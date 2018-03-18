@@ -115,44 +115,22 @@
 		<div class="form-row">	
 			<div class="form-group col-md-5">
 				<label for="codCli">Código</label>
-				<input class="form-control" id="codCli" type="number">
-			</div>
-			<div class="form-group col-md-7">
-				<label for="telCli" class="control-label">Telefone</label>
-				<input class="form-control" id="telCli" type="text" maxlength="15" required>
+				<input class="form-control" id="cnCliente" type="number">
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="nomeCli">Nome</label>
-			<input class="form-control" id="nomeCli" type="text" maxlength="255" required>
+			<input class="form-control" id="dsNome" type="text" maxlength="255" required>
 		</div>
 		<div class="form-row">
 			<div class="form-group col-md-9">
 				<label for="endCli">Endereço</label>
-				<input class="form-control" id="endCli" type="text" maxlength="255" required>
+				<input class="form-control" id="dsEndereco" type="text" maxlength="255" required>
 			</div>	
 			<div class="form-group col-md-3">
-				<label for="numEndCli">Número</label>
-				<input class="form-control" id="numEndCli" type="number" required>
+				<label for="numEndCli">Telefone</label>
+				<input class="form-control" id="caTelefone" type="number" required>
 			</div>
-		</div>	
-		<div class="form-group">
-			<label for="complCli">Complemento</label>
-			<input type="text" class="form-control" id="complCli" maxlength="255">
-		</div>
-		<div class="form-row">
-			<div class="form-group col-md-6">
-				<label for="cidadeCli">Cidade</label>
-				<input type="text" class="form-control" id="cidadeCli" maxlength="255" required>
-			</div>
-			<div class="form-group col-md-6">
-				<label for="bairroCli">Bairro</label>
-				<input type="text" class="form-control" id="bairroCli" maxlength="255" required>
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="pontoRefCli">Ponto de referência</label>
-			<input type="text" class="form-control" id="pontoRefCli" maxlength="255">
 		</div>
 		<button type="submit" class="btn btn-primary"><a href="consultaCliente.html">Salvar</a></button>
 		

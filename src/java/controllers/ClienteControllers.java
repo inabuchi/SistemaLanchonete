@@ -6,6 +6,7 @@
 package controllers;
 
 import beans.ClienteBean;
+import java.util.List;
 import models.conexao.ExceptionBD;
 import models.dao.ClienteDao;
 
@@ -78,10 +79,10 @@ public class ClienteControllers {
         }
     }
 
-    public void DefaultSelect(ClienteBean cliente) throws Exception {
+    public List<ClienteBean> DefaultSelect(ClienteBean cliente) throws Exception {
 
         try {
-            clienteDao.DefaultSelect(cliente);
+            return clienteDao.DefaultSelect(cliente);
         } catch (Exception e) {
             throw new Exception(e);
         }

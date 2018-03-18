@@ -32,7 +32,7 @@ public class Conexao {
         try {
 
             Class.forName("com.mysql.jdbc.Driver");
-            conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemabonstock?useSSL=true", "usuario", "usuario");
+            conexao = DriverManager.getConnection("jdbc:mysql://sistemalanchonetebd.c3vx8k5m6fma.sa-east-1.rds.amazonaws.com:3306/SistemaLanchoneteBD?useSSL=true", "usuarioAdmin", "usuario123");
             return conexao;
         } catch (Exception e) {
 
