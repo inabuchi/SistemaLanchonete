@@ -1,3 +1,8 @@
+/**
+ *
+ * @author Everton
+ */
+
 const form = $("#login");
 
 form.ready(() => {
@@ -26,7 +31,7 @@ form.ready(() => {
       $.ajax({
         type: 'post'
         , dataType: 'json'
-        , url: urlRequest
+        , url: "LoginApi.java"
         , data: params
       }).done(response => {
         if (response.success) {

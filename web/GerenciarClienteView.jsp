@@ -1,7 +1,7 @@
 <%-- 
     Document   : GerenciarClienteView
     Created on : 15/03/2018, 20:38:17
-    Author     : Aluno
+    Author     : Morgana
 --%>
 
 <!DOCTYPE html>

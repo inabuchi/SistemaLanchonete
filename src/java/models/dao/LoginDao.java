@@ -5,7 +5,7 @@
  */
 package models.dao;
 
-import beans.ClienteBean;
+import beans.LoginBean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,23 +20,20 @@ import models.conexao.ExceptionBD;
  *
  * @author Douglas
  */
-public class ClienteDao {
-
-    public boolean Insert(ClienteBean cliente) throws ExceptionBD {
+public class LoginDao {
+    public boolean Insert(LoginBean login) throws ExceptionBD {
         Connection conexao = Conexao.getConexao();
         String sqlInsert;
 
         try {
-            sqlInsert = "INSERT INTO Cliente (";
-            sqlInsert += " cnCliente,";
-            sqlInsert += " dsNome,";
-            sqlInsert += " dsEndereco,";
-            sqlInsert += " cnTelefone";
+            sqlInsert = "INSERT INTO Login (";
+            sqlInsert += " cnLogin,";
+            sqlInsert += " dsUsuario,";
+            sqlInsert += " dsSenha,";
             sqlInsert += " ) VALUES (";
-            sqlInsert += cliente.getCnCliente();
-            sqlInsert += cliente.getDsNome();
-            sqlInsert += cliente.getDsEndereco();
-            sqlInsert += cliente.getCaTelefone();
+            sqlInsert += login.getCnLogin();
+            sqlInsert += login.getDsUsuario();
+            sqlInsert += login.getDsSenha();
             sqlInsert += ");";
 
             PreparedStatement pst = conexao.prepareStatement(sqlInsert);
@@ -49,15 +46,14 @@ public class ClienteDao {
         }
     }
 
-    public boolean Update(ClienteBean cliente) throws ExceptionBD {
+    public boolean Update(LoginBean login) throws ExceptionBD {
         Connection conexao = Conexao.getConexao();
         String sqlUpdate;
         try {
-            sqlUpdate = "UPDATE Cliente SET";
-            sqlUpdate += " cnCliente = " + cliente.getCnCliente();
-            sqlUpdate += " dsNome = " + cliente.getDsNome();
-            sqlUpdate += " dsEndereco = " + cliente.getDsEndereco();
-            sqlUpdate += " cnTelefone = " + cliente.getCaTelefone();
+            sqlUpdate = "UPDATE Login SET";
+            sqlUpdate += " cnLogin = " + login.getCnLogin();
+            sqlUpdate += " dsUsuario = " + login.getDsUsuario();
+            sqlUpdate += " dsSenha = " + login.getDsSenha();
             sqlUpdate += ";";
 
             PreparedStatement pst = conexao.prepareStatement(sqlUpdate);
@@ -70,13 +66,13 @@ public class ClienteDao {
         }
     }
 
-    public boolean Delete(ClienteBean Cliente) throws ExceptionBD {
+    public boolean Delete(LoginBean login) throws ExceptionBD {
         Connection conexao = Conexao.getConexao();
         String sqlDelete;
 
         try {
-            sqlDelete = "DELETE FROM Cliente ";
-            sqlDelete += "WHERE cnCliente = " + Cliente.getCnCliente();
+            sqlDelete = "DELETE FROM Login ";
+            sqlDelete += "WHERE cnLogin = " + login.getCnLogin();
 
             PreparedStatement pst = conexao.prepareStatement(sqlDelete);
             return pst.executeUpdate() > 0;
@@ -87,42 +83,37 @@ public class ClienteDao {
         }
     }
 
-    public List<ClienteBean> DefaultSelect(ClienteBean Cliente) throws ExceptionBD {
+    public List<LoginBean> DefaultSelect(LoginBean login) throws ExceptionBD {
         Connection conexao = Conexao.getConexao();
         String sqlSelect;
         try {
             Statement st = conexao.createStatement();
 
             sqlSelect = "SELECT";
-            sqlSelect += " cnCliente";
-            sqlSelect += " ,dsNome";
-            sqlSelect += " ,dsEndereco";
-            sqlSelect += " ,cnTelefone";
-            sqlSelect += " WHERE cnCliente = " + Cliente.getCnCliente();
+            sqlSelect += " cnLogin";
+            sqlSelect += " ,dsUsuario";
+            sqlSelect += " ,dsSenha";
+            sqlSelect += " WHERE cnLogin = " + login.getCnLogin();
 
-            if (Cliente.getDsNome() != null || Cliente.getDsNome() != "") {
-                sqlSelect += " AND dsNome = " + Cliente.getDsNome();
+            if (login.getDsUsuario() != null || login.getDsUsuario() != "") {
+                sqlSelect += " AND dsUsuario = " + login.getDsUsuario();
             }
 
-            if (Cliente.getDsEndereco() != null || Cliente.getDsEndereco() != "") {
-                sqlSelect += " AND dsEndereco = " + Cliente.getDsEndereco();
+            if (login.getDsSenha() != null || login.getDsSenha() != "") {
+                sqlSelect += " AND dsSenha = " + login.getDsSenha();
             }
-
-            if (Cliente.getCaTelefone() != null || Cliente.getCaTelefone() != "") {
-                sqlSelect += " AND cnTelefone = " + Cliente.getCaTelefone();
-            }
-            sqlSelect += " from Cliente;";
+            
+            sqlSelect += " from Login;";
 
             ResultSet rs = st.executeQuery(sqlSelect);
-            List<ClienteBean> clientes = new ArrayList<ClienteBean>();
+            List<LoginBean> logins = new ArrayList<LoginBean>();
             while (rs.next()) {
-                clientes.add(new ClienteBean(
-                        rs.getInt("cnCliente"),
-                        rs.getString("dsNome"),
-                        rs.getString("dsEndereco"),
-                        rs.getString("cnTelefone")));
+                logins.add(new LoginBean(
+                        rs.getInt("cnLogin"),
+                        rs.getString("dsUsuario"),
+                        rs.getString("cnSenha")));
             }
-            return clientes;
+            return logins;
         } catch (Exception e) {
             throw new ExceptionBD(e.getMessage(), EErrosBD.CONSULTA_DADO);
         } finally {
@@ -130,15 +121,15 @@ public class ClienteDao {
         }
     }
 
-    public boolean GetAsExists(ClienteBean Cliente) throws ExceptionBD {
+    public boolean GetAsExists(LoginBean login) throws ExceptionBD {
         Connection conexao = Conexao.getConexao();
         String sqlSelect = "";
 
         try {
             Statement st = conexao.createStatement();
             sqlSelect = "select 1";
-            sqlSelect += " from Cliente ";
-            sqlSelect += " where cnCliente = " + Cliente.getCnCliente();
+            sqlSelect += " from Login ";
+            sqlSelect += " where cnLogin = " + login.getCnLogin();
             sqlSelect += " ;";
 
             ResultSet rs = st.executeQuery(sqlSelect);
@@ -155,5 +146,26 @@ public class ClienteDao {
 
         return false;
     }
-
+    
+    public int NextValue() throws ExceptionBD{
+        Connection conexao = Conexao.getConexao();
+        String sqlSelect = "";
+        
+        try {
+            Statement st = conexao.createStatement();
+            sqlSelect = "select max(cnLogin) + 1";
+            sqlSelect += " from Login;";
+            
+            ResultSet rs = st.executeQuery(sqlSelect);
+            if (rs == null){
+                return 0;
+            } else {
+                return rs.getInt(1);
+            }            
+        } catch (Exception e) {
+            throw new ExceptionBD(e.getMessage(), EErrosBD.CONSULTA_DADO);
+        } finally {
+            Conexao.fechaConexao();
+        }
+    }
 }

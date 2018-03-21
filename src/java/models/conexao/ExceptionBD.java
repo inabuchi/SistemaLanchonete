@@ -7,7 +7,7 @@ package models.conexao;
 
 /**
  *
- * @author Daniel
+ * @author Douglas
  */
 public class ExceptionBD extends Exception {
 

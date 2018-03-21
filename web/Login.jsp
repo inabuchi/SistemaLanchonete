@@ -1,7 +1,7 @@
 <%-- 
     Document   : Login
     Created on : 15/03/2018, 20:38:26
-    Author     : Aluno
+    Author     : Morgana
 --%>
 
 <!DOCTYPE html>
@@ -116,7 +116,7 @@
     <form class="login" id="fLogin">
 		<div class="form-group">
 			<label for="usuario">Usuário</label>
-			<input type="email" class="form-control" id="usuario" aria-describedby="emailHelp">
+			<input type="user" class="form-control" id="usuario">
 		</div>
 		<div class="form-group">
 			<label for="senha">Senha</label>
