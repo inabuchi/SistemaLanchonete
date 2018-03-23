@@ -5,6 +5,28 @@
  */
 
 /**
+ * Informa se o valor da string é nula ou vazia
+ * 
+ * @param {String} valor string a ser checada
+ * @returns {Boolean}
+ */
+String.prototype.isNullOrEmpty = function (valor) {
+
+    valor = valor || this || '';
+
+    return valor === null || valor === '';
+};
+
+
+function HTMLDialogo() {}
+
+/**
+ * 
+ * @param {String} texto
+ */
+HTMLDialogo.prototype.alerta = function (texto){};
+
+/**
  * 
  * @param {String} prUrl
  * @param {String} prMethod

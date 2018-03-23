@@ -1,3 +1,9 @@
+<%-- 
+    Document   : CadastroClienteView
+    Created on : 15/03/2018, 20:37:59
+    Author     : Morgana
+--%>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -5,9 +11,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>Consulta de clientes</title>
         <meta charset="utf-8">
-        <script src="js/jquery.min.js" type="text/javascript"></script>
-        <script src="js/sistema.js" type="text/javascript"></script>
-        <script src="js/cadastroClienteView.js" type="text/javascript"></script>
         <style type="text/css">
 
             body {
@@ -104,75 +107,43 @@
             }
 
         </style>
-
-        <script >
-
-
-            /**
-             * Cria um objeto com os campos do form passado por parametro.
-             */
-            function formToObject(form) {
-                var fieldArray = form.serializeArray();
-                var obj = {};
-                fieldArray.forEach(element => {
-                    obj[element.name] = element.value;
-                });
-                return obj;
-            }
-
-            function submeter() {
-                var form = document.getElementById("form-cadastro")
-                var obj = {
-                    cnCliente: 1,
-                    dsNome: form.getAttribute("nomeCli"),
-                    dsEndereco: form.getAttribute("dsEndereco"),
-                    caTelefone: form.getAttribute("numEndCli")
-                }
-                
-                $.ajax({
-                    method: "POST", 
-                    dataType: 'json',
-                    url: "action/cliente/addCliente",
-                    contentType: "application/json",
-                    data: JSON.stringify(formToObject($('form'))),
-                    success: function (msg) {
-                        alert('foi!')
-                    },
-                    error: function (msg) {
-                        alert(msg)
-                        console.log(msg)
-                    }
-                })
-            }
-            </script>
-            
     </head>
 
     <body>
-        <form id="form-cadastro" class="cad" onsubmit="submeter()">  
-            <div class="form-row">	
-                <div class="form-group col-md-5">
-<!--                    <label for="codCli">C�digo</label>-->
-                    <input class="form-control" id="cnCliente" name="cnCliente" type="hidden">
-                </div>
+        <form id="form-cadastro" class="cad">  
+            <div class="form-group">
+                <h3>Cadastro de Clientes</h3>
+                <!--                    <label for="codCli">C�digo</label>-->
+                <input class="form-control" id="cnCliente" name="cnCliente" type="hidden">
             </div>
             <div class="form-group">
                 <label for="nomeCli">Nome</label>
                 <input class="form-control" id="dsNome" name="dsNome" type="text" maxlength="255" required>
             </div>
             <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="endCli">Endere�o</label>
+                <input class="form-control" id="dsEndereco" name="dsEndereco" type="text" maxlength="255" required>
+            </div>
+                <div class="form-group col-md-6">
+                <label for="bairroCli">Bairro:</label>
+                <input class="form-control" id="bairroCli" name="bairroCli" type="text" minlength="3" maxlength="32" required/>
+            </div>
+            </div>
+            <div class="form-row">
                 <div class="form-group col-md-9">
-                    <label for="endCli">Endere�o</label>
-                    <input class="form-control" id="dsEndereco" name="dsEndereco" type="text" maxlength="255" required>
-                </div>	
-                <div class="form-group col-md-3">
                     <label for="numEndCli">Telefone</label>
-                    <input class="form-control" id="caTelefone" name="caTelefone" type="tel" required>
+                    <input class="form-control" placeholder="Ex.: (47) 3333-3333" pattern="^(\({0,1})([\d]{2})(\){0,1})( {0,1})([\d]{0,1})([\d]{4})(-{0,1})([\d]{4})$" id="caTelefone" name="caTelefone" type="tel" required>
                 </div>
             </div>
-            <button type="button" onclick="submeter()" >botao</button>
             <button type="submit" class="btn btn-primary"><a href="consultaCliente.html">Salvar</a></button>
 
         </form>
     </body>
+
+    <!-- -- Igor Vieira Rodrigues -->
+    <!-- -- As declara��es javascript devem ser feitas aqui -->
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/sistema.js" type="text/javascript"></script>
+    <script src="js/cadastroClienteView.js" type="text/javascript"></script>  
 </html>
