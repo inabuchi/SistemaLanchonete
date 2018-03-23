@@ -1,9 +1,3 @@
-<%-- 
-    Document   : CadastroClienteView
-    Created on : 15/03/2018, 20:37:59
-    Author     : Morgana
---%>
-
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -110,13 +104,55 @@
             }
 
         </style>
+
+        <script >
+
+
+            /**
+             * Cria um objeto com os campos do form passado por parametro.
+             */
+            function formToObject(form) {
+                var fieldArray = form.serializeArray();
+                var obj = {};
+                fieldArray.forEach(element => {
+                    obj[element.name] = element.value;
+                });
+                return obj;
+            }
+
+            function submeter() {
+                var form = document.getElementById("form-cadastro")
+                var obj = {
+                    cnCliente: 1,
+                    dsNome: form.getAttribute("nomeCli"),
+                    dsEndereco: form.getAttribute("dsEndereco"),
+                    caTelefone: form.getAttribute("numEndCli")
+                }
+                
+                $.ajax({
+                    method: "POST", 
+                    dataType: 'json',
+                    url: "action/cliente/addCliente",
+                    contentType: "application/json",
+                    data: JSON.stringify(formToObject($('form'))),
+                    success: function (msg) {
+                        alert('foi!')
+                    },
+                    error: function (msg) {
+                        alert(msg)
+                        console.log(msg)
+                    }
+                })
+            }
+            </script>
+            
     </head>
 
     <body>
-        <form id="form-cadastro" class="cad">  
+        <form id="form-cadastro" class="cad" onsubmit="submeter()">  
             <div class="form-row">	
                 <div class="form-group col-md-5">
-<!--                    <label for="codCli">Código</label>-->
+<!--                    <label for="codCli">Cï¿½digo</label>-->
                     <input class="form-control" id="cnCliente" name="cnCliente" type="hidden">
                 </div>
             </div>
@@ -126,7 +162,7 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-9">
-                    <label for="endCli">Endereço</label>
+                    <label for="endCli">Endereï¿½o</label>
                     <input class="form-control" id="dsEndereco" name="dsEndereco" type="text" maxlength="255" required>
                 </div>	
                 <div class="form-group col-md-3">
@@ -134,6 +170,7 @@
                     <input class="form-control" id="caTelefone" name="caTelefone" type="tel" required>
                 </div>
             </div>
+            <button type="button" onclick="submeter()" >botao</button>
             <button type="submit" class="btn btn-primary"><a href="consultaCliente.html">Salvar</a></button>
 
         </form>

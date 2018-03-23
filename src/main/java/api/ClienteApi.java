@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -13,7 +14,7 @@ import javax.ws.rs.core.Response;
  *
  * @author Jonathan Oldenburg
  */
-@Path("/")
+@Path("cliente")
 public class ClienteApi {
     
     @POST
@@ -30,7 +31,7 @@ public class ClienteApi {
     
     @POST
     @Path("/getCliente")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response getCustomer(ClienteBean queryData) {
         try {
             List<ClienteBean> clientes = new ClienteControllers().DefaultSelect(queryData);
@@ -42,7 +43,7 @@ public class ClienteApi {
     
     @POST
     @Path("/removeCliente")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response removeCustomer(ClienteBean queryData) {
         try {
             new ClienteControllers().Delete(queryData);
@@ -54,7 +55,7 @@ public class ClienteApi {
     
     @POST
     @Path("/updateCliente")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response updateCustomer(ClienteBean queryData) {
         try {
             new ClienteControllers().Update(queryData);
