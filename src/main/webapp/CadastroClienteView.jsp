@@ -111,24 +111,29 @@
 
     <body>
         <form id="form-cadastro" class="cad">  
-            <div class="form-row">	
-                <div class="form-group col-md-5">
-                    <!--                    <label for="codCli">Código</label>-->
-                    <input class="form-control" id="cnCliente" name="cnCliente" type="hidden">
-                </div>
+            <div class="form-group">
+                <h3>Cadastro de Clientes</h3>
+                <!--                    <label for="codCli">Código</label>-->
+                <input class="form-control" id="cnCliente" name="cnCliente" type="hidden">
             </div>
             <div class="form-group">
                 <label for="nomeCli">Nome</label>
                 <input class="form-control" id="dsNome" name="dsNome" type="text" maxlength="255" required>
             </div>
             <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="endCli">Endereço</label>
+                <input class="form-control" id="dsEndereco" name="dsEndereco" type="text" maxlength="255" required>
+            </div>
+                <div class="form-group col-md-6">
+                <label for="bairroCli">Bairro:</label>
+                <input class="form-control" id="bairroCli" name="bairroCli" type="text" minlength="3" maxlength="32" required/>
+            </div>
+            </div>
+            <div class="form-row">
                 <div class="form-group col-md-9">
-                    <label for="endCli">Endereço</label>
-                    <input class="form-control" id="dsEndereco" name="dsEndereco" type="text" maxlength="255" required>
-                </div>	
-                <div class="form-group col-md-3">
                     <label for="numEndCli">Telefone</label>
-                    <input class="form-control" id="caTelefone" name="caTelefone" type="tel" required>
+                    <input class="form-control" placeholder="Ex.: (47) 3333-3333" pattern="^(\({0,1})([\d]{2})(\){0,1})( {0,1})([\d]{0,1})([\d]{4})(-{0,1})([\d]{4})$" id="caTelefone" name="caTelefone" type="tel" required>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary"><a href="consultaCliente.html">Salvar</a></button>
