@@ -11,9 +11,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>Consulta de clientes</title>
         <meta charset="utf-8">
-        <script src="js/jquery.min.js" type="text/javascript"></script>
-        <script src="js/sistema.js" type="text/javascript"></script>
-        <script src="js/gerenciarClienteView.js" type="text/javascript"></script>
     </head>
 
     <style type="text/css">
@@ -259,4 +256,10 @@
             <center><button type="submit" class="btn btn-primary"><a href="cliente.html?status=C">+ Cadastrar</a></button></center>
         </form>	
     </body>
+
+    <!-- -- Igor Vieira Rodrigues -->
+    <!-- -- As declarações javascript devem ser feitas aqui -->
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/sistema.js" type="text/javascript"></script>
+    <script src="js/gerenciarClienteView.js" type="text/javascript"></script>
 </html>

@@ -8,8 +8,6 @@
 <html lang="pt-br">
   <head>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-  <script src = "library/jquery-3.2.1.min.js"> </script>
-  <script type="text/javascript" src="js/login.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Consulta de clientes</title>
@@ -125,4 +123,7 @@
 		<button class="btn btn-primary" id="btnLogin"><a>Entrar</a></button>
 	</form>
   </body>
+  
+  <script src="js/jquery.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="js/login.js"></script>
 </html>
