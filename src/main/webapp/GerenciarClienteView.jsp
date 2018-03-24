@@ -259,7 +259,7 @@
 
     <!-- -- Igor Vieira Rodrigues -->
     <!-- -- As declarações javascript devem ser feitas aqui -->
-    <script src="js/jquery.min.js" type="text/javascript"></script>
-    <script src="js/sistema.js" type="text/javascript"></script>
-    <script src="js/gerenciarClienteView.js" type="text/javascript"></script>
+    <script src="js/lib/externas/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="js/lib/internas/sistema.js" type="text/javascript"></script>
+    <script src="js/cliente/gerenciarClienteView.js" type="text/javascript"></script>
 </html>
