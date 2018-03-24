@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+/* global BootstrapModal, $bsModal */
+
 /**
  * Informa se o valor da string é nula ou vazia
  * 
@@ -16,15 +18,6 @@ String.prototype.isNullOrEmpty = function (valor) {
 
     return valor === null || valor === '';
 };
-
-
-function HTMLDialogo() {}
-
-/**
- * 
- * @param {String} texto
- */
-HTMLDialogo.prototype.alerta = function (texto){};
 
 /**
  * 
@@ -44,10 +37,10 @@ function enviarAjax(prUrl, prMethod, prDados, prDoneCallBack, prFailCallBack) {
 
     prFailCallBack = prFailCallBack || (res => {
         console.error(res);
-        alert('página não encontrada');
+        $bsModal.alerta('página não encontrada', `${res.status} - ${res.statusText}`, $bsModal.TIPO.ERRO);
     });
     return $.ajax({
-        url: prUrl.toLocaleLowerCase(),
+        url: prUrl,
         type: prMethod.toUpperCase(),
         headers: {
             'Cache-Control': 'no-cache',
@@ -61,8 +54,9 @@ function enviarAjax(prUrl, prMethod, prDados, prDoneCallBack, prFailCallBack) {
         crossDomain: false,
         data: prDados,
         statusCode: {
-            404: function () {
-                alert("page not found");
+            404: function (res) {
+                //$bsModal.prototype.alerta("page not found");
+                console.error(res.responseText, "page not found");
             }
         }
     }).done(prDoneCallBack).fail(prFailCallBack);

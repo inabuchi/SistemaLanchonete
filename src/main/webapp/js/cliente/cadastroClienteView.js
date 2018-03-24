@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-/* global enviarAjax */
+/* global enviarAjax, BootstrapModal */
 
 ($ => {
     $(document).ready(() => {
@@ -34,7 +34,7 @@ function atribuirEventos($) {
 
                 var fnCallBack = objDados.cnCliente === null
                         ? res => $("#cnCliente").val(res.id)
-                : res => alert('Cliente atualizado com sucesso!');
+                : res => BootstrapModal.alerta('Cliente atualizado com sucesso!');
 
                 $(e.currentTarget).find(".desabilitar").attr('disabled', '');
                 enviarAjax(strUrl, 'post', objDados, fnCallBack)

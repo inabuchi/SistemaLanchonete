@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap/bootstrap.min.css" type="text/css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>Consulta de clientes</title>
         <meta charset="utf-8">
@@ -121,14 +121,14 @@
                 <input class="form-control" id="dsNome" name="dsNome" type="text" maxlength="255" required>
             </div>
             <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="endCli">Endereço</label>
-                <input class="form-control" id="dsEndereco" name="dsEndereco" type="text" maxlength="255" required>
-            </div>
                 <div class="form-group col-md-6">
-                <label for="bairroCli">Bairro:</label>
-                <input class="form-control" id="bairroCli" name="bairroCli" type="text" minlength="3" maxlength="32" required/>
-            </div>
+                    <label for="endCli">Endereço</label>
+                    <input class="form-control" id="dsEndereco" name="dsEndereco" type="text" maxlength="255" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="bairroCli">Bairro:</label>
+                    <input class="form-control" id="bairroCli" name="bairroCli" type="text" minlength="3" maxlength="32" required/>
+                </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-9">
@@ -143,7 +143,11 @@
 
     <!-- -- Igor Vieira Rodrigues -->
     <!-- -- As declarações javascript devem ser feitas aqui -->
-    <script src="js/lib/externas/jquery/jquery.min.js" type="text/javascript"></script>
-    <script src="js/lib/internas/sistema.js" type="text/javascript"></script>
-    <script src="js/cliente/cadastroClienteView.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/js/lib/externas/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/js/lib/externas/propper/popper.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/js/lib/externas/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+    
+    <script src="<%=request.getContextPath()%>/js/lib/internas/bootstrap-modal.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/js/lib/internas/sistema.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/js/cliente/cadastroClienteView.js" type="text/javascript"></script>
 </html>
