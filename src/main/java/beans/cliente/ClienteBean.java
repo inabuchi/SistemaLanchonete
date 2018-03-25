@@ -5,6 +5,8 @@
  */
 package beans.cliente;
 
+import java.util.Date;
+
 /**
  *
  * @author Douglas
@@ -12,19 +14,16 @@ package beans.cliente;
 public class ClienteBean {
 
     private int cdCliente;
-    private int cdPessoa;
     private String dsObservacao;
-    private String ieAtivo;
 
     public ClienteBean() {
-        this(0, 0, "", "");
+        this(0,"","","", new Date(),"",0,"");
     }
 
-    public ClienteBean(int cdCliente, int cdPessoa, String dsObservacao, String ieAtivo) {
+    public ClienteBean(int cdPessoa, String dsNome, String dsTelefone1, String dsTelefone2,
+            Date dtCadastro, String ieAtivo, int cdCliente, String dsObservacao) {
         setCdCliente(cdCliente);
-        setCdPessoa(cdPessoa);
         setDsObservacao(dsObservacao);
-        setIeAtivo(ieAtivo);
     }
 
     public int getCdCliente() {
@@ -35,27 +34,11 @@ public class ClienteBean {
         this.cdCliente = cdCliente;
     }
 
-    public int getCdPessoa() {
-        return cdPessoa;
-    }
-
-    public void setCdPessoa(int cdPessoa) {
-        this.cdPessoa = cdPessoa;
-    }
-
     public String getDsObservacao() {
         return dsObservacao;
     }
 
     public void setDsObservacao(String dsObservacao) {
         this.dsObservacao = dsObservacao;
-    }
-
-    public String getIeAtivo() {
-        return ieAtivo;
-    }
-
-    public void setIeAtivo(String ieAtivo) {
-        this.ieAtivo = ieAtivo;
     }
 }

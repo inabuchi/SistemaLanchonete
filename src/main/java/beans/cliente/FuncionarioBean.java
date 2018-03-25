@@ -5,25 +5,33 @@
  */
 package beans.cliente;
 
+import java.util.Date;
+
 /**
  *
  * @author Douglas
  */
 public class FuncionarioBean {
+    private PessoaBean pessoa;
     private int cdCliente;
-    private int cdPessoa;
     private String dsObservacao;
-    private String ieAtivo;
-
+    
     public FuncionarioBean() {
-        this(0, 0, "", "");
+        this(0,"","","", new Date(),"", 0, "");
     }
 
-    public FuncionarioBean(int cdCliente, int cdPessoa, String dsObservacao, String ieAtivo) {
+    public FuncionarioBean(int cdPessoa, String dsNome, String dsTelefone1, String dsTelefone2,
+            Date dtCadastro, String ieAtivo, int cdCliente, String dsObservacao) {
         setCdCliente(cdCliente);
-        setCdPessoa(cdPessoa);
         setDsObservacao(dsObservacao);
-        setIeAtivo(ieAtivo);
+    }
+    
+    public PessoaBean getPessoa() {
+        return pessoa;
+    }
+    
+    public void setPessoa(PessoaBean pessoa){
+        this.pessoa = pessoa;
     }
 
     public int getCdCliente() {
@@ -34,27 +42,11 @@ public class FuncionarioBean {
         this.cdCliente = cdCliente;
     }
 
-    public int getCdPessoa() {
-        return cdPessoa;
-    }
-
-    public void setCdPessoa(int cdPessoa) {
-        this.cdPessoa = cdPessoa;
-    }
-
     public String getDsObservacao() {
         return dsObservacao;
     }
 
     public void setDsObservacao(String dsObservacao) {
         this.dsObservacao = dsObservacao;
-    }
-
-    public String getIeAtivo() {
-        return ieAtivo;
-    }
-
-    public void setIeAtivo(String ieAtivo) {
-        this.ieAtivo = ieAtivo;
     }
 }

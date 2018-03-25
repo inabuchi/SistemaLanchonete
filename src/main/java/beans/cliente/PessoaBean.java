@@ -5,33 +5,31 @@
  */
 package beans.cliente;
 
+import java.util.Date;
+
 /**
  *
  * @author Douglas
  */
 public class PessoaBean {
-    private int cdCliente;
     private int cdPessoa;
-    private String dsObservacao;
+    private String dsNome;
+    private String dsTelefone1;
+    private String dsTelefone2;
+    private Date dtCadastro;
     private String ieAtivo;
 
     public PessoaBean() {
-        this(0, 0, "", "");
+        this(0,"","","", new Date(), "");
     }
 
-    public PessoaBean(int cdCliente, int cdPessoa, String dsObservacao, String ieAtivo) {
-        setCdCliente(cdCliente);
+    public PessoaBean(int cdPessoa, String dsNome, String dsTelefone1, String dsTelefone2, Date dtCadastro, String ieAtivo) {
         setCdPessoa(cdPessoa);
-        setDsObservacao(dsObservacao);
+        setDsNome(dsNome);
+        setDsTelefone1(dsTelefone1);
+        setDsTelefone2(dsTelefone2);
+        setDsCadastro(dtCadastro);
         setIeAtivo(ieAtivo);
-    }
-
-    public int getCdCliente() {
-        return cdCliente;
-    }
-
-    public void setCdCliente(int cdCliente) {
-        this.cdCliente = cdCliente;
     }
 
     public int getCdPessoa() {
@@ -42,14 +40,38 @@ public class PessoaBean {
         this.cdPessoa = cdPessoa;
     }
 
-    public String getDsObservacao() {
-        return dsObservacao;
+    public String getDsNome() {
+        return dsNome;
     }
 
-    public void setDsObservacao(String dsObservacao) {
-        this.dsObservacao = dsObservacao;
+    public void setDsNome(String dsNome) {
+        this.dsNome = dsNome;
     }
 
+    public String getDsTelefone1() {
+        return dsTelefone1;
+    }
+
+    public void setDsTelefone1(String dsTelefone1) {
+        this.dsTelefone1 = dsTelefone1;
+    }
+
+    public String getDsTelefone2() {
+        return dsTelefone1;
+    }
+
+    public void setDsTelefone2(String dsTelefone1) {
+        this.dsTelefone1 = dsTelefone1;
+    }
+    
+    public Date getDsCadastro() {
+        return dtCadastro;
+    }
+
+    public void setDsCadastro(Date dsCadastro) {
+        this.dtCadastro = dsCadastro;
+    }
+    
     public String getIeAtivo() {
         return ieAtivo;
     }
