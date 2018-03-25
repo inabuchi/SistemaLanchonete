@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package models.dao;
+package models.dao.cliente;
 
-import beans.ClienteBean;
+import beans.cliente.ClienteBean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,16 +27,16 @@ public class ClienteDao {
         String sqlInsert;
 
         try {
-            sqlInsert = "INSERT INTO Cliente (";
-            sqlInsert += " cnCliente,";
-            sqlInsert += " dsNome,";
-            sqlInsert += " dsEndereco,";
-            sqlInsert += " cnTelefone";
+            sqlInsert = "INSERT INTO cliente (";
+            sqlInsert += " cd_cliente,";
+            sqlInsert += " cd_pessoa,";
+            sqlInsert += " ds_observacao,";
+            sqlInsert += " ie_ativo";
             sqlInsert += " ) VALUES (";
-            sqlInsert += cliente.getCnCliente();
-            sqlInsert += cliente.getDsNome();
-            sqlInsert += cliente.getDsEndereco();
-            sqlInsert += cliente.getCaTelefone();
+            sqlInsert += cliente.getCdCliente();
+            sqlInsert += cliente.getCdPessoa();
+            sqlInsert += cliente.getDsObservacao();
+            sqlInsert += cliente.getIeAtivo();
             sqlInsert += ");";
 
             PreparedStatement pst = conexao.prepareStatement(sqlInsert);
@@ -53,11 +53,11 @@ public class ClienteDao {
         Connection conexao = Conexao.getConexao();
         String sqlUpdate;
         try {
-            sqlUpdate = "UPDATE Cliente SET";
-            sqlUpdate += " cnCliente = " + cliente.getCnCliente();
-            sqlUpdate += " dsNome = " + cliente.getDsNome();
-            sqlUpdate += " dsEndereco = " + cliente.getDsEndereco();
-            sqlUpdate += " cnTelefone = " + cliente.getCaTelefone();
+            sqlUpdate = "UPDATE cliente SET";
+            sqlUpdate += " cd_cliente = " + cliente.getCdCliente();
+            sqlUpdate += " cd_pessoa = " + cliente.getCdPessoa();
+            sqlUpdate += " ds_observacao = " + cliente.getDsObservacao();
+            sqlUpdate += " ie_ativo = " + cliente.getIeAtivo();
             sqlUpdate += ";";
 
             PreparedStatement pst = conexao.prepareStatement(sqlUpdate);
@@ -75,8 +75,8 @@ public class ClienteDao {
         String sqlDelete;
 
         try {
-            sqlDelete = "DELETE FROM Cliente ";
-            sqlDelete += "WHERE cnCliente = " + Cliente.getCnCliente();
+            sqlDelete = "DELETE FROM cliente ";
+            sqlDelete += "WHERE cd_cliente = " + Cliente.getCdCliente();
 
             PreparedStatement pst = conexao.prepareStatement(sqlDelete);
             return pst.executeUpdate() > 0;
@@ -94,33 +94,33 @@ public class ClienteDao {
             Statement st = conexao.createStatement();
 
             sqlSelect = "SELECT";
-            sqlSelect += " cnCliente";
-            sqlSelect += " ,dsNome";
-            sqlSelect += " ,dsEndereco";
-            sqlSelect += " ,cnTelefone";
-            sqlSelect += " WHERE cnCliente = " + Cliente.getCnCliente();
+            sqlSelect += " cd_cliente";
+            sqlSelect += " ,cd_pessoa";
+            sqlSelect += " ,ds_observacao";
+            sqlSelect += " ,ie_ativo";
+            //sqlSelect += " WHERE cnCliente = " + Cliente.getCdCliente();
 
-            if (Cliente.getDsNome() != null || Cliente.getDsNome() != "") {
-                sqlSelect += " AND dsNome = " + Cliente.getDsNome();
-            }
+            //if (Cliente.getCdPessoa() != 0) {
+            //    sqlSelect += " AND cd_pessoa = " + Cliente.getCdPessoa();
+            //}
 
-            if (Cliente.getDsEndereco() != null || Cliente.getDsEndereco() != "") {
-                sqlSelect += " AND dsEndereco = " + Cliente.getDsEndereco();
-            }
+            //if (Cliente.getDsObservacao() != null || Cliente.getDsObservacao() != "") {
+            //    sqlSelect += " AND ds_observacao = " + Cliente.getDsObservacao();
+            //}
 
-            if (Cliente.getCaTelefone() != null || Cliente.getCaTelefone() != "") {
-                sqlSelect += " AND cnTelefone = " + Cliente.getCaTelefone();
-            }
-            sqlSelect += " from Cliente;";
+            //if (Cliente.getIeAtivo() != null || Cliente.getIeAtivo() != "") {
+            //    sqlSelect += " AND ie_ativo = " + Cliente.getIeAtivo();
+            //}
+            sqlSelect += " from cliente;";
 
             ResultSet rs = st.executeQuery(sqlSelect);
             List<ClienteBean> clientes = new ArrayList<ClienteBean>();
             while (rs.next()) {
                 clientes.add(new ClienteBean(
-                        rs.getInt("cnCliente"),
-                        rs.getString("dsNome"),
-                        rs.getString("dsEndereco"),
-                        rs.getString("cnTelefone")));
+                        rs.getInt("cd_cliente"),
+                        rs.getInt("cd_pessoa"),
+                        rs.getString("ds_observacao"),
+                        rs.getString("ie_ativo")));
             }
             return clientes;
         } catch (Exception e) {
@@ -129,31 +129,4 @@ public class ClienteDao {
             Conexao.fechaConexao();
         }
     }
-
-    public boolean GetAsExists(ClienteBean Cliente) throws ExceptionBD {
-        Connection conexao = Conexao.getConexao();
-        String sqlSelect = "";
-
-        try {
-            Statement st = conexao.createStatement();
-            sqlSelect = "select 1";
-            sqlSelect += " from Cliente ";
-            sqlSelect += " where cnCliente = " + Cliente.getCnCliente();
-            sqlSelect += " ;";
-
-            ResultSet rs = st.executeQuery(sqlSelect);
-
-            if (rs != null) //Registro não encontrado
-            {
-                return true;
-            }
-        } catch (Exception e) {
-            throw new ExceptionBD(e.getMessage(), EErrosBD.CONSULTA_DADO);
-        } finally {
-            Conexao.fechaConexao();
-        }
-
-        return false;
-    }
-
 }

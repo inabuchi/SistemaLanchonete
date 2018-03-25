@@ -118,137 +118,14 @@
                 <table id="gerenciar-cliente" class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Código</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Telefone</th>
-                            <th scope="col">Endereço</th>
-                            <th scope="col">Número</th>
-                            <th scope="col">Bairro</th>
+                            <th scope="col">Código Cliente</th>
+                            <th scope="col">Código Pessoa</th>
+                            <th scope="col">Observação</th>
+                            <th scope="col">Situação</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark Otto</td>
-                            <td>(47) 98789-9878</td>
-                            <td>Rua São Paulo</td>
-                            <td>456</td>
-                            <td>Centro</td>
-                            <td><a href="cliente.html?status=A"><i class="fa fa-pencil"></i></a></td>
-                            <td><a class="excluir" href="#"><i class="fa fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob Thornton</td>
-                            <td>(47) 98756-5564</td>
-                            <td>Avenida Duff</td>
-                            <td>799</td>
-                            <td>Fortaleza</td>
-                            <td><a href="cliente.html?status=A"><i class="fa fa-pencil"></i></a></td>
-                            <td><a class="excluir" href="#"><i class="fa fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry the Bird</td>
-                            <td>(47) 87985-9999</td>
-                            <td>Rua XV de Novembro</td>
-                            <td>1023</td>
-                            <td>Centro</td>
-                            <td><a href="cliente.html?status=A"><i class="fa fa-pencil"></i></a></td>
-                            <td><a class="excluir" href="#"><i class="fa fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>Mark Otto</td>
-                            <td>(47) 98789-9878</td>
-                            <td>Rua São Paulo</td>
-                            <td>456</td>
-                            <td>Centro</td>
-                            <td><a href="cliente.html?status=A"><i class="fa fa-pencil"></i></a></td>
-                            <td><a class="excluir" href="#"><i class="fa fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>Jacob Thornton</td>
-                            <td>(47) 98756-5564</td>
-                            <td>Avenida Duff</td>
-                            <td>799</td>
-                            <td>Fortaleza</td>
-                            <td><a href="cliente.html?status=A"><i class="fa fa-pencil"></i></a></td>
-                            <td><a class="excluir" href="#"><i class="fa fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6</th>
-                            <td>Larry the Bird</td>
-                            <td>(47) 87985-9999</td>
-                            <td>Rua XV de Novembro</td>
-                            <td>1023</td>
-                            <td>Centro</td>
-                            <td><a href="cliente.html?status=A"><i class="fa fa-pencil"></i></a></td>
-                            <td><a class="excluir" href="#"><i class="fa fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">7</th>
-                            <td>Mark Otto</td>
-                            <td>(47) 98789-9878</td>
-                            <td>Rua São Paulo</td>
-                            <td>456</td>
-                            <td>Centro</td>
-                            <td><a href="cliente.html?status=A"><i class="fa fa-pencil"></i></a></td>
-                            <td><a class="excluir" href="#"><i class="fa fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">8</th>
-                            <td>Jacob Thornton</td>
-                            <td>(47) 98756-5564</td>
-                            <td>Avenida Duff</td>
-                            <td>799</td>
-                            <td>Fortaleza</td>
-                            <td><a href="cliente.html?status=A"><i class="fa fa-pencil"></i></a></td>
-                            <td><a class="excluir" href="#"><i class="fa fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">9</th>
-                            <td>Larry the Bird</td>
-                            <td>(47) 87985-9999</td>
-                            <td>Rua XV de Novembro</td>
-                            <td>1023</td>
-                            <td>Centro</td>
-                            <td><a href="cliente.html?status=A"><i class="fa fa-pencil"></i></a></td>
-                            <td><a class="excluir" href="#"><i class="fa fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">10</th>
-                            <td>Mark Otto</td>
-                            <td>(47) 98789-9878</td>
-                            <td>Rua São Paulo</td>
-                            <td>456</td>
-                            <td>Centro</td>
-                            <td><a href="cliente.html?status=A"><i class="fa fa-pencil"></i></a></td>
-                            <td><a class="excluir" href="#"><i class="fa fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">11</th>
-                            <td>Jacob Thornton</td>
-                            <td>(47) 98756-5564</td>
-                            <td>Avenida Duff</td>
-                            <td>799</td>
-                            <td>Fortaleza</td>
-                            <td><a href="cliente.html?status=A"><i class="fa fa-pencil"></i></a></td>
-                            <td><a class="excluir" href="#"><i class="fa fa-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">12</th>
-                            <td>Larry the Bird</td>
-                            <td>(47) 87985-9999</td>
-                            <td>Rua XV de Novembro</td>
-                            <td>1023</td>
-                            <td>Centro</td>
-                            <td><a href="cliente.html?status=A"><i class="fa fa-pencil"></i></a></td>
-                            <td><a class="excluir" href="#"><i class="fa fa-trash"></i></a></td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
