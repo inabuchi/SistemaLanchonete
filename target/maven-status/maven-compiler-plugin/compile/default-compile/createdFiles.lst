@@ -1,9 +1,0 @@
-controllers/ClienteControllers$1.class
-models/conexao/Conexao.class
-models/dao/ClienteDao.class
-controllers/EAcao.class
-models/conexao/ExceptionBD.class
-controllers/ClienteControllers.class
-models/conexao/EErrosBD.class
-beans/ClienteBean.class
-api/ClienteApi.class
