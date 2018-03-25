@@ -30,7 +30,7 @@ public class ClienteControllers {
     public void Update(ClienteBean cliente) throws Exception {
 
         try {
-            clienteDao.Update(cliente);
+            clienteDao.alterarRegistro(cliente);
         } catch (Exception e) {
             throw new Exception(e);
         }
@@ -39,7 +39,7 @@ public class ClienteControllers {
     public void Delete(ClienteBean cliente) throws Exception {
 
         try {
-            clienteDao.Delete(cliente);
+            clienteDao.deletarRegistro(cliente);
         } catch (Exception e) {
             throw new Exception(e);
         }

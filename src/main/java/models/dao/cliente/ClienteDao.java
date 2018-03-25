@@ -7,7 +7,6 @@ package models.dao.cliente;
 
 import beans.cliente.ClienteBean;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -23,81 +22,34 @@ import java.util.List;
  * @author Douglas
  */
 public class ClienteDao extends ObjectDAO{
-
-/*    public boolean Insert(ClienteBean cliente) throws ExceptionBD {
-        Connection conexao = Conexao.getConexao();
-        String sqlInsert;
-
-        try {
-            sqlInsert = "INSERT INTO cliente (";
-            sqlInsert += " cd_cliente,";
-            sqlInsert += " cd_pessoa,";
-            sqlInsert += " ds_observacao,";
-            sqlInsert += " ie_ativo";
-            sqlInsert += " ) VALUES (";
-            sqlInsert += cliente.getCdCliente();
-            sqlInsert += cliente.getCdPessoa();
-            sqlInsert += cliente.getDsObservacao();
-            sqlInsert += cliente.getIeAtivo();
-            sqlInsert += ");";
-
-            PreparedStatement pst = conexao.prepareStatement(sqlInsert);
-
-            return pst.executeUpdate() > 0;
-        } catch (Exception e) {
-            throw new ExceptionBD(e.getMessage(), EErrosBD.INSERE_DADO);
-        } finally {
-            Conexao.fechaConexao();
-        }
-    }*/
     
     public boolean inserirRegistro(ClienteBean cliente) throws ExceptionBD {
         List<FieldsAndValues> val = new ArrayList();
-        val.add(new FieldsAndValues("cd_cliente", cliente.getCdCliente()));
-        val.add(new FieldsAndValues("cd_pessoa", cliente.getCdPessoa()));
+        val.add(new FieldsAndValues("cd_cliente", cliente.getCdCliente(), true));
+        val.add(new FieldsAndValues("cd_pessoa", cliente.getCdPessoa(), true));
         val.add(new FieldsAndValues("ds_observacao", cliente.getDsObservacao()));
         val.add(new FieldsAndValues("ie_ativo", cliente.getIeAtivo()));                           
 		
 	return inserirRegistro(val);    
     }
-
-    public boolean Update(ClienteBean cliente) throws ExceptionBD {
-        Connection conexao = Conexao.getConexao();
-        String sqlUpdate;
-        try {
-            sqlUpdate = "UPDATE cliente SET";
-            sqlUpdate += " cd_cliente = " + cliente.getCdCliente();
-            sqlUpdate += " cd_pessoa = " + cliente.getCdPessoa();
-            sqlUpdate += " ds_observacao = " + cliente.getDsObservacao();
-            sqlUpdate += " ie_ativo = " + cliente.getIeAtivo();
-            sqlUpdate += ";";
-
-            PreparedStatement pst = conexao.prepareStatement(sqlUpdate);
-
-            return pst.executeUpdate() > 0;
-        } catch (Exception e) {
-            throw new ExceptionBD(e.getMessage(), EErrosBD.ATUALIZA_DADO);
-        } finally {
-            Conexao.fechaConexao();
-        }
+    
+    public boolean alterarRegistro(ClienteBean cliente) throws ExceptionBD {    
+        List<FieldsAndValues> val = new ArrayList();
+        val.add(new FieldsAndValues("cd_cliente", cliente.getCdCliente(), true));
+        val.add(new FieldsAndValues("cd_pessoa", cliente.getCdCliente(), true));
+        val.add(new FieldsAndValues("ds_observacao", cliente.getDsObservacao()));        
+        val.add(new FieldsAndValues("ie_ativo", cliente.getIeAtivo()));        
+        
+        return alterarRegistro(val);
     }
 
-    public boolean Delete(ClienteBean Cliente) throws ExceptionBD {
-        Connection conexao = Conexao.getConexao();
-        String sqlDelete;
-
-        try {
-            sqlDelete = "DELETE FROM cliente ";
-            sqlDelete += "WHERE cd_cliente = " + Cliente.getCdCliente();
-
-            PreparedStatement pst = conexao.prepareStatement(sqlDelete);
-            return pst.executeUpdate() > 0;
-        } catch (Exception e) {
-            throw new ExceptionBD(e.getMessage(), EErrosBD.EXCLUI_DADO);
-        } finally {
-            Conexao.fechaConexao();
-        }
-    }
+    public boolean deletarRegistro(ClienteBean cliente) throws ExceptionBD { 
+        List<FieldsAndValues> val = new ArrayList<>();
+        val.add(new FieldsAndValues("cd_cliente", cliente.getCdCliente(), true));
+        val.add(new FieldsAndValues("cd_pessoa", cliente.getCdCliente(), true));
+        
+        return deletarRegistro(val);
+    }   
 
     public List<ClienteBean> DefaultSelect(ClienteBean Cliente) throws ExceptionBD {
         Connection conexao = Conexao.getConexao();

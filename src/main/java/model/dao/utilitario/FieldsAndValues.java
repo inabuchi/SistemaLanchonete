@@ -28,6 +28,10 @@ public class FieldsAndValues {
 		this(field, Integer.toString(value), false);
 	}        
         
+	public FieldsAndValues(String field, Integer value, boolean isKey){
+		this(field, Integer.toString(value), isKey);
+	}        
+        
 	public FieldsAndValues(String field, float value){
 		this(field, Float.toString(value), false);
 	}                                        

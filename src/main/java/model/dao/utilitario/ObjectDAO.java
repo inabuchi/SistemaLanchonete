@@ -38,7 +38,7 @@ public class ObjectDAO {
 		try {
 			PreparedStatement ps = conn.prepareStatement(
 					"SELECT ORDINAL_POSITION AS ORDEM, COLUMN_NAME AS COLUNA, DATA_TYPE AS TIPO, IF(COLUMN_KEY = '', 'NO', COLUMN_KEY) CHAVE "
-							+ "FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = 'SistemaLanchoneteBD' AND TABLE_NAME = ? "
+							+ "FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = 'SistemaLanchonete' AND TABLE_NAME = ? "
 							+ "ORDER BY ORDINAL_POSITION");
 			ps.setString(1, getTabela());
 			ResultSet rs = ps.executeQuery();
