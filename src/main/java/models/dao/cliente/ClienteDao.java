@@ -11,18 +11,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 import models.conexao.Conexao;
 import models.conexao.EErrosBD;
 import models.conexao.ExceptionBD;
+import model.dao.utilitario.ObjectDAO;
+import model.dao.utilitario.FieldsAndValues;
+import java.util.List;
 
 /**
  *
  * @author Douglas
  */
-public class ClienteDao {
+public class ClienteDao extends ObjectDAO{
 
-    public boolean Insert(ClienteBean cliente) throws ExceptionBD {
+/*    public boolean Insert(ClienteBean cliente) throws ExceptionBD {
         Connection conexao = Conexao.getConexao();
         String sqlInsert;
 
@@ -47,6 +49,16 @@ public class ClienteDao {
         } finally {
             Conexao.fechaConexao();
         }
+    }*/
+    
+    public boolean inserirRegistro(ClienteBean cliente) throws ExceptionBD {
+        List<FieldsAndValues> val = new ArrayList();
+        val.add(new FieldsAndValues("cd_cliente", cliente.getCdCliente()));
+        val.add(new FieldsAndValues("cd_pessoa", cliente.getCdPessoa()));
+        val.add(new FieldsAndValues("ds_observacao", cliente.getDsObservacao()));
+        val.add(new FieldsAndValues("ie_ativo", cliente.getIeAtivo()));                           
+		
+	return inserirRegistro(val);    
     }
 
     public boolean Update(ClienteBean cliente) throws ExceptionBD {

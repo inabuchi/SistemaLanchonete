@@ -21,7 +21,7 @@ public class ClienteControllers {
     public void Insert(ClienteBean cliente) throws Exception {
 
         try {
-            clienteDao.Insert(cliente);
+            clienteDao.inserirRegistro(cliente);
         } catch (Exception e) {
             throw new Exception(e);
         }

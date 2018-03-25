@@ -23,7 +23,8 @@ public enum EErrosBD {
     CRIA_BD("Erro ao criar o banco de dados específico"),
     LISTA_DADO("Erro ao listar a tabela desejada"),
     ATUALIZA_IMAGEM_DADO("Erro ao atualizar imagem"),
-    VISUALIZA_DADO("Erro ao visualizar os dados");
+    VISUALIZA_DADO("Erro ao visualizar os dados"),
+    BUSCAR_CAMPOS_TABELA("Erro ao buscar os campos da tabela");
 
     private final String erro;
 
