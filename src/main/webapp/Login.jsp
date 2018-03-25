@@ -124,6 +124,6 @@
 	</form>
   </body>
   
-  <script src="js/jquery.min.js" type="text/javascript"></script>
-  <script type="text/javascript" src="js/login.js"></script>
+  <script src="js/lib/externas/jquery/jquery.min.js" type="text/javascript"></script>
+  <script src="js/login/login.js" type="text/javascript"></script>
 </html>
