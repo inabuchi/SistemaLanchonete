@@ -8,7 +8,6 @@ package model.dao.utilitario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,19 +86,30 @@ public class ObjectDAO {
 									&& (fv.getValue().equalsIgnoreCase("0"))) {
 								ps.setNull(i, java.sql.Types.INTEGER);
 							} else {
-								ps.setInt(i, Integer.parseInt(fv.getValue()));
+								ps.setInt(i, fv.getValueInt());
 							}
 							break;
-						case ConstantesBD.VARCHAR:
+						case ConstantesBD.VARCHAR:                                                     
 							ps.setString(i, fv.getValue());
 							break;
+                                                case ConstantesBD.LONGTEXT:
+                                                    ps.setString(i, fv.getValue());
+                                                    break;
 						case ConstantesBD.DECIMAL:
-							ps.setDouble(i, Double.parseDouble(fv.getValue()));
+							ps.setDouble(i, fv.getValueDouble());
 							break;
+						case ConstantesBD.DOUBLE:
+							ps.setDouble(i, fv.getValueDouble());
+							break;                                                        
+						case ConstantesBD.FLOAT:
+							ps.setFloat(i, fv.getValueFloat());
+							break;                                                                                                                
 						case ConstantesBD.DATE:
-							SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-							ps.setDate(i, new java.sql.Date(sdf.parse(fv.getValue()).getTime()));
+							ps.setDate(i, new java.sql.Date(fv.getValueDate()));
 							break;
+						case ConstantesBD.DATETIME:
+							ps.setDate(i, new java.sql.Date(fv.getValueDate()));
+							break;                                                        
 						case ConstantesBD.CHAR:
 							ps.setString(i, String.valueOf(fv.getValue().charAt(0)));
 							break;
@@ -168,17 +178,16 @@ public class ObjectDAO {
 						if ((campoTipo[0].equalsIgnoreCase(fv.getField())) && (!fv.getValue().equalsIgnoreCase(""))) {
 							switch (campoTipo[1]) {
 							case ConstantesBD.INTEIRO:
-								ps.setInt(i, Integer.parseInt(fv.getValue()));
+								ps.setInt(i, fv.getValueInt());
 								break;
 							case ConstantesBD.VARCHAR:
 								ps.setString(i, fv.getValue());
 								break;
 							case ConstantesBD.DECIMAL:
-								ps.setDouble(i, Double.parseDouble(fv.getValue()));
+								ps.setDouble(i, fv.getValueDouble());
 								break;
 							case ConstantesBD.DATE:
-								SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-								ps.setDate(i, new java.sql.Date(sdf.parse(fv.getValue()).getTime()));
+								ps.setDate(i, new java.sql.Date(fv.getValueDate()));
 								break;
 							case ConstantesBD.CHAR:
 								ps.setString(i, String.valueOf(fv.getValue().charAt(0)));
@@ -198,17 +207,16 @@ public class ObjectDAO {
 					if ((fv.isKey()) && (campoTipo[0].equalsIgnoreCase(fv.getField()))) {
 						switch (campoTipo[1]) {
 						case ConstantesBD.INTEIRO:
-							ps.setInt(i, Integer.parseInt(fv.getValue()));
+							ps.setInt(i, fv.getValueInt());
 							break;
 						case ConstantesBD.VARCHAR:
 							ps.setString(i, fv.getValue());
 							break;
 						case ConstantesBD.DECIMAL:
-							ps.setDouble(i, Double.parseDouble(fv.getValue()));
+							ps.setDouble(i, fv.getValueDouble());
 							break;
 						case ConstantesBD.DATE:
-							SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-							ps.setDate(i, new java.sql.Date(sdf.parse(fv.getValue()).getTime()));
+							ps.setDate(i, new java.sql.Date(fv.getValueDate()));
 							break;
 						case ConstantesBD.CHAR:
 							ps.setString(i, String.valueOf(fv.getValue().charAt(0)));
@@ -249,17 +257,16 @@ public class ObjectDAO {
 					if (campoTipo[0].equalsIgnoreCase(fv.getField())) {
 						switch (campoTipo[1]) {
 						case ConstantesBD.INTEIRO:
-							ps.setInt(i, Integer.parseInt(fv.getValue()));
+							ps.setInt(i, fv.getValueInt());
 							break;
 						case ConstantesBD.VARCHAR:
 							ps.setString(i, fv.getValue());
 							break;
 						case ConstantesBD.DECIMAL:
-							ps.setDouble(i, Double.parseDouble(fv.getValue()));
+							ps.setDouble(i, fv.getValueDouble());
 							break;
 						case ConstantesBD.DATE:
-							SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-							ps.setDate(i, new java.sql.Date(sdf.parse(fv.getValue()).getTime()));
+							ps.setDate(i, new java.sql.Date(fv.getValueDate()));
 							break;
 						case ConstantesBD.CHAR:
 							ps.setString(i, String.valueOf(fv.getValue().charAt(0)));

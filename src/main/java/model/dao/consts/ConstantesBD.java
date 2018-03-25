@@ -17,11 +17,15 @@ public class ConstantesBD {
 	
     /*TIPOS DE DADOS BANCO DE DADOS*/
 	
-    public static final String VARCHAR = "varchar";
-    public static final String INTEIRO = "int";
-    public static final String DECIMAL = "decimal";
-    public static final String DATE    = "date";
-    public static final String CHAR    = "char";
+    public static final String VARCHAR  = "varchar";
+    public static final String LONGTEXT = "longtext";
+    public static final String INTEIRO  = "int";
+    public static final String DECIMAL  = "decimal";
+    public static final String DATE     = "date";
+    public static final String CHAR     = "char";
+    public static final String DATETIME = "datetime";
+    public static final String DOUBLE   = "double";
+    public static final String FLOAT    = "float";
 	
     /*TABELAS*/    
     public static final String CLIENTE = "cliente";    
