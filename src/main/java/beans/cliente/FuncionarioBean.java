@@ -11,17 +11,18 @@ import java.util.Date;
  *
  * @author Douglas
  */
-public class FuncionarioBean {
+public class FuncionarioBean extends PessoaBean {
     private PessoaBean pessoa;
+    private CargoBean cargo;
     private int cdCliente;
     private String dsObservacao;
     
     public FuncionarioBean() {
-        this(0,"","","", new Date(),"", 0, "");
+        this(0,"","","", new Date(),0,"","", 0, "");
     }
 
     public FuncionarioBean(int cdPessoa, String dsNome, String dsTelefone1, String dsTelefone2,
-            Date dtCadastro, String ieAtivo, int cdCliente, String dsObservacao) {
+            Date dtCadastro, int cdCargo, String dsCargo, String ieAtivo, int cdCliente, String dsObservacao) {
         setCdCliente(cdCliente);
         setDsObservacao(dsObservacao);
     }

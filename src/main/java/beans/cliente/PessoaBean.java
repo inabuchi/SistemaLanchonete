@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Douglas
  */
-public class PessoaBean {
+public abstract class PessoaBean {
     private int cdPessoa;
     private String dsNome;
     private String dsTelefone1;

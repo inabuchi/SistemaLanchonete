@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Douglas
  */
-public class ClienteBean {
+public class ClienteBean extends PessoaBean {
 
     private int cdCliente;
     private String dsObservacao;
