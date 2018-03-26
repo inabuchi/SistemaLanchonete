@@ -131,10 +131,33 @@
             <button type="submit" class="btn btn-primary"><a href="consultaCliente.html">Salvar</a></button>
 
         </form>
+	<!--
+        <form id="form-cadastro" class="cad">  
+            <div class="form-group">
+                <h3>Cadastro de Clientes</h3>
+                < !--                    <label for="codCli">Código</label>-- >
+                <input class="form-control" id="cnCliente" name="cnCliente" type="hidden">
+            </div>
+            <div class="form-group">
+                <label for="nomeCli">Código Pessoa</label>
+                <input class="form-control" id="cdPessoa" name="cdPessoa" type="text" maxlength="255" required>
+            </div>
+            <div class="form-group">
+                <label for="endCli">Observação</label>
+                <input class="form-control" id="dsObservacao" name="dsObservacao" type="text" maxlength="255" required>
+            </div>
+            <div class="form-group">
+                <label for="bairroCli">Situação</label>
+                <input class="form-control" id="ieAtivo" name="ieAtivo" type="text" minlength="3" maxlength="32" required/>
+            </div>
+            <button type="submit" class="btn btn-primary"><a href="consultaCliente.html">Salvar</a></button>
+
+        </form>
+	-->
     </body>
 
     <!-- -- Igor Vieira Rodrigues -->
-    <!-- -- As declaraï¿½ï¿½es javascript devem ser feitas aqui -->
+    <!-- -- As declarações javascript devem ser feitas aqui -->
     <script src="<%=request.getContextPath()%>/js/lib/externas/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="<%=request.getContextPath()%>/js/lib/externas/propper/popper.min.js" type="text/javascript"></script>
     <script src="<%=request.getContextPath()%>/js/lib/externas/bootstrap/bootstrap.min.js" type="text/javascript"></script>
