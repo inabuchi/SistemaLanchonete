@@ -125,6 +125,14 @@
                             <th scope="col"></th>
                             <th scope="col"></th>
                         </tr>
+                        <tr>
+                            <th scope="col"></th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
                     </thead>
                     </tbody>
                 </table>
@@ -136,7 +144,13 @@
 
     <!-- -- Igor Vieira Rodrigues -->
     <!-- -- As declarações javascript devem ser feitas aqui -->
-    <script src="js/lib/externas/jquery/jquery.min.js" type="text/javascript"></script>
-    <script src="js/lib/internas/sistema.js" type="text/javascript"></script>
-    <script src="js/cliente/gerenciarClienteView.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/js/lib/externas/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/js/lib/externas/jqgrid/i18n/grid.locale-pt-br.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/js/lib/externas/jqgrid/jquery.jqGrid.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/js/lib/externas/propper/popper.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/js/lib/externas/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+    
+    <script src="<%=request.getContextPath()%>/js/lib/internas/bootstrap-modal.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/js/lib/internas/sistema.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/js/cliente/gerenciarClienteView.js" type="text/javascript"></script>
 </html>

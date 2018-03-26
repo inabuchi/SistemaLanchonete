@@ -3,9 +3,28 @@
 ($ => {
     $(document).ready(() => {
         console.log('entrou');
+        construirGrid($);
         atribuirEventos($);
     });
 })(jQuery);
+
+function construirGrid($) {
+    enviarAjax('/SistemaLanchonete/action/cliente/getCliente', 'get',{},(res) => $('#gerenciar-cliente').jqGrid({
+//            url: '/api/cliente/getCliente',
+//            datatype: 'json',
+//            mtype: 'post',
+            colNames: [],
+            colModel: [],
+            pager: '#pager',
+            rowNum: 10,
+            rowList: [10,20,30],
+            sortName: 'cdCliente',
+            sprtprder: 'desc',
+            autoencode: true,
+            caption: 'Clientes'
+        }));
+}
+
 
 function atribuirEventos($) {
     $('body').on('click', '#gerenciar-cliente a.excluir', function (e) {

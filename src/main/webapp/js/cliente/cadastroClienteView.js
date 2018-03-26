@@ -32,7 +32,7 @@ function atribuirEventos($) {
                 var txtUrl = objDados.cdCliente === null
                         ? "addCliente" : "updateCliente";
 
-                txtUrl = `/api/cliente/${txtUrl}`;
+                txtUrl = `/SistemaLanchonete/action/cliente/${txtUrl}`;
                 
                 var txtTipo = objDados.cdCliente === null ? 'post' : 'put';
 
