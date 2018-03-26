@@ -29,14 +29,16 @@ function atribuirEventos($) {
 
                 var objDados = getFormCampos(e.currentTarget);
 
-                var txtUrl = objDados.cnCliente === null
-                        ? "/addCliente" : "/updateCliente";
+                var txtUrl = objDados.cdCliente === null
+                        ? "addCliente" : "updateCliente";
 
-                var txtTipo = objDados.cnCliente === null ? 'post' : 'put';
+                txtUrl = `/api/cliente/${txtUrl}`;
+                
+                var txtTipo = objDados.cdCliente === null ? 'post' : 'put';
 
-                var fnCallBack = objDados.cnCliente === null ?
+                var fnCallBack = objDados.cdCliente === null ?
                         res => $("#cnCliente").val(res.id) :
-                        res => BootstrapModal.alerta('Cliente atualizado com sucesso!');
+                        res => $bsModal.alerta('Cliente atualizado com sucesso!');
 
                 $(e.currentTarget).find(".desabilitar").attr('disabled', '');
                 enviarAjax(txtUrl, txtTipo, objDados, fnCallBack)
