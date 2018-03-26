@@ -12,8 +12,8 @@ package beans.produto;
 public class ProdutoBean {
    
     private int codProduto;
-    private int codProdutoAdicional;
-    private int codProdutoCategoria;
+    private ProdutoAdicionalBean codProdutoAdicional;
+    private ProdutoCategoriaBean codProdutoCategoria;
     private String referenciaProduto;
     private String descProduto;
     private float valVenda;
@@ -29,7 +29,7 @@ public class ProdutoBean {
      * @param valVenda
      * @param isAtivo 
      */
-    ProdutoBean(int codProduto, int codProdutoAdicional, int codProdutoCategoria, String referenciaProduto, 
+    ProdutoBean(int codProduto,  ProdutoAdicionalBean codProdutoAdicional, ProdutoCategoriaBean codProdutoCategoria, String referenciaProduto, 
             String descProduto, float valVenda, boolean isAtivo) {
         this.codProduto = codProduto;
         this.codProdutoAdicional = codProdutoAdicional;
@@ -42,7 +42,7 @@ public class ProdutoBean {
 
     /**
      * 
-     * @return código do produto 
+     * @return Código do Produto
      */
     public int getCodProduto() {
         return codProduto;
@@ -59,9 +59,9 @@ public class ProdutoBean {
     
     /**
      * 
-     * @return código do produto adicional desejado 
+     * @return Código do Produto Adicional
      */
-    public int getCodProdutoAdicional() {
+    public ProdutoAdicionalBean getCodProdutoAdicional() {
         return codProdutoAdicional;
     }
 
@@ -69,7 +69,7 @@ public class ProdutoBean {
      * 
      * @param codProdutoAdicional 
      */
-    public void setCodProdutoAdicional(int codProdutoAdicional) {
+    public void setCodProdutoAdicional(ProdutoAdicionalBean codProdutoAdicional) {
         this.codProdutoAdicional = codProdutoAdicional;
     }
     
@@ -77,7 +77,7 @@ public class ProdutoBean {
      * 
      * @return Categoria do objeto ProdutoCategoria 
      */
-    public int getCodProdutoCategoria() {
+    public ProdutoCategoriaBean getCodProdutoCategoria() {
         return codProdutoCategoria;
     }
 
@@ -85,13 +85,13 @@ public class ProdutoBean {
      *
      * @param codProdutoCategoria 
      */
-    public void setCodProdutoCategoria(int codProdutoCategoria) {
+    public void setCodProdutoCategoria(ProdutoCategoriaBean codProdutoCategoria) {
         this.codProdutoCategoria = codProdutoCategoria;
     }
 
     /**
      * 
-     * @return Referencia do produto
+     * @return Referencia de Produto
      */
     public String getReferenciaProduto() {
         return referenciaProduto;
@@ -106,7 +106,7 @@ public class ProdutoBean {
     
     /**
      * 
-     * @return descrição do produto 
+     * @return Descrição de Produto
      */
     public String getDescProduto() {
         return descProduto;
@@ -122,7 +122,7 @@ public class ProdutoBean {
 
     /**
      * 
-     * @return valor total da venda
+     * @return Valor total de Venda
      */
     public float getValVenda() {
         return valVenda;
@@ -137,7 +137,7 @@ public class ProdutoBean {
 
     /**
      * 
-     * @return produto ativo ou não
+     * @return Booleano: Ativo ou Inativo
      */
     public boolean isIsAtivo() {
         return isAtivo;
