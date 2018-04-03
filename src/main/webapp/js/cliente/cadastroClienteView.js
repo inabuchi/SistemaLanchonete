@@ -33,8 +33,10 @@ function atribuirEventos($) {
                         ? "addCliente" : "updateCliente";
 
                 txtUrl = `/SistemaLanchonete/action/cliente/${txtUrl}`;
-                
-                var txtTipo = objDados.cdCliente === null ? 'post' : 'put';
+                if (objDados.cdCliente === null)
+                    delete objDados.cdCliente;
+
+                var txtTipo = objDados.cdCliente === undefined ? 'post' : 'put';
 
                 var fnCallBack = objDados.cdCliente === null ?
                         res => $("#cnCliente").val(res.id) :
