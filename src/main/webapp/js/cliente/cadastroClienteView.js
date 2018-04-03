@@ -41,7 +41,7 @@ function atribuirEventos($) {
                         res => $bsModal.alerta('Cliente atualizado com sucesso!');
 
                 $(e.currentTarget).find(".desabilitar").attr('disabled', '');
-                enviarAjax(txtUrl, txtTipo, JSON.stringify(objDados), fnCallBack)
+                enviarAjax(txtUrl, txtTipo, objDados, fnCallBack)
                         .always(() => $(e.currentTarget).find('.desabilitar').removeAttr('disabled'));
 
                 return false;
