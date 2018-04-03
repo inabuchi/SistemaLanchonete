@@ -12,9 +12,9 @@
  * @param {String} valor string a ser checada
  * @returns {Boolean}
  */
-String.prototype.isNullOrEmpty = function (valor) {
-
-    valor = valor || this || '';
+String.isNullOrEmpty = function (valor) {
+    
+    valor = valor || '';
 
     return valor === null || valor === '';
 };
@@ -32,6 +32,9 @@ function enviarAjax(prUrl, prMethod, prDados, prDoneCallBack, prFailCallBack) {
     prUrl = prUrl || '';
     prMethod = prMethod || 'GET';
     prDados = prDados || {};
+
+    if (typeof prDados === 'object')
+        prDados = JSON.stringify(prDados);
 
     prDoneCallBack = prDoneCallBack || (res => console.log(res));
 
@@ -79,9 +82,11 @@ function getFormCampos(prForm) {
         if ($.isNumeric(campo.value)) {
             valor = Number(campo.value);
         } else if (campo.value !== "") {
-            valor = campo.value;
+            valor = campo.value || null;
         }
-        objRetorno[campo.name] = campo.value === "" ? null : campo.value;
+
+        if (!String.isNullOrEmpty(campo.name))
+            objRetorno[campo.name] = valor;
 
         n++;
     }
