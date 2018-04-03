@@ -113,8 +113,8 @@
         <form id="form-cadastro" class="cad">  
             <div class="form-group">
                 <h3>Cadastro de Clientes</h3>
-                <label for="codCli">Código Cliente</label>
-                <input class="form-control" id="cdCliente" name="cdCliente" type="text" maxlength="255" required>
+                <!-- label for="codCli">Código Cliente</label -->
+                <input class="form-control" id="cdCliente" name="cdCliente" type="hidden" maxlength="255">
             </div>
             <div class="form-group">
                 <label for="nomeCli">Código Pessoa</label>
