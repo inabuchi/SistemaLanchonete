@@ -13,7 +13,7 @@
  * @returns {Boolean}
  */
 String.isNullOrEmpty = function (valor) {
-    
+
     valor = valor || '';
 
     return valor === null || valor === '';
@@ -65,6 +65,20 @@ function enviarAjax(prUrl, prMethod, prDados, prDoneCallBack, prFailCallBack) {
         }
     }).done(prDoneCallBack).fail(prFailCallBack);
 
+}
+
+function mascaraTelefone(telefone) {
+    telefone = telefone || 0;
+    var modelo = '00000000000';
+    var regex = /^([\d]{3})([\d]{4,5})([\d]{4})$/g;
+    var mascara = '($1) $2-$3';
+    var str = `${modelo}${telefone}`;
+
+    str = str.slice(-modelo.length);
+    if (str.substr(0, 1) !== '0')
+        str = `0${str}`;
+
+    return str.replace(regex, mascara);
 }
 
 /**

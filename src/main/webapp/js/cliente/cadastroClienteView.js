@@ -35,6 +35,15 @@ function atribuirEventos($) {
                 txtUrl = `/SistemaLanchonete/action/cliente/${txtUrl}`;
                 if (objDados.cdCliente === null)
                     delete objDados.cdCliente;
+                
+                if (objDados.cdPessoa === null)
+                    delete objDados.cdPessoa;
+                
+                if (typeof objDados.dsTelefone1 === 'number')
+                    objDados.dsTelefone1 = mascaraTelefone(objDados.dsTelefone1);
+
+                if (typeof objDados.dsTelefone2 === 'number')
+                    objDados.dsTelefone2 = mascaraTelefone(objDados.dsTelefone2);
 
                 var txtTipo = objDados.cdCliente === undefined ? 'post' : 'put';
 

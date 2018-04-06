@@ -113,47 +113,52 @@
         <form id="form-cadastro" class="cad">  
             <div class="form-group">
                 <h3>Cadastro de Clientes</h3>
-                <!-- label for="codCli">Código Cliente</label -->
-                <input class="form-control" id="cdCliente" name="cdCliente" type="hidden" maxlength="255">
+<!--                <label for="codCli">Código Cliente</label>-->
+                <input class="form-control" id="cdCliente" name="cdCliente" type="hidden" maxlength="255"/>
+                <input class="form-control" id="cdPessoa" name="cdPessoa" type="hidden" maxlength="255"/>
             </div>
             <div class="form-group">
-                <label for="nomeCli">Código Pessoa</label>
-                <input class="form-control" id="cdPessoa" name="cdPessoa" type="text" maxlength="255" required>
+                <label for="dsNome">Nome</label>
+                <input class="form-control" id="dsNome" name="dsNome" type="text" maxlength="255" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="dsTelefone1">Telefones</label>
+                </div>
+                <div class="form-group col-md-6">
+                    <input class="form-control" placeholder="Ex.: (47) 3333-3333" pattern="^(\({0,1})([\d]{2})(\){0,1})( {0,1})([\d]{0,1})([\d]{4})(-{0,1})([\d]{4})$" id="dsTelefone1" name="dsTelefone1" type="tel" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input class="form-control" placeholder="Ex.: (47) 3333-3333" pattern="^(\({0,1})([\d]{2})(\){0,1})( {0,1})([\d]{0,1})([\d]{4})(-{0,1})([\d]{4})$" id="dsTelefone2" name="dsTelefone2" type="tel">
+                </div>
             </div>
             <div class="form-group">
-                <label for="endCli">Observação</label>
+                <label for="dsObservacao">Observação</label>
                 <input class="form-control" id="dsObservacao" name="dsObservacao" type="text" maxlength="255" required>
             </div>
-            <div class="form-group">
-                <label for="bairroCli">Situação</label>
-                <input class="form-control" id="ieAtivo" name="ieAtivo" type="text" minlength="3" maxlength="32" required/>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="">Situação:</label>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="ieAtivo-sim" class="col-md-6">Ativo</label>
+                    <input class="form-control col-md-6" id="ieAtivo-sim" name="ieAtivo" type="radio" value="S" minlength="3" maxlength="32" required/>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="ieAtivo-nao" class="col-md-6">Inativo</label>
+                    <input class="form-control col-md-6" id="ieAtivo-nao" name="ieAtivo" type="radio" value="N" minlength="3" maxlength="32" required/>
+                </div>
             </div>
+
+            <!--            <div class="form-row">
+                            <div class="form-group col-md-9">
+                                <label for="numEndCli">Telefone</label>
+                                <input class="form-control" placeholder="Ex.: (47) 3333-3333" pattern="^(\({0,1})([\d]{2})(\){0,1})( {0,1})([\d]{0,1})([\d]{4})(-{0,1})([\d]{4})$" id="caTelefone" name="caTelefone" type="tel" required>
+                            </div>
+                        </div>-->
             <button type="submit" class="btn btn-primary"><a href="consultaCliente.html">Salvar</a></button>
 
         </form>
-	<!--
-        <form id="form-cadastro" class="cad">  
-            <div class="form-group">
-                <h3>Cadastro de Clientes</h3>
-                < !--                    <label for="codCli">Código</label>-- >
-                <input class="form-control" id="cnCliente" name="cnCliente" type="hidden">
-            </div>
-            <div class="form-group">
-                <label for="nomeCli">Código Pessoa</label>
-                <input class="form-control" id="cdPessoa" name="cdPessoa" type="text" maxlength="255" required>
-            </div>
-            <div class="form-group">
-                <label for="endCli">Observação</label>
-                <input class="form-control" id="dsObservacao" name="dsObservacao" type="text" maxlength="255" required>
-            </div>
-            <div class="form-group">
-                <label for="bairroCli">Situação</label>
-                <input class="form-control" id="ieAtivo" name="ieAtivo" type="text" minlength="3" maxlength="32" required/>
-            </div>
-            <button type="submit" class="btn btn-primary"><a href="consultaCliente.html">Salvar</a></button>
-
-        </form>
-	-->
     </body>
 
     <!-- -- Igor Vieira Rodrigues -->
@@ -161,7 +166,7 @@
     <script src="<%=request.getContextPath()%>/js/lib/externas/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="<%=request.getContextPath()%>/js/lib/externas/propper/popper.min.js" type="text/javascript"></script>
     <script src="<%=request.getContextPath()%>/js/lib/externas/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-    
+
     <script src="<%=request.getContextPath()%>/js/lib/internas/bootstrap-modal.js" type="text/javascript"></script>
     <script src="<%=request.getContextPath()%>/js/lib/internas/sistema.js" type="text/javascript"></script>
     <script src="<%=request.getContextPath()%>/js/cliente/cadastroClienteView.js" type="text/javascript"></script>
