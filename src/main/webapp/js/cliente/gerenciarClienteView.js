@@ -23,16 +23,16 @@ function construirGrid($) {
         $('#gerenciar-cliente').jqGrid({
             data: dados,
             datatype: 'local',
-//            colNames: ['Código Cliente', 'Código Pessoa', 'Observação', 'Situação'],
+//            colNames: ['Código Cliente', 'Código Pessoa', 'Nome', 'Observação', 'Situação', 'Data de Cadastro', 'Telefone', 'Telefone'],
             colModel: [
-                {name: 'cdCliente', index: 'cdCliente', label: 'Código Cliente', hidden: true},
-                {name: 'cdPessoa', index: 'cdPessoa', label: 'Código Pessoa', hidden: true},
-                {name: 'dsNome', index: 'dsNome', label: 'Nome', sortable: false},
-                {name: 'dsObservacao', index: 'dsObservacao', label: 'Observação'},
-                {name: 'ieAtivo', index: 'ieAtivo', label: 'Situação', align: "right"},
-                {name: 'dsCadastro', index: 'dsCadastro', label: 'Data de Cadastro', sorttype: "date", formatter: 'date', datefmt: 'd-m-Y'},
-                {name: 'dsTelefone1', index: 'dsTelefone1', label: 'Telefone', align: "right"},
-                {name: 'dsTelefone2', index: 'dsTelefone2', label: 'Telefone', align: "right"}
+                {name: 'cdCliente',     index: 'cdCliente',     label: 'Código Cliente',    hidden: true},
+                {name: 'cdPessoa',      index: 'cdPessoa',      label: 'Código Pessoa',     hidden: true},
+                {name: 'dsNome',        index: 'dsNome',        label: 'Nome',              sortable: false},
+                {name: 'dsObservacao',  index: 'dsObservacao',  label: 'Observação'},
+                {name: 'ieAtivo',       index: 'ieAtivo',       label: 'Situação',          align: "right"},
+                {name: 'dsCadastro',    index: 'dsCadastro',    label: 'Data de Cadastro',  sorttype: "date", formatter: 'date', datefmt: 'd-m-Y'},
+                {name: 'dsTelefone1',   index: 'dsTelefone1',   label: 'Telefone',          align: "right"},
+                {name: 'dsTelefone2',   index: 'dsTelefone2',   label: 'Telefone',          align: "right"}
             ],
             pager: '#pager',
             rowNum: 10,
