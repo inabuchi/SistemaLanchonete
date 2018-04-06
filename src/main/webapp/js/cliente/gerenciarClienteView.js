@@ -1,4 +1,4 @@
-/* global enviarAjax */
+﻿/* global enviarAjax */
 
 ($ => {
     $(document).ready(() => {
@@ -9,15 +9,23 @@
 })(jQuery);
 
 function construirGrid($) {
-    enviarAjax('/SistemaLanchonete/action/cliente/getCliente', 'get',{},(res) => $('#gerenciar-cliente').jqGrid({
-//            url: '/api/cliente/getCliente',
-//            datatype: 'json',
-//            mtype: 'post',
-            colNames: [],
-            colModel: [],
+    enviarAjax('/SistemaLanchonete/action/cliente/getCliente', 'get', {}, (res) => $('#gerenciar-cliente').jqGrid({
+            data: res,
+            datatype: 'local',
+//            colNames: ['Código Cliente', 'Código Pessoa', 'Observação', 'Situação'],
+            colModel: [
+                {name: 'cdCliente', index: 'cdCliente'},
+                {name: 'cdPessoa', index: 'cdPessoa'},
+                {name: 'dsObservacao', index: 'dsObservacao', label: 'Observação'},
+                {name: 'ieAtivo', index: 'ieAtivo', width: 80, align: "right"},
+                {name: 'dsNome', index: 'dsNome', width: 150, sortable: false},
+                {name: 'dsCadastro', index: 'dsCadastro', width: 100},
+                {name: 'dsTelefone1', index: 'dsTelefone1', width: 80, align: "right"},
+                {name: 'dsTelefone2', index: 'dsTelefone2', width: 80, align: "right"}
+            ],
             pager: '#pager',
             rowNum: 10,
-            rowList: [10,20,30],
+            rowList: [10, 20, 30],
             sortName: 'cdCliente',
             sprtprder: 'desc',
             autoencode: true,
