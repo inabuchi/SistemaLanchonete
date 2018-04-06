@@ -115,27 +115,8 @@
             <div class="title">Consulta de clientes</div> 
             </br>
             <div class="tableArea">
-                <table id="gerenciar-cliente" class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Código Cliente</th>
-                            <th scope="col">Código Pessoa</th>
-                            <th scope="col">Observação</th>
-                            <th scope="col">Situação</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                        </tr>
-                        <tr>
-                            <th scope="col"></th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    </tbody>
-                </table>
+                <table id="gerenciar-cliente" class="table table-striped"></table>
+                <div id="pager"></div>
             </div>
 
             <center><button type="submit" class="btn btn-primary"><a href="cliente.html?status=C">+ Cadastrar</a></button></center>
@@ -150,7 +131,7 @@
     <script src="<%=request.getContextPath()%>/js/lib/externas/jqgrid/jquery.jqGrid.min.js" type="text/javascript"></script>
     <script src="<%=request.getContextPath()%>/js/lib/externas/propper/popper.min.js" type="text/javascript"></script>
     <script src="<%=request.getContextPath()%>/js/lib/externas/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-    
+
     <script src="<%=request.getContextPath()%>/js/lib/internas/bootstrap-modal.js" type="text/javascript"></script>
     <script src="<%=request.getContextPath()%>/js/lib/internas/sistema.js" type="text/javascript"></script>
     <script src="<%=request.getContextPath()%>/js/cliente/gerenciarClienteView.js" type="text/javascript"></script>
