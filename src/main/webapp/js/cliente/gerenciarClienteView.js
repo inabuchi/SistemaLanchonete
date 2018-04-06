@@ -8,6 +8,9 @@
             });
         })(jQuery);
 function construirGrid($) {
+    $('#gerenciar-cliente').html('');
+    $('#pager').html('');
+    
     enviarAjax('/SistemaLanchonete/action/cliente/getCliente', 'get', {}, (res) => {
         var dados = [];
         for (var i in res) {
@@ -42,6 +45,9 @@ function construirGrid($) {
             autoencode: true
 //            caption: 'Clientes'
         });
+        
+        $('#pager *:input:not(select)').addClass('form-control');
+        $('#pager select').addClass('custom-select');
     });
 }
 
