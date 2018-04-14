@@ -9,6 +9,9 @@
         <title>Guten Burguer - Adicionar cliente</title>
 
         <!-- DataTables -->
+		<script src = "library/jquery-3.2.1.min.js"> </script>
+        <script type="text/javascript" src="controller/cliente/cadastroCliente.js"></script>
+        <script type="text/javascript" src="controller/generics/validacoesGenericas.js"></script>
         <link rel="stylesheet" type="text/css" href="library/DataTables/datatables.min.css"/>
         <script type="text/javascript" src="library/DataTables/datatables.min.js"></script>
 
@@ -107,7 +110,7 @@
                 <div class="content-title"><i class="fa fa-id-card-o"></i>Cadastros<i class="fa fa-angle-right"></i>Clientes<i class="fa fa-angle-right"></i>Cadastrar cliente</div>
 
                 <div class="formtitle">Adicionar cliente</div>
-                <form>
+                <form id="fCadCliente" class="formCliente>
                     <div class="page-cad">                   
                         <fieldset class="well">
                             <legend class="well-legend">Dados pessoais</legend>
@@ -124,7 +127,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-8">
-                                    <label for="nomeCli" class="control-label required">Nome</label>
+                                    <label for="nomeCli" "== class="control-label required">Nome</label>
                                     <input class="form-control" id="nomeCli" type="text" maxlength="255" required>
                                 </div> 
                                 <div class="form-group col-md-2">
