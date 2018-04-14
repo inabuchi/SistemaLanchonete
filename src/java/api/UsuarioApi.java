@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package api;
 
 import beans.ClienteBean;
@@ -15,10 +20,10 @@ import javax.ws.rs.core.Response;
 
 /**
  *
- * @author Jonathan Oldenburg
+ * @author pc1
  */
-@Path("/clientes")
-public class ClienteApi {
+@Path("/usuarios")
+public class UsuarioApi {
     
     @POST
     @Path("")
@@ -26,7 +31,6 @@ public class ClienteApi {
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertCustomer(ClienteBean cliente) {
         try {
-            new ClienteControllers().Insert(cliente);
             return Response.status(200).build();
         } catch (Exception e) {
             return Response.status(500).entity(e).build();
@@ -39,8 +43,7 @@ public class ClienteApi {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCustomer(ClienteBean queryData) {
         try {
-            List<ClienteBean> clientes = new ClienteControllers().DefaultSelect(queryData);
-            return Response.status(200).entity(clientes).build();
+            return Response.status(200).entity("teste").build();
         } catch (Exception e) {
             return Response.status(500).entity(e).build();
         }
@@ -52,7 +55,6 @@ public class ClienteApi {
     @Produces(MediaType.APPLICATION_JSON)
     public Response removeCustomer(ClienteBean queryData) {
         try {
-            new ClienteControllers().Delete(queryData);
             return Response.status(200).build();
         } catch (Exception e) {
             return Response.status(500).entity(e).build();
@@ -65,7 +67,6 @@ public class ClienteApi {
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateCustomer(ClienteBean queryData) {
         try {
-            new ClienteControllers().Update(queryData);
             return Response.status(200).build();
         } catch (Exception e) {
             return Response.status(500).entity(e).build();

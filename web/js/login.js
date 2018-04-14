@@ -17,19 +17,20 @@ form.ready(() => {
   }
 
   btnLogin.click(() => {
+    debugger;
     const params = {
       nmUsuario: user.val(),
       dsSenha: senha.val()
     }
-    const urlRequest = "action/login";
+    const urlRequest = "/usuarios";
     if (validaLogin()) {
       $.ajax({
-        type: 'post'
+        type: 'GET'
         , dataType: 'json'
         , url: urlRequest
         , data: params
       }).done(response => {
-        if (response.success) {
+        if (true) {
           alert("Login efetuado com sucesso!");
           window.location = "GerenciarClienteView.jsp";
         } else if (response.erro) {
