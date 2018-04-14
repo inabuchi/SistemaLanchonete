@@ -1,0 +1,147 @@
+﻿<!-- 
+    Document   : ConsultaFuncionario
+    Created on : 13/04/2018, 20:09:28
+    Author     : Morgana e Sidnei
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Guten Burguer - Lista de Funcionários</title>
+
+        <!-- DataTables (REFERENCIANDO ELE, O Jquery E O BOOTSTRAP já são automaticamente referenciados)-->
+        <link rel="stylesheet" type="text/css" href="library/DataTables/datatables.min.css"/>
+        <script type="text/javascript" src="library/DataTables/datatables.min.js"></script>
+			<!-- Tradução customizada do DataTable -->
+
+        <!-- Fontes-->        
+        <link rel="stylesheet" href="fonts/font-awesome.css">	
+        <link href='fonts/NotoSans.css' rel='stylesheet' type='text/css'>
+
+        <!-- CSS custimozado -->        
+        <link href="css/style.css" rel="stylesheet"/>
+        
+		<!-- Scripts de javaScript, Jquery, etc-->
+		<script type="text/javascript" src="controller/sistema.js"></script>
+        
+    </head>
+    <body>
+        
+
+		
+		<div id="includeCabecalho"></div>
+		
+		
+        <div class="d-flex align-items-stretch">
+		
+			<div id="includeMenu"></div>
+			
+            <div class="content p-4">
+                <div class="content-title"><i class="fa fa-id-card-o"></i>Pessoas<i class="fa fa-angle-right"></i>Funcionários</div>          
+
+                <div class="formtitle">Funcionários</div>
+                <div class="page-consulta">
+                    <a href="CadastroFuncionario.html"><button type="button" class="btn btn-success" style="margin: 15px 15px 25px 15px;"></i><i class="fa fa-plus-circle"></i>Adicionar Funcionário</button></a>
+                    <table class="table table-bordered table-hover" id="data-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Código</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Cargo</th>
+                                <th scope="col">Telefone</th>
+                                <th scope="col">Opções</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>UZUCRAKI XARUTO</td>
+                                <td>Gerente</td>
+                                <td>(47) 95458-4555</td>
+                                <td class="table-buttons">
+                                    <a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>     
+                                    <a href="#"><button type="button" class="table-hist" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>
+                                    <a href="CadastroCliente.html?state=e"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>
+                                    <a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</th>
+                                <td>Jacob do Crepúsculo</td>
+                                <td>Caixa</td>
+                                <td>(47) 3332-9895</td>
+                                <td class="table-buttons">
+                                    <a href="#"><button type="button" class="table-visu"><i class="fa fa-eye"></i></button></a>
+                                    <a href="#"><button type="button" class="table-hist" data-toggle="tooltip" data-placement="top" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>
+                                    <a href="CadastroCliente.html?state=e"><button type="button" class="table-edit"><i class="fa fa-pencil"></i></button></a>
+                                    <a href="#"><button type="button" class="table-del"><i class="fa fa-close"></i></button></a>                                  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</th>
+                                <td>Larry the Bird</td>
+                                <td>Garçom</td>
+                                <td>(47) 9999-2525</td>
+                                <td class="table-buttons">
+                                    <a href="#"><button type="button" class="table-visu"><i class="fa fa-eye"></i></button></a>
+                                    <a href="#"><button type="button" class="table-hist" data-toggle="tooltip" data-placement="top" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>
+                                    <a href="#"><button type="button" class="table-edit"><i class="fa fa-pencil"></i></button></a>
+                                    <a href="#"><button type="button" class="table-del"><i class="fa fa-close"></i></button></a>                                 
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Satânico da Silva</td>
+                                <td>Motoqueiro (Fantasma)</td>
+                                <td>(66) 66666-6666</td>
+                                <td class="table-buttons">
+                                    <a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>     
+                                    <a href="#"><button type="button" class="table-hist" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>
+                                    <a href="#"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>
+                                    <a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>                                    
+                                </td>
+                            </tr>                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+<script type="text/javascript">
+    $('#data-table').dataTable({
+        "language": {
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "_MENU_ resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar",
+            "oPaginate": {
+                "sNext": "Próximo",
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
+            },
+            "oAria": {
+                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                "sSortDescending": ": Ordenar colunas de forma descendente"
+            }
+        }
+    });
+</script>
+<script type="text/javascript">
+		$(function(){
+			$("#includeCabecalho").load("Cabecalho.html");
+			$("#includeMenu").load("Menu.html");  
+		});</script> 
+</html>
