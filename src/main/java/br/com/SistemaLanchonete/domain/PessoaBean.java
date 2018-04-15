@@ -2,18 +2,14 @@ package br.com.SistemaLanchonete.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -40,7 +36,7 @@ public abstract class PessoaBean implements Serializable {
 	private Date dtCadastro;
 	@Column(name = "is_ativo")
 	private boolean isAtivo;
-
+	
 	/**
 	 * Construtor padrão da classe
 	 */
