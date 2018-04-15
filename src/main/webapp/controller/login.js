@@ -11,11 +11,24 @@ form.ready(() => {
   const btnLogin = $("#btnLogin");
 
   const validaLogin = () => {
+    let hasUser = true;
+    let hasPass = true;
     if (!user.val()) {
-      alert(unescape("Usuário não informado"));
+      hasUser = false;
+    }
+
+    if (!senha.val()) {
+      hasPass = false;
+    }
+
+    if (!hasPass && !hasUser) {
+      alert(unescape("Usuário e senha não informados!"));
       return false;
-    } else if (!senha.val()) {
-      alert("Senha não informada");
+    } else if (!hasUser) {
+      alert(unescape("Usuário não informado!"));
+      return false;
+    } else if (!hasPass) {
+      alert("Senha não informada!");
       return false;
     }
     return true;
