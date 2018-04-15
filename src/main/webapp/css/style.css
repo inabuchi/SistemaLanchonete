@@ -219,7 +219,7 @@ table {
 
 .table .table-buttons {
     padding:6px; 
-    min-width:150px;
+    min-width:152px;
 }
 
 .pagination a {
@@ -262,8 +262,8 @@ table {
 }
 
 navcolor {
-    color: #3ab4a6;		
-    font-size: 17px;
+    color: #3ab4a6;	
+    font-size: 17px;	
 }
 
 .btnadd {
@@ -458,5 +458,54 @@ fieldset {
     color:#000;
 }
 
+.form-check {
+	margin-left: 5px;
+}
+
+.login {
+	width: 30%;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	padding: 25px;
+	border-radius: 3px;
+	margin: auto;
+	margin-top: 12%;
+	border: 1px solid #ddd;
+    border-width: 1px 1px 3px;
+    border-radius: 0px 3px 3px;
+}
 
 
+.login-title {
+	padding: 10px;
+	font-family: Noto Sans;
+    font-size: 16px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    text-align: center;
+    background-color: #25292d;
+    color: #fff;
+    margin-left: -25px;
+    margin-top: -25px;
+    width: calc(100% + 50px);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    margin-bottom: 25px;
+    
+}
+
+logincolor {
+	color: #3ab4a6;
+	font-size: 17px;
+}
+
+.login-form {
+		width: 385px;
+		margin: 30px auto;
+	}
+   
+ .form-control, .login-btn {
+        min-height: 38px;
+        border-radius: 2px;
+ }
+    
