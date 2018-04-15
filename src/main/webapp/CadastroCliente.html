@@ -7,7 +7,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Guten Burguer - Adicionar cliente</title>
-
+	
+		<script src = "library/jquery-3.2.1.min.js"> </script>
+        <script type="text/javascript" src="controller/cliente/cadastroCliente.js"></script>
+        <script type="text/javascript" src="controller/generics/validacoesGenericas.js"></script>
+	
         <!-- DataTables -->
         <link rel="stylesheet" type="text/css" href="library/DataTables/datatables.min.css"/>
         <script type="text/javascript" src="library/DataTables/datatables.min.js"></script>
@@ -212,7 +216,7 @@
 
                         <center>
                             <a href="ConsultaCliente.html"><button type="button" class="btn btn-secondary">Cancelar</button></a>
-                            <a href="ConsultaCliente.html"><button type="button" class="btn btn-success"></i><i class="fa fa-save"></i>Cadastrar cliente</button></a>
+                            <button type="button" id="btnSaveCliente" class="btn btn-success"></i><i class="fa fa-save"></i>Cadastrar cliente</button>
                         </center>
                 </form>
             </div>
