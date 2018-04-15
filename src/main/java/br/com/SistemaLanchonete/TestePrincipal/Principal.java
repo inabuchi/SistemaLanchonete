@@ -3,9 +3,9 @@ package br.com.SistemaLanchonete.TestePrincipal;
 import java.util.Date;
 import java.util.List;
 
-import br.com.SistemaLanchonete.Domain.CargoBean;
-import br.com.SistemaLanchonete.Domain.ClienteBean;
-import br.com.SistemaLanchonete.Domain.FuncionarioBean;
+import br.com.SistemaLanchonete.domain.CargoBean;
+import br.com.SistemaLanchonete.domain.ClienteBean;
+import br.com.SistemaLanchonete.domain.FuncionarioBean;
 import br.com.SistemaLanchonete.Repository.BDException;
 import br.com.SistemaLanchonete.Repository.GenericDAO;
 

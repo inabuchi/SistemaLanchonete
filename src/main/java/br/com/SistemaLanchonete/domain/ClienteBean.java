@@ -1,4 +1,4 @@
-package br.com.SistemaLanchonete.Domain;
+package br.com.SistemaLanchonete.domain;
 
 import java.io.Serializable;
 import java.util.Date;
