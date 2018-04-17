@@ -1,4 +1,6 @@
+
 const form = $("#formCliente");
+
 form.ready(() => {
     const btnSave = $("#btnSaveCliente");
 
@@ -15,7 +17,7 @@ form.ready(() => {
         const complemento = $('#compEndCli');
         const cidade = $('#codCidCli');
         const uf = $('#ufCli');
-        const obsEnd = $('#obsEndCli')
+        const obsEnd = $('#obsEndCli');
 
         const validaFomularioCliente = () => {
             let mandatoryFields = '';
@@ -55,13 +57,16 @@ form.ready(() => {
                 dsTelefone1: phone1.val(),
                 dsTelefone2: phone2.val(),
                 dsObservacao: obsCli.val(),
-                dsRua: rua.val(),
-                dsBairro: bairro.val(),
-                cep: cep.val(),
-                dsObservacaoEnd: obsEnd.val(),
-                dsLogradouro: logradouro.val(),
-                dsCidade: cidade.val(),
-                dsEstado: uf.val()
+                enredecoCliente: [ 
+                	{	dsRua: rua.val(),
+		                dsBairro: bairro.val(),
+		                cep: cep.val(),
+		                dsObservacaoEnd: obsEnd.val(),
+		                dsLogradouro: logradouro.val(),
+		                dsCidade: cidade.val(),
+		                dsEstado: uf.val()
+		            }
+                ]
             };
     
             const urlRequest = "/clientes";
