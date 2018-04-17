@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Guten Burguer - Cliente</title>
+
+        <!-- DataTables -->
+        <link rel="stylesheet" type="text/css" href="library/DataTables/datatables.min.css"/>
+        <script type="text/javascript" src="library/DataTables/datatables.min.js"></script>
+
+        <!-- FontAwesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">	
+
+        <link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>  
+
+        <link href="css/style.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand">
+            <a class="sidebar-toggle text-light"><i class="fa fa-bars"></i></a>
+            <a class="navbar-brand" href="#"><navcolor>Guten</navcolor> Burguer</a>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
+                            <i class="fa fa-user-circle"></i>Username<i class="fa fa-caret-down" style="margin-left:10px"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Gerenciar</a>
+                            <a class="dropdown-item" href="#">Sair</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <div class="d-flex align-items-stretch">	
+            <div class="sidebar bg-dark">
+
+                <ul class="list-unstyled">				
+                    <li>
+                        <a href="#submenu1" data-toggle="collapse"><i class="fa fa-id-card-o"></i>Cadastros</a>
+                        <ul id="submenu1" class="list-unstyled collapse show">
+                            <li class="active"><a href="ConsultaCliente.html"><i class="fa fa-users"></i>Clientes<i class="fa fa-caret-left"></i></a></li> 
+                            <li><a href="#"><i class="fa fa-angle-right"></i>Funcionários</a></li>
+                            <li><a href="#"><i class="fa fa-angle-right"></i>Submenu Item</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Pedidos</a></li>
+                    <li>
+                        <a href="#submenu2" data-toggle="collapse"><i class="fa fa-barcode"></i>Produtos</a>
+                        <ul id="submenu2" class="list-unstyled collapse">
+                            <li><a href="#"><i class="fa fa-angle-right"></i>Submenu Item</a></li>
+                            <li><a href="#"><i class="fa fa-angle-right"></i>Submenu Item</a></li>
+                            <li><a href="#"><i class="fa fa-angle-right"></i>Submenu Item</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#submenu3" dropdown-toggle data-toggle="collapse"><i class="fa fa-money"></i>Fluxo de caixa</a><div >
+                            <ul id="submenu3" class="list-unstyled collapse">
+                                <li><a href="#"><i class="fa fa-angle-right"></i>Submenu Item</a></li>
+                            </ul>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="content p-4">
+                <div class="content-title"><i class="fa fa-barcode"></i>Produtos</div>          
+
+                <div class="formtitle">Produtos</div>
+                <div class="page-consulta">
+                    <a href="CadastroProduto.html?state=i"><button type="button" class="btn btn-success" style="margin: 15px 15px 25px 15px;"></i><i class="fa fa-plus-circle"></i>Adicionar produto</button></a>
+                    <table class="table table-bordered table-hover" id="data-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Código</th>
+                                <th scope="col">Categoria</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Opções</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Lanche</td>
+                                <td>X-Burguer</td>
+                                <td>R$ 12,00</td>
+                                <td class="table-buttons">
+                                    <a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>
+                                    <a href="CadastroProduto.html?state=e"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>
+                                    <a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>                                  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Porção</td>
+                                <td>Fritas</td>
+                                <td>R$ 10,95</td>
+                                <td class="table-buttons">
+                                    <a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>
+                                    <a href="CadastroProduto.html?state=e"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>
+                                    <a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>                                  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Bebida</td>
+                                <td>Coca-Cola</td>
+                                <td>R$ 5,00</td>
+                                <td class="table-buttons">
+                                    <a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>
+                                    <a href="CadastroProduto.html?state=e"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>
+                                    <a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>                                  
+                                </td>                  
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Adicional</td>
+                                <td>Maionese</td>
+                                <td>R$ 3,50</td>
+                                <td class="table-buttons">
+                                    <a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>
+                                    <a href="CadastroProduto.html?state=e"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>
+                                    <a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>                                  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Lanche</td>
+                                <td>X-Burguer</td>
+                                <td>R$ 12,00</td>
+                                <td class="table-buttons">
+                                    <a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>
+                                    <a href="CadastroProduto.html?state=e"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>
+                                    <a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>                                  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Porção</td>
+                                <td>Fritas</td>
+                                <td>R$ 10,95</td>
+                                <td class="table-buttons">
+                                    <a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>
+                                    <a href="CadastroProduto.html?state=e"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>
+                                    <a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>                                  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Bebida</td>
+                                <td>Coca-Cola</td>
+                                <td>R$ 5,00</td>
+                                <td class="table-buttons">
+                                    <a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>
+                                    <a href="CadastroProduto.html?state=e"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>
+                                    <a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>                                  
+                                </td>                  
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>Adicional</td>
+                                <td>Maionese</td>
+                                <td>R$ 3,50</td>
+                                <td class="table-buttons">
+                                    <a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>
+                                    <a href="CadastroProduto.html?state=e"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>
+                                    <a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>                                  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>Lanche</td>
+                                <td>X-Burguer</td>
+                                <td>R$ 12,00</td>
+                                <td class="table-buttons">
+                                    <a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>
+                                    <a href="CadastroProduto.html?state=e"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>
+                                    <a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>                                  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>Porção</td>
+                                <td>Fritas</td>
+                                <td>R$ 10,95</td>
+                                <td class="table-buttons">
+                                    <a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>
+                                    <a href="CadastroProduto.html?state=e"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>
+                                    <a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>                                  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>Bebida</td>
+                                <td>Coca-Cola</td>
+                                <td>R$ 5,00</td>
+                                <td class="table-buttons">
+                                    <a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>
+                                    <a href="CadastroProduto.html?state=e"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>
+                                    <a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>                                  
+                                </td>                  
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td>Adicional</td>
+                                <td>Maionese</td>
+                                <td>R$ 3,50</td>
+                                <td class="table-buttons">
+                                    <a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>
+                                    <a href="CadastroProduto.html?state=e"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>
+                                    <a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>                                  
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+<script type="text/javascript">
+    $('#data-table').dataTable({
+        "language": {
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "_MENU_ resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar",
+            "oPaginate": {
+                "sNext": "Próximo",
+                "sPrevious": "Anterior",
+                "sFirst": "Primeiro",
+                "sLast": "Último"
+            },
+            "oAria": {
+                "sSortAscending": ": Ordenar colunas de forma ascendente",
+                "sSortDescending": ": Ordenar colunas de forma descendente"
+            }
+        }
+    });
+</script>
+</html>
