@@ -1,13 +1,17 @@
 package br.com.SistemaLanchonete.Domain;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -38,6 +42,9 @@ public class FuncionarioBean extends PessoaBean {
 	private String dsSenha;
 	@Column(name = "cd_nivel")
 	private int cdNivel;
+	
+	@OneToMany(mappedBy = "funcionario", targetEntity = CaixaBean.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<CaixaBean> caixa;
 
 	/**
 	 * Contrutor padrão da classe
@@ -180,12 +187,30 @@ public class FuncionarioBean extends PessoaBean {
 	public void setCdNivel(int cdNivel) {
 		this.cdNivel = cdNivel;
 	}
-
+	
+		/**
+	 * Retorna a lista de Caixas Desse Funcionario
+	 * 
+	 *	@return caixa
+	 */
+	public List<CaixaBean> getCaixa() {
+		return caixa;
+	}
+		/**
+	 * Setar o valor para o parametro caixa
+	 * 
+	 * @param caixa
+	 */
+	public void setCaixa(List<CaixaBean> caixa) {
+		this.caixa = caixa;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
