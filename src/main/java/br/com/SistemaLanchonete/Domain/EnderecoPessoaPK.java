@@ -5,13 +5,19 @@ import java.io.Serializable;
 import javax.persistence.Embeddable;
 import javax.persistence.Column;
 
+/**
+ * Chave composta da classe EnderecoPessoaBean
+ * 
+ * @author Yago
+ */
+
 @Embeddable
 public class EnderecoPessoaPK implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@Column(name="cd_endereco")
+	@Column
 	private int cdEndereco;
 	
-	@Column(name="cd_pessoa")
+	@Column
 	private int cdPessoa;
 
 	/**
