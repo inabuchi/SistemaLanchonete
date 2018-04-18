@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.EmbeddedId;
+import javax.persistence.FetchType;
 /**
  * Classe da tabela auxiliar endereco_pessoa
  * 
@@ -22,12 +23,12 @@ public class EnderecoPessoaBean implements Serializable {
 	@EmbeddedId
 	private EnderecoPessoaPK pk;
 	
-	@ManyToOne
-	@JoinColumn(name="cd_endereco", referencedColumnName="cd_endereco")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="cd_endereco", insertable = false, updatable = false)
 	private EnderecoBean endereco;
 	
-	@ManyToOne
-	@JoinColumn(name="cd_pessoa", referencedColumnName="cd_pessoa")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="cd_pessoa", insertable = false, updatable = false)
 	private PessoaBean pessoa;
 	
 	@Column(name = "dt_alteracao")

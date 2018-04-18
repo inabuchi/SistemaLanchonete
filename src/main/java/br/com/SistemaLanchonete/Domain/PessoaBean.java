@@ -2,14 +2,18 @@ package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -36,7 +40,9 @@ public abstract class PessoaBean implements Serializable {
 	private Date dtCadastro;
 	@Column(name = "is_ativo")
 	private boolean isAtivo;
-
+	@OneToMany(mappedBy = "pessoa", targetEntity = EnderecoPessoaBean.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<EnderecoPessoaBean> enderecoPessoas;
+	
 	/**
 	 * Construtor padrão da classe
 	 */
@@ -171,6 +177,24 @@ public abstract class PessoaBean implements Serializable {
 		this.isAtivo = isAtivo;
 	}
 
+	/**
+	 * Retorna a lista de enderecos dessa pesoa
+	 * 
+	 *	@return enderecoPessoas
+	 */
+	public List<EnderecoPessoaBean> getEnderecoPessoas() {
+		return enderecoPessoas;
+	}
+
+	/**
+	 * Setar o valor para o parametro enderecoPessoas
+	 * 
+	 * @param enderecoPessoas
+	 */
+	public void setEnderecoPessoas(List<EnderecoPessoaBean> enderecoPessoas) {
+		this.enderecoPessoas = enderecoPessoas;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
