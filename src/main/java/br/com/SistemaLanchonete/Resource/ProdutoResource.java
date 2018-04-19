@@ -12,15 +12,16 @@ import javax.ws.rs.core.Response;
 import br.com.SistemaLanchonete.Domain.ProdutoBean;
 import br.com.SistemaLanchonete.Service.ProdutoService;
 
-@Path("/produto")
+@Path("/produtos")
 public class ProdutoResource {
-
+	private static int id = 0;
+	
 	@POST
-	@Path("/addProduto")
+	@Path("/produto")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response insert(ProdutoBean produto) {
 		try {
-			new ProdutoService().save(produto);
+			new ProdutoService().save(produto, id);
 			return Response.status(200).entity("Produto " + produto.getDescProduto() + " adicionado com sucesso!").build();
 		} catch (Exception e) {
 			throw new WebApplicationException(500);
@@ -28,24 +29,23 @@ public class ProdutoResource {
 	}
 
 	@DELETE
-	@Path("/delProduto/{cdProduto}")
+	@Path("/produto/{cdProduto}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(ProdutoBean produto) {
+	public Response remove(ProdutoBean produto) {
 		try {
-			new ProdutoService().delete(produto.getCodProduto());
-			return Response.status(200).entity("Produto " + produto.getCodProduto() + " - " + produto.getDescProduto() + " removido com sucesso!").build();
+			new ProdutoService().remove(produto);
+			return Response.status(200).entity("Produto " + produto.getcdProduto() + " - " + produto.getDescProduto() + " removido com sucesso!").build();
 
 		} catch (Exception e) {
 			throw new WebApplicationException(500);
 		}
 	}
-	
 	@GET
-	@Path("/listProduto/{cdProduto}")
+	@Path("/produto/{cdProduto}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response select(ProdutoBean produto) {
 		try {
-			new ProdutoService().select(produto.getCodProduto());
+			new ProdutoService().findById(produto);
 			return Response.status(200).entity("Produtos listados com sucesso!").build();
 		} catch (Exception e) {
 			throw new WebApplicationException(500);
