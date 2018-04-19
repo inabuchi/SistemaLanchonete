@@ -12,11 +12,11 @@ import javax.ws.rs.core.Response;
 import br.com.SistemaLanchonete.Domain.ProdutoBean;
 import br.com.SistemaLanchonete.Service.ProdutoService;
 
-@Path("/produto")
+@Path("/produtos")
 public class ProdutoResource {
 
 	@POST
-	@Path("/addProduto")
+	@Path("/produto")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response insert(ProdutoBean produto) {
 		try {
@@ -28,9 +28,9 @@ public class ProdutoResource {
 	}
 
 	@DELETE
-	@Path("/delProduto/{cdProduto}")
+	@Path("/produto/{cdProduto}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(ProdutoBean produto) {
+	public Response remove(ProdutoBean produto) {
 		try {
 			new ProdutoService().delete(produto.getCodProduto());
 			return Response.status(200).entity("Produto " + produto.getCodProduto() + " - " + produto.getDescProduto() + " removido com sucesso!").build();
@@ -41,7 +41,7 @@ public class ProdutoResource {
 	}
 	
 	@GET
-	@Path("/listProduto/{cdProduto}")
+	@Path("/produto/{cdProduto}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response select(ProdutoBean produto) {
 		try {
