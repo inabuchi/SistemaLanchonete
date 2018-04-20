@@ -1,15 +1,12 @@
 package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -25,6 +22,7 @@ public class FormaPagamentoBean implements Serializable {
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cd_forma_pagamento")
+	@Id
 	private int cdFormaPagamento;
 	@Column(name = "ds_forma_pagamento")
 	private String dsFormaPagamento;

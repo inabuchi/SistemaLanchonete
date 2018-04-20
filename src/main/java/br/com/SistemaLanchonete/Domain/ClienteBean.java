@@ -26,6 +26,8 @@ public class ClienteBean extends PessoaBean implements Serializable {
 	private int cdCliente;
 	@Column(name = "ds_observacao")
 	private String dsObservacao;
+	@Column(name = "dt_cadastro")
+	private Date dtCadastro = new Date();
 
 	public ClienteBean() {
 	}
@@ -47,6 +49,7 @@ public class ClienteBean extends PessoaBean implements Serializable {
 		super(cdPessoa, dsNome, dsTelefone1, dsTelefone2, dtCadastro, isAtivo);
 		this.cdCliente = cdCliente;
 		this.dsObservacao = dsObservacao;
+		this.dtCadastro = dtCadastro;
 	}
 
 	/**
@@ -83,6 +86,14 @@ public class ClienteBean extends PessoaBean implements Serializable {
 	 */
 	public void setDsObservacao(String dsObservacao) {
 		this.dsObservacao = dsObservacao;
+	}
+
+	public Date getDtCadastro() {
+		return dtCadastro;
+	}
+
+	public void setDtCadastro(Date dtCadastro) {
+		this.dtCadastro = dtCadastro;
 	}
 
 	/*
