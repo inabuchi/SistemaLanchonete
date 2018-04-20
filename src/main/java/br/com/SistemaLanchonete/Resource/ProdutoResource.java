@@ -34,7 +34,7 @@ public class ProdutoResource {
 	public Response remove(ProdutoBean produto) {
 		try {
 			new ProdutoService().remove(produto);
-			return Response.status(200).entity("Produto " + produto.getcdProduto() + " - " + produto.getDescProduto() + " removido com sucesso!").build();
+			return Response.status(200).entity("Produto " + produto.getCodProduto() + " - " + produto.getDescProduto() + " removido com sucesso!").build();
 
 		} catch (Exception e) {
 			throw new WebApplicationException(500);

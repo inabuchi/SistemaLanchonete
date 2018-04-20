@@ -3,42 +3,39 @@ package br.com.SistemaLanchonete.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.SistemaLanchonete.Domain.ClienteBean;
+import br.com.SistemaLanchonete.Domain.CargoBean;
 import br.com.SistemaLanchonete.Repository.BDException;
 import br.com.SistemaLanchonete.Repository.EErrosBD;
 import br.com.SistemaLanchonete.Repository.GenericDAO;
 
-public class ClienteService {
+public class CargoService {
 	private String retorno = "";
-	GenericDAO<ClienteBean> clienteDao = new GenericDAO<ClienteBean>();
-	Class<ClienteBean> clienteBean;
-
-	public String save(ClienteBean cliente, int id) throws BDException {
+	GenericDAO<CargoBean> cargoDao = new GenericDAO<CargoBean>();
+	Class<CargoBean> cargoBean;
+	
+	public String save(CargoBean cargo, int id) throws BDException {
 		if (id == 0) {
 			try {
-				// aqui precisa validar os dados que vem da tela
-				clienteDao.save(cliente, 0);
+				cargoDao.save(cargo, 0);
 			} catch (BDException e) {
 				throw new BDException("Erro ao Salvar dados no banco" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
-
 			}
 			retorno = "Dados salvos com sucesso na tabela";
 		} else {
 			try {
-				clienteDao.save(cliente, id);
+				cargoDao.save(cargo, id);
 			} catch (BDException e) {
-				throw new BDException("Erro na atualizaï¿½ï¿½o de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
-
+				throw new BDException("Erro na atualização de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 			}
 			retorno = "Dados atualizados com sucesso na tabela";
 		}
 		return retorno;
 	}
 
-	public String remove(ClienteBean cliente) {
-		ClienteBean clienteRetorno = clienteDao.findById(clienteBean, cliente.getCdPessoa());
+	public String remove(CargoBean cargo) {
+		CargoBean cargoRetorno = cargoDao.findById(cargoBean, cargo.getCdCargo());
 		try {
-			clienteDao.remove(clienteBean, clienteRetorno.getCdPessoa());
+			cargoDao.remove(cargoBean, cargoRetorno.getCdCargo());
 			retorno = "Dados removidos com sucesso na tabela";
 		} catch (Exception e) {
 			// throw new BDException("Erro na remoï¿½ï¿½o de dados:" + e.getMessage(),
@@ -48,31 +45,28 @@ public class ClienteService {
 		return retorno;
 	}
 
-	public ClienteBean findById(ClienteBean cliente) {
+	public CargoBean findById(CargoBean cargo) {
 		/*
 		 * o metodo find busca por chave primaria, mas como nao tenho a anotaï¿½ï¿½o @ID
 		 * no fucionario so retorna o funcinario que for igual na classe pessoa
 		 * 
 		 * precisa fazer uma query nao da para usar o mï¿½todo find do hibernate
 		 */
-
-		return clienteDao.findById(clienteBean, cliente.getCdPessoa());
+		return cargoDao.findById(cargoBean, cargo.getCdCargo());
 
 	}
 
-	public ArrayList<ClienteBean> findLike(ClienteBean cliente) {
-		ArrayList<ClienteBean> lista = new ArrayList<ClienteBean>();
+	public ArrayList<CargoBean> findLike(CargoBean cargo) {
+		ArrayList<CargoBean> lista = new ArrayList<CargoBean>();
 		/*
 		 * Esse metodo precisa ou retornar uma lista completa do banco ou entao uma
 		 * lista aproximada utilizadno o parametro LIKE Tanto faz se for List ou
 		 * ArrayList, ou qq outra collection
 		 */
-		List<ClienteBean> lista2 = clienteDao.findLike(clienteBean, cliente);
-		for (ClienteBean model2 : lista2) {
+		List<CargoBean> lista2 = cargoDao.findLike(cargoBean, cargo);
+		for (CargoBean model2 : lista2) {
 			lista.add(model2);
 		}
 		return lista;
-
 	}
-
 }

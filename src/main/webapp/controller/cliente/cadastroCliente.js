@@ -56,8 +56,8 @@ form.ready(() => {
                 dsNome: name.val(),
                 dsTelefone1: phone1.val(),
                 dsTelefone2: phone2.val(),
-                dsObservacao: obsCli.val(),
-                enredecoCliente: [ 
+                dsObservacao: obsCli.val()
+                /*enredecoCliente: [ 
                 	{	dsRua: rua.val(),
 		                dsBairro: bairro.val(),
 		                cep: cep.val(),
@@ -66,15 +66,18 @@ form.ready(() => {
 		                dsCidade: cidade.val(),
 		                dsEstado: uf.val()
 		            }
-                ]
+                ]*/
             };
-    
-            const urlRequest = "/clientes";
+
             $.ajax({
+            	headers: { 
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json' 
+                },
                 type: 'POST'
+                , data: JSON.stringify(params)
                 , dataType: 'json'
-                , url: urlRequest
-                , data: params
+                , url: 'http://localhost:8080/SistemaLanchonete/services/cliente/cliente'
             }).done(response => {
                 alert("Cliente cadastrado com sucesso!");
                 $(location).attr('href','ConsultaCliente.html');
