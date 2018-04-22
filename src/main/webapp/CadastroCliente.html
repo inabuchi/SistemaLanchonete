@@ -14,7 +14,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Guten Burguer - Adicionar cliente</title>
 
-<script src="library/jquery-3.2.1.min.js">
+<script src="library/DataTables/jQuery-3.2.1/jquery-3.2.1.min.js">
 	
 </script>
 <script type="text/javascript"
@@ -38,7 +38,6 @@
 	href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic'
 	rel='stylesheet' type='text/css'>
 
-
 <link href="css/style.css" rel="stylesheet" />
 <script type="text/javascript">
 	$(function() {
@@ -54,8 +53,7 @@
 			<div class="content-title">
 				<i class="fa fa-id-card-o"></i>Pessoas<i class="fa fa-angle-right"></i><a
 					href="ConsultaCliente.html">Consulta de clientes</a><i
-					class="fa fa-angle-right"></i>Adicionar cliente
-			</div>
+					class="fa fa-angle-right"></i>Adicionar cliente			</div>
 
 			<div class="formtitle">Adicionar cliente</div>
 			<form>
@@ -98,26 +96,37 @@
 						<legend class="well-legend">Endereço</legend>
 
 						<div class="form-row">
+							<div id="locationField" class="form-group col-md-12">
+								<label for="autocomplete" class="control-label required">Auto-complete</label>
+								<input id="autocomplete"
+									placeholder="Digite o endereço para auto completar os campos"
+									class="form-control" onFocus="geolocate()" type="text"></input>
+							</div>
+						</div>
+
+						<div class="form-row">
+
 							<div class="form-group col-md-6">
-								<label for="endCli" class="control-label required">Endereço</label>
-								<input class="form-control" id="endCli" type="text"
+								<label for="route" class="control-label required">Endereço</label>
+								<input class="form-control" id="route" type="text"
 									maxlength="255" required>
 							</div>
-							<div class="form-group col-md-1">
-								<label for="numEndCli" class="control-label required">Número</label>
-								<input class="form-control" id="numEndCli" type="number" min="1"
+							 <div class="form-group col-md-1">								
+								<label for="street_number" class="control-label required">Número</label>
+								<input class="form-control" id="street_number" type="number" min="1"
 									required>
 							</div>
 							<div class="form-group col-md-3">
 								<label for="logrEndCli" class="control-label">Logradouro</label>
-								<input class="form-control" id="logrEndCli" type="text"
+								<input class="form-control" id="logrEndCli" 
 									maxlength="255">
 							</div>
 							<div class="form-group col-md-2">
-								<label for="cepCli" class="control-label required">CEP</label> <input
-									class="form-control" id="cepCli" type="number" required>
+								<label for="postal_code" class="control-label required">CEP</label> <input
+									class="form-control" id="postal_code" required>																	
 							</div>
 						</div>
+
 						<div class="form-row">
 
 							<div class="form-group col-md-3">
@@ -131,20 +140,95 @@
 									maxlength="255">
 							</div>
 							<div class="form-group col-md-5">
-								<label for="codCidCli" class="control-label required">Cidade</label>
-								<input class="form-control" id="codCidCli" type="text"
+								<label for="locality" class="control-label required">Cidade</label>
+								<input class="form-control" id="locality" type="text"
 									maxlength="255" required>
 							</div>
 							<div class="form-group col-md-1">
-								<label for="ufCli" class="control-label">UF</label> <input
-									class="form-control" id="ufCli" type="text" maxlength="2">
+								<label for="administrative_area_level_1" class="control-label">UF</label> <input
+									class="form-control" id="administrative_area_level_1" type="text" maxlength="2">
 							</div>
+							<div class="form-group col-md-12">
+								<label for="country" class="control-label required">País</label>
+								<input class="form-control" id="country" type="text"
+									maxlength="255" required>
+							</div>							 
 						</div>
 						<div class="form-group">
 							<label for="obsEndCli" class="control-label">Observação</label>
 							<textarea class="form-control" rows="4" id="obsEndCli"></textarea>
 						</div>
+						<script>
+							var placeSearch, autocomplete;
+							var componentForm = {
+								street_number : 'short_name',
+								route : 'long_name',
+								locality : 'long_name',
+								administrative_area_level_1 : 'short_name',
+								country : 'long_name',
+								postal_code : 'short_name'
+							};
 
+							function initAutocomplete() {
+								// Create the autocomplete object, restricting the search to geographical
+								// location types.
+								autocomplete = new google.maps.places.Autocomplete(
+								/** @type {!HTMLInputElement} */
+								(document.getElementById('autocomplete')), {
+									types : [ 'geocode' ]
+								});
+
+								// When the user selects an address from the dropdown, populate the address
+								// fields in the form.
+								autocomplete.addListener('place_changed',
+										fillInAddress);
+							}
+
+							function fillInAddress() {
+								// Get the place details from the autocomplete object.
+								var place = autocomplete.getPlace();
+
+								for ( var component in componentForm) {
+									document.getElementById(component).value = '';
+									document.getElementById(component).disabled = false;
+								}
+
+								// Get each component of the address from the place details
+								// and fill the corresponding field on the form.
+								for (var i = 0; i < place.address_components.length; i++) {
+									var addressType = place.address_components[i].types[0];
+									if (componentForm[addressType]) {
+										var val = place.address_components[i][componentForm[addressType]];
+										document.getElementById(addressType).value = val;
+									}
+								}
+							}
+
+							// Bias the autocomplete object to the user's geographical location,
+							// as supplied by the browser's 'navigator.geolocation' object.
+							function geolocate() {
+								if (navigator.geolocation) {
+									navigator.geolocation
+											.getCurrentPosition(function(
+													position) {
+												var geolocation = {
+													lat : position.coords.latitude,
+													lng : position.coords.longitude
+												};
+												var circle = new google.maps.Circle(
+														{
+															center : geolocation,
+															radius : position.coords.accuracy
+														});
+												autocomplete.setBounds(circle
+														.getBounds());
+											});
+								}
+							}
+						</script>
+						<script
+							src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxDxbtdTs7_ViJD346_X6rj2-a9gIJeE8&libraries=places&callback=initAutocomplete"
+							async defer></script>
 					</fieldset>
 					<fieldset class="well" style="padding-bottom: 18px">
 						<legend class="well-legend">Endereços</legend>

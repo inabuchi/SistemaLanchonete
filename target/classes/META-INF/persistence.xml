@@ -11,10 +11,10 @@
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://127.0.0.1:3306/sistemaLanchonete" />
-			<property name="javax.persistence.jdbc.user" value="root" />
+				value="jdbc:mysql://sistemalanchonetebd.c3vx8k5m6fma.sa-east-1.rds.amazonaws.com/SistemaLanchonete" />
+			<property name="javax.persistence.jdbc.user" value="usuarioAdmin" />
 			<property name="javax.persistence.jdbc.password"
-				value="root" />
+				value="usuario123" />
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.show_sql" value="true" />
