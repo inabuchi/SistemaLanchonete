@@ -1,3 +1,8 @@
+<!-- 
+    Document   : CadastroProduto
+    Created on : 21/04/2018, 16:39:28
+    Author     : Morgana e Sidnei
+-->
 
 <!DOCTYPE html>
 <html>
@@ -8,6 +13,14 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Guten Burguer - Adicionar produto</title>
+
+<script src="library/jquery-3.2.1.min.js">
+	
+</script>
+<script type="text/javascript"
+	src="controller/cliente/cadastroCliente.js"></script>
+<script type="text/javascript"
+	src="controller/generics/validacoesGenericas.js"></script>
 
 <!-- DataTables -->
 <link rel="stylesheet" type="text/css"
@@ -25,100 +38,22 @@
 	href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic'
 	rel='stylesheet' type='text/css'>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-<script type="text/javascript">
-	$('#example').dataTable({
-		"language" : {
-			"sEmptyTable" : "Nenhum registro encontrado",
-			"sInfo" : "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-			"sInfoEmpty" : "Mostrando 0 até 0 de 0 registros",
-			"sInfoFiltered" : "(Filtrados de _MAX_ registros)",
-			"sInfoPostFix" : "",
-			"sInfoThousands" : ".",
-			"sLengthMenu" : "_MENU_ resultados por página",
-			"sLoadingRecords" : "Carregando...",
-			"sProcessing" : "Processando...",
-			"sZeroRecords" : "Nenhum registro encontrado",
-			"sSearch" : "Pesquisar",
-			"oPaginate" : {
-				"sNext" : "Próximo",
-				"sPrevious" : "Anterior",
-				"sFirst" : "Primeiro",
-				"sLast" : "Último"
-			},
-			"oAria" : {
-				"sSortAscending" : ": Ordenar colunas de forma ascendente",
-				"sSortDescending" : ": Ordenar colunas de forma descendente"
-			}
-		}
-	});
-</script>
-
 
 <link href="css/style.css" rel="stylesheet" />
+<script type="text/javascript">
+	$(function() {
+		$("#includeMenu").load("Menu.html");
+	});
+</script>
 </head>
 <body>
-	<nav class="navbar navbar-expand">
-		<a class="sidebar-toggle text-light"><i class="fa fa-bars"></i></a> <a
-			class="navbar-brand" href="#"><navcolor>Guten</navcolor> Burguer</a>
-		<div class="navbar-collapse collapse">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item dropdown"><a class="nav-link" href="#"
-					id="navbarDropdownMenuLink" data-toggle="dropdown"> <i
-						class="fa fa-user-circle"></i>Username<i class="fa fa-caret-down"
-						style="margin-left: 10px"></i>
-				</a>
-					<div class="dropdown-menu dropdown-menu-right"
-						aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="#">Gerenciar</a> <a
-							class="dropdown-item" href="#">Sair</a>
-					</div></li>
-			</ul>
-		</div>
-	</nav>
-
+	<div id="includeMenu"></div>
 
 	<div class="d-flex align-items-stretch">
-		<div class="sidebar bg-dark">
-
-			<ul class="list-unstyled">
-				<li><a href="#submenu1" data-toggle="collapse"><i
-						class="fa fa-id-card-o"></i>Cadastros</a>
-					<ul id="submenu1" class="list-unstyled collapse show">
-						<li class="active"><a href="ConsultaCliente.html"><i
-								class="fa fa-users"></i>Clientes<i class="fa fa-caret-left"></i></a></li>
-						<li><a href="#"><i class="fa fa-angle-right"></i>Funcionários</a></li>
-						<li><a href="#"><i class="fa fa-angle-right"></i>Submenu
-								Item</a></li>
-					</ul></li>
-				<li><a href="#"><i class="fa fa-shopping-cart"
-						aria-hidden="true"></i>Pedidos</a></li>
-				<li><a href="#submenu2" data-toggle="collapse"><i
-						class="fa fa-barcode"></i>Produtos</a>
-					<ul id="submenu2" class="list-unstyled collapse">
-						<li><a href="#"><i class="fa fa-angle-right"></i>Submenu
-								Item</a></li>
-						<li><a href="#"><i class="fa fa-angle-right"></i>Submenu
-								Item</a></li>
-						<li><a href="#"><i class="fa fa-angle-right"></i>Submenu
-								Item</a></li>
-					</ul></li>
-				<li><a href="#submenu3" dropdown-toggle data-toggle="collapse"><i
-						class="fa fa-money"></i>Fluxo de caixa</a>
-				<div>
-						<ul id="submenu3" class="list-unstyled collapse">
-							<li><a href="#"><i class="fa fa-angle-right"></i>Submenu
-									Item</a></li>
-						</ul></li>
-			</ul>
-		</div>
-
-
 		<div class="content p-4">
 			<div class="content-title">
-				<i class="fa fa-barcode"></i>Produtos<i class="fa fa-angle-right"></i>Adicionar produto 
+				<i class="fa fa-barcode"></i>Consulta de produtos<i class="fa fa-angle-right"></i>Adicionar
+				produto
 			</div>
 
 			<div class="formtitle">Adicionar produto</div>
@@ -128,8 +63,8 @@
 
 					<div class="form-row">
 						<div class="form-group col-md-2">
-							<label for="codCli">Código</label> <input
-								class="form-control" id="codCli" type="number" min="1">
+							<label for="codCli">Código</label> <input class="form-control"
+								id="codCli" type="number" min="1">
 						</div>
 						<div class="form-group col-md-2">
 							<label for="codCategoria">Categoria</label> <select
@@ -159,19 +94,23 @@
 					</div>
 					<div class="form-row">
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" checked="checked" id="prodAtivo"> 
-							<label class="form-check-label" for="prodAtivo">Ativo</label>
+							<input class="form-check-input" type="checkbox" checked="checked"
+								id="prodAtivo"> <label class="form-check-label"
+								for="prodAtivo">Ativo</label>
 						</div>
 					</div>
 
 					<center>
-						<a href="ConsultaCliente.html"><button type="button" class="btn btn-secondary">Cancelar</button></a> 
-						<a href="ConsultaCliente.html"><button type="button" class="btn btn-success"><i class="fa fa-save"></i>Cadastrar produto</button></a>
+						<a href="ConsultaProduto.html"><button type="button"
+								class="btn btn-secondary">Cancelar</button></a> <a
+							href="ConsultaProduto.html"><button type="button"
+								class="btn btn-success">
+								<i class="fa fa-save"></i>Cadastrar produto
+							</button></a>
 					</center>
+				</div>
 			</form>
 		</div>
 	</div>
-	</div>
 </body>
 </html>
-////

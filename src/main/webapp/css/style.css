@@ -162,7 +162,7 @@ table {
     font-size: 14px;
 }
 
-.table .table-visu, .table-edit, .table-del, .table-hist {
+.table .table-visu, .table-edit, .table-del, .table-hist, .table-add {
     border: 1px solid #ddd;
     width: 35px;
     height: 35px;
@@ -217,9 +217,26 @@ table {
     background-color: #666;
 }
 
+.table .table-add {
+    background-color: #279e41;
+    color: #fff;
+    padding-left: 10px;
+    font-size: 15px;
+    margin-left: -2px;
+}
+
+.table .table-add:hover {
+    background-color: #218838;
+}
+
+
 .table .table-buttons {
     padding:6px; 
-    min-width:152px;
+    min-width:140px;
+}
+
+.table .table-buttons-hist {
+    padding:6px; 
 }
 
 .pagination a {
@@ -508,4 +525,23 @@ logincolor {
         min-height: 38px;
         border-radius: 2px;
  }
+ 
+
+.modal-content{
+	width: 100%;
+	max-height: 81%;		
+	margin: auto;
+	position: fixed;
+	
+}
+ 
+ .modal-body  {
+		width: 100%;
+		max-height:100%;
+		border:1px solid #ddd;
+		overflow-x:auto;
+		overflow-y:auto;
+		margin:auto;	
+	}
+ 
     

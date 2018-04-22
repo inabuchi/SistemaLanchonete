@@ -1,226 +1,178 @@
-﻿
+﻿<!-- 
+    Document   : CadastroCliente
+    Created on : 21/04/2018, 16:39:28
+    Author     : Morgana e Sidnei
+-->
+
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Guten Burguer - Adicionar cliente</title>
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Guten Burguer - Adicionar cliente</title>
+
+<script src="library/jquery-3.2.1.min.js">
 	
-		<script src = "library/jquery-3.2.1.min.js"> </script>
-        <script type="text/javascript" src="controller/cliente/cadastroCliente.js"></script>
-        <script type="text/javascript" src="controller/generics/validacoesGenericas.js"></script>
-	
-        <!-- DataTables -->
-        <link rel="stylesheet" type="text/css" href="library/DataTables/datatables.min.css"/>
-        <script type="text/javascript" src="library/DataTables/datatables.min.js"></script>
+</script>
+<script type="text/javascript"
+	src="controller/cliente/cadastroCliente.js"></script>
+<script type="text/javascript"
+	src="controller/generics/validacoesGenericas.js"></script>
 
-        <!-- FontAwesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">	
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css"
+	href="library/DataTables/datatables.min.css" />
+<script type="text/javascript"
+	src="library/DataTables/datatables.min.js"></script>
 
-        <link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
+<!-- FontAwesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="path/to/font-awesome/css/font-awesome.min.css">
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        
-        <script type="text/javascript">
-            $('#example').dataTable({
-                "language": {
-                    "sEmptyTable": "Nenhum registro encontrado",
-                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                    "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-                    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-                    "sInfoPostFix": "",
-                    "sInfoThousands": ".",
-                    "sLengthMenu": "_MENU_ resultados por página",
-                    "sLoadingRecords": "Carregando...",
-                    "sProcessing": "Processando...",
-                    "sZeroRecords": "Nenhum registro encontrado",
-                    "sSearch": "Pesquisar",
-                    "oPaginate": {
-                        "sNext": "Próximo",
-                        "sPrevious": "Anterior",
-                        "sFirst": "Primeiro",
-                        "sLast": "Último"
-                    },
-                    "oAria": {
-                        "sSortAscending": ": Ordenar colunas de forma ascendente",
-                        "sSortDescending": ": Ordenar colunas de forma descendente"
-                    }
-                }
-            });
-        </script>
+<link
+	href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic'
+	rel='stylesheet' type='text/css'>
 
 
-        <link href="css/style.css" rel="stylesheet"/>
-    </head>
-    <body>
-        <nav class="navbar navbar-expand">
-            <a class="sidebar-toggle text-light"><i class="fa fa-bars"></i></a>
-            <a class="navbar-brand" href="#"><navcolor>Guten</navcolor> Burguer</a>
-            <div class="navbar-collapse collapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
-                            <i class="fa fa-user-circle"></i>Username<i class="fa fa-caret-down" style="margin-left:10px"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Gerenciar</a>
-                            <a class="dropdown-item" href="#">Sair</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+<link href="css/style.css" rel="stylesheet" />
+<script type="text/javascript">
+	$(function() {
+		$("#includeMenu").load("Menu.html");
+	});
+</script>
+</head>
+<body>
+	<div id="includeMenu"></div>
+	<div class="d-flex align-items-stretch">
+
+		<div class="content p-4">
+			<div class="content-title">
+				<i class="fa fa-id-card-o"></i>Pessoas<i class="fa fa-angle-right"></i><a
+					href="ConsultaCliente.html">Consulta de clientes</a><i
+					class="fa fa-angle-right"></i>Adicionar cliente
+			</div>
+
+			<div class="formtitle">Adicionar cliente</div>
+			<form>
+				<div class="page-cad">
+					<fieldset class="well">
+						<legend class="well-legend">Dados pessoais</legend>
+
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label for="codCli">Código cliente</label> <input
+									class="form-control" id="codCli" type="number" min="1" required>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-8">
+								<label for="nomeCli" class="control-label required">Nome</label>
+								<input class="form-control" id="nomeCli" type="text"
+									maxlength="255" required>
+							</div>
+							<div class="form-group col-md-2">
+								<label for="telCli01" class="control-label required">Telefone</label>
+								<input class="form-control" id="telCli01" type="text"
+									maxlength="15" required>
+							</div>
+							<div class="form-group col-md-2">
+								<label for="telCli02" class="control-label">Telefone
+									adicional</label> <input class="form-control" id="telCli02" type="text"
+									maxlength="15">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="obsCli">Observação</label>
+							<textarea class="form-control" rows="4" id="obsCli"></textarea>
+						</div>
+
+					</fieldset>
 
 
-        <div class="d-flex align-items-stretch">	
-            <div class="sidebar bg-dark">
+					<fieldset class="well">
+						<legend class="well-legend">Endereço</legend>
 
-                <ul class="list-unstyled">				
-                    <li>
-                        <a href="#submenu1" data-toggle="collapse"><i class="fa fa-id-card-o"></i>Cadastros</a>
-                        <ul id="submenu1" class="list-unstyled collapse show">
-                            <li class="active"><a href="ConsultaCliente.html"><i class="fa fa-users"></i>Clientes<i class="fa fa-caret-left"></i></a></li> 
-                            <li><a href="#"><i class="fa fa-angle-right"></i>Funcionários</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i>Submenu Item</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Pedidos</a></li>
-                    <li>
-                        <a href="#submenu2" data-toggle="collapse"><i class="fa fa-barcode"></i>Produtos</a>
-                        <ul id="submenu2" class="list-unstyled collapse">
-                            <li><a href="#"><i class="fa fa-angle-right"></i>Submenu Item</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i>Submenu Item</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i>Submenu Item</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#submenu3" dropdown-toggle data-toggle="collapse"><i class="fa fa-money"></i>Fluxo de caixa</a><div >
-                            <ul id="submenu3" class="list-unstyled collapse">
-                                <li><a href="#"><i class="fa fa-angle-right"></i>Submenu Item</a></li>
-                            </ul>
-                    </li>
-                </ul>
-            </div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="endCli" class="control-label required">Endereço</label>
+								<input class="form-control" id="endCli" type="text"
+									maxlength="255" required>
+							</div>
+							<div class="form-group col-md-1">
+								<label for="numEndCli" class="control-label required">Número</label>
+								<input class="form-control" id="numEndCli" type="number" min="1"
+									required>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="logrEndCli" class="control-label">Logradouro</label>
+								<input class="form-control" id="logrEndCli" type="text"
+									maxlength="255">
+							</div>
+							<div class="form-group col-md-2">
+								<label for="cepCli" class="control-label required">CEP</label> <input
+									class="form-control" id="cepCli" type="number" required>
+							</div>
+						</div>
+						<div class="form-row">
 
+							<div class="form-group col-md-3">
+								<label for="baiCli" class="control-label required">Bairro</label>
+								<input class="form-control" id="baiCli" type="text"
+									maxlength="255" required>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="compEndCli" class="control-label">Complemento</label>
+								<input class="form-control" id="compEndCli" type="text"
+									maxlength="255">
+							</div>
+							<div class="form-group col-md-5">
+								<label for="codCidCli" class="control-label required">Cidade</label>
+								<input class="form-control" id="codCidCli" type="text"
+									maxlength="255" required>
+							</div>
+							<div class="form-group col-md-1">
+								<label for="ufCli" class="control-label">UF</label> <input
+									class="form-control" id="ufCli" type="text" maxlength="2">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="obsEndCli" class="control-label">Observação</label>
+							<textarea class="form-control" rows="4" id="obsEndCli"></textarea>
+						</div>
 
-            <div class="content p-4">
-                <div class="content-title"><i class="fa fa-id-card-o"></i>Cadastros<i class="fa fa-angle-right"></i>Clientes<i class="fa fa-angle-right"></i>Cadastrar cliente</div>
+					</fieldset>
+					<fieldset class="well" style="padding-bottom: 18px">
+						<legend class="well-legend">Endereços</legend>
+						<div class="area-end">
+							<p>
+								Endereço: Rua XV de Novembro </br> Número: 888 </br> Logradouro: Rua </br> CEP:
+								89055-555 </br> Bairro: Centro </br> Complemento: Andar 2 </br> Cidade:
+								Blumenau </br> UF: SC </br> Observação: Lorem ipsum dolor sit amet,
+								consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+								labore et dolore magna aliqua. </br> 
+								<a href="CadastroEndereco.html" class="end-edit">Editar</a>
+								<a href="#" class="end-del">Excluir</a>
+							</p>
+							<a href="CadastroEndereco.html" class="add-end"><i
+								class="fa fa-plus"></i>Adicionar endereço</a>
+						</div>
+					</fieldset>
 
-                <div class="formtitle">Adicionar cliente</div>
-                <form>
-                    <div class="page-cad">                   
-                        <fieldset class="well">
-                            <legend class="well-legend">Dados pessoais</legend>
-
-                            <div class="form-row">	
-                                <div class="form-group col-md-2">
-                                    <label for="codCli">Código cliente</label>
-                                    <input class="form-control" id="codCli" type="number" min="1" required>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="codPessoa">Código pessoa</label>
-                                    <input class="form-control" id="codPessoa" type="number" min="1" required>
-                                </div>                              
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-8">
-                                    <label for="nomeCli" class="control-label required">Nome</label>
-                                    <input class="form-control" id="nomeCli" type="text" maxlength="255" required>
-                                </div> 
-                                <div class="form-group col-md-2">
-                                    <label for="telCli01" class="control-label required">Telefone</label>
-                                    <input class="form-control" id="telCli01" type="text" maxlength="15" required>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="telCli02" class="control-label">Telefone adicional</label>
-                                    <input class="form-control" id="telCli02" type="text" maxlength="15">
-                                </div>                             
-                            </div>                          
-                            <div class="form-group">
-                                <label for="obsCli">Observação</label>
-                                <textarea class="form-control" rows="4" id="obsCli"></textarea>
-                            </div>                            
-
-                        </fieldset>
-
-                                            
-                        <fieldset class="well">
-                            <legend class="well-legend">Endereço</legend>
-
-                            <div class="form-row">	
-                                <div class="form-group col-md-6">
-                                    <label for="endCli" class="control-label required">Endereço</label>
-                                    <input class="form-control" id="endCli" type="text" maxlength="255" required>
-                                </div>
-                                <div class="form-group col-md-1">
-                                    <label for="numEndCli" class="control-label required">Número</label>
-                                    <input class="form-control" id="numEndCli" type="number" min="1" required>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="logrEndCli" class="control-label">Logradouro</label>
-                                    <input class="form-control" id="logrEndCli" type="text" maxlength="255">                               
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="cepCli" class="control-label required">CEP</label>
-                                    <input class="form-control" id="cepCli" type="number" required>
-                                </div>
-                            </div>                                                   
-                            <div class="form-row">
-
-                                <div class="form-group col-md-3">
-                                    <label for="baiCli" class="control-label required">Bairro</label>
-                                    <input class="form-control" id="baiCli" type="text" maxlength="255" required>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="compEndCli" class="control-label">Complemento</label>
-                                    <input class="form-control" id="compEndCli" type="text" maxlength="255">
-                                </div>
-                                <div class="form-group col-md-5">
-                                    <label for="codCidCli" class="control-label required">Cidade</label>
-                                    <input class="form-control" id="codCidCli" type="text" maxlength="255" required>
-                                </div>
-                                <div class="form-group col-md-1">
-                                    <label for="ufCli" class="control-label">UF</label>
-                                    <input class="form-control" id="ufCli" type="text" maxlength="2">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="obsEndCli" class="control-label">Observação</label>
-                                <textarea class="form-control" rows="4" id="obsEndCli"></textarea>
-                            </div>
-
-                        </fieldset>
-                        <fieldset class="well" style="padding-bottom:18px">
-                            <legend class="well-legend">Endereços</legend>
-                            <div class="area-end">                                                         
-                                <p>                                
-                                    Endereço: Rua XV de Novembro </br>
-                                    Número: 888 </br>
-                                    Logradouro: Rua </br>
-                                    CEP: 89055-555 </br>
-                                    Bairro: Centro </br>
-                                    Complemento: Andar 2 </br>
-                                    Cidade: Blumenau </br>
-                                    UF: SC </br>
-                                    Observação: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </br>
-                                    <a href="CadastroEndereco.html?state=e" class="end-edit">Editar</a>
-                                    <a href="CadastroEndereco.html?state=e" class="end-del">Excluir</a>
-                                </p>                 
-                                <a href="CadastroEndereco.html?state=i" class="add-end"><i class="fa fa-plus"></i>Adicionar endereço</a> 
-                            </div>
-                        </fieldset>
-
-                        <center>
-                            <a href="ConsultaCliente.html"><button type="button" class="btn btn-secondary">Cancelar</button></a>
-                            <button type="button" id="btnSaveCliente" class="btn btn-success"></i><i class="fa fa-save"></i>Cadastrar cliente</button>
-                        </center>
-                </form>
-            </div>
-        </div>
-    </div>    
+					<center>
+						<a href="ConsultaCliente.html"><button type="button"
+								class="btn btn-secondary">Cancelar</button></a>
+						<a href="ConsultaCliente.html"><button type="button" id="btnSaveCliente" class="btn btn-success">
+							<i class="fa fa-save"></i>Cadastrar cliente
+						</button></a>
+					</center>
+				</div>
+			</form>
+		</div>
+	</div>
 </body>
 </html>

@@ -1,0 +1,383 @@
+<!-- 
+    Document   : CadastroPedido
+    Created on : 21/04/2018, 16:39:28
+    Author     : Morgana e Sidnei
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Guten Burguer - Adicionar produto</title>
+
+<script src="library/jquery-3.2.1.min.js">
+	
+</script>
+<script type="text/javascript"
+	src="controller/cliente/cadastroCliente.js"></script>
+<script type="text/javascript"
+	src="controller/generics/validacoesGenericas.js"></script>
+
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css"
+	href="library/DataTables/datatables.min.css" />
+<script type="text/javascript"
+	src="library/DataTables/datatables.min.js"></script>
+
+<!-- FontAwesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="path/to/font-awesome/css/font-awesome.min.css">
+
+<link
+	href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic'
+	rel='stylesheet' type='text/css'>
+
+
+<link href="css/style.css" rel="stylesheet" />
+<script type="text/javascript">
+	$(function() {
+		$("#includeMenu").load("Menu.html");
+	});
+</script>
+
+</head>
+<body>
+
+	<div id="includeMenu"></div>
+
+	<div class="d-flex align-items-stretch">
+
+		<div class="content p-4">
+			<div class="content-title">
+				<i class="fa fa-id-card-o"></i>Pedidos<i class="fa fa-angle-right"></i>Cadastro
+				de Pedidos
+			</div>
+			<div class="formtitle">Cadastrar pedido</div>
+			<form>
+				<div class="page-cad">
+					<div class="form-row">
+						<div class="col-lg-6">
+							<div class="form-group input-group">
+								<input type="text" class="form-control" placeholder="Telefone">
+								<span class="input-group-btn">
+									<button class="btn btn-secondary" type="button"><i class="fa fa-search"></i></button>
+								</span>
+							</div>
+							<!-- /input-group -->
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-3">
+							<label for="logrEndCli" class="control-label">Nome</label> <input
+								class="form-control" id="nomeCli" type="text" maxlength="255"
+								value="Exemplo da Silva" disabled>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-3">
+							<label for="endCli" class="control-label required">Endereços</label>
+							<select class="form-control" id="endCli" min="1" required>
+								<option value="1">Rua VX, 552, Centro, Blumenau, SC</option>
+								<option value="2">Rua Sete de Setembro, 1234, Centro,
+									Blumenau, SC</option>
+								<option value="0">Endereço alternativo</option>
+							</select>
+						</div>
+						<div class="form-group col-md-3">
+							<label for="formaPgto" class="control-label">Forma de
+								pagamento</label> <select class="form-control" id="endCli" min="1">
+								<option value="1">Cartão de crédito</option>
+								<option value="2">Cartão de débito</option>
+								<option value="3">Dinheiro</option>
+							</select>
+						</div>
+					</div>
+					<div class="formtitle">Cardápio</div>
+					<br>
+					<table class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th scope="col">Código</th>
+								<th scope="col">Nome</th>
+								<th scope="col">Preço</th>
+								<th scope="col">Quantidade</th>
+								<th scope="col">Ação</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>X-Ovelha</td>
+								<td>R$1,50</td>
+								<td><input id="qtd1" type="number" maxlength="255"
+									value="0"></td>
+								<td class="table-buttons"><button type="button"
+										class="table-add">
+										</i><i class="fa fa-plus-circle"></i>
+									</button></td>
+							</tr>
+							<tr>
+								<td>2
+								</th>
+								<td>X-Galinha</td>
+								<td>R$3,00</td>
+								<td><input id="qtd2" type="number" maxlength="255"
+									value="1"></td>
+								<td class="table-buttons"><button type="button"
+										class="table-add">
+										</i><i class="fa fa-plus-circle"></i>
+									</button></td>
+							</tr>
+							<tr>
+								<td>3
+								</th>
+								<td>Coca Cola 2L</td>
+								<td>R$4,50</td>
+								<td><input id="qtd3" type="number" maxlength="255"
+									value="1"></td>
+								<td class="table-buttons"><button type="button"
+										class="table-add">
+										</i><i class="fa fa-plus-circle"></i>
+									</button></td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>X-Tudo</td>
+								<td>R$6,00</td>
+								<td><input id="qtd4" type="number" maxlength="255"
+									value="0"></td>
+								<td class="table-buttons"><button type="button"
+										class="table-add">
+										</i><i class="fa fa-plus-circle"></i>
+									</button></td>
+							</tr>
+							<tr>
+								<td>5
+								</th>
+								<td>X-Burger</td>
+								<td>R$7,50</td>
+								<td><input id="qtd5" type="number" maxlength="255"
+									value="2"></td>
+								<td class="table-buttons"><button type="button"
+										class="table-add">
+										</i><i class="fa fa-plus-circle"></i>
+									</button></td>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+					<div class="formtitle">Itens do pedido</div>
+					<br>
+					<table class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th scope="col">Item</th>
+								<th scope="col">Adicionais</th>
+								<th scope="col">Preço</th>
+								<th scope="col">Ação</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>X-Burger</td>
+								<td class="table-buttons">
+									<button type="button" class="table-add" data-toggle="modal"
+										data-target="#ModalAdicionais" data-nome="X-Burger"
+										data-codigo="1" title="Histórico de pedidos">
+										<i class="fa fa-plus-circle"></i>
+									</button> Bacon
+								</td>
+								<td>R$8,50</td>
+								<td class="table-buttons"><a href="#"><button
+											type="button" class="table-del" title="Excluir">
+											<i class="fa fa-close"></i>
+										</button></a></td>
+							</tr>
+							<tr>
+								<td>X-Galinha</td>
+								<td class="table-buttons">
+									<button type="button" class="table-add" data-toggle="modal"
+										data-target="#ModalAdicionais" data-nome="X-Galinha"
+										data-codigo="2" title="Histórico de pedidos">
+										<i class="fa fa-plus-circle"></i>
+									</button>
+								</td>
+								<td>R$3,00</td>
+								<td class="table-buttons"><a href="#"><button
+											type="button" class="table-del" title="Excluir">
+											<i class="fa fa-close"></i>
+										</button></a></td>
+							</tr>
+							<tr>
+								<td>X-Burger</td>
+								<td class="table-buttons">
+									<button type="button" class="table-add" data-toggle="modal"
+										data-target="#ModalAdicionais" data-nome="X-Burger"
+										data-codigo="3" title="Histórico de pedidos">
+										<i class="fa fa-plus-circle"></i>
+									</button> Queijo, Bacon
+								</td>
+								<td>R$9,50</td>
+								<td class="table-buttons"><a href="#"><button
+											type="button" class="table-del" title="Excluir">
+											<i class="fa fa-close"></i>
+										</button></a></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="form-group col-md-12">
+						<label for="obsPed" class="control-label">Observações do
+							pedido</label>
+						<textarea class="form-control" rows="4" id="obsPed"></textarea>
+					</div>
+					<div class="form-group col-md-2">
+						<label for="pedtroco" class="control-label">Troco</label> <input
+							class="form-control" id="pedtroco" type="text">
+					</div>
+					SubTotal: R$25,50 <br> Taxa de entrega: R$10,00 <br>
+					Total: R$35,50 <br> Tempo de entrega: 1 hora(s) <br>
+					<center>
+						<a href="#"><button type="button" class="btn btn-secondary">Cancelar</button></a>
+						<a href="#"><button type="button" class="btn btn-success">
+								</i><i class="fa fa-save"></i>Gerar Pedido
+							</button></a>
+					</center>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="ModalAdicionais" tabindex="-1"
+		role="dialog" aria-labelledby="ModalTitulo" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="ModalTitulo">Lista de adicionais</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<table class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th scope="col">Código</th>
+								<th scope="col">Nome</th>
+								<th scope="col">Preço</th>
+								<th scope="col">Ação</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>Queijo</td>
+								<td>R$1,00</td>
+								<td class="table-buttons"><a href="#"><button
+											type="button" class="table-add">
+											</i><i class="fa fa-plus-circle"></i>
+										</button>
+										</i>
+									</button></a></td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>Bacon</td>
+								<td>R$1,00</td>
+								<td class="table-buttons"><a href="#"><button
+											type="button" class="table-add">
+											</i><i class="fa fa-plus-circle"></i>
+										</button></a></td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>Queijo</td>
+								<td>R$1,00</td>
+								<td class="table-buttons"><a href="#"><button
+											type="button" class="table-add">
+											</i><i class="fa fa-plus-circle"></i>
+										</button>
+										</i>
+									</button></a></td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>Bacon</td>
+								<td>R$1,00</td>
+								<td class="table-buttons"><a href="#"><button
+											type="button" class="table-add">
+											</i><i class="fa fa-plus-circle"></i>
+										</button></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<!-- Tradução customizada do DataTable -->
+<script type="text/javascript">
+	$('table').dataTable({
+		"language" : {
+			"sEmptyTable" : "Nenhum registro encontrado",
+			"sInfo" : "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+			"sInfoEmpty" : "Mostrando 0 até 0 de 0 registros",
+			"sInfoFiltered" : "(Filtrados de _MAX_ registros)",
+			"sInfoPostFix" : "",
+			"sInfoThousands" : ".",
+			"sLengthMenu" : "_MENU_ resultados por página",
+			"sLoadingRecords" : "Carregando...",
+			"sProcessing" : "Processando...",
+			"sZeroRecords" : "Nenhum registro encontrado",
+			"sSearch" : "Pesquisar",
+			"oPaginate" : {
+				"sNext" : "Próximo",
+				"sPrevious" : "Anterior",
+				"sFirst" : "Primeiro",
+				"sLast" : "Último"
+			},
+			"oAria" : {
+				"sSortAscending" : ": Ordenar colunas de forma ascendente",
+				"sSortDescending" : ": Ordenar colunas de forma descendente"
+			}
+		}
+	});
+</script>
+<!-- Adição ERRADA do cabeçalho/Menu -->
+<script type="text/javascript">
+	$(function() {
+		$("#includeCabecalho").load("Cabecalho.html");
+		$("#includeMenu").load("Menu.html");
+	});
+</script>
+<!-- Script para o modal -->
+<script type="text/javascript">
+	$('#ModalAdicionais').on('show.bs.modal', function(event) {
+		var button = $(event.relatedTarget) // Botão que dispoarou o modal
+		var nome = button.data('nome') // Extraí a string do atributo data-nome			
+		// A requisição AJAX vai aqui.
+
+		// Atualiza o conteúdo da modal.
+		var modal = $(this)
+		modal.find('.modal-title').text('Lista de adicionais do(a) ' + nome)
+	})
+</script>
+<!-- Script necessário para vários DataTables -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('table').DataTable();
+	});
+</script>
+</html>
