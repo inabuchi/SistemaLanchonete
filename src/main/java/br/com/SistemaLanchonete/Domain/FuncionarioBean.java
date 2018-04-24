@@ -1,5 +1,6 @@
 package br.com.SistemaLanchonete.Domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,16 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
- * Classe Modelo para os Funcionários da empresa
+ * Classe Modelo para os Funcionï¿½rios da empresa
  * 
- * @author Douglas
+ * @author Patrick
  */
 
 @Entity
@@ -30,24 +29,20 @@ public class FuncionarioBean extends PessoaBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cd_funcionario")
 	private int cdFuncionario;
-	@ManyToOne
-	@JoinColumn(name = "cd_cargo")
-	private CargoBean cargo;
-
-	@Column(name = "dt_admissao")
-	private Date dtAdmissao;
+	@Column(name = "ds_cargo")
+	private String dsCargo;
 	@Column(name = "ds_login")
 	private String dsLogin;
 	@Column(name = "ds_senha")
 	private String dsSenha;
 	@Column(name = "cd_nivel")
 	private int cdNivel;
-	
+
 	@OneToMany(mappedBy = "funcionario", targetEntity = CaixaBean.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<CaixaBean> caixa;
+	private List<CaixaBean> caixa = new ArrayList<CaixaBean>();
 
 	/**
-	 * Contrutor padrão da classe
+	 * Contrutor padrÃ£o da classe
 	 */
 	public FuncionarioBean() {
 	}
@@ -62,19 +57,17 @@ public class FuncionarioBean extends PessoaBean {
 	 * @param dtCadastro
 	 * @param isAtivo
 	 * @param cdFuncionario
-	 * @param cargo
+	 * @param dsCargo
 	 * @param dtAdmissao
 	 * @param dsLogin
 	 * @param dsSenha
 	 * @param cdNivel
 	 */
 	public FuncionarioBean(int cdPessoa, String dsNome, String dsTelefone1, String dsTelefone2, Date dtCadastro,
-			boolean isAtivo, int cdFuncionario, CargoBean cargo, Date dtAdmissao, String dsLogin, String dsSenha,
-			int cdNivel) {
+			boolean isAtivo, int cdFuncionario, String dsCargo, String dsLogin, String dsSenha, int cdNivel) {
 		super(cdPessoa, dsNome, dsTelefone1, dsTelefone2, dtCadastro, isAtivo);
 		this.cdFuncionario = cdFuncionario;
-		this.cargo = cargo;
-		this.dtAdmissao = dtAdmissao;
+		this.dsCargo = dsCargo;
 		this.dsLogin = dsLogin;
 		this.dsSenha = dsSenha;
 		this.cdNivel = cdNivel;
@@ -103,35 +96,17 @@ public class FuncionarioBean extends PessoaBean {
 	 * 
 	 * @return cargo
 	 */
-	public CargoBean getCargo() {
-		return cargo;
+	public String getCargo() {
+		return dsCargo;
 	}
 
 	/**
 	 * Setar o valor para o parametro cargo
 	 * 
-	 * @param cargo
+	 * @param dsCargo
 	 */
-	public void setCargo(CargoBean cargo) {
-		this.cargo = cargo;
-	}
-
-	/**
-	 * Captura o valor contido no parametro dtAdmissao
-	 * 
-	 * @return dtAdmissao
-	 */
-	public Date getDtAdmissao() {
-		return dtAdmissao;
-	}
-
-	/**
-	 * Setar o valor para o parametro dtAdmissao
-	 * 
-	 * @param dtAdmissao
-	 */
-	public void setDtAdmissao(Date dtAdmissao) {
-		this.dtAdmissao = dtAdmissao;
+	public void setCargo(String dsCargo) {
+		this.dsCargo = dsCargo;
 	}
 
 	/**
@@ -187,16 +162,17 @@ public class FuncionarioBean extends PessoaBean {
 	public void setCdNivel(int cdNivel) {
 		this.cdNivel = cdNivel;
 	}
-	
-		/**
+
+	/**
 	 * Retorna a lista de Caixas Desse Funcionario
 	 * 
-	 *	@return caixa
+	 * @return caixa
 	 */
 	public List<CaixaBean> getCaixa() {
 		return caixa;
 	}
-		/**
+
+	/**
 	 * Setar o valor para o parametro caixa
 	 * 
 	 * @param caixa
@@ -204,13 +180,13 @@ public class FuncionarioBean extends PessoaBean {
 	public void setCaixa(List<CaixaBean> caixa) {
 		this.caixa = caixa;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -242,11 +218,10 @@ public class FuncionarioBean extends PessoaBean {
 	public String toString() {
 		return super.toString() + //
 				"\nClasse ................: " + getClass().getSimpleName() + //
-				"\nIdentif. do Funcionário: " + getCdFuncionario() + //
+				"\nIdentif. do Funcionï¿½rio: " + getCdFuncionario() + //
 				"\nCargo..................: " + getCargo() + //
 				"\nApelido................: " + getDsLogin() + //
 				"\nTelefone...............: " + getDsSenha() + //
-				"\nNível Permissão Sist...: " + getCdNivel() + //
-				"\nData Admissão..........: " + getDtAdmissao(); //
+				"\nNï¿½vel Permissï¿½o Sist...: " + getCdNivel();
 	}
 }

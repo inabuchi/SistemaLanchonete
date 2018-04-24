@@ -1,6 +1,7 @@
 package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Id;
@@ -15,8 +16,9 @@ import javax.persistence.Table;
 /**
  * Classe de Estados cadastrados no sistema
  * 
- * @author Yago
+ * @author Patrick
  */
+
 @Entity
 @Table(name = "estado")
 public class EstadoBean implements Serializable {
@@ -30,7 +32,7 @@ public class EstadoBean implements Serializable {
 	@Column(name = "ds_sigla")
 	private String dsSigla;
 	@OneToMany(mappedBy = "estado", targetEntity = MunicipioBean.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<MunicipioBean> municipios;
+	private List<MunicipioBean> municipios = new ArrayList<MunicipioBean>();
 
 	/**
 	 * Construtor padrão da classe
@@ -147,9 +149,9 @@ public class EstadoBean implements Serializable {
 
 	@Override
 	public String toString() {
-		return "\nClasse .................: " + getClass().getSimpleName() + //
-				"\nIdentificador do Estado: " + getDsSigla() + //
-				"\nNome...................: " + getDsEstado();//
+		return "\nClasse .................: " + getClass().getSimpleName() + 
+				"\nIdentificador do Estado: " + getDsSigla() + 
+				"\nNome...................: " + getDsEstado();
 	}
 
 }

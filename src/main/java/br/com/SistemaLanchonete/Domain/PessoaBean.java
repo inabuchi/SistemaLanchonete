@@ -1,6 +1,7 @@
 package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,11 +37,12 @@ public abstract class PessoaBean implements Serializable {
 	private String dsTelefone1;
 	@Column(name = "ds_telefone2")
 	private String dsTelefone2;
-	@Column(name = "	dt_cadastro")
+	@Column(name = "dt_cadastro")
 	private Date dtCadastro;
 	@Column(name = "is_ativo")
 	private boolean isAtivo;
-	@OneToMany(mappedBy = "pessoa", targetEntity = EnderecoPessoaBean.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "pessoa", targetEntity = EnderecoPessoaBean.class, fetch = FetchType.EAGER, cascade = 
+			{CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
 	private List<EnderecoPessoaBean> enderecoPessoas;
 	
 	/**
@@ -67,12 +69,13 @@ public abstract class PessoaBean implements Serializable {
 		this.dsTelefone2 = dsTelefone2;
 		this.dtCadastro = dtCadastro;
 		this.isAtivo = isAtivo;
+		this.enderecoPessoas = new ArrayList<EnderecoPessoaBean>();
 	}
 
 	/**
 	 * Captura o valor contido no parametro id
 	 * 
-	 * @return
+	 * @return cdPessoa
 	 */
 	public int getCdPessoa() {
 		return cdPessoa;
@@ -191,8 +194,9 @@ public abstract class PessoaBean implements Serializable {
 	 * 
 	 * @param enderecoPessoas
 	 */
-	public void setEnderecoPessoas(List<EnderecoPessoaBean> enderecoPessoas) {
-		this.enderecoPessoas = enderecoPessoas;
+	public void addEnderecoPessoa(EnderecoPessoaBean enderecoPessoa) {
+		enderecoPessoa.setPessoa(this);
+		this.enderecoPessoas.add(enderecoPessoa);
 	}
 	
 	@Override
