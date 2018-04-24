@@ -1,6 +1,7 @@
 package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Id;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
 /**
  * Classe de Logradouros cadastrados no sistema
  * 
- * @author Yago
+ * @author Patrick
  */
 @Entity
 @Table(name = "logradouro")
@@ -40,7 +41,7 @@ public class LogradouroBean implements Serializable {
 	private String dsLogradouro;
 	
 	@OneToMany(mappedBy = "logradouro", targetEntity = EnderecoBean.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<EnderecoBean> enderecos;
+	private List<EnderecoBean> enderecos = new ArrayList<EnderecoBean>();
 	
 	/**
 	 * Construtor padrão da classe

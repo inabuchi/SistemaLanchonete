@@ -1,4 +1,4 @@
-package br.com.SistemaLanchonete.Domain;
+	package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
 
@@ -14,10 +14,11 @@ import javax.persistence.Column;
 @Embeddable
 public class EnderecoPessoaPK implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@Column
+	
+	@Column(name = "cd_endereco", nullable = false)	
 	private int cdEndereco;
 	
-	@Column
+	@Column(name = "cd_pessoa", nullable = false)	
 	private int cdPessoa;
 
 	/**

@@ -1,16 +1,19 @@
 package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,25 +27,32 @@ import javax.persistence.Table;
 public class ItemPedidoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cd_item_compra")
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "cd_item_pedido")
 	private int cdItemPedido;
-	@Column(name = "cd_pedido")
-	private int cdPedido;
-	@Column(name = "cd_produto")
-	private int cdProduto;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="cd_pedido")
+	private PedidoBean pedido;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="cd_produto")
+	private ProdutoBean produto;
 	@Column(name = "qt_unitaria")
 	private float qtUnitaria;
 	@Column(name = "vl_unitario")
 	private float vlUnitario;
 	@Column(name = "vl_desconto")
 	private float vlDesconto;
-	
+	@OneToMany(mappedBy = "itemPedido", targetEntity = ItemPedidoAdicionalBean.class, fetch = FetchType.LAZY, cascade = 
+		{CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
+	private List<ItemPedidoAdicionalBean> itemPedidoAdicionais;
+
 	/**
 	 * Contrutor padrão da classe
 	 */
 	public ItemPedidoBean() {
+		itemPedidoAdicionais = new ArrayList<ItemPedidoAdicionalBean>();
 	}
 
 	/**
@@ -55,14 +65,16 @@ public class ItemPedidoBean implements Serializable {
 	 * @param vlUnitario
 	 * @param vlDesconto
 	 */
-	public ItemPedidoBean(int cdItemPedido, int cdPedido, int cdProduto, float qtUnitaria, float vlUnitario,
+	public ItemPedidoBean(int cdItemPedido, PedidoBean pedido, ProdutoBean produto, float qtUnitaria, float vlUnitario,
 			float vlDesconto) {
-		this.cdItemPedido = cdItemPedido;
-		this.cdPedido = cdPedido;
-		this.cdProduto = cdProduto;
+		this();
+		
+		this.pedido = pedido;
+		this.produto = produto;
 		this.qtUnitaria = qtUnitaria;
 		this.vlUnitario = vlUnitario;
 		this.vlDesconto = vlDesconto;
+		this.cdItemPedido = cdItemPedido;
 	}
 
 	/**
@@ -80,43 +92,43 @@ public class ItemPedidoBean implements Serializable {
 	 * @param cdItemPedido
 	 */
 	public void setCdItemPedido(int cdItemPedido) {
-		this.cdItemPedido = cdItemPedido;
+		this.cdItemPedido = cdItemPedido; 
 	}
 
 	/**
-	 * Captura o valor contido no parametro cdPedido
+	 * Captura o valor contido no parametro pedido
 	 * 
-	 * @return cdPedido
+	 * @return pedido
 	 */
-	public int getCdPedido() {
-		return cdPedido;
+	public PedidoBean getPedido() {
+		return pedido;
 	}
 
 	/**
-	 * Setar o valor para o parametro cdPedido
+	 * Setar o valor para o parametro pedido
 	 * 
-	 * @param cdPedido
+	 * @param pedido
 	 */
-	public void setCdPedido(int cdPedido) {
-		this.cdPedido = cdPedido;
+	public void setPedido(PedidoBean pedido) {
+		this.pedido = pedido;
 	}
 
 	/**
-	 * Captura o valor contido no parametro cdProduto
+	 * Captura o valor contido no parametro produto
 	 * 
-	 * @return cdProduto
+	 * @return produto
 	 */
-	public int getCdProduto() {
-		return cdProduto;
+	public ProdutoBean getProduto() {
+		return produto;
 	}
 
 	/**
-	 * Setar o valor para o parametro cdProduto
+	 * Setar o valor para o parametro produto
 	 * 
-	 * @param cdProduto
+	 * @param produto
 	 */
-	public void setCdProduto(int cdProduto) {
-		this.cdProduto = cdProduto;
+	public void setProduto(ProdutoBean produto) {
+		this.produto = produto;
 	}
 
 	/**
@@ -173,15 +185,49 @@ public class ItemPedidoBean implements Serializable {
 		this.vlDesconto = vlDesconto;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Captura o valor contido no parametro itemPedidoAdicionais
 	 * 
-	 * @see java.lang.Object#hashCode()
+	 * @return itemPedidoAdicionais
 	 */
+	public List<ItemPedidoAdicionalBean> getAdicionais() {
+		return itemPedidoAdicionais;
+	}
+
+	/**
+	 * Setar o valor para o parametro itemPedidoAdicionais
+	 * 
+	 * @param itemPedidoAdicionais
+	 */
+	public void addAdicional(ItemPedidoAdicionalBean adicional) {
+		adicional.setItemPedido(this);
+		this.itemPedidoAdicionais.add(adicional);
+	}	
+	
+	/**
+	 * Captura o sub total do item de pedido
+	 * 
+	 * @return vlTotal
+	 */
+	public double getSubTotal() {
+		
+		double vlTotal = 0;
+		
+		for (ItemPedidoAdicionalBean itemPedidoAdicionalBean : itemPedidoAdicionais) {
+			vlTotal += itemPedidoAdicionalBean.getPedidoAdicional().getVlAdicional();
+		}
+		
+		vlTotal += (qtUnitaria * vlUnitario);
+		
+		vlTotal -= vlDesconto;
+		
+		return vlTotal;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = super.hashCode();
+		int result = 1;
 		result = prime * result + cdItemPedido;
 		return result;
 	}
@@ -205,8 +251,8 @@ public class ItemPedidoBean implements Serializable {
 		return super.toString() + //
 				"\nClasse ..........: " + getClass().getSimpleName() + //
 				"\nCód. Item Pedido.: " + getCdItemPedido() + //
-				"\nPedido...........: " + getCdPedido() + //
-				"\nCód. Produto.....: " + getCdProduto() + //
+				"\nPedido...........: " + (getPedido() != null ? getPedido().getCdPedido() : 0) + //
+				"\nCód. Produto.....: " + (getProduto() != null ? getProduto().getCdProduto() : 0) + //
 				"\nQT Unitária......: " + getQtUnitaria() + //
 				"\nValor Unitário...: " + getVlUnitario() + //
 				"\nValor Desconto...: " + getVlDesconto(); //

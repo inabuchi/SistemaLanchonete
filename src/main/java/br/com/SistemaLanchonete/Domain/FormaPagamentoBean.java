@@ -20,9 +20,9 @@ import javax.persistence.Table;
 public class FormaPagamentoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cd_forma_pagamento")
-	@Id
 	private int cdFormaPagamento;
 	@Column(name = "ds_forma_pagamento")
 	private String dsFormaPagamento;

@@ -1,6 +1,7 @@
 package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Id;
@@ -41,7 +42,8 @@ public class EnderecoBean implements Serializable {
 	@Column(name = "ds_observacao")
 	private String dsObservacao;
 	
-	@OneToMany(mappedBy = "endereco", targetEntity = EnderecoPessoaBean.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "endereco", targetEntity = EnderecoPessoaBean.class, fetch = FetchType.LAZY, cascade = 
+		{CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
 	private List<EnderecoPessoaBean> enderecoPessoas;
 	
 	/**
@@ -65,6 +67,7 @@ public class EnderecoBean implements Serializable {
 		this.cdNumero = cdNumero;
 		this.dsComplemento = dsComplemento;
 		this.dsObservacao = dsObservacao;
+		this.enderecoPessoas = new ArrayList<EnderecoPessoaBean>();
 	}
 
 	

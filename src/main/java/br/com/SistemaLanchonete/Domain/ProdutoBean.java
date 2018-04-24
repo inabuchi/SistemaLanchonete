@@ -4,7 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -15,18 +17,22 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "produto")
-@PrimaryKeyJoinColumn(name = "cd_produto")
 public class ProdutoBean {
 	
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column (name= "cd_produto")
-	private int codProduto;
+	private int cdProduto;
+	
+	@ManyToOne
+	@JoinColumn(name="cd_categoria", referencedColumnName="cd_categoria")
+	private ProdutoCategoriaBean categoria;
 	
 	@Column (name = "ds_ref_produto")
-	private String descRefProduto;
+	private String dsRefProduto;
 	
 	@Column(name = "ds_produto")
-	private String descProduto;
+	private String dsProduto;
 	
 	@Column(name = "is_ativo")
 	private boolean isAtivo;
@@ -38,66 +44,93 @@ public class ProdutoBean {
 	public ProdutoBean() {
 	}
 	
+	
 	/**
-	 * Constructor parâmetrizado da Classe ProdutoBean
-	 * @param codProduto -> Código do Produto a ser inserido;
-	 * @param descRefProduto -> Descrição da Referência do Produto a ser Inserido;
-	 * @param descProduto -> Descrição do Produto a ser Inserido;
-	 * @param isAtivo -> Status Produto Ativo ou Inativo;
+	 * Construtor da classe
+	 *
+	 * @param cdProduto
+	 * @param categoria
+	 * @param dsRefProduto
+	 * @param dsProduto
+	 * @param isAtivo
 	 */
 	
-	ProdutoBean(int codProduto, String descRefProduto, String descProduto, boolean isAtivo) {
-		this.codProduto = codProduto;
-		this.descRefProduto = descRefProduto;
-		this.descProduto = descProduto;
+	public ProdutoBean(int cdProduto, ProdutoCategoriaBean categoria,
+			String dsRefProduto, String dsProduto, boolean isAtivo) {
+		super();
+		this.cdProduto = cdProduto;
+		this.categoria = categoria;
+		this.dsRefProduto = dsRefProduto;
+		this.dsProduto = dsProduto;
 		this.isAtivo = isAtivo;
 	}
-	
+
+
 	/**
 	 * 
-	 * @return código do Produto
+	 * @return Retorna a categproa do Produto
 	 */
-	public int getCodProduto() {
-		return codProduto;
+	public ProdutoCategoriaBean getCategoria() {
+		return categoria;
 	}
-	
+
+
 	/**
 	 * 
-	 * @param Setar valor para codProduto
+	 * @param Setar valor para categoria
 	 */
-	public void setCodProduto(int codProduto) {
-		this.codProduto = codProduto;
+	public void setCategoria(ProdutoCategoriaBean categoria) {
+		this.categoria = categoria;
+	}
+
+
+	/**
+	 * 
+	 * @return Retorna a descrição da referência do Produto
+	 */
+	public int getCdProduto() {
+		return cdProduto;
+	}
+
+
+
+	/**
+	 * 
+	 * @param Setar valor para cdProduto
+	 */
+	public void setCdProduto(int cdProduto) {
+		this.cdProduto = cdProduto;
 	}
 	
 	/**
 	 * 
 	 * @return Retorna a descrição da referência do Produto
 	 */
-	public String getDescRefProduto() {
-		return descRefProduto;
+	public String getDsRefProduto() {
+		return dsRefProduto;
 	}
 	/**
 	 * 
-	 * @param Setar valor para descRefProduto 
+	 * @param Setar valor para dsRefProduto 
 	 */
-	public void setDescRefProduto(String descRefProduto) {
-		this.descRefProduto = descRefProduto;
+	public void setDsRefProduto(String dsRefProduto) {
+		this.dsRefProduto = dsRefProduto;
 	}
 	
 	/**
 	 * 
 	 * @return Retorna a descrição do Produto
 	 */
-	public String getDescProduto() {
-		return descProduto;
+	public String getDsProduto() {
+		return dsProduto;
 	}
 	
 	/**
 	 * 
-	 * @param Setar valor para descProduto
+	 * @param Setar valor para dsProduto
 	 */
-	public void setDescProduto(String descProduto) {
-		this.descProduto = descProduto;
+	public void setDsProduto(String dsProduto) {
+		this.dsProduto = dsProduto;
 	}
 	
 	/**
@@ -131,7 +164,7 @@ public class ProdutoBean {
 		if (getClass() != obj.getClass())
 			return false;
 		ProdutoBean other = (ProdutoBean) obj;
-		if (codProduto!= other.codProduto)
+		if (cdProduto!= other.cdProduto)
 			return false;
 		return true;
 	}
@@ -141,9 +174,9 @@ public class ProdutoBean {
 		// TODO Auto-generated method stub
 		return super.toString() +
 				"\nClasse: " + ProdutoBean.class.getName() +
-				"\nCódigo do Produto: " + getCodProduto() +
-				"\nDescrição da Referência do Produto " +  getDescRefProduto() +
-				"\nDescrição do Produto " + getDescProduto() +
+				"\nCódigo do Produto: " + getCdProduto() +
+				"\nDescrição da Referência do Produto " +  getDsRefProduto() +
+				"\nDescrição do Produto " + getDsProduto() +
 				"\nIsAtivo: " + getIsAtivo();
 	}
 	

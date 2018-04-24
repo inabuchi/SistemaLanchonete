@@ -14,7 +14,7 @@ import javax.persistence.Table;
 /**
  * Classe de caixas cadastrados no sistema
  * 
- * @author Yago e Erick
+ * @author Patrick
  */
 @Entity
 @Table(name = "caixa")

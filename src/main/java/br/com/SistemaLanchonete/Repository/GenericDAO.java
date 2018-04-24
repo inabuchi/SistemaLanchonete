@@ -22,7 +22,7 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 	 * @param model
 	 *            - Objeto a ser salvo no banco
 	 * @param id
-	 *            - Identifica��o do registro no banco 0 = novo registro
+	 *            - Identificação do registro no banco 0 = novo registro
 	 * @return String - Mensagem de retorno
 	 * @throws BDException
 	 */
@@ -37,6 +37,7 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 				retorno = "Dados atualizados com sucesso na tabela";
 			}
 			manager.getTransaction().commit();
+			manager.clear();
 		} catch (Exception e) {
 			manager.getTransaction().rollback();
 			throw new BDException("Erro na atualiza��o de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
@@ -80,10 +81,11 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 	 */
 	public MODEL findById(Class<MODEL> classe, int id) {
 		/*
-		 * o metodo find busca por chave primaria, mas como nao tenho a anota��o @ID no
-		 * fucionario so retorna o funcinario que for igual na classe pessoa
+		 * o metodo find busca por chave primaria, mas como nao tenho a 
+		 * anotação @ID no fucionario e no cliente so retorna o funcionário 
+		 * que for igual na classe pessoa
 		 * 
-		 * precisa fazer uma query nao da para usar o m�todo find do hibernate
+		 * precisa fazer uma query nao da para usar o método find do hibernate
 		 */
 		return manager.find(classe, id);
 	}
