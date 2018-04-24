@@ -1,0 +1,159 @@
+<!-- 
+    Document   : ConsultaCargo
+    Created on : 21/04/2018, 16:39:28
+    Author     : Morgana e Sidnei
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Guten Burguer - Cargos</title>
+
+<script src="library/jquery-3.2.1.min.js">
+	
+</script>
+<script type="text/javascript"
+	src="controller/cliente/cadastroCliente.js"></script>
+<script type="text/javascript"
+	src="controller/generics/validacoesGenericas.js"></script>
+
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css"
+	href="library/DataTables/datatables.min.css" />
+<script type="text/javascript"
+	src="library/DataTables/datatables.min.js"></script>
+
+<!-- FontAwesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="path/to/font-awesome/css/font-awesome.min.css">
+
+<link
+	href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic'
+	rel='stylesheet' type='text/css'>
+
+
+<link href="css/style.css" rel="stylesheet" />
+<script type="text/javascript">
+	$(function() {
+		$("#includeMenu").load("Menu.html");
+	});
+</script>
+
+</head>
+<body>
+	<div id="includeMenu"></div>
+	<div class="d-flex align-items-stretch">
+
+		<div class="content p-4">
+			<div class="content-title">
+				<i class="fa fa-id-card-o"></i>Pessoas<i class="fa fa-angle-right"></i>Consulta
+				de cargos
+			</div>
+
+			<div class="formtitle">Cargos</div>
+			<div class="page-consulta">
+				<a href="CadastroCargo.html"><button type="button"
+						class="btn btn-success" style="margin: 15px 15px 25px 15px;">
+						</i><i class="fa fa-plus-circle"></i>Adicionar cargo
+					</button></a>
+				<table class="table table-bordered table-hover" id="data-table">
+					<thead>
+						<tr>
+							<th scope="col">Código</th>
+							<th scope="col">Nome</th>
+							<th scope="col">Opções</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>Gerente</td>
+							<td class="table-buttons"><a href="CadastroCargo.html"><button
+										type="button" class="table-edit" title="Editar">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del"
+										title="Excluir">
+										<i class="fa fa-close"></i>
+									</button></a></td>
+						</tr>
+						<tr>
+							<td>2
+							</th>
+							<td>Caixa</td>
+							<td class="table-buttons"><a href="CadastroCargo.html"><button
+										type="button" class="table-edit" title="Editar">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del"
+										title="Excluir">
+										<i class="fa fa-close"></i>
+									</button></a></td>
+						</tr>
+						<tr>
+							<td>3
+							</th>
+							<td>Garçom</td>
+							<td class="table-buttons"><a href="CadastroCargo.html"><button
+										type="button" class="table-edit">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del">
+										<i class="fa fa-close"></i>
+									</button></a>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td>Entregador</td>
+							<td class="table-buttons"><a href="CadastroCargo.html"><button
+										type="button" class="table-edit" title="Editar">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del"
+										title="Excluir">
+										<i class="fa fa-close"></i>
+									</button></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$('#data-table').dataTable({
+		"language" : {
+			"sEmptyTable" : "Nenhum registro encontrado",
+			"sInfo" : "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+			"sInfoEmpty" : "Mostrando 0 até 0 de 0 registros",
+			"sInfoFiltered" : "(Filtrados de _MAX_ registros)",
+			"sInfoPostFix" : "",
+			"sInfoThousands" : ".",
+			"sLengthMenu" : "_MENU_ resultados por página",
+			"sLoadingRecords" : "Carregando...",
+			"sProcessing" : "Processando...",
+			"sZeroRecords" : "Nenhum registro encontrado",
+			"sSearch" : "Pesquisar",
+			"oPaginate" : {
+				"sNext" : "Próximo",
+				"sPrevious" : "Anterior",
+				"sFirst" : "Primeiro",
+				"sLast" : "Último"
+			},
+			"oAria" : {
+				"sSortAscending" : ": Ordenar colunas de forma ascendente",
+				"sSortDescending" : ": Ordenar colunas de forma descendente"
+			}
+		}
+	});
+</script>
+<script type="text/javascript">
+	$(function() {
+		$("#includeCabecalho").load("Cabecalho.html");
+		$("#includeMenu").load("Menu.html");
+	});
+</script>
+</html>
