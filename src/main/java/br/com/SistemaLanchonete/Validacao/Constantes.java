@@ -1,4 +1,4 @@
-package br.com.SistemaLanchonete.Util;
+package br.com.SistemaLanchonete.Validacao;
 
 public class Constantes {
 	// Erros de Login

@@ -3,7 +3,6 @@ package br.com.SistemaLanchonete.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.SistemaLanchonete.Domain.ClienteBean;
 import br.com.SistemaLanchonete.Domain.FuncionarioBean;
 import br.com.SistemaLanchonete.Repository.BDException;
 import br.com.SistemaLanchonete.Repository.EErrosBD;

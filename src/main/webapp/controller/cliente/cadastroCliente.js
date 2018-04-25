@@ -78,7 +78,7 @@ form.ready(() => {
                 type: 'POST'
                 , data: JSON.stringify(params)
                 , dataType: 'json'
-                , url: 'http://localhost:8080/SistemaLanchonete/services/cliente/cliente'
+                , url: 'http://localhost:8080/SistemaLanchonete/service/cliente/cliente'
             }).done(response => {
                 alert("Cliente cadastrado com sucesso!");
                 $(location).attr('href','ConsultaCliente.html');

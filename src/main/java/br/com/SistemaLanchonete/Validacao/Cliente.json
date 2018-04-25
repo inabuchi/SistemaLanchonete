@@ -6,7 +6,7 @@
 	"dsObservacao": "Testando Json",
 	"enderecoPessoa": [
 		{
-			"isEnderecoPadrao": "S",
+			"isEnderecoPadrao": true,
 			"dsObservacaoEnd": "Teste de Json endereco",
 			"dsEstado": "SC",
 			"dsMunicipio": "Blumenau",
@@ -17,7 +17,7 @@
 			"dsComplemento": "Casa"
 		},
 		{
-			"isEnderecoPadrao": "N",
+			"isEnderecoPadrao": false,
 			"dsObservacaoEnd": "Teste de Json endereco 2",
 			"dsEstado": "PR",
 			"dsMunicipio": "Curitiba",

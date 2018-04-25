@@ -8,10 +8,13 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.jboss.logging.Param;
 
 import br.com.SistemaLanchonete.Domain.ClienteBean;
 import br.com.SistemaLanchonete.Service.ClienteService;
@@ -20,13 +23,14 @@ import br.com.SistemaLanchonete.Service.ClienteService;
 public class ClienteResource {
 
 	@POST
+	@Path("/cliente")
 	@Consumes({ MediaType.APPLICATION_JSON })
-	@Produces({ MediaType.APPLICATION_JSON })
 	public Response insert(ClienteBean cliente) {
 		try {
 			new ClienteService().save(cliente);
 			return Response.status(201).entity("Cliente Inserido com Sucesso").build();
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new WebApplicationException(500);
 		}
 	}
@@ -60,10 +64,13 @@ public class ClienteResource {
 	@GET
 	@Path("/{cdCliente}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ClienteBean select(ClienteBean cliente) {
+	public ClienteBean select(@PathParam("cdCliente") int codigo) {
 		try {
+			ClienteBean cliente = new ClienteBean();
+			cliente.setCdPessoa(codigo);
 			return new ClienteService().findById(cliente);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new WebApplicationException(500);
 		}
 	}
