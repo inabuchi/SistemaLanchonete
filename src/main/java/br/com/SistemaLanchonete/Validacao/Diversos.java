@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.SistemaLanchonete.Util;
+package br.com.SistemaLanchonete.Validacao;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

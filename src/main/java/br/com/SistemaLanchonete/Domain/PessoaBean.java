@@ -38,12 +38,12 @@ public abstract class PessoaBean implements Serializable {
 	@Column(name = "ds_telefone2")
 	private String dsTelefone2;
 	@Column(name = "dt_cadastro")
-	private Date dtCadastro;
+	private Date dtCadastro = new Date();
 	@Column(name = "is_ativo")
 	private boolean isAtivo;
 	@OneToMany(mappedBy = "pessoa", targetEntity = EnderecoPessoaBean.class, fetch = FetchType.EAGER, cascade = 
 			{CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
-	private List<EnderecoPessoaBean> enderecoPessoas;
+	private List<EnderecoPessoaBean> enderecoPessoas = new ArrayList<EnderecoPessoaBean>();
 	
 	/**
 	 * Construtor padrão da classe
@@ -86,7 +86,7 @@ public abstract class PessoaBean implements Serializable {
 	 * 
 	 * @param cdPessoa
 	 */
-	public void setId(int cdPessoa) {
+	public void setCdPessoa(int cdPessoa) {
 		this.cdPessoa = cdPessoa;
 	}
 

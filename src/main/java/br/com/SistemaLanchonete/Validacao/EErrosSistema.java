@@ -1,4 +1,4 @@
-package br.com.SistemaLanchonete.Util;
+package br.com.SistemaLanchonete.Validacao;
 
 public enum EErrosSistema {
 	CODIGO_NULO("C�digo � nulo ou num formato inv�lido! Somente inteiros s�o v�lidos."), //

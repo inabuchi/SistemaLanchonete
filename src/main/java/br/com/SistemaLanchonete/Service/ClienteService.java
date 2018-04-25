@@ -75,7 +75,8 @@ public class ClienteService {
 		 * de fazer as mensagens de retorno se nao foi encontrado o cliente precisa
 		 * fazer uma query nao da para usar o m�todo find do hibernate
 		 */
-
+		System.out.println(cliente);
+		
 		return clienteDao.findById(clienteBean, cliente.getCdPessoa());
 
 	}

@@ -24,7 +24,7 @@ public class ProdutoService {
 			try {
 				produtoDAO.save(produto, id);
 			} catch (BDException e) {
-				throw new BDException("Erro ao atualizar Produto " + produto.getCodProduto() + e.getMessage(), EErrosBD.ATUALIZA_DADO);
+				throw new BDException("Erro ao atualizar Produto " + produto.getCdProduto() + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 
 			}
 			retorno = "Dados atualizados com sucesso na tabela";
@@ -33,18 +33,18 @@ public class ProdutoService {
 	}
 
 	public String remove(ProdutoBean produto) throws BDException {
-		ProdutoBean produtoRetorna = produtoDAO.findById(produtoBean, produto.getCodProduto());
+		ProdutoBean produtoRetorna = produtoDAO.findById(produtoBean, produto.getCdProduto());
 		try {;
-			produtoDAO.remove(produtoBean, produtoRetorna.getCodProduto());
+			produtoDAO.remove(produtoBean, produtoRetorna.getCdProduto());
 			retorno = "Dados removidos com sucesso na tabela";
 		} catch (Exception e) {
-			throw new BDException("Erro ao remover : " + produto.getCodProduto()  + e.getMessage(), EErrosBD.EXCLUI_DADO);
+			throw new BDException("Erro ao remover : " + produto.getCdProduto()  + e.getMessage(), EErrosBD.EXCLUI_DADO);
 		}
 		return retorno;
 	}
 
 	public ProdutoBean findById(ProdutoBean produto) {
-		return produtoDAO.findById(produtoBean, produto.getCodProduto());
+		return produtoDAO.findById(produtoBean, produto.getCdProduto());
 
 	}
 }
