@@ -1,23 +1,24 @@
 package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 /**
  * Classe de Municípios cadastrados no sistema
  * 
- * @author Yago
+ * @author Patrick
  */
 @Entity
 @Table(name = "municipio")
@@ -37,12 +38,13 @@ public class MunicipioBean implements Serializable {
 	private String dsMunicipio;
 	
 	@OneToMany(mappedBy = "municipio", targetEntity = BairroBean.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<BairroBean> bairros;
+	private List<BairroBean> bairros = new ArrayList<BairroBean>();
 	
 	/**
 	 * Construtor padrão da classe
 	 */
 	public MunicipioBean() {
+		
 	}
 	
 	/**
@@ -55,7 +57,7 @@ public class MunicipioBean implements Serializable {
 	public MunicipioBean(int cdMunicipio, EstadoBean estado, String dsMunicipio) {
 		this.cdMunicipio = cdMunicipio;
 		this.estado = estado;
-		this.dsMunicipio = dsMunicipio;
+		this.dsMunicipio = dsMunicipio; 
 	}
 	
 	/**

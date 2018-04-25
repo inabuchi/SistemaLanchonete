@@ -1,274 +1,431 @@
-﻿
+﻿<!-- 
+    Document   : ConsultaCliente
+    Created on : 21/04/2018, 16:39:28
+    Author     : Morgana e Sidnei
+-->
+
 <!DOCTYPE html>
 <html>
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Guten Burguer - Cliente</title>
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Guten Burguer - Clientes</title>
 
-        <!-- DataTables -->
-        <link rel="stylesheet" type="text/css" href="library/DataTables/datatables.min.css"/>
-        <script type="text/javascript" src="library/DataTables/datatables.min.js"></script>
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css"
+	href="library/DataTables/datatables.min.css" />
+<script type="text/javascript"
+	src="library/DataTables/datatables.min.js"></script>
 
-        <!-- FontAwesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">	
+<!-- FontAwesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="path/to/font-awesome/css/font-awesome.min.css">
 
-        <link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
+<link
+	href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic'
+	rel='stylesheet' type='text/css'>
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>  
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
 
-        <link href="css/style.css" rel="stylesheet"/>
-    </head>
-    <body>
-        <nav class="navbar navbar-expand">
-            <a class="sidebar-toggle text-light"><i class="fa fa-bars"></i></a>
-            <a class="navbar-brand" href="#"><navcolor>Guten</navcolor> Burguer</a>
-            <div class="navbar-collapse collapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
-                            <i class="fa fa-user-circle"></i>Username<i class="fa fa-caret-down" style="margin-left:10px"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Gerenciar</a>
-                            <a class="dropdown-item" href="#">Sair</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+<link href="css/style.css" rel="stylesheet" />
 
+<script type="text/javascript">
+	$(function() {
+		$("#includeMenu").load("Menus.html");
+	});
+</script>
+</head>
+<body>
+	<div id="includeMenu"></div>
+	<div class="d-flex align-items-stretch">
 
-        <div class="d-flex align-items-stretch">	
-            <div class="sidebar bg-dark">
+		<div class="content p-4">
+			<div class="content-title">
+				<i class="fa fa-id-card-o"></i>Pessoas<i class="fa fa-angle-right"></i>Consulta de clientes
+			</div>
 
-                <ul class="list-unstyled">				
-                    <li>
-                        <a href="#submenu1" data-toggle="collapse"><i class="fa fa-id-card-o"></i>Cadastros</a>
-                        <ul id="submenu1" class="list-unstyled collapse show">
-                            <li class="active"><a href="ConsultaCliente.html"><i class="fa fa-users"></i>Clientes<i class="fa fa-caret-left"></i></a></li> 
-                            <li><a href="#"><i class="fa fa-angle-right"></i>Funcionários</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i>Submenu Item</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Pedidos</a></li>
-                    <li>
-                        <a href="#submenu2" data-toggle="collapse"><i class="fa fa-barcode"></i>Produtos</a>
-                        <ul id="submenu2" class="list-unstyled collapse">
-                            <li><a href="#"><i class="fa fa-angle-right"></i>Submenu Item</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i>Submenu Item</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i>Submenu Item</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#submenu3" dropdown-toggle data-toggle="collapse"><i class="fa fa-money"></i>Fluxo de caixa</a><div >
-                            <ul id="submenu3" class="list-unstyled collapse">
-                                <li><a href="#"><i class="fa fa-angle-right"></i>Submenu Item</a></li>
-                            </ul>
-                    </li>
-                </ul>
-            </div>
+			<div class="formtitle">Clientes</div>
+			<div class="page-consulta">
+				<a href="CadastroCliente.html"><button type="button"
+						class="btn btn-success" style="margin: 15px 15px 25px 15px;">
+						<i class="fa fa-plus-circle"></i>Adicionar cliente
+					</button></a>
+				<table class="table table-bordered table-hover" id="data-table">
+					<thead>
+						<tr>
+							<th scope="col">Código</th>
+							<th scope="col">Nome</th>
+							<th scope="col">Telefone</th>
+							<th scope="col">Endereço</th>
+							<th scope="col">Opções</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>Mark Otto</td>
+							<td>(47) 95458-4555</td>
+							<td>Rua VX de Novembro</td>
+							<td class="table-buttons"><a href="#"><button
+										type="button" class="table-hist" title="Histórico de pedidos"
+										data-toggle="modal" data-target="#ModalHistorico">
+										<i class="fa fa-file-text-o"></i>
+									</button></a> <a href="CadastroCliente.html"><button
+										type="button" class="table-edit" title="Editar">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del"
+										title="Excluir">
+										<i class="fa fa-close"></i>
+									</button></a></td>
+						</tr>
+						<tr>
+							<td>2
+							</th>
+							<td>Jacob Thornton</td>
+							<td>(47) 3332-9895</td>
+							<td>Rua 7 de Setembro</td>
+							<td class="table-buttons"><a href="#"><button
+										type="button" class="table-hist" data-toggle="modal"
+										data-target="#ModalHistorico" title="Histórico de pedidos">
+										<i class="fa fa-file-text-o"></i>
+									</button></a> <a href="CadastroCliente.html"><button
+										type="button" class="table-edit">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del">
+										<i class="fa fa-close"></i>
+									</button></a></td>
+						</tr>
+						<tr>
+							<td>3
+							</th>
+							<td>Larry the Bird</td>
+							<td>(47) 9999-2525</td>
+							<td>Beira Rio</td>
+							<td class="table-buttons"><a href="#"><button
+										type="button" class="table-hist" data-toggle="modal"
+										data-target="#ModalHistorico" title="Histórico de pedidos">
+										<i class="fa fa-file-text-o"></i>
+									</button></a> <a href="CadastroCliente.html"><button
+										type="button" class="table-edit">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del">
+										<i class="fa fa-close"></i>
+									</button></a>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td>Mark Otto</td>
+							<td>(47) 95458-4555</td>
+							<td>Rua VX de Novembro</td>
+							<td class="table-buttons"><a href="#"><button
+										type="button" class="table-hist" data-toggle="modal"
+										data-target="#ModalHistorico" title="Histórico de pedidos">
+										<i class="fa fa-file-text-o"></i>
+									</button></a> <a href="CadastroCliente.html"><button
+										type="button" class="table-edit">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del">
+										<i class="fa fa-close"></i>
+									</button></a></td>
+						</tr>
+						<tr>
+							<td>5
+							</th>
+							<td>Jacob Thornton</td>
+							<td>(47) 3332-9895</td>
+							<td>Rua 7 de Setembro</td>
+							<td class="table-buttons"><a href="#"><button
+										type="button" class="table-hist" data-toggle="modal"
+										data-target="#ModalHistorico" title="Histórico de pedidos">
+										<i class="fa fa-file-text-o"></i>
+									</button></a> <a href="CadastroCliente.html"><button
+										type="button" class="table-edit">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del">
+										<i class="fa fa-close"></i>
+									</button></a></td>
+						</tr>
+						<tr>
+							<td>6
+							</th>
+							<td>Larry the Bird</td>
+							<td>(47) 9999-2525</td>
+							<td>Beira Rio</td>
+							<td class="table-buttons"><a href="#"><button
+										type="button" class="table-hist" data-toggle="modal"
+										data-target="#ModalHistorico" title="Histórico de pedidos">
+										<i class="fa fa-file-text-o"></i>
+									</button></a> <a href="CadastroCliente.html"><button
+										type="button" class="table-edit">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del">
+										<i class="fa fa-close"></i>
+									</button></a>
+						</tr>
+						<tr>
+							<td>7</td>
+							<td>Mark Otto</td>
+							<td>(47) 95458-4555</td>
+							<td>Rua VX de Novembro</td>
+							<td class="table-buttons"><a href="#"><button
+										type="button" class="table-hist" data-toggle="modal"
+										data-target="#ModalHistorico" title="Histórico de pedidos">
+										<i class="fa fa-file-text-o"></i>
+									</button></a> <a href="CadastroCliente.html"><button
+										type="button" class="table-edit">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del">
+										<i class="fa fa-close"></i>
+									</button></a></td>
+						</tr>
+						<tr>
+							<td>8
+							</th>
+							<td>Jacob Thornton</td>
+							<td>(47) 3332-9895</td>
+							<td>Rua 7 de Setembro</td>
+							<td class="table-buttons"><a href="#"><button
+										type="button" class="table-hist" data-toggle="modal"
+										data-target="#ModalHistorico" title="Histórico de pedidos">
+										<i class="fa fa-file-text-o"></i>
+									</button></a> <a href="CadastroCliente.html"><button
+										type="button" class="table-edit">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del">
+										<i class="fa fa-close"></i>
+									</button></a></td>
+						</tr>
+						<tr>
+							<td>9
+							</th>
+							<td>Larry the Bird</td>
+							<td>(47) 9999-2525</td>
+							<td>Beira Rio</td>
+							<td class="table-buttons"><a href="#"><button
+										type="button" class="table-hist" data-toggle="modal"
+										data-target="#ModalHistorico" title="Histórico de pedidos">
+										<i class="fa fa-file-text-o"></i>
+									</button></a> <a href="CadastroCliente.html"><button
+										type="button" class="table-edit">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del">
+										<i class="fa fa-close"></i>
+									</button></a>
+						</tr>
+						<tr>
+							<td>10</td>
+							<td>Mark Otto</td>
+							<td>(47) 95458-4555</td>
+							<td>Rua VX de Novembro</td>
+							<td class="table-buttons"><a href="#"><button
+										type="button" class="table-hist" data-toggle="modal"
+										data-target="#ModalHistorico" title="Histórico de pedidos">
+										<i class="fa fa-file-text-o"></i>
+									</button></a> <a href="CadastroCliente.html"><button
+										type="button" class="table-edit">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del">
+										<i class="fa fa-close"></i>
+									</button></a></td>
+						</tr>
+						<tr>
+							<td>11
+							</th>
+							<td>Jacob Thornton</td>
+							<td>(47) 3332-9895</td>
+							<td>Rua 7 de Setembro</td>
+							<td class="table-buttons"><a href="#"><button
+										type="button" class="table-hist" data-toggle="modal"
+										data-target="#ModalHistorico" title="Histórico de pedidos">
+										<i class="fa fa-file-text-o"></i>
+									</button></a> <a href="CadastroCliente.html"><button
+										type="button" class="table-edit">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del">
+										<i class="fa fa-close"></i>
+									</button></a></td>
+						</tr>
+						<tr>
+							<td>12
+							</th>
+							<td>Larry the Bird</td>
+							<td>(47) 9999-2525</td>
+							<td>Beira Rio</td>
+							<td class="table-buttons"><a href="#"><button
+										type="button" class="table-hist" data-toggle="modal"
+										data-target="#ModalHistorico" title="Histórico de pedidos">
+										<i class="fa fa-file-text-o"></i>
+									</button></a> <a href="CadastroCliente.html"><button
+										type="button" class="table-edit">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del">
+										<i class="fa fa-close"></i>
+									</button></a>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 
+		<!-- Modal -->
+		<div class="modal fade" id="ModalHistorico" tabindex="-1"
+			role="dialog" aria-labelledby="ModalTitulo" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="ModalTitulo">Histórico de Pedidos</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
 
-            <div class="content p-4">
-                <div class="content-title"><i class="fa fa-id-card-o"></i>Cadastros<i class="fa fa-angle-right"></i>Clientes</div>          
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th scope="col">Código</th>
+									<th scope="col">Data</th>
+									<th scope="col">Preço</th>
+									<th scope="col">Opções</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>101</td>
+									<td>18/02/2018</td>
+									<td>R$49,99</td>
+									<td class="table-buttons-hist"><a
+										href="PedidoCadastro.html"><button type="button"
+												class="table-edit" title="Editar">
+												<i class="fa fa-pencil"></i>
+											</button></a></td>
+								</tr>
+								<tr>
+									<td>120
+									</th>
+									<td>19/02/2018</td>
+									<td>R$20,19</td>
+									<td class="table-buttons-hist"><a
+										href="PedidoCadastro.html"><button type="button"
+												class="table-edit" title="Editar">
+												<i class="fa fa-pencil"></i>
+											</button></a></td>
+								</tr>
+								<tr>
+									<td>101</td>
+									<td>18/02/2018</td>
+									<td>R$49,99</td>
+									<td class="table-buttons-hist"><a
+										href="PedidoCadastro.html"><button type="button"
+												class="table-edit" title="Editar">
+												<i class="fa fa-pencil"></i>
+											</button></a></td>
+								</tr>
+								<tr>
+									<td>120
+									</th>
+									<td>19/02/2018</td>
+									<td>R$20,19</td>
+									<td class="table-buttons-hist"><a
+										href="PedidoCadastro.html"><button type="button"
+												class="table-edit" title="Editar">
+												<i class="fa fa-pencil"></i>
+											</button></a></td>
+								</tr>
+								<tr>
+									<td>101</td>
+									<td>18/02/2018</td>
+									<td>R$49,99</td>
+									<td class="table-buttons-hist"><a
+										href="PedidoCadastro.html"><button type="button"
+												class="table-edit" title="Editar">
+												<i class="fa fa-pencil"></i>
+											</button></a></td>
+								</tr>
+								<tr>
+									<td>120
+									</th>
+									<td>19/02/2018</td>
+									<td>R$20,19</td>
+									<td class="table-buttons-hist"><a
+										href="PedidoCadastro.html"><button type="button"
+												class="table-edit" title="Editar">
+												<i class="fa fa-pencil"></i>
+											</button></a></td>
+								</tr>
+								<tr>
+									<td>101</td>
+									<td>18/02/2018</td>
+									<td>R$49,99</td>
+									<td class="table-buttons-hist"><a
+										href="PedidoCadastro.html"><button type="button"
+												class="table-edit" title="Editar">
+												<i class="fa fa-pencil"></i>
+											</button></a></td>
+								</tr>
+								<tr>
+									<td>120
+									</th>
+									<td>19/02/2018</td>
+									<td>R$20,19</td>
+									<td class="table-buttons-hist"><a
+										href="PedidoCadastro.html"><button type="button"
+												class="table-edit" title="Editar">
+												<i class="fa fa-pencil"></i>
+											</button></a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-                <div class="formtitle">Clientes</div>
-                <div class="page-consulta">
-                    <a href="CadastroCliente.html?state=i"><button type="button" class="btn btn-success" style="margin: 15px 15px 25px 15px;"></i><i class="fa fa-plus-circle"></i>Adicionar cliente</button></a>
-                    <table class="table table-bordered table-hover" id="data-table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Código</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Telefone</th>
-                                <th scope="col">Endereço</th>
-                                <th scope="col">Opções</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark Otto</td>
-                                <td>(47) 95458-4555</td>
-                                <td>Rua VX de Novembro</td>
-                                <td class="table-buttons">
-                                    <a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>     
-                                    <a href="#"><button type="button" class="table-hist" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>
-                                    <a href="CadastroCliente.html?state=e"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>
-                                    <a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</th>
-                                <td>Jacob Thornton</td>
-                                <td>(47) 3332-9895</td>
-                                <td>Rua 7 de Setembro</td>
-                                <td class="table-buttons">
-                                    <a href="#"><button type="button" class="table-visu"><i class="fa fa-eye"></i></button></a>
-                                    <a href="#"><button type="button" class="table-hist" data-toggle="tooltip" data-placement="top" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>
-                                    <a href="CadastroCliente.html?state=e"><button type="button" class="table-edit"><i class="fa fa-pencil"></i></button></a>
-                                    <a href="#"><button type="button" class="table-del"><i class="fa fa-close"></i></button></a>                                  
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</th>
-                                <td>Larry the Bird</td>
-                                <td>(47) 9999-2525</td>
-                                <td>Beira Rio</td>
-                                <td class="table-buttons">
-                                    <a href="#"><button type="button" class="table-visu"><i class="fa fa-eye"></i></button></a>
-                                    <a href="#"><button type="button" class="table-hist" data-toggle="tooltip" data-placement="top" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>
-                                    <a href="#"><button type="button" class="table-edit"><i class="fa fa-pencil"></i></button></a>
-                                    <a href="#"><button type="button" class="table-del"><i class="fa fa-close"></i></button></a>                                 
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Mark Otto</td>
-                                <td>(47) 95458-4555</td>
-                                <td>Rua VX de Novembro</td>
-                                <td class="table-buttons">
-                                    <a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>     
-                                    <a href="#"><button type="button" class="table-hist" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>
-                                    <a href="#"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>
-                                    <a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</th>
-                                <td>Jacob Thornton</td>
-                                <td>(47) 3332-9895</td>
-                                <td>Rua 7 de Setembro</td>
-                                <td class="table-buttons">
-                                    <a href="#"><button type="button" class="table-visu"><i class="fa fa-eye"></i></button></a>
-                                    <a href="#"><button type="button" class="table-hist" data-toggle="tooltip" data-placement="top" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>
-                                    <a href="#"><button type="button" class="table-edit"><i class="fa fa-pencil"></i></button></a>
-                                    <a href="#"><button type="button" class="table-del"><i class="fa fa-close"></i></button></a>                                  
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>6</th>
-                                <td>Larry the Bird</td>
-                                <td>(47) 9999-2525</td>
-                                <td>Beira Rio</td>
-                                <td class="table-buttons">
-                                    <a href="#"><button type="button" class="table-visu"><i class="fa fa-eye"></i></button></a>
-                                    <a href="#"><button type="button" class="table-hist" data-toggle="tooltip" data-placement="top" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>
-                                    <a href="#"><button type="button" class="table-edit"><i class="fa fa-pencil"></i></button></a>
-                                    <a href="#"><button type="button" class="table-del"><i class="fa fa-close"></i></button></a>                                 
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>Mark Otto</td>
-                                <td>(47) 95458-4555</td>
-                                <td>Rua VX de Novembro</td>
-                                <td class="table-buttons">
-                                    <a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>     
-                                    <a href="#"><button type="button" class="table-hist" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>
-                                    <a href="#"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>
-                                    <a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>8</th>
-                                <td>Jacob Thornton</td>
-                                <td>(47) 3332-9895</td>
-                                <td>Rua 7 de Setembro</td>
-                                <td class="table-buttons">
-                                    <a href="#"><button type="button" class="table-visu"><i class="fa fa-eye"></i></button></a>
-                                    <a href="#"><button type="button" class="table-hist" data-toggle="tooltip" data-placement="top" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>
-                                    <a href="#"><button type="button" class="table-edit"><i class="fa fa-pencil"></i></button></a>
-                                    <a href="#"><button type="button" class="table-del"><i class="fa fa-close"></i></button></a>                                  
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>9</th>
-                                <td>Larry the Bird</td>
-                                <td>(47) 9999-2525</td>
-                                <td>Beira Rio</td>
-                                <td class="table-buttons">
-                                    <a href="#"><button type="button" class="table-visu"><i class="fa fa-eye"></i></button></a>
-                                    <a href="#"><button type="button" class="table-hist" data-toggle="tooltip" data-placement="top" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>
-                                    <a href="#"><button type="button" class="table-edit"><i class="fa fa-pencil"></i></button></a>
-                                    <a href="#"><button type="button" class="table-del"><i class="fa fa-close"></i></button></a>                                 
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>Mark Otto</td>
-                                <td>(47) 95458-4555</td>
-                                <td>Rua VX de Novembro</td>
-                                <td class="table-buttons">
-                                    <a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>     
-                                    <a href="#"><button type="button" class="table-hist" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>
-                                    <a href="#"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>
-                                    <a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>11</th>
-                                <td>Jacob Thornton</td>
-                                <td>(47) 3332-9895</td>
-                                <td>Rua 7 de Setembro</td>
-                                <td class="table-buttons">
-                                    <a href="#"><button type="button" class="table-visu"><i class="fa fa-eye"></i></button></a>
-                                    <a href="#"><button type="button" class="table-hist" data-toggle="tooltip" data-placement="top" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>
-                                    <a href="#"><button type="button" class="table-edit"><i class="fa fa-pencil"></i></button></a>
-                                    <a href="#"><button type="button" class="table-del"><i class="fa fa-close"></i></button></a>                                  
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>12</th>
-                                <td>Larry the Bird</td>
-                                <td>(47) 9999-2525</td>
-                                <td>Beira Rio</td>
-                                <td class="table-buttons">
-                                    <a href="#"><button type="button" class="table-visu"><i class="fa fa-eye"></i></button></a>
-                                    <a href="#"><button type="button" class="table-hist" data-toggle="tooltip" data-placement="top" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>
-                                    <a href="#"><button type="button" class="table-edit"><i class="fa fa-pencil"></i></button></a>
-                                    <a href="#"><button type="button" class="table-del"><i class="fa fa-close"></i></button></a>                                 
-                            </tr>
-                        </tbody>
-                    </table>
-
-
-
-                </div>
-            </div>
-        </div>
-
-
-    </div>
 </body>
 <script type="text/javascript">
-    $('#data-table').dataTable({
-        "language": {
-            "sEmptyTable": "Nenhum registro encontrado",
-            "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-            "sInfoPostFix": "",
-            "sInfoThousands": ".",
-            "sLengthMenu": "_MENU_ resultados por página",
-            "sLoadingRecords": "Carregando...",
-            "sProcessing": "Processando...",
-            "sZeroRecords": "Nenhum registro encontrado",
-            "sSearch": "Pesquisar",
-            "oPaginate": {
-                "sNext": "Próximo",
-                "sPrevious": "Anterior",
-                "sFirst": "Primeiro",
-                "sLast": "Último"
-            },
-            "oAria": {
-                "sSortAscending": ": Ordenar colunas de forma ascendente",
-                "sSortDescending": ": Ordenar colunas de forma descendente"
-            }
-        }
-    });
+	$('#data-table').dataTable({
+		"language" : {
+			"sEmptyTable" : "Nenhum registro encontrado",
+			"sInfo" : "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+			"sInfoEmpty" : "Mostrando 0 até 0 de 0 registros",
+			"sInfoFiltered" : "(Filtrados de _MAX_ registros)",
+			"sInfoPostFix" : "",
+			"sInfoThousands" : ".",
+			"sLengthMenu" : "_MENU_ resultados por página",
+			"sLoadingRecords" : "Carregando...",
+			"sProcessing" : "Processando...",
+			"sZeroRecords" : "Nenhum registro encontrado",
+			"sSearch" : "Pesquisar",
+			"oPaginate" : {
+				"sNext" : "Próximo",
+				"sPrevious" : "Anterior",
+				"sFirst" : "Primeiro",
+				"sLast" : "Último"
+			},
+			"oAria" : {
+				"sSortAscending" : ": Ordenar colunas de forma ascendente",
+				"sSortDescending" : ": Ordenar colunas de forma descendente"
+			}
+		}
+	});
 </script>
 </html>

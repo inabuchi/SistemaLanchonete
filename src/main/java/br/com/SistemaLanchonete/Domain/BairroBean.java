@@ -1,6 +1,7 @@
 package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Id;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
 /**
  * Classe de Bairros cadastrados no sistema
  * 
- * @author Yago
+ * @author Patrick
  */
 @Entity
 @Table(name = "bairro")
@@ -37,7 +38,7 @@ public class BairroBean implements Serializable {
 	private String dsBairro;
 	
 	@OneToMany(mappedBy = "bairro", targetEntity = LogradouroBean.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<LogradouroBean> logradouros;
+	private List<LogradouroBean> logradouros = new ArrayList<LogradouroBean>();
 	
 	/**
 	 * Construtor padrão da classe

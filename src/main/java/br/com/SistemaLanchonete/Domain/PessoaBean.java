@@ -1,15 +1,20 @@
 package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -32,11 +37,14 @@ public abstract class PessoaBean implements Serializable {
 	private String dsTelefone1;
 	@Column(name = "ds_telefone2")
 	private String dsTelefone2;
-	@Column(name = "	dt_cadastro")
-	private Date dtCadastro;
+	@Column(name = "dt_cadastro")
+	private Date dtCadastro = new Date();
 	@Column(name = "is_ativo")
 	private boolean isAtivo;
-
+	@OneToMany(mappedBy = "pessoa", targetEntity = EnderecoPessoaBean.class, fetch = FetchType.EAGER, cascade = 
+			{CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
+	private List<EnderecoPessoaBean> enderecoPessoas = new ArrayList<EnderecoPessoaBean>();
+	
 	/**
 	 * Construtor padrão da classe
 	 */
@@ -61,12 +69,13 @@ public abstract class PessoaBean implements Serializable {
 		this.dsTelefone2 = dsTelefone2;
 		this.dtCadastro = dtCadastro;
 		this.isAtivo = isAtivo;
+		this.enderecoPessoas = new ArrayList<EnderecoPessoaBean>();
 	}
 
 	/**
 	 * Captura o valor contido no parametro id
 	 * 
-	 * @return
+	 * @return cdPessoa
 	 */
 	public int getCdPessoa() {
 		return cdPessoa;
@@ -77,7 +86,7 @@ public abstract class PessoaBean implements Serializable {
 	 * 
 	 * @param cdPessoa
 	 */
-	public void setId(int cdPessoa) {
+	public void setCdPessoa(int cdPessoa) {
 		this.cdPessoa = cdPessoa;
 	}
 
@@ -171,6 +180,25 @@ public abstract class PessoaBean implements Serializable {
 		this.isAtivo = isAtivo;
 	}
 
+	/**
+	 * Retorna a lista de enderecos dessa pesoa
+	 * 
+	 *	@return enderecoPessoas
+	 */
+	public List<EnderecoPessoaBean> getEnderecoPessoas() {
+		return enderecoPessoas;
+	}
+
+	/**
+	 * Setar o valor para o parametro enderecoPessoas
+	 * 
+	 * @param enderecoPessoas
+	 */
+	public void addEnderecoPessoa(EnderecoPessoaBean enderecoPessoa) {
+		enderecoPessoa.setPessoa(this);
+		this.enderecoPessoas.add(enderecoPessoa);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

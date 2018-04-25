@@ -1,0 +1,31 @@
+{
+	"cdPessoa": "",
+	"dsNome": "Lino Pegoretti",
+	"dsTelefone1": "4733368011",
+	"dsTelefone2": "",
+	"dsObservacao": "Testando Json",
+	"enderecoPessoa": [
+		{
+			"isEnderecoPadrao": true,
+			"dsObservacaoEnd": "Teste de Json endereco",
+			"dsEstado": "SC",
+			"dsMunicipio": "Blumenau",
+			"dsBairro": "Progresso",
+			"cdCep": "89026640",
+			"dsLogradouro": "Rua Leopoldo Heringer",
+			"cdNumero": "820",
+			"dsComplemento": "Casa"
+		},
+		{
+			"isEnderecoPadrao": false,
+			"dsObservacaoEnd": "Teste de Json endereco 2",
+			"dsEstado": "PR",
+			"dsMunicipio": "Curitiba",
+			"dsBairro": "Boqueirão",
+			"cdCep": "88280000",
+			"dsLogradouro": "Rua das Cabras",
+			"cdNumero": "50",
+			"dsComplemento": "Apto. 2"
+		}
+	]
+}

@@ -1,0 +1,215 @@
+<!-- 
+    Document   : CadastroCliente
+    Created on : 21/04/2018, 16:39:28
+    Author     : Morgana e Sidnei
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Guten Burguer - Adicionar funcionário</title>
+
+<script src="library/jquery-3.2.1.min.js">
+	
+</script>
+<script type="text/javascript"
+	src="controller/cliente/cadastroCliente.js"></script>
+<script type="text/javascript"
+	src="controller/generics/validacoesGenericas.js"></script>
+
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css"
+	href="library/DataTables/datatables.min.css" />
+<script type="text/javascript"
+	src="library/DataTables/datatables.min.js"></script>
+
+<!-- FontAwesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="path/to/font-awesome/css/font-awesome.min.css">
+
+<link
+	href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic'
+	rel='stylesheet' type='text/css'>
+
+
+<link href="css/style.css" rel="stylesheet" />
+<script type="text/javascript">
+	$(function() {
+		$("#includeMenu").load("Menu.html");
+	});
+</script>
+</head>
+<body>
+	<div id="includeMenu"></div>
+
+	<div class="d-flex align-items-stretch">
+
+		<div class="content p-4">
+			<div class="content-title">
+				<i class="fa fa-id-card-o"></i>Pessoas<a
+					href="ConsultaFuncionario.html"><i class="fa fa-angle-right"></i>Consulta
+					de funcionários</a><i class="fa fa-angle-right"></i>Adicionar
+				funcionário
+			</div>
+
+			<div class="formtitle">Adicionar funcionário</div>
+			<form>
+			<div class="page-cad">
+				<fieldset class="well">
+					<legend class="well-legend">Dados pessoais</legend>
+
+					<div class="form-row">
+						<div class="form-group col-md-2">
+							<label for="codFun">Código funcionário</label> <input
+								class="form-control" id="codFun" min="1" required>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-8">
+							<label for="nomeFun" class="control-label required">Nome</label>
+							<input class="form-control" id="nomeFun" type="text"
+								maxlength="255" required>
+						</div>
+						<div class="form-group col-md-2">
+							<label for="telFun01" class="control-label required">Telefone</label>
+							<input class="form-control" id="telFun01" type="text"
+								maxlength="15" required>
+						</div>
+						<div class="form-group col-md-2">
+							<label for="telFun02" class="control-label">Telefone
+								adicional</label> <input class="form-control" id="telFun02" type="text"
+								maxlength="15">
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-2">
+							<label for="DatAdFun" class="control-label required">Data
+								de admissão</label> <input class="form-control" id="DatAdFun" min="1"
+								type="date" required>
+						</div>
+						<div class="form-group col-md-2">
+							<label for="CargoFun" class="control-label">Cargo</label> <select
+								class="form-control" id="CargoFun" min="1">
+								<option value="3" selected>Atendente</option>
+								<option value="2">Caixa</option>
+								<option value="4">Cozinheiro</option>
+								<option value="1">Gerente</option>
+								<option value="5">Gestor de entrega</option>
+								<option value="6">Entregador</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-2">
+							<label for="PermFun" class="control-label required">Nível
+								de permissão</label> <select class="form-control" id="PermFun" min="1"
+								required>
+								<option value="0" selected>Sem acesso</option>
+								<option value="1">Mínima</option>
+								<option value="10">Máxima</option>
+
+							</select>
+						</div>
+						<div class="form-group col-md-2">
+							<label for="LoginFun" class="control-label">Login de
+								usuário</label> <input class="form-control" id="LoginFun" min="1">
+						</div>
+						<div class="form-group col-md-2">
+							<label for="SenhaFun" class="control-label">Senha</label> <input
+								class="form-control" id="SenhaFun" min="1">
+						</div>
+					</div>
+
+				</fieldset>
+
+
+				<fieldset class="well">
+					<legend class="well-legend">Endereço</legend>
+
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="endFun" class="control-label required">Endereço</label>
+							<input class="form-control" id="endFun" type="text"
+								maxlength="255" required>
+						</div>
+						<div class="form-group col-md-1">
+							<label for="numEndFun" class="control-label required">Número</label>
+							<input class="form-control" id="numEndFun" min="1" required>
+						</div>
+						<div class="form-group col-md-3">
+							<label for="logrEndFun" class="control-label required">Logradouro</label>
+							<input class="form-control" id="logrEndFun" type="text"
+								maxlength="255" required>
+						</div>
+						<div class="form-group col-md-2">
+							<label for="cepFun" class="control-label required">CEP</label> <input
+								class="form-control" id="cepFun" required>
+						</div>
+					</div>
+					<div class="form-row">
+
+						<div class="form-group col-md-3">
+							<label for="baiFun" class="control-label required">Bairro</label>
+							<input class="form-control" id="baiFun" type="text"
+								maxlength="255" required>
+						</div>
+						<div class="form-group col-md-3">
+							<label for="compEndFun" class="control-label required">Complemento</label>
+							<input class="form-control" id="compEndFun" type="text"
+								maxlength="255" required>
+						</div>
+						<div class="form-group col-md-5">
+							<label for="codCidFun" class="control-label required">Cidade</label>
+							<input class="form-control" id="codCidFun" type="text"
+								maxlength="255" required>
+						</div>
+						<div class="form-group col-md-1">
+							<label for="ufFun" class="control-label required">UF</label> <input
+								class="form-control" id="ufFun" type="text" maxlength="2"
+								required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="obsEndFun" class="control-label">Observação</label>
+						<textarea class="form-control" rows="4" id="obsEndFun"></textarea>
+					</div>
+
+				</fieldset>
+				<fieldset class="well" style="padding-bottom: 18px">
+					<legend class="well-legend">Endereços</legend>
+					<div class="area-end">
+						<p>
+							Endereço: Rua XV de Novembro </br> Número: 888 </br> Logradouro: Rua </br> CEP:
+							89055-555 </br> Bairro: Centro </br> Complemento: Andar 2 </br> Cidade: Blumenau
+							</br> UF: SC </br> Observação: Lorem ipsum dolor sit amet, consectetur
+							adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+							dolore magna aliqua. </br> <a href="CadastroEndereco.html"
+								class="end-edit">Editar</a> <a href="#"
+								class="end-del">Excluir</a>
+						</p>
+						<a href="CadastroEndereco.html" class="add-end"><i
+							class="fa fa-plus"></i>Adicionar endereço</a>
+					</div>
+				</fieldset>
+
+				<center>
+					<a href="ConsultaFuncionario.html"><button type="button"
+							class="btn btn-secondary">Cancelar</button></a> <a
+						href="ConsultaFuncionario.html"><button type="button"
+							class="btn btn-success">
+							<i class="fa fa-save"></i>Adicionar funcionário
+						</button></a>
+				</center>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

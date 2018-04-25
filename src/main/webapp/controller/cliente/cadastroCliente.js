@@ -9,15 +9,16 @@ form.ready(() => {
         const phone1 = $('#telCli01');
         const phone2 = $('#telCli02');
         const obsCli = $('#obsCli');
-        const rua = $('#endCli');
-        const nr = $('#numEndCli');
+        const rua = $('#route');
+        const nr = $('#street_number');
         const logradouro = $('#logrEndCli');
-        const cep = $('#cepCli');
+        const cep = $('#postal_code');
         const bairro = $('#baiCli');
         const complemento = $('#compEndCli');
-        const cidade = $('#codCidCli');
-        const uf = $('#ufCli');
+        const cidade = $('#locality');
+        const uf = $('#administrative_area_level_1');
         const obsEnd = $('#obsEndCli');
+        const pais = $('#country');
 
         const validaFomularioCliente = () => {
             let mandatoryFields = '';
@@ -32,7 +33,6 @@ form.ready(() => {
                 alert(res.message);
                 return false;
             }
-
 
             res = validaEndereco(rua.val(), nr.val(), cep.val(), bairro.val(), cidade.val());
             if (res.message) {
@@ -50,31 +50,35 @@ form.ready(() => {
             return true;
         };
 
-        
+
         if (validaFomularioCliente()) {
             const params = {
                 dsNome: name.val(),
                 dsTelefone1: phone1.val(),
                 dsTelefone2: phone2.val(),
-                dsObservacao: obsCli.val(),
-                enredecoCliente: [ 
+                dsObservacao: obsCli.val()
+                /*enredecoCliente: [
                 	{	dsRua: rua.val(),
 		                dsBairro: bairro.val(),
 		                cep: cep.val(),
 		                dsObservacaoEnd: obsEnd.val(),
 		                dsLogradouro: logradouro.val(),
 		                dsCidade: cidade.val(),
-		                dsEstado: uf.val()
+		                dsEstado: uf.val(),
+                    dsPais: pais.val()
 		            }
-                ]
+                ]*/
             };
-    
-            const urlRequest = "/clientes";
+
             $.ajax({
+            	headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
                 type: 'POST'
+                , data: JSON.stringify(params)
                 , dataType: 'json'
-                , url: urlRequest
-                , data: params
+                , url: 'http://localhost:8080/SistemaLanchonete/service/cliente/cliente'
             }).done(response => {
                 alert("Cliente cadastrado com sucesso!");
                 $(location).attr('href','ConsultaCliente.html');

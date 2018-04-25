@@ -1,17 +1,24 @@
-package br.com.SistemaLanchonete.Domain;
+	package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Column;
 
+/**
+ * Chave composta da classe EnderecoPessoaBean
+ * 
+ * @author Yago
+ */
+
 @Embeddable
 public class EnderecoPessoaPK implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@Column(name="cd_endereco")
+	
+	@Column(name = "cd_endereco", nullable = false)	
 	private int cdEndereco;
 	
-	@Column(name="cd_pessoa")
+	@Column(name = "cd_pessoa", nullable = false)	
 	private int cdPessoa;
 
 	/**
