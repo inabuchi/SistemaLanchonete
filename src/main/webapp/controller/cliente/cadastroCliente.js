@@ -77,11 +77,11 @@ form.ready(() => {
                 },
                 type: 'POST'
                 , data: JSON.stringify(params)
-                , dataType: 'json'
-                , url: 'http://localhost:8080/SistemaLanchonete/service/cliente/cliente'
+                , dataType: 'json' //http://localhost:8080/SistemaLanchonete/
+                , url: 'services/cliente/'
             }).done(response => {
                 alert("Cliente cadastrado com sucesso!");
-                $(location).attr('href','ConsultaCliente.html');
+                //$(location).attr('href','ConsultaCliente.html');
             }).fail(response => {
                 alert("Falha no cadastro, tente novamente!");
             });

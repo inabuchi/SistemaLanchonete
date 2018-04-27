@@ -17,8 +17,8 @@ public class PedidoService {
 	GenericDAO<PedidoBean> pedidoDao = new GenericDAO<PedidoBean>();
 	Class<PedidoBean> PedidoBean;
 
-	public String save(PedidoBean pedido, int id) throws BDException {
-		if (id == 0) {
+	public String save(PedidoBean pedido) throws BDException {
+		if (pedido.getCdPedido() == 0) {
 			try {
 				// aqui precisa validar os dados que vem da tela
 				pedidoDao.save(pedido, 0);
@@ -29,7 +29,7 @@ public class PedidoService {
 			retorno = "Dados salvos com sucesso na tabela";
 		} else {
 			try {
-				pedidoDao.save(pedido, id);
+				pedidoDao.save(pedido, pedido.getCdPedido());
 			} catch (BDException e) {
 				throw new BDException("Erro na atualizacao de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 

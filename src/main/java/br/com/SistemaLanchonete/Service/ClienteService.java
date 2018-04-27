@@ -23,8 +23,9 @@ public class ClienteService {
 	 */
 	public String save(ClienteBean cliente) throws BDException {
 		/*
-		 * TODO Fazer mÃ©todos auxiliares de validaÃ§Ãµes de cliente
+		 * TODO Fazer métodos auxiliares de validações de cliente
 		 */
+
 		if (cliente.getCdPessoa() == 0) {
 			try {
 				clienteDao.save(cliente, 0);
@@ -47,7 +48,7 @@ public class ClienteService {
 	 * Remove um Cliente no banco de acordo com o objeto passado
 	 * 
 	 * @param cliente
-	 * @return Mensagem de retorno informando a situaÃ§Ã£o
+	 * @return Mensagem de retorno informando a situação
 	 * @throws BDException
 	 */
 	public String remove(ClienteBean cliente) throws BDException {
@@ -63,20 +64,20 @@ public class ClienteService {
 	}
 
 	/**
-	 * Pesquisa um cliente pelo seu cÃ³digo de acordo com o objeto vindo da tela
+	 * Pesquisa um cliente pelo seu código de acordo com o objeto vindo da tela
 	 * 
 	 * @param cliente
 	 * @return um cliente gravado no Banco de acordo com o cd do objeto passado
 	 */
 	public ClienteBean findById(ClienteBean cliente) {
 		/*
-		 * o metodo find busca por chave primaria, mas como nao tenho a anotaï¿½ï¿½o @ID no
-		 * fucionario so retorna o funcinario que for igual na classe pessoa tem ainda
-		 * de fazer as mensagens de retorno se nao foi encontrado o cliente precisa
-		 * fazer uma query nao da para usar o mï¿½todo find do hibernate
+		 * o metodo find busca por chave primaria, mas como nao tenho a anotaï¿½ï¿½o @ID
+		 * no fucionario so retorna o funcinario que for igual na classe pessoa tem
+		 * ainda de fazer as mensagens de retorno se nao foi encontrado o cliente
+		 * precisa fazer uma query nao da para usar o mï¿½todo find do hibernate
 		 */
 		System.out.println(cliente);
-		
+
 		return clienteDao.findById(clienteBean, cliente.getCdPessoa());
 
 	}
@@ -104,6 +105,38 @@ public class ClienteService {
 		}
 		return lista;
 
+	}
+
+	/**
+	 * Validar se Telefone do Cliente já existe
+	 * 
+	 * @param dsTelefone1
+	 * @param dsTelefone2
+	 *
+	 * @return Boolean
+	 */
+	public Boolean ValidarTelefoneCliente(String telefone1, String telefone2) {
+		// Instancia um objeto cliente
+		ClienteBean cliente = new ClienteBean();
+
+		// Busca todos os registros (mais lento)
+		List<ClienteBean> listaTelefone = findLike(cliente);
+
+		for (ClienteBean item : listaTelefone) {
+			if (item.getDsTelefone1() == telefone1)
+				return false;
+			if (item.getDsTelefone1() == telefone2)
+				return false;
+			if (telefone2 == null || telefone2.trim().equals(""))
+				continue;
+			else {
+				if (item.getDsTelefone2() == telefone1)
+					return false;
+				if (item.getDsTelefone2() == telefone2)
+					return false;
+			}
+		}
+		return true;
 	}
 
 }

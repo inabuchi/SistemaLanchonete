@@ -1,5 +1,7 @@
 package br.com.SistemaLanchonete.Service;
 
+import java.util.ArrayList;
+
 import br.com.SistemaLanchonete.Domain.ProdutoBean;
 import br.com.SistemaLanchonete.Repository.BDException;
 import br.com.SistemaLanchonete.Repository.EErrosBD;
@@ -11,8 +13,8 @@ public class ProdutoService {
 	GenericDAO<ProdutoBean> produtoDAO = new GenericDAO<ProdutoBean>();
 	Class<ProdutoBean> produtoBean;
 
-	public String save(ProdutoBean produto, int id) throws BDException {
-		if (id == 0) {
+	public String save(ProdutoBean produto) throws BDException {
+		if (produto.getCdProduto() == 0) {
 			try {
 				produtoDAO.save(produto, 0);
 			} catch (BDException e) {
@@ -22,7 +24,7 @@ public class ProdutoService {
 			retorno = "Dados salvos com sucesso na tabela";
 		} else {
 			try {
-				produtoDAO.save(produto, id);
+				produtoDAO.save(produto, produto.getCdProduto());
 			} catch (BDException e) {
 				throw new BDException("Erro ao atualizar Produto " + produto.getCdProduto() + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 
@@ -46,5 +48,10 @@ public class ProdutoService {
 	public ProdutoBean findById(ProdutoBean produto) {
 		return produtoDAO.findById(produtoBean, produto.getCdProduto());
 
+	}
+
+	public ArrayList<ProdutoBean> findLike(ProdutoBean produto) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
