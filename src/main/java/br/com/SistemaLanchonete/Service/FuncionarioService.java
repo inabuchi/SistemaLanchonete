@@ -13,8 +13,15 @@ public class FuncionarioService {
 	GenericDAO<FuncionarioBean> funcionarioDao = new GenericDAO<FuncionarioBean>();
 	Class<FuncionarioBean> funcionarioBean;
 
-	public String save(FuncionarioBean funcionario, int id) throws BDException {
-		if (id == 0) {
+	public String save(FuncionarioBean funcionario) throws BDException {
+		/*
+		 * Valida o telefone do funcionario
+		 */
+		boolean validado = validarTelefoneFuncionario(funcionario.getDsTelefone1(), funcionario.getDsTelefone2());
+		if (!validado) {
+			retorno = "Funcionário com telefones inválidos";
+		}
+		if (funcionario.getCdPessoa() == 0) {
 			try {
 				funcionarioDao.save(funcionario, 0);
 			} catch (BDException e) {
@@ -23,7 +30,7 @@ public class FuncionarioService {
 			retorno = "Dados salvos com sucesso na tabela";
 		} else {
 			try {
-				funcionarioDao.save(funcionario, id);
+				funcionarioDao.save(funcionario, funcionario.getCdPessoa());
 			} catch (BDException e) {
 				throw new BDException("Erro na atualização de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 			}
@@ -32,14 +39,13 @@ public class FuncionarioService {
 		return retorno;
 	}
 
-	public String remove(FuncionarioBean funcionario) {
+	public String remove(FuncionarioBean funcionario) throws BDException {
 		FuncionarioBean funcionarioRetorno = funcionarioDao.findById(funcionarioBean, funcionario.getCdFuncionario());
 		try {
 			funcionarioDao.remove(funcionarioBean, funcionarioRetorno.getCdPessoa());
 			retorno = "Dados removidos com sucesso na tabela";
 		} catch (Exception e) {
-			// throw new BDException("Erro na remoï¿½ï¿½o de dados:" + e.getMessage(),
-			// EErrosBD.EXCLUI_DADO);
+			throw new BDException("Erro na remoção de dados:" + e.getMessage(), EErrosBD.EXCLUI_DADO);
 
 		}
 		return retorno;
@@ -68,5 +74,64 @@ public class FuncionarioService {
 			lista.add(model2);
 		}
 		return lista;
+	}
+
+	/**
+	 * Validar se Telefone do Funcionario já existe
+	 * 
+	 * @param dsTelefone1
+	 * @param dsTelefone2
+	 *
+	 * @return Boolean
+	 */
+	public Boolean validarTelefoneFuncionario(String telefone1, String telefone2) {
+		// Instancia um objeto funcionário
+		FuncionarioBean funcionario = new FuncionarioBean();
+
+		// Busca todos os registros (mais lento)
+		List<FuncionarioBean> listaTelefone = findLike(funcionario);
+
+		for (FuncionarioBean item : listaTelefone) {
+			if (item.getDsTelefone1() == telefone1)
+				return false;
+			if (item.getDsTelefone1() == telefone2)
+				return false;
+			if (telefone2 == null || telefone2.trim().equals(""))
+				continue;
+			else {
+				if (item.getDsTelefone2() == telefone1)
+					return false;
+				if (item.getDsTelefone2() == telefone2)
+					return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Validar Login é valido
+	 * 
+	 * @param login
+	 * @param senha
+	 *
+	 * @return int
+	 */
+	public int validarLogin(String login, String senha) {
+		// Instancia um objeto funcionario
+		FuncionarioBean funcionario = new FuncionarioBean();
+
+		// Carregar o objeto funcionário
+		funcionario.setDsLogin(login);
+		funcionario.setDsSenha(senha);
+
+		// Buscar na tabela pelo usuário e senha
+		// Deve retornar o nível se deu certo, caso contrário retorna nulo
+		// funcionario = funcionarioDao.ValidarLogin(funcionario);
+
+		// Se objeto retornar nulo não foi encontrado.
+		if (funcionario == null)
+			return 0;
+		return funcionario.getCdNivel();
+
 	}
 }

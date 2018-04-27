@@ -14,19 +14,19 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.com.SistemaLanchonete.Domain.ClienteBean;
-import br.com.SistemaLanchonete.Service.ClienteService;
+import br.com.SistemaLanchonete.Domain.FuncionarioBean;
+import br.com.SistemaLanchonete.Service.FuncionarioService;
 
-@Path("/cliente")
-public class ClienteResource {
+@Path("/funcionario")
+public class FuncionarioResource {
 
 	@POST
-	@Path("/cliente")
+	@Path("/funcionario")
 	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response insert(ClienteBean cliente) {
+	public Response insert(FuncionarioBean funcionario) {
 		try {
-			new ClienteService().save(cliente);
-			return Response.status(201).entity("Cliente Inserido com Sucesso").build();
+			new FuncionarioService().save(funcionario);
+			return Response.status(201).entity("Funcionario Inserido com Sucesso").build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new WebApplicationException(500);
@@ -38,10 +38,10 @@ public class ClienteResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response update(@PathParam("cdPessoa") int codigo) {
 		try {
-			ClienteBean cliente = new ClienteBean();
-			cliente.setCdPessoa(codigo);
-			new ClienteService().save(cliente);
-			return Response.status(200).entity("Cliente alterado com sucesso").build();
+			FuncionarioBean funcionario = new FuncionarioBean();
+			funcionario.setCdPessoa(codigo);
+			new FuncionarioService().save(funcionario);
+			return Response.status(200).entity("Funcionario alterado com sucesso").build();
 		} catch (Exception e) {
 			throw new WebApplicationException(500);
 		}
@@ -52,10 +52,10 @@ public class ClienteResource {
 	@Path("/{cdPessoa}")
 	public Response delete(@PathParam("cdPessoa") int codigo) {
 		try {
-			ClienteBean cliente = new ClienteBean();
-			cliente.setCdPessoa(codigo);
-			new ClienteService().remove(cliente);
-			return Response.status(200).entity("Cliente excluÃ­do com sucesso").build();
+			FuncionarioBean funcionario = new FuncionarioBean();
+			funcionario.setCdPessoa(codigo);
+			new FuncionarioService().remove(funcionario);
+			return Response.status(200).entity("Funcionario excluído com sucesso").build();
 		} catch (Exception e) {
 			throw new WebApplicationException(500);
 		}
@@ -64,11 +64,11 @@ public class ClienteResource {
 	@GET
 	@Path("/{cdPessoa}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ClienteBean select(@PathParam("cdPessoa") int codigo) {
+	public FuncionarioBean select(@PathParam("cdPessoa") int codigo) {
 		try {
-			ClienteBean cliente = new ClienteBean();
-			cliente.setCdPessoa(codigo);
-			return new ClienteService().findById(cliente);
+			FuncionarioBean funcionario = new FuncionarioBean();
+			funcionario.setCdPessoa(codigo);
+			return new FuncionarioService().findById(funcionario);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new WebApplicationException(500);
@@ -76,12 +76,12 @@ public class ClienteResource {
 	}
 
 	@GET
-	@Path("/clientes")
+	@Path("/funcionarios")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<ClienteBean> findLike(ClienteBean cliente) {
+	public ArrayList<FuncionarioBean> findLike(FuncionarioBean funcionario) {
 		try {
-			ArrayList<ClienteBean> clientes = new ClienteService().findLike(cliente);
-			return clientes;
+			ArrayList<FuncionarioBean> funcionarios = new FuncionarioService().findLike(funcionario);
+			return funcionarios;
 		} catch (Exception e) {
 			throw new WebApplicationException(500);
 		}

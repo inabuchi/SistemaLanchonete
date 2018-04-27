@@ -1,9 +1,16 @@
 package br.com.SistemaLanchonete.Repository;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  * Classe Genérica de Acesso ao banco de dados
@@ -12,6 +19,7 @@ import javax.persistence.EntityManager;
  *
  * @param <MODEL>
  */
+
 public class GenericDAO<MODEL> implements IDAO<MODEL> {
 	private static EntityManager manager = ConectionFactory.getEntityManager();
 	private String retorno = null;
@@ -102,17 +110,71 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 	 */
 	public ArrayList<MODEL> findLike(Class<MODEL> classe, MODEL model) {
 		ArrayList<MODEL> lista = new ArrayList<MODEL>();
-		/*
-		 * Esse metodo precisa ou retornar uma lista completa do banco ou entao uma
-		 * lista aproximada utilizadno o parametro LIKE Tanto faz se for List ou
-		 * ArrayList, ou qq outra collection
-		 */
-		List<MODEL> lista2 = manager.createQuery("FROM " + classe.getSimpleName()).getResultList();
+		
+		CriteriaBuilder cb = manager.getCriteriaBuilder();
+		CriteriaQuery<MODEL> cq = cb.createQuery(classe);
+		Root<MODEL> root = cq.from(classe);
+		
+		List<Expression<Boolean>> predicados = new ArrayList<Expression<Boolean>>();
+		
+		Class<?> metaClass = model.getClass();
+		
+		List<Field> fields = findAllFields(metaClass);
+		
+		for (int i = 1; i < fields.size(); ++i) {
+			
+			fields.get(i).setAccessible(true); // You might want to set modifier to public first.
+		    Object value = null;
+			try {
+				value = fields.get(i).get(model);
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			if(value != null) {			
+				
+				if(value instanceof Integer && ((Integer)value) != 0) {
+					predicados.add(cb.equal(root.get(fields.get(i).getName()), value));
+					
+				} else if(value instanceof String && !((String)value).equals("")) {
+					predicados.add(cb.equal(root.get(fields.get(i).getName()), value));
+				}				
+			}
+			
+		}
+
+		cq.where( cb.and(predicados.toArray(new Predicate[0])));
+		cq.select(root);	
+		
+		List<MODEL> lista2 = manager.createQuery(cq).getResultList();
 		for (MODEL model2 : lista2) {
 			lista.add(model2);
 		}
 		return lista;
 
 	}
+	
+	private static List<Field> findAllFields(Class<?> metaClass) {
+	    List<Field[]> fields = new ArrayList<Field[]>();
+	    findFields(metaClass, fields);
 
+	    List<Field> allFields = new ArrayList<Field>();
+	    for(Field[] f : fields) {
+	        List<Field> asList = Arrays.asList(f);
+	        allFields.addAll(asList);
+	    }
+	    return allFields;
+	}
+
+	private static void findFields(Class<?> metaClass2, List<Field[]> fields) {
+	    Class<?> next = metaClass2;
+	    while(true) {
+	        Field[] f = next.getDeclaredFields();
+	        fields.add(f);
+	        next = next.getSuperclass();
+	        if(next.equals(Object.class))
+	            return;
+	    }
+	}
 }
