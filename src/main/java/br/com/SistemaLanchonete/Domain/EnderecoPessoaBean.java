@@ -10,6 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * Classe da tabela auxiliar endereco_pessoa
  * 
@@ -19,21 +22,21 @@ import javax.persistence.Table;
 @Table(name = "endereco_pessoa")
 public class EnderecoPessoaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@EmbeddedId
 	private EnderecoPessoaPK pk;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="cd_endereco", insertable = false, updatable = false, nullable = false)
+	@JoinColumn(name = "cd_endereco", insertable = false, updatable = false, nullable = false)
 	private EnderecoBean endereco;
-	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="cd_pessoa", insertable = false, updatable = false, nullable = false)
+	@JoinColumn(name = "cd_pessoa", insertable = false, updatable = false, nullable = false)
 	private PessoaBean pessoa;
-	
+
 	@Column(name = "dt_alteracao")
 	private Date dtAlteracao;
-	
+
 	@Column(name = "is_endereco_padrao")
 	private boolean isEnderecoPadrao;
 
@@ -41,9 +44,9 @@ public class EnderecoPessoaBean implements Serializable {
 	 * Construtor padrão da classe
 	 */
 	public EnderecoPessoaBean() {
-		pk = new EnderecoPessoaPK(); 
+		pk = new EnderecoPessoaPK();
 	}
-	
+
 	/**
 	 * Construtor da classe
 	 *
@@ -58,7 +61,7 @@ public class EnderecoPessoaBean implements Serializable {
 		this.pessoa = pessoa;
 		this.dtAlteracao = dtAlteracao;
 		this.isEnderecoPadrao = isEnderecoPadrao;
-		
+
 		pk.setCdEndereco(endereco != null ? endereco.getCdEndereco() : 0);
 		pk.setCdPessoa(pessoa != null ? pessoa.getCdPessoa() : 0);
 	}
@@ -136,7 +139,7 @@ public class EnderecoPessoaBean implements Serializable {
 	public void setEnderecoPadrao(boolean isEnderecoPadrao) {
 		this.isEnderecoPadrao = isEnderecoPadrao;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -161,8 +164,7 @@ public class EnderecoPessoaBean implements Serializable {
 	public String toString() {
 		return "\nClasse ....................: " + getClass().getSimpleName() + //
 				"\nPessoa....................: " + getPessoa() != null ? getPessoa().getDsNome() : "Sem pessoa" + //
-				"\nData alteração............: " + getDtAlteracao() +//
-				"\nÉ padrão?.................: " + (isEnderecoPadrao() ? "Sim" : "Não" );//
+						"\nData alteração............: " + getDtAlteracao() + //
+						"\nÉ padrão?.................: " + (isEnderecoPadrao() ? "Sim" : "Não");//
 	}
 }
-

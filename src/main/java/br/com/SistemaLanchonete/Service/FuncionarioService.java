@@ -17,7 +17,7 @@ public class FuncionarioService {
 		/*
 		 * Valida o telefone do funcionario
 		 */
-		boolean validado = validarTelefoneFuncionario(funcionario.getDsTelefone1(), funcionario.getDsTelefone2());
+		boolean validado = validarTelefoneFuncionario(funcionario.getDsTelefone1(), funcionario.getDsTelefone1());
 		if (!validado) {
 			retorno = "Funcionário com telefones inválidos";
 		}
@@ -53,9 +53,10 @@ public class FuncionarioService {
 
 	public FuncionarioBean findById(FuncionarioBean funcionario) {
 		/*
-		 * o metodo find busca por chave primaria, mas como nao tenho a anotaï¿½ï¿½o @ID
-		 * no fucionario so retorna o funcinario que for igual na classe pessoa
+		 * o metodo find busca por chave primaria, mas como nao tenho a anotaï¿½ï¿½o
 		 * 
+		 * @ID no fucionario so retorna o funcinario que for igual na classe pessoa
+		 *
 		 * precisa fazer uma query nao da para usar o mï¿½todo find do hibernate
 		 */
 		return funcionarioDao.findById(funcionarioBean, funcionario.getCdFuncionario());
@@ -78,7 +79,7 @@ public class FuncionarioService {
 
 	/**
 	 * Validar se Telefone do Funcionario já existe
-	 * 
+	 *
 	 * @param dsTelefone1
 	 * @param dsTelefone2
 	 *
@@ -99,9 +100,9 @@ public class FuncionarioService {
 			if (telefone2 == null || telefone2.trim().equals(""))
 				continue;
 			else {
-				if (item.getDsTelefone2() == telefone1)
+				if (item.getDsTelefone1() == telefone1)
 					return false;
-				if (item.getDsTelefone2() == telefone2)
+				if (item.getDsTelefone1() == telefone2)
 					return false;
 			}
 		}
@@ -110,7 +111,7 @@ public class FuncionarioService {
 
 	/**
 	 * Validar Login é valido
-	 * 
+	 *
 	 * @param login
 	 * @param senha
 	 *

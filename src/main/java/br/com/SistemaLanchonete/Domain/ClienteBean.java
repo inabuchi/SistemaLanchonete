@@ -1,14 +1,19 @@
 package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * Classe Modelo para os Clientes Cadastrados no Sistema
@@ -26,6 +31,9 @@ public class ClienteBean extends PessoaBean implements Serializable {
 	private int cdCliente;
 	@Column(name = "ds_observacao")
 	private String dsObservacao;
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente")
+	private List<PedidoBean> pedidos = new ArrayList<PedidoBean>();
 
 	public ClienteBean() {
 	}
@@ -83,6 +91,14 @@ public class ClienteBean extends PessoaBean implements Serializable {
 	 */
 	public void setDsObservacao(String dsObservacao) {
 		this.dsObservacao = dsObservacao;
+	}
+
+	public List<PedidoBean> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<PedidoBean> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 	/*

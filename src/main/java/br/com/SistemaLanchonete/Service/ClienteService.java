@@ -77,8 +77,8 @@ public class ClienteService {
 		 * precisa fazer uma query nao da para usar o m�todo find do hibernate
 		 */
 		System.out.println(cliente);
-
-		return clienteDao.findById(clienteBean, cliente.getCdPessoa());
+	
+		return clienteDao.findById(ClienteBean.class, cliente.getCdPessoa());
 
 	}
 
