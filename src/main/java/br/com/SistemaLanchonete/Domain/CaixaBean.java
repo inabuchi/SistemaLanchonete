@@ -22,32 +22,29 @@ public class CaixaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
+
 	@Column(name = "cd_caixa")
 	private int cdCaixa;
-	
+
 	@ManyToOne
-	@JoinColumn(name="cd_funcionario", referencedColumnName="cd_funcionario")
+	@JoinColumn(name = "cd_funcionario", referencedColumnName = "cd_funcionario")
 	private FuncionarioBean funcionario;
-	
+
 	@Column(name = "dt_abertura")
 	private Date dtAbertura;
-	
+
 	@Column(name = "dt_fechamento")
 	private Date dtFechamento;
 
 	@Column(name = "vl_troco_inicial")
 	private float vlTrocoInicial;
-	
-
-		
 
 	/**
 	 * Construtor padrão da classe
 	 */
 	public CaixaBean() {
 	}
-	
+
 	/**
 	 * Construtor da classe
 	 *
@@ -65,7 +62,7 @@ public class CaixaBean implements Serializable {
 		this.dtFechamento = dtFechamento;
 		this.vlTrocoInicial = vlTrocoInicial;
 	}
-	
+
 	/**
 	 * Captura o valor contido no parametro cdCaixa
 	 * 
@@ -86,7 +83,7 @@ public class CaixaBean implements Serializable {
 
 	/**
 	 * Captura o valor contido no parametro funcionario
-	 * 
+	 *
 	 * @return funcionario
 	 */
 	public FuncionarioBean getFuncionario() {
@@ -95,7 +92,7 @@ public class CaixaBean implements Serializable {
 
 	/**
 	 * Setar o valor para o parametro funcionario
-	 * 
+	 *
 	 * @param funcionario
 	 */
 	public void setFuncionario(FuncionarioBean funcionario) {
@@ -182,12 +179,11 @@ public class CaixaBean implements Serializable {
 	public String toString() {
 		return "\nClasse .................: " + getClass().getSimpleName() + //
 				"\nIdentificador do caixa.: " + getCdCaixa() + //
-				"\nNome funcionário.......: " + getFuncionario() != null ? getFuncionario().getDsNome() : "Sem funcionario" +//
-				"\nData abertura..........: " + getDtAbertura() +//
-				"\nData fechamento........: " + getDtFechamento() +//
+				"\nNome funcionário.......: " + // getFuncionario() != null ? getFuncionario().getDsNome() : "Sem
+												// funcionario" +//
+				"\nData abertura..........: " + getDtAbertura() + //
+				"\nData fechamento........: " + getDtFechamento() + //
 				"\nValor Troco Inicial....: " + getVlTrocoInicial();//
 	}
 
-	
-	
 }

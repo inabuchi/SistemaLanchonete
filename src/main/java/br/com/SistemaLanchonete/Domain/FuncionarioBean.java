@@ -96,7 +96,7 @@ public class FuncionarioBean extends PessoaBean {
 	 * 
 	 * @return cargo
 	 */
-	public String getCargo() {
+	public String getDsCargo() {
 		return dsCargo;
 	}
 
@@ -105,7 +105,7 @@ public class FuncionarioBean extends PessoaBean {
 	 * 
 	 * @param dsCargo
 	 */
-	public void setCargo(String dsCargo) {
+	public void setDsCargo(String dsCargo) {
 		this.dsCargo = dsCargo;
 	}
 
@@ -219,7 +219,7 @@ public class FuncionarioBean extends PessoaBean {
 		return super.toString() + //
 				"\nClasse ................: " + getClass().getSimpleName() + //
 				"\nIdentif. do Funcion�rio: " + getCdFuncionario() + //
-				"\nCargo..................: " + getCargo() + //
+				"\nCargo..................: " + getDsCargo() + //
 				"\nApelido................: " + getDsLogin() + //
 				"\nTelefone...............: " + getDsSenha() + //
 				"\nN�vel Permiss�o Sist...: " + getCdNivel();

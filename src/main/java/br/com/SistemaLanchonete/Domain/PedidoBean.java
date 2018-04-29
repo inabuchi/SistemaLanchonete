@@ -32,18 +32,18 @@ public class PedidoBean implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cd_pedido")
 	private int cdPedido;
-	
+
 	@ManyToOne
-	@JoinColumn(name="cd_cliente", referencedColumnName="cd_cliente")
+	@JoinColumn(name = "cd_cliente", referencedColumnName = "cd_cliente")
 	private ClienteBean cliente;
 	@ManyToOne
-	@JoinColumn(name="cd_funcionario", referencedColumnName="cd_funcionario")
+	@JoinColumn(name = "cd_funcionario", referencedColumnName = "cd_funcionario")
 	private FuncionarioBean funcionario;
 	@ManyToOne
-	@JoinColumn(name="cd_funcionarioEntrega", referencedColumnName="cd_funcionario")
+	@JoinColumn(name = "cd_funcionarioEntrega", referencedColumnName = "cd_funcionario")
 	private FuncionarioBean funcionarioEntrega;
 	@ManyToOne
-	@JoinColumn(name="cd_forma_pagamento", referencedColumnName="cd_forma_pagamento")
+	@JoinColumn(name = "cd_forma_pagamento", referencedColumnName = "cd_forma_pagamento")
 	private FormaPagamentoBean formaPagto;
 	@Column(name = "cd_num_pedido")
 	private int cdNumPedido;
@@ -63,10 +63,10 @@ public class PedidoBean implements Serializable {
 	private float vlTroco;
 	@Column(name = "ds_observacao")
 	private String dsObservacao;
-	@OneToMany(mappedBy = "pedido", targetEntity = ItemPedidoBean.class, fetch = FetchType.LAZY, cascade = 
-		{CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
+	@OneToMany(mappedBy = "pedido", targetEntity = ItemPedidoBean.class, fetch = FetchType.LAZY, cascade = {
+			CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH })
 	private List<ItemPedidoBean> itensPedido;
-	
+
 	/**
 	 * Contrutor padrão da classe
 	 */
@@ -91,9 +91,10 @@ public class PedidoBean implements Serializable {
 	 * @param vlTroco
 	 * @param dsObservacao
 	 */
-	public PedidoBean(int cdPedido, ClienteBean cliente, FuncionarioBean funcionario, FuncionarioBean funcionarioEntrega
-			, FormaPagamentoBean formaPagto, int cdNumPedido, Date dtEmissao, float vlEntrega, float vlTotalCompra, float vlDesconto
-			, float vlPago, Date dtEntrega, float vlTroco, String dsObservacao) {
+	public PedidoBean(int cdPedido, ClienteBean cliente, FuncionarioBean funcionario,
+			FuncionarioBean funcionarioEntrega, FormaPagamentoBean formaPagto, int cdNumPedido, Date dtEmissao,
+			float vlEntrega, float vlTotalCompra, float vlDesconto, float vlPago, Date dtEntrega, float vlTroco,
+			String dsObservacao) {
 		this();
 		this.cdPedido = cdPedido;
 		this.cliente = cliente;
@@ -155,42 +156,42 @@ public class PedidoBean implements Serializable {
 		this.cliente = cliente;
 	}
 
-	/**
-	 * Captura o valor contido no parametro funcionario
-	 * 
-	 * @return funcionario
-	 */
-	public FuncionarioBean getFuncionario() {
-		return funcionario;
-	}
-
-	/**
-	 * Setar o valor para o parametro funcionario
-	 * 
-	 * @param funcionario
-	 */
-	public void setFuncionario(FuncionarioBean funcionario) {
-		this.funcionario = funcionario;
-	}
-
-	/**
-	 * Captura o valor contido no parametro funcionarioEntrega
-	 * 
-	 * @return funcionarioEntrega
-	 */
-	public FuncionarioBean getFuncionarioEntrega() {
-		return funcionarioEntrega;
-	}
-
-	/**
-	 * Setar o valor para o parametro funcionarioEntrega
-	 * 
-	 * @param funcionarioEntrega
-	 */
-	public void setFuncionarioEntrega(FuncionarioBean funcionarioEntrega) {
-		this.funcionarioEntrega = funcionarioEntrega;
-	}
-
+	// /**
+	// * Captura o valor contido no parametro funcionario
+	// *
+	// * @return funcionario
+	// */
+	// public FuncionarioBean getFuncionario() {
+	// return funcionario;
+	// }
+	//
+	// /**
+	// * Setar o valor para o parametro funcionario
+	// *
+	// * @param funcionario
+	// */
+	// public void setFuncionario(FuncionarioBean funcionario) {
+	// this.funcionario = funcionario;
+	// }
+	//
+	// /**
+	// * Captura o valor contido no parametro funcionarioEntrega
+	// *
+	// * @return funcionarioEntrega
+	// */
+	// public FuncionarioBean getFuncionarioEntrega() {
+	// return funcionarioEntrega;
+	// }
+	//
+	// /**
+	// * Setar o valor para o parametro funcionarioEntrega
+	// *
+	// * @param funcionarioEntrega
+	// */
+	// public void setFuncionarioEntrega(FuncionarioBean funcionarioEntrega) {
+	// this.funcionarioEntrega = funcionarioEntrega;
+	// }
+	//
 	/**
 	 * Captura o valor contido no parametro formaPagamento
 	 * 
@@ -280,7 +281,7 @@ public class PedidoBean implements Serializable {
 	public void setVlTotalCompra(float vlTotalCompra) {
 		this.vlTotalCompra = vlTotalCompra;
 	}
-	
+
 	/**
 	 * Captura o valor contido no parametro vlPago
 	 * 
@@ -298,7 +299,7 @@ public class PedidoBean implements Serializable {
 	public void setVlPago(float vlPago) {
 		this.vlPago = vlPago;
 	}
-	
+
 	/**
 	 * Captura o valor contido no parametro dtEntrega
 	 * 
@@ -316,7 +317,7 @@ public class PedidoBean implements Serializable {
 	public void setDtEntrega(Date dtEntrega) {
 		this.dtEntrega = dtEntrega;
 	}
-	
+
 	/**
 	 * Captura o valor contido no parametro vlTroco
 	 * 
@@ -352,7 +353,7 @@ public class PedidoBean implements Serializable {
 	public void setDsObservacao(String dsObservacao) {
 		this.dsObservacao = dsObservacao;
 	}
-	
+
 	/**
 	 * Captura o valor contido no parametro itensPedido
 	 * 
@@ -371,7 +372,7 @@ public class PedidoBean implements Serializable {
 		itemPedido.setPedido(this);
 		this.itensPedido.add(itemPedido);
 	}
-	
+
 	/**
 	 * Captura o valor total do pedido
 	 * 
@@ -384,7 +385,7 @@ public class PedidoBean implements Serializable {
 		}
 		return soma;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -417,9 +418,9 @@ public class PedidoBean implements Serializable {
 		return super.toString() + //
 				"\nClasse .............: " + getClass().getSimpleName() + //
 				"\nPedido..............: " + getCdPedido() + //
-				//"\nFuncionario.........: " + getFuncionario() + //
-				//"\nFuncionario Entrega.: " + getFuncionarioEntrega() + //
-				//"\nForma de Pagamento..: " + getFormaPagamento() + //
+				// "\nFuncionario.........: " + getFuncionario() + //
+				// "\nFuncionario Entrega.: " + getFuncionarioEntrega() + //
+				// "\nForma de Pagamento..: " + getFormaPagamento() + //
 				"\nNúmero Pedido.......: " + getCdNumPedido() + //
 				"\nData Emissão........: " + getDtEmissao() + //
 				"\nValor Entrega.......: " + getVlEntrega() + //
