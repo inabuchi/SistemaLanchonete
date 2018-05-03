@@ -121,7 +121,7 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 		
 		List<Field> fields = findAllFields(metaClass);
 		
-		for (int i = 1; i < fields.size(); ++i) {
+		for (int i = 0; i < fields.size(); ++i) {
 			
 			fields.get(i).setAccessible(true); // You might want to set modifier to public first.
 		    Object value = null;
@@ -130,16 +130,22 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}			
 			
-			if(value != null) {			
+			if(value != null) {	
 				
-				if(value instanceof Integer && ((Integer)value) != 0) {
-					predicados.add(cb.equal(root.get(fields.get(i).getName()), value));
-					
-				} else if(value instanceof String && !((String)value).equals("")) {
-					predicados.add(cb.equal(root.get(fields.get(i).getName()), value));
-				}				
+				boolean podeFiltrar = false;
+				if(value instanceof Integer)
+					podeFiltrar = ((Integer)value) != 0;
+				else if(value instanceof String)
+					podeFiltrar = !((String)value).equalsIgnoreCase("");
+				else if(value instanceof Double)
+					podeFiltrar = ((Double)value) != 0;
+				else if(value instanceof Float)
+					podeFiltrar = ((Float)value) != 0;
+				
+				if (podeFiltrar)
+					predicados.add(cb.like(root.get(fields.get(i).getName()), "%" + value + "%"));		
 			}
 			
 		}
