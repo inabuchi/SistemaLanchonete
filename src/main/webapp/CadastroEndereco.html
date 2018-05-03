@@ -13,13 +13,9 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Guten Burguer - Adicionar endereço</title>
 
-<script src="library/jquery-3.2.1.min.js">
-	
-</script>
-<script type="text/javascript"
-	src="controller/cliente/cadastroCliente.js"></script>
-<script type="text/javascript"
-	src="controller/generics/validacoesGenericas.js"></script>
+<script src="library/DataTables/jQuery-3.2.1/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="controller/endereco/cadastroEndereco.js"></script>
+<script type="text/javascript" src="controller/generics/validacoesGenericas.js"></script>
 
 <!-- DataTables -->
 <link rel="stylesheet" type="text/css"
@@ -110,11 +106,10 @@
 
 				<center>
 					<a href="CadastroCliente.html"><button type="button"
-							class="btn btn-secondary">Cancelar</button></a> <a
-						href="CadastroCliente.html"><button type="button"
-							class="btn btn-success">
-							<i class="fa fa-save"></i>Editar endereço
-						</button></a>
+							class="btn btn-secondary">Cancelar</button></a> 
+							
+					<a><button id="btnSave" type="button" class="btn btn-success"><i class="fa fa-save"></i>Editar endereço</button></a>
+				
 				</center>
 			</div>
 		</div>
