@@ -26,7 +26,7 @@ public class ClienteResource {
 	public Response insert(ClienteBean cliente) {
 		try {
 			new ClienteService().save(cliente);
-			return Response.status(201).entity("Cliente Inserido com Sucesso").build();
+			return Response.status(200).entity("Cliente Inserido com Sucesso").build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new WebApplicationException(500);

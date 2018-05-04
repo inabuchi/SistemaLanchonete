@@ -11,7 +11,7 @@ import br.com.SistemaLanchonete.Repository.GenericDAO;
 public class ClienteService {
 	private String retorno = "";
 	GenericDAO<ClienteBean> clienteDao = new GenericDAO<ClienteBean>();
-	Class<ClienteBean> clienteBean;
+	Class<ClienteBean> clienteBean = ClienteBean.class;
 
 	/**
 	 * Salva ou atualiza um cliente no banco de acordo com o objeto passado se id do
