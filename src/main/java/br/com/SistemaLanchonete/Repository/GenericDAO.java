@@ -133,7 +133,6 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 			}			
 			
 			if(value != null) {	
-				
 				boolean podeFiltrar = false;
 				if(value instanceof Integer)
 					podeFiltrar = ((Integer)value) != 0;
@@ -143,7 +142,7 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 					podeFiltrar = ((Double)value) != 0;
 				else if(value instanceof Float)
 					podeFiltrar = ((Float)value) != 0;
-				
+				// Fazer instancia de DATA.
 				if (podeFiltrar)
 					predicados.add(cb.like(root.get(fields.get(i).getName()), "%" + value + "%"));		
 			}
