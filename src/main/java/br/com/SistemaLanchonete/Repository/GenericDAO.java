@@ -1,6 +1,7 @@
 package br.com.SistemaLanchonete.Repository;
 
 import java.lang.reflect.Field;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -97,6 +98,17 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 		 */
 		return manager.find(classe, id);
 	}
+	
+	public MODEL findByDate(Class<MODEL> classe, Date date) {
+		/*
+		 * o metodo find busca por chave primaria, mas como nao tenho a 
+		 * anotação @ID no fucionario e no cliente so retorna o funcionário 
+		 * que for igual na classe pessoa
+		 * 
+		 * precisa fazer uma query nao da para usar o método find do hibernate
+		 */
+		return manager.find(classe, date);
+	}
 
 	/**
 	 * Retorna uma lista de objetos da classe passada como parametro de acordo com o
@@ -121,7 +133,7 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 		
 		List<Field> fields = findAllFields(metaClass);
 		
-		for (int i = 1; i < fields.size(); ++i) {
+		for (int i = 0; i < fields.size(); ++i) {
 			
 			fields.get(i).setAccessible(true); // You might want to set modifier to public first.
 		    Object value = null;
@@ -130,16 +142,22 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}			
 			
-			if(value != null) {			
+			if(value != null) {	
 				
-				if(value instanceof Integer && ((Integer)value) != 0) {
-					predicados.add(cb.equal(root.get(fields.get(i).getName()), value));
-					
-				} else if(value instanceof String && !((String)value).equals("")) {
-					predicados.add(cb.equal(root.get(fields.get(i).getName()), value));
-				}				
+				boolean podeFiltrar = false;
+				if(value instanceof Integer)
+					podeFiltrar = ((Integer)value) != 0;
+				else if(value instanceof String)
+					podeFiltrar = !((String)value).equalsIgnoreCase("");
+				else if(value instanceof Double)
+					podeFiltrar = ((Double)value) != 0;
+				else if(value instanceof Float)
+					podeFiltrar = ((Float)value) != 0;
+				// Fazer instancia de DATA.
+				if (podeFiltrar)
+					predicados.add(cb.like(root.get(fields.get(i).getName()), "%" + value + "%"));		
 			}
 			
 		}

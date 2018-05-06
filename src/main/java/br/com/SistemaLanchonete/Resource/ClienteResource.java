@@ -76,10 +76,12 @@ public class ClienteResource {
 	}
 
 	@GET
-	@Path("/clientes")
+	@Path("/clientes/{campo}={valor}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<ClienteBean> findLike(ClienteBean cliente) {
+	public ArrayList<ClienteBean> findLike(@PathParam("campo") String campo, @PathParam("valor") String valor) {
 		try {
+			ClienteBean cliente = new ClienteBean();
+			cliente.setDsNome(valor);
 			ArrayList<ClienteBean> clientes = new ClienteService().findLike(cliente);
 			return clientes;
 		} catch (Exception e) {

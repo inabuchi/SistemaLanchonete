@@ -194,4 +194,29 @@ public class Diversos {
 		}
 		return booleanRetorno;
 	}
+	
+	public String getDateAtualString(int formato) {
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat formatarDate = null;
+		if (formato == 1) {			  
+			formatarDate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		} else if (formato == 2) {
+			formatarDate = new SimpleDateFormat("dd/MM/yyyy");
+		} else if (formato == 3) {
+			formatarDate = new SimpleDateFormat("HH:mm:ss");
+		} else if (formato == 4) {
+			formatarDate = new SimpleDateFormat("dd");
+		} else if (formato == 5) {
+			formatarDate = new SimpleDateFormat("MM");
+		} else if (formato == 6) {
+			formatarDate = new SimpleDateFormat("yyyy");
+		} else if (formato == 7) {
+			formatarDate = new SimpleDateFormat("HH");
+		} else if (formato == 8) {
+			formatarDate = new SimpleDateFormat("mm");
+		} else if (formato == 9) {
+			formatarDate = new SimpleDateFormat("ss");
+		}
+		return formatarDate.format(date);
+	}
 }

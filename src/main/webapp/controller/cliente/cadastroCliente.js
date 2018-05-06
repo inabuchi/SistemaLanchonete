@@ -77,8 +77,8 @@ form.ready(() => {
                 },
                 type: 'POST'
                 , data: JSON.stringify(params)
-                , dataType: 'json' //http://localhost:8080/SistemaLanchonete
-                , url: '/services/cliente/cliente'
+                , dataType: 'json' //
+                , url: 'http://localhost:8080/SistemaLanchonete/services/cliente/cliente'
                 , statusCode: {
                 	200: ()=>{
                 		debugger;

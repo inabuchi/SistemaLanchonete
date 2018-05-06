@@ -1,17 +1,23 @@
 package br.com.SistemaLanchonete.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.com.SistemaLanchonete.Domain.CaixaBean;
+import br.com.SistemaLanchonete.Domain.ClienteBean;
+import br.com.SistemaLanchonete.Domain.PedidoBean;
 import br.com.SistemaLanchonete.Repository.BDException;
 import br.com.SistemaLanchonete.Repository.EErrosBD;
 import br.com.SistemaLanchonete.Repository.GenericDAO;
+import br.com.SistemaLanchonete.Validacao.Diversos;
+import br.com.SistemaLanchonete.Validacao.Validacao;
 
 public class CaixaService {
 	private String retorno = "";
 	GenericDAO<CaixaBean> caixaDao = new GenericDAO<CaixaBean>();
 	Class<CaixaBean> caixaBean;
+	GenericDAO<PedidoBean> pedidoDao = new GenericDAO<PedidoBean>();
 
 	public String save(CaixaBean caixa) throws BDException {
 		/*
@@ -75,6 +81,31 @@ public class CaixaService {
 		}
 		return listaCaixa;
 
+	}
+	
+	public Boolean abrirCaixa(double valor) {
+		//Get funcionario logado
+		// get data atual
+		// pegar valor inicial
+		// inserir no banco;
+		return true;
+	}
+	
+	//
+	public Double fecharCaixa(CaixaBean caixa) {
+		// Busca todos os registros
+		// listar os pedidos do dia atual
+		PedidoBean pedidoBean = new PedidoBean();
+		pedidoBean.setDtEmissao(new Date());
+		List<PedidoBean> listaCaixa = pedidoDao.findLike(PedidoBean.class, pedidoBean);
+		Double result = 0.0;
+		for (PedidoBean item : listaCaixa) {
+			if ((item.getDtFechamento().equals(Diversos.getDateAtualString()))
+				&& (Validacao.validaDouble(item.getVlTrocoInicial()) != 0.0)) {
+				result += Validacao.validaDouble(item.getVlTrocoInicial());
+			}
+		}
+		return result;
 	}
 
 }
