@@ -145,7 +145,6 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 			}			
 			
 			if(value != null) {	
-				
 				boolean podeFiltrar = false;
 				if(value instanceof Integer)
 					podeFiltrar = ((Integer)value) != 0;

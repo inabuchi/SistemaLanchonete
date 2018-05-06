@@ -44,7 +44,7 @@ form.ready(() => {
       $.ajax({
         type: 'post'
         , dataType: 'json'
-        , url: "LoginApi.java"
+        , url: 'http://localhost:8080/SistemaLanchonete/services/login/login'
         , data: params
       }).done(response => {
         if (response.success) {
