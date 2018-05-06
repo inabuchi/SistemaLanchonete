@@ -14,13 +14,9 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Guten Burguer - Adicionar funcionário</title>
 
-<script src="library/jquery-3.2.1.min.js">
-	
-</script>
-<script type="text/javascript"
-	src="controller/cliente/cadastroCliente.js"></script>
-<script type="text/javascript"
-	src="controller/generics/validacoesGenericas.js"></script>
+<script src="library/DataTables/jQuery-3.2.1/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="controller/funcionario/cadastroFuncionario.js"></script>
+<script type="text/javascript" src="controller/generics/validacoesGenericas.js"></script>
 
 <!-- DataTables -->
 <link rel="stylesheet" type="text/css"
@@ -60,7 +56,7 @@
 			</div>
 
 			<div class="formtitle">Adicionar funcionário</div>
-			<form>
+			<form id="formFuncionario">
 			<div class="page-cad">
 				<fieldset class="well">
 					<legend class="well-legend">Dados pessoais</legend>
@@ -201,11 +197,9 @@
 
 				<center>
 					<a href="ConsultaFuncionario.html"><button type="button"
-							class="btn btn-secondary">Cancelar</button></a> <a
-						href="ConsultaFuncionario.html"><button type="button"
-							class="btn btn-success">
-							<i class="fa fa-save"></i>Adicionar funcionário
-						</button></a>
+							class="btn btn-secondary">Cancelar</button></a> 
+							
+					<a><button id="btnSaveFunc" type="button" class="btn btn-success"> <i class="fa fa-save"></i>Adicionar funcionário</button></a>
 				</center>
 				</div>
 			</form>
