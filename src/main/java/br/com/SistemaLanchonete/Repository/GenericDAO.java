@@ -98,17 +98,6 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 		 */
 		return manager.find(classe, id);
 	}
-	
-	public MODEL findByDate(Class<MODEL> classe, Date date) {
-		/*
-		 * o metodo find busca por chave primaria, mas como nao tenho a 
-		 * anotação @ID no fucionario e no cliente so retorna o funcionário 
-		 * que for igual na classe pessoa
-		 * 
-		 * precisa fazer uma query nao da para usar o método find do hibernate
-		 */
-		return manager.find(classe, date);
-	}
 
 	/**
 	 * Retorna uma lista de objetos da classe passada como parametro de acordo com o
