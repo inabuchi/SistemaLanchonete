@@ -156,48 +156,48 @@ public class PedidoBean implements Serializable {
 		this.cliente = cliente;
 	}
 
-	// /**
-	// * Captura o valor contido no parametro funcionario
-	// *
-	// * @return funcionario
-	// */
-	// public FuncionarioBean getFuncionario() {
-	// return funcionario;
-	// }
-	//
-	// /**
-	// * Setar o valor para o parametro funcionario
-	// *
-	// * @param funcionario
-	// */
-	// public void setFuncionario(FuncionarioBean funcionario) {
-	// this.funcionario = funcionario;
-	// }
-	//
-	// /**
-	// * Captura o valor contido no parametro funcionarioEntrega
-	// *
-	// * @return funcionarioEntrega
-	// */
-	// public FuncionarioBean getFuncionarioEntrega() {
-	// return funcionarioEntrega;
-	// }
-	//
-	// /**
-	// * Setar o valor para o parametro funcionarioEntrega
-	// *
-	// * @param funcionarioEntrega
-	// */
-	// public void setFuncionarioEntrega(FuncionarioBean funcionarioEntrega) {
-	// this.funcionarioEntrega = funcionarioEntrega;
-	// }
-	//
+	/**
+	* Captura o valor contido no parametro funcionario
+	*
+	* @return funcionario
+	*/
+	public FuncionarioBean getCdFuncionario() {
+		return funcionario;
+	}
+	
+	/**
+	* Setar o valor para o parametro funcionario
+	*
+	* @param funcionario
+	*/
+	public void setCdFuncionario(FuncionarioBean funcionario) {
+		this.funcionario = funcionario;
+	}
+	
+	/**
+	* Captura o valor contido no parametro funcionarioEntrega
+	*
+	* @return funcionarioEntrega
+	*/
+	public FuncionarioBean getCdFuncionarioEntrega() {
+		return funcionarioEntrega;
+	}
+	
+	/**
+	* Setar o valor para o parametro funcionarioEntrega
+	*
+	* @param funcionarioEntrega
+	*/
+	public void setCdFuncionarioEntrega(FuncionarioBean funcionarioEntrega) {
+		this.funcionarioEntrega = funcionarioEntrega;
+	}
+	
 	/**
 	 * Captura o valor contido no parametro formaPagamento
 	 * 
 	 * @return formaPagamento
 	 */
-	public FormaPagamentoBean getFormaPagamento() {
+	public FormaPagamentoBean getCdFormaPagamento() {
 		return formaPagto;
 	}
 
@@ -206,7 +206,7 @@ public class PedidoBean implements Serializable {
 	 * 
 	 * @param formaPagamento
 	 */
-	public void setFormaPagamento(FormaPagamentoBean formaPagto) {
+	public void setCdFormaPagamento(FormaPagamentoBean formaPagto) {
 		this.formaPagto = formaPagto;
 	}
 
@@ -418,9 +418,9 @@ public class PedidoBean implements Serializable {
 		return super.toString() + //
 				"\nClasse .............: " + getClass().getSimpleName() + //
 				"\nPedido..............: " + getCdPedido() + //
-				// "\nFuncionario.........: " + getFuncionario() + //
-				// "\nFuncionario Entrega.: " + getFuncionarioEntrega() + //
-				// "\nForma de Pagamento..: " + getFormaPagamento() + //
+				"\nFuncionario.........: " + getCdFuncionario() + //
+				"\nFuncionario Entrega.: " + getCdFuncionarioEntrega() + //
+				"\nForma de Pagamento..: " + getCdFormaPagamento() + //
 				"\nNúmero Pedido.......: " + getCdNumPedido() + //
 				"\nData Emissão........: " + getDtEmissao() + //
 				"\nValor Entrega.......: " + getVlEntrega() + //
