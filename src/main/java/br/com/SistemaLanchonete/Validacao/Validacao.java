@@ -1,6 +1,7 @@
 package br.com.SistemaLanchonete.Validacao;
 
 import java.text.DecimalFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -118,4 +119,52 @@ public class Validacao {
         c.set(Calendar.MILLISECOND, 999);
         return c.getTime();
     }
+    
+
+    /**
+     * Método para obter o formato de data conforme abaixo
+     * 1 = dd/MM/yyyy HH:mm:ss
+     * 2 = dd/MM/yyyy
+     * 3 = HH:mm:ss
+     * 4 = dd
+     * 5 = MM
+     * 6 = yyyy
+     * 7 = HH
+     * 8 = mm
+     * 9 = ss
+     * 10 = HH:mm
+     * @param int
+     * @return String
+     * @throws Exception 
+     */
+	public static Date formatarData(int formato, Date data) throws Exception {
+		try {		
+			SimpleDateFormat formatarDate = null;
+			if (formato == 1) {			  
+				formatarDate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			} else if (formato == 2) {
+				formatarDate = new SimpleDateFormat("dd/MM/yyyy");
+			} else if (formato == 3) {
+				formatarDate = new SimpleDateFormat("HH:mm:ss");
+			} else if (formato == 4) {
+				formatarDate = new SimpleDateFormat("dd");
+			} else if (formato == 5) {
+				formatarDate = new SimpleDateFormat("MM");
+			} else if (formato == 6) {
+				formatarDate = new SimpleDateFormat("yyyy");
+			} else if (formato == 7) {
+				formatarDate = new SimpleDateFormat("HH");
+			} else if (formato == 8) {
+				formatarDate = new SimpleDateFormat("mm");
+			} else if (formato == 9) {
+				formatarDate = new SimpleDateFormat("ss");
+			} else if (formato == 10) {
+				formatarDate = new SimpleDateFormat("HH:mm");
+			}
+			Date date = formatarDate.parse(validaString(data));
+			return date;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 }
