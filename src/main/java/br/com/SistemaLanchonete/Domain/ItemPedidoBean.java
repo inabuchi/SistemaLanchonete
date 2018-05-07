@@ -16,8 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 /**
  * Classe Modelo para os itens do pedido
  * 
@@ -33,15 +31,15 @@ public class ItemPedidoBean implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cd_item_pedido")
 	private int cdItemPedido;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cd_pedido")
 	private PedidoBean pedido;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cd_produto")
 	private ProdutoBean produto;
-	
+
 	@Column(name = "qt_unitaria")
 	private float qtUnitaria;
 	@Column(name = "vl_unitario")
