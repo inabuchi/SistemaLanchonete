@@ -7,19 +7,19 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * @author Lino Pegoretti
+ * @author robertozbnu && Lino Pegoretti
  *
  */
 public class Validacao {
 
 	/*
 	 * 
-	 * Métodos para validação de String
+	 * MÃ©todos para validaÃ§Ã£o de String
 	 * 
 	 */
 
 	/**
-	 * Método validação de String
+	 * MÃ©todo validaÃ§Ã£o de String
 	 *
 	 * @param object
 	 * @return String
@@ -57,7 +57,7 @@ public class Validacao {
 
 	/*
 	 * 
-	 * Métodos para validações de objetos
+	 * MÃ©todos para validaÃ§Ãµes de objetos
 	 * 
 	 */
 
@@ -66,7 +66,7 @@ public class Validacao {
 	 * 
 	 * @param um
 	 *            objeto para ser validado
-	 * @return false - se objeto estï¿½ nulo true se nao for nulo
+	 * @return false - se objeto estÃ¯Â¿Â½ nulo true se nao for nulo
 	 */
 	public static boolean validaNulo(Object objetoValidacao) {
 		if (objetoValidacao == null) {
@@ -80,7 +80,7 @@ public class Validacao {
 	 * 
 	 * @param um
 	 *            objeto para ser validado
-	 * @return false - se objeto estï¿½ vazio true se nao for vazio
+	 * @return false - se objeto estÃ¯Â¿Â½ vazio true se nao for vazio
 	 */
 	public static boolean validaVazio(Object objetoValidacao) {
 		if (objetoValidacao.equals("")) {
@@ -90,7 +90,7 @@ public class Validacao {
 	}
 
 	/**
-	 * Método validação de Long
+	 * MÃ©todo validaÃ§Ã£o de Long
 	 *
 	 * @param object
 	 * @return Long
@@ -100,7 +100,7 @@ public class Validacao {
 	}
 
 	/**
-	 * Método validação de Integer
+	 * MÃ©todo validaÃ§Ã£o de Integer
 	 *
 	 * @param object
 	 * @return Integer
@@ -110,7 +110,7 @@ public class Validacao {
 	}
 
 	/**
-	 * Método validação de Float
+	 * MÃ©todo validaÃ§Ã£o de Float
 	 *
 	 * @param object
 	 * @return Float
@@ -120,7 +120,7 @@ public class Validacao {
 	}
 
 	/**
-	 * Método validação de Double
+	 * MÃ©todo validaÃ§Ã£o de Double
 	 *
 	 * @param object
 	 * @return Double
@@ -134,8 +134,8 @@ public class Validacao {
 			return 0d;
 		}
 
-		String valorString = obj.toString(); // Como implementação original, se não for numero, tenta-se trabalhar com
-												// base no toString. Strings retornam "this" neste método.
+		String valorString = obj.toString(); // Como implementaÃ§Ã£o original, se nÃ£o for numero, tenta-se trabalhar com
+												// base no toString. Strings retornam "this" neste mÃ©todo.
 		try {
 			return Double.valueOf(valorString);
 		} catch (NumberFormatException e) {
@@ -151,7 +151,7 @@ public class Validacao {
 	}
 
 	/**
-	 * Método de remoção de caracteres especiais
+	 * MÃ©todo de remoÃ§Ã£o de caracteres especiais
 	 *
 	 * @param String
 	 * @return String
@@ -161,7 +161,7 @@ public class Validacao {
 	}
 	
 	/**
-	 * Método para obter a hora inicial da data passada como parâmetro
+	 * MÃ©todo para obter a hora inicial da data passada como parÃ¢metro
 	 *
 	 * @param date
 	 * @return date
@@ -177,7 +177,7 @@ public class Validacao {
 	}
 
 	/**
-	 * Método para obter a hora final da data passada como parâmetro
+	 * MÃ©todo para obter a hora final da data passada como parÃ¢metro
 	 *
 	 * @param date
 	 * @return date
@@ -193,12 +193,12 @@ public class Validacao {
 	}
 
 	/**
-	 * Método para obter o formato de data conforme abaixo 1 = dd/MM/yyyy HH:mm:ss 2
+	 * MÃ©todo para obter o formato de data conforme abaixo 1 = dd/MM/yyyy HH:mm:ss 2
 	 * = dd/MM/yyyy 3 = HH:mm:ss 4 = dd 5 = MM 6 = yyyy 7 = HH 8 = mm 9 = ss 10 =
 	 * HH:mm
 	 * 
-	 * @param int
-	 * @return String
+	 * @param int, date
+	 * @return date
 	 * @throws Exception
 	 */
 	public static Date formatarData(int formato, Date data) throws Exception {
@@ -233,7 +233,7 @@ public class Validacao {
 	}
 
 	/**
-	 * Método para conversão de String para Double
+	 * MÃ©todo para conversÃ£o de String para Double
 	 * 
 	 * @param stringDouble
 	 * @return
@@ -252,7 +252,7 @@ public class Validacao {
 	}
 
 	/**
-	 * Método para conversão de String para Date
+	 * MÃ©todo para conversÃ£o de String para Date
 	 * 
 	 * @param dataString
 	 * @return
@@ -275,7 +275,7 @@ public class Validacao {
 	}
 
 	/**
-	 * Método para converter data formatada para String
+	 * MÃ©todo para converter data formatada para String
 	 * 
 	 * @param dataRetorno
 	 * @return
@@ -286,7 +286,7 @@ public class Validacao {
 	}
 
 	/**
-	 * Método para converter String para ID de Classe
+	 * MÃ©todo para converter String para ID de Classe
 	 * 
 	 * @param codigoString
 	 * @return
@@ -307,7 +307,7 @@ public class Validacao {
 	}
 
 	/**
-	 * Método para converter String para int
+	 * MÃ©todo para converter String para int
 	 * 
 	 * @param intString
 	 * @return
@@ -327,7 +327,7 @@ public class Validacao {
 	}
 
 	/**
-	 * Método para converter String para boolean
+	 * MÃ©todo para converter String para boolean
 	 * 
 	 * @param parameter
 	 * @throws SistemaException
