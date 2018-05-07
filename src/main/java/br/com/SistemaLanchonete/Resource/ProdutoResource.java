@@ -17,22 +17,59 @@ import javax.ws.rs.core.Response;
 import br.com.SistemaLanchonete.Domain.ProdutoBean;
 import br.com.SistemaLanchonete.Service.ProdutoService;
 
+/**
+ * * Classe REST para manipulação de objetos do tipo Produto<br>
+ * <p>
+ * URI para acesso: http://localhost:8080/SistemaLanchonete/services/produto
+ * 
+ * @author Lino Pegoretti
+ *
+ */
 @Path("/produto")
 public class ProdutoResource {
 
+	/**
+	 * Recurso REST para inserção de um novo produto
+	 * <p>
+	 * URI para acesso:
+	 * http://localhost:8080/SistemaLanchonete/services/produto/produto
+	 * <p>
+	 * Arquivo JSON para modelo de produto:
+	 * {@link br.com.SistemaLanchonete.ExemplosJSON.Produto.json}
+	 * 
+	 *  @param produto
+	 *            - Um objeto do tipo ProdutoBean para ser inserido no BD
+	 * 
+	 * @return Response - Uma resposta do servidor principal<br>
+	 *         200 quando inserido com sucesso<br>
+	 *         500 quando houver erro interno
+	 */
 	@POST
 	@Path("/produto")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response insert(ProdutoBean produto) {
 		try {
 			new ProdutoService().save(produto);
-			return Response.status(201).entity("Produto Inserido com Sucesso").build();
+			return Response.status(200).entity("Produto Inserido com Sucesso").build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new WebApplicationException(500);
 		}
 	}
-
+	/**
+	 * Recurso REST para atualização de um produto no BD *
+	 * <p>
+	 * URI para acesso:
+	 * http://localhost:8080/SistemaLanchonete/services/produto/cdProduto
+	 * <p>
+	 * 
+	 * @param cdProduto
+	 *            - Um id de um ProdutoBean para ser atualizado no BD
+	 * 
+	 * @return Response - Uma resposta do servidor principal<br>
+	 *         200 quando atualizado com sucesso<br>
+	 *         500 quando houver erro interno
+	 */
 	@PUT
 	@Path("/{cdProduto}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -46,7 +83,20 @@ public class ProdutoResource {
 			throw new WebApplicationException(500);
 		}
 	}
-
+	/**
+	 * Recurso REST para remoção de um produto no BD
+	 * <p>
+	 * URI para acesso:
+	 * http://localhost:8080/SistemaLanchonete/services/produto/cdPessoa
+	 * <p>
+	 * 
+	 * @param cdProduto
+	 *            - Um id de um ProdutoBean para ser removido do BD
+	 * 
+	 * @return Response - Uma resposta do servidor principal<br>
+	 *         200 quando removido com sucesso<br>
+	 *         500 quando houver erro interno
+	 */
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{cdProduto}")
@@ -60,7 +110,19 @@ public class ProdutoResource {
 			throw new WebApplicationException(500);
 		}
 	}
-
+	/**
+	 * Recurso REST para busca de um único funcionario no BD
+	 * <p>
+	 * URI para acesso:
+	 * http://localhost:8080/SistemaLanchonete/services/funcionario/cdPessoa
+	 * <p>
+	 * 
+	 * @param cdPessoa
+	 *            - Um id de um FuncionarioBean para ser buscado no BD
+	 * 
+	 * @return FuncionarioBean - Um funcionario localizado no banco de dados<br>
+	 *         500 quando houver erro interno
+	 */
 	@GET
 	@Path("/{cdProduto}")
 	@Produces(MediaType.APPLICATION_JSON)

@@ -16,11 +16,34 @@ import javax.ws.rs.core.Response;
 
 import br.com.SistemaLanchonete.Domain.ClienteBean;
 import br.com.SistemaLanchonete.Service.ClienteService;
-import br.com.SistemaLanchonete.Validacao.Validacao;
 
+/**
+ * Classe REST para manipulação de objetos do tipo cliente<br>
+ * <p>
+ * URI para acesso: http://localhost:8080/SistemaLanchonete/services/cliente
+ * 
+ * @author Lino Pegoretti
+ *
+ */
 @Path("/cliente")
 public class ClienteResource {
 
+	/**
+	 * Recurso REST para inserção de um novo cliente
+	 * <p>
+	 * URI para acesso:
+	 * http://localhost:8080/SistemaLanchonete/services/cliente/cliente
+	 * <p>
+	 * Arquivo JSON para modelo de cliente:
+	 * {@link br.com.SistemaLanchonete.ExemplosJSON.Cliente.json}
+	 * 
+	 * @param cliente
+	 *            - Um objeto do tipo ClienteBean para ser inserido no BD
+	 * 
+	 * @return Response - Uma resposta do servidor principal<br>
+	 *         200 quando inserido com sucesso<br>
+	 *         500 quando houver erro interno
+	 */
 	@POST
 	@Path("/cliente")
 	@Consumes({ MediaType.APPLICATION_JSON })
@@ -34,6 +57,20 @@ public class ClienteResource {
 		}
 	}
 
+	/**
+	 * Recurso REST para atualização de um cliente no BD *
+	 * <p>
+	 * URI para acesso:
+	 * http://localhost:8080/SistemaLanchonete/services/cliente/cdPessoa
+	 * <p>
+	 * 
+	 * @param cdPessoa
+	 *            - Um id de um ClienteBean para ser atualizado no BD
+	 * 
+	 * @return Response - Uma resposta do servidor principal<br>
+	 *         200 quando atualizado com sucesso<br>
+	 *         500 quando houver erro interno
+	 */
 	@PUT
 	@Path("/{cdPessoa}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -48,9 +85,23 @@ public class ClienteResource {
 		}
 	}
 
+	/**
+	 * Recurso REST para remoção de um cliente no BD
+	 * <p>
+	 * URI para acesso:
+	 * http://localhost:8080/SistemaLanchonete/services/cliente/cdPessoa
+	 * <p>
+	 * 
+	 * @param cdPessoa
+	 *            - Um id de um ClienteBean para ser removido do BD
+	 * 
+	 * @return Response - Uma resposta do servidor principal<br>
+	 *         200 quando removido com sucesso<br>
+	 *         500 quando houver erro interno
+	 */
 	@DELETE
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{cdPessoa}")
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response delete(@PathParam("cdPessoa") int cdPessoa) {
 		try {
 			ClienteBean cliente = new ClienteBean();
@@ -62,6 +113,19 @@ public class ClienteResource {
 		}
 	}
 
+	/**
+	 * Recurso REST para busca de um único cliente no BD
+	 * <p>
+	 * URI para acesso:
+	 * http://localhost:8080/SistemaLanchonete/services/cliente/cdPessoa
+	 * <p>
+	 * 
+	 * @param cdPessoa
+	 *            - Um id de um ClienteBean para ser buscado no BD
+	 * 
+	 * @return ClienteBean - Um cliente localizado no banco de dados<br>
+	 *         500 quando houver erro interno
+	 */
 	@GET
 	@Path("/{cdPessoa}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -76,15 +140,34 @@ public class ClienteResource {
 		}
 	}
 
+	/**
+	 * Recurso REST para fazer uma busca de vários clientes no BD de acordo com o
+	 * campo e valor passado por parametro na URL
+	 * <p>
+	 * URI para acesso:
+	 * http://localhost:8080/SistemaLanchonete/services/cliente/clientes/campo=valor
+	 * <p>
+	 * 
+	 * @param campo
+	 *            - Campo para pesquisa, implementado Telefone e Nome
+	 * @param valor
+	 *            - Valor do campo para a pesquisa
+	 * 
+	 * @return ArrayList ClienteBean - Uma lista de clientes de acordo com os
+	 *         parametros enviados<br>
+	 *         500 quando houver erro interno
+	 */
 	@GET
-	@Path("/clientes/{valor}")
+	@Path("/clientes/{campo}={valor}")
 	@Produces(MediaType.APPLICATION_JSON)
-	// @PathParam("campo") String campo,
-	public ArrayList<ClienteBean> findLike(@PathParam("valor") String valor) {
-		try {
-			
-			ClienteBean cliente = new ClienteBean();
+	public ArrayList<ClienteBean> findLike(@PathParam("campo") String campo, @PathParam("valor") String valor) {
+		ClienteBean cliente = new ClienteBean();
+		if (campo.equals("dsTelefone1")) {
+			cliente.setDsTelefone1(valor);
+		} else {
 			cliente.setDsNome(valor);
+		}
+		try {
 			ArrayList<ClienteBean> clientes = new ClienteService().findLike(cliente);
 			return clientes;
 		} catch (Exception e) {
