@@ -37,6 +37,7 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 	public String save(MODEL model, int id) throws BDException {
 		try {
 			manager.getTransaction().begin();
+			System.out.println(model.toString());
 			if (id == 0) {
 				manager.persist(model);
 				retorno = "Dados salvos com sucesso na tabela";
@@ -110,7 +111,7 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 	 */
 	public ArrayList<MODEL> findLike(Class<MODEL> classe, MODEL model) {
 		ArrayList<MODEL> lista = new ArrayList<MODEL>();
-		
+		System.out.println(model.toString());
 		CriteriaBuilder cb = manager.getCriteriaBuilder();
 		CriteriaQuery<MODEL> cq = cb.createQuery(classe);
 		Root<MODEL> root = cq.from(classe);

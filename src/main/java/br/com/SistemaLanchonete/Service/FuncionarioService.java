@@ -11,12 +11,22 @@ import br.com.SistemaLanchonete.Repository.GenericDAO;
 public class FuncionarioService {
 	private String retorno = "";
 	GenericDAO<FuncionarioBean> funcionarioDao = new GenericDAO<FuncionarioBean>();
-	Class<FuncionarioBean> funcionarioBean;
+	Class<FuncionarioBean> funcionarioClasse = FuncionarioBean.class;
 
 	public String save(FuncionarioBean funcionario) throws BDException {
 		/*
 		 * Valida o telefone do funcionario
 		 */
+		// Validar Nome Obrigatório
+		if (funcionario.getDsNome().trim() == null || funcionario.getDsNome().trim().length() == 0)
+			return (retorno = "Campo nome é obrigatório");
+		// Validar Login Obrigatório
+		if (funcionario.getDsLogin().trim() == null || funcionario.getDsLogin().trim().length() == 0)
+			return (retorno = "Campo Login é obrigatório");
+		// Validar Senha Obrigatório
+		if (funcionario.getDsSenha().trim() == null || funcionario.getDsSenha().trim().length() == 0)
+			return (retorno = "Campo Senha é obrigatório");
+
 		boolean validado = validarTelefoneFuncionario(funcionario.getDsTelefone1(), funcionario.getDsTelefone1());
 		if (!validado) {
 			retorno = "Funcionário com telefones inválidos";
@@ -40,9 +50,9 @@ public class FuncionarioService {
 	}
 
 	public String remove(FuncionarioBean funcionario) throws BDException {
-		FuncionarioBean funcionarioRetorno = funcionarioDao.findById(funcionarioBean, funcionario.getCdFuncionario());
+		FuncionarioBean funcionarioRetorno = funcionarioDao.findById(funcionarioClasse, funcionario.getCdFuncionario());
 		try {
-			funcionarioDao.remove(funcionarioBean, funcionarioRetorno.getCdPessoa());
+			funcionarioDao.remove(funcionarioClasse, funcionarioRetorno.getCdPessoa());
 			retorno = "Dados removidos com sucesso na tabela";
 		} catch (Exception e) {
 			throw new BDException("Erro na remoção de dados:" + e.getMessage(), EErrosBD.EXCLUI_DADO);
@@ -52,15 +62,7 @@ public class FuncionarioService {
 	}
 
 	public FuncionarioBean findById(FuncionarioBean funcionario) {
-		/*
-		 * o metodo find busca por chave primaria, mas como nao tenho a anotaï¿½ï¿½o
-		 * 
-		 * @ID no fucionario so retorna o funcinario que for igual na classe pessoa
-		 *
-		 * precisa fazer uma query nao da para usar o mï¿½todo find do hibernate
-		 */
-		return funcionarioDao.findById(funcionarioBean, funcionario.getCdFuncionario());
-
+		return funcionarioDao.findById(funcionarioClasse, funcionario.getCdPessoa());
 	}
 
 	public ArrayList<FuncionarioBean> findLike(FuncionarioBean funcionario) {
@@ -70,7 +72,7 @@ public class FuncionarioService {
 		 * lista aproximada utilizadno o parametro LIKE Tanto faz se for List ou
 		 * ArrayList, ou qq outra collection
 		 */
-		List<FuncionarioBean> lista2 = funcionarioDao.findLike(funcionarioBean, funcionario);
+		List<FuncionarioBean> lista2 = funcionarioDao.findLike(funcionarioClasse, funcionario);
 		for (FuncionarioBean model2 : lista2) {
 			lista.add(model2);
 		}

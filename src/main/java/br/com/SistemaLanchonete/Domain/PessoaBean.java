@@ -24,7 +24,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "pessoa")
-@Inheritance(strategy= InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class PessoaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -41,10 +41,15 @@ public abstract class PessoaBean implements Serializable {
 	private Date dtCadastro = new Date();
 	@Column(name = "is_ativo")
 	private boolean isAtivo;
-	@OneToMany(mappedBy = "pessoa", targetEntity = EnderecoPessoaBean.class, fetch = FetchType.EAGER, cascade = 
-			{CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
+	@OneToMany(mappedBy = "pessoa", //
+			targetEntity = EnderecoPessoaBean.class, //
+			fetch = FetchType.EAGER, //
+			cascade = { CascadeType.MERGE, //
+					CascadeType.REMOVE, //
+					CascadeType.REFRESH, //
+					CascadeType.DETACH })
 	private List<EnderecoPessoaBean> enderecoPessoas = new ArrayList<EnderecoPessoaBean>();
-	
+
 	/**
 	 * Construtor padrão da classe
 	 */
@@ -183,7 +188,7 @@ public abstract class PessoaBean implements Serializable {
 	/**
 	 * Retorna a lista de enderecos dessa pesoa
 	 * 
-	 *	@return enderecoPessoas
+	 * @return enderecoPessoas
 	 */
 	public List<EnderecoPessoaBean> getEnderecoPessoas() {
 		return enderecoPessoas;
@@ -198,7 +203,7 @@ public abstract class PessoaBean implements Serializable {
 		enderecoPessoa.setPessoa(this);
 		this.enderecoPessoas.add(enderecoPessoa);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

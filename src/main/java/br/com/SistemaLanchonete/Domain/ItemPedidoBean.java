@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * Classe Modelo para os itens do pedido
  * 
@@ -33,26 +35,27 @@ public class ItemPedidoBean implements Serializable {
 	private int cdItemPedido;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="cd_pedido")
+	@JoinColumn(name = "cd_pedido")
 	private PedidoBean pedido;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="cd_produto")
+	@JoinColumn(name = "cd_produto")
 	private ProdutoBean produto;
+	
 	@Column(name = "qt_unitaria")
 	private float qtUnitaria;
 	@Column(name = "vl_unitario")
 	private float vlUnitario;
 	@Column(name = "vl_desconto")
 	private float vlDesconto;
-	@OneToMany(mappedBy = "itemPedido", targetEntity = ItemPedidoAdicionalBean.class, fetch = FetchType.LAZY, cascade = 
-		{CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
-	private List<ItemPedidoAdicionalBean> itemPedidoAdicionais;
+	@OneToMany(mappedBy = "itemPedido", targetEntity = ItemPedidoAdicionalBean.class, fetch = FetchType.LAZY, cascade = {
+			CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH })
+	private List<ItemPedidoAdicionalBean> itemPedidoAdicionais = new ArrayList<ItemPedidoAdicionalBean>();;
 
 	/**
 	 * Contrutor padrão da classe
 	 */
 	public ItemPedidoBean() {
-		itemPedidoAdicionais = new ArrayList<ItemPedidoAdicionalBean>();
 	}
 
 	/**
@@ -68,7 +71,7 @@ public class ItemPedidoBean implements Serializable {
 	public ItemPedidoBean(int cdItemPedido, PedidoBean pedido, ProdutoBean produto, float qtUnitaria, float vlUnitario,
 			float vlDesconto) {
 		this();
-		
+
 		this.pedido = pedido;
 		this.produto = produto;
 		this.qtUnitaria = qtUnitaria;
@@ -92,7 +95,7 @@ public class ItemPedidoBean implements Serializable {
 	 * @param cdItemPedido
 	 */
 	public void setCdItemPedido(int cdItemPedido) {
-		this.cdItemPedido = cdItemPedido; 
+		this.cdItemPedido = cdItemPedido;
 	}
 
 	/**
@@ -202,28 +205,28 @@ public class ItemPedidoBean implements Serializable {
 	public void addAdicional(ItemPedidoAdicionalBean adicional) {
 		adicional.setItemPedido(this);
 		this.itemPedidoAdicionais.add(adicional);
-	}	
-	
+	}
+
 	/**
 	 * Captura o sub total do item de pedido
 	 * 
 	 * @return vlTotal
 	 */
 	public double getSubTotal() {
-		
+
 		double vlTotal = 0;
-		
+
 		for (ItemPedidoAdicionalBean itemPedidoAdicionalBean : itemPedidoAdicionais) {
 			vlTotal += itemPedidoAdicionalBean.getPedidoAdicional().getVlAdicional();
 		}
-		
+
 		vlTotal += (qtUnitaria * vlUnitario);
-		
+
 		vlTotal -= vlDesconto;
-		
+
 		return vlTotal;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
