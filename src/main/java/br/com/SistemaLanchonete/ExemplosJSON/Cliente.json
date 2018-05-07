@@ -1,0 +1,33 @@
+{
+	"dsNome": "",
+	"dsTelefone1": "",
+	"dsTelefone2": "",
+	"dtCadastro": 9999999999999,
+	"enderecoPessoas": [
+		{
+			"endereco": {
+				"logradouro": {
+					"bairro": {
+						"municipio": {
+							"estado": {
+								"dsEstado": "",
+								"dsSigla": ""
+							},
+							"dsMunicipio": ""
+						},
+						"dsBairro": ""
+					},
+					"cdCep": 99999999,
+					"dsLogradouro": ""
+				},
+				"cdNumero": 99999,
+				"dsComplemento": "",
+				"dsObservacao": ""
+			},
+			"dtAlteracao": 9999999999999,
+			"enderecoPadrao": true
+		}
+	],
+	"dsObservacao": "",
+	"ativo": false
+}
