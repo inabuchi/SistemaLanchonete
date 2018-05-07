@@ -1,6 +1,7 @@
 package br.com.SistemaLanchonete.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.com.SistemaLanchonete.Domain.ProdutoBean;
 import br.com.SistemaLanchonete.Repository.BDException;
@@ -11,7 +12,7 @@ public class ProdutoService {
 
 	private static String retorno = "";
 	GenericDAO<ProdutoBean> produtoDAO = new GenericDAO<ProdutoBean>();
-	Class<ProdutoBean> produtoBean;
+	Class<ProdutoBean> produtoClasse = ProdutoBean.class;
 
 	public String save(ProdutoBean produto) throws BDException {
 		if (produto.getCdProduto() == 0) {
@@ -26,7 +27,8 @@ public class ProdutoService {
 			try {
 				produtoDAO.save(produto, produto.getCdProduto());
 			} catch (BDException e) {
-				throw new BDException("Erro ao atualizar Produto " + produto.getCdProduto() + e.getMessage(), EErrosBD.ATUALIZA_DADO);
+				throw new BDException("Erro ao atualizar Produto " + produto.getCdProduto() + e.getMessage(),
+						EErrosBD.ATUALIZA_DADO);
 
 			}
 			retorno = "Dados atualizados com sucesso na tabela";
@@ -35,23 +37,28 @@ public class ProdutoService {
 	}
 
 	public String remove(ProdutoBean produto) throws BDException {
-		ProdutoBean produtoRetorna = produtoDAO.findById(produtoBean, produto.getCdProduto());
-		try {;
-			produtoDAO.remove(produtoBean, produtoRetorna.getCdProduto());
+		ProdutoBean produtoRetorna = produtoDAO.findById(produtoClasse, produto.getCdProduto());
+		try {
+			;
+			produtoDAO.remove(produtoClasse, produtoRetorna.getCdProduto());
 			retorno = "Dados removidos com sucesso na tabela";
 		} catch (Exception e) {
-			throw new BDException("Erro ao remover : " + produto.getCdProduto()  + e.getMessage(), EErrosBD.EXCLUI_DADO);
+			throw new BDException("Erro ao remover : " + produto.getCdProduto() + e.getMessage(), EErrosBD.EXCLUI_DADO);
 		}
 		return retorno;
 	}
 
 	public ProdutoBean findById(ProdutoBean produto) {
-		return produtoDAO.findById(produtoBean, produto.getCdProduto());
+		return produtoDAO.findById(produtoClasse, produto.getCdProduto());
 
 	}
 
 	public ArrayList<ProdutoBean> findLike(ProdutoBean produto) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<ProdutoBean> lista = new ArrayList<ProdutoBean>();
+		List<ProdutoBean> lista2 = produtoDAO.findLike(produtoClasse, produto);
+		for (ProdutoBean model2 : lista2) {
+			lista.add(model2);
+		}
+		return lista;
 	}
 }

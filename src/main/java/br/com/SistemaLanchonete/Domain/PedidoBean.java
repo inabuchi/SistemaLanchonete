@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * Classe Modelo para os pedidos
  * 
@@ -32,7 +34,6 @@ public class PedidoBean implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cd_pedido")
 	private int cdPedido;
-
 	@ManyToOne
 	@JoinColumn(name = "cd_cliente", referencedColumnName = "cd_cliente")
 	private ClienteBean cliente;
@@ -63,15 +64,16 @@ public class PedidoBean implements Serializable {
 	private float vlTroco;
 	@Column(name = "ds_observacao")
 	private String dsObservacao;
+	@JsonIgnore
 	@OneToMany(mappedBy = "pedido", targetEntity = ItemPedidoBean.class, fetch = FetchType.LAZY, cascade = {
 			CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH })
-	private List<ItemPedidoBean> itensPedido;
+	private List<ItemPedidoBean> itensPedido = new ArrayList<ItemPedidoBean>();
 
 	/**
 	 * Contrutor padrão da classe
 	 */
 	public PedidoBean() {
-		itensPedido = new ArrayList<ItemPedidoBean>();
+
 	}
 
 	/**
@@ -157,41 +159,41 @@ public class PedidoBean implements Serializable {
 	}
 
 	/**
-	* Captura o valor contido no parametro funcionario
-	*
-	* @return funcionario
-	*/
+	 * Captura o valor contido no parametro funcionario
+	 *
+	 * @return funcionario
+	 */
 	public FuncionarioBean getCdFuncionario() {
 		return funcionario;
 	}
-	
+
 	/**
-	* Setar o valor para o parametro funcionario
-	*
-	* @param funcionario
-	*/
+	 * Setar o valor para o parametro funcionario
+	 *
+	 * @param funcionario
+	 */
 	public void setCdFuncionario(FuncionarioBean funcionario) {
 		this.funcionario = funcionario;
 	}
-	
+
 	/**
-	* Captura o valor contido no parametro funcionarioEntrega
-	*
-	* @return funcionarioEntrega
-	*/
+	 * Captura o valor contido no parametro funcionarioEntrega
+	 *
+	 * @return funcionarioEntrega
+	 */
 	public FuncionarioBean getCdFuncionarioEntrega() {
 		return funcionarioEntrega;
 	}
-	
+
 	/**
-	* Setar o valor para o parametro funcionarioEntrega
-	*
-	* @param funcionarioEntrega
-	*/
+	 * Setar o valor para o parametro funcionarioEntrega
+	 *
+	 * @param funcionarioEntrega
+	 */
 	public void setCdFuncionarioEntrega(FuncionarioBean funcionarioEntrega) {
 		this.funcionarioEntrega = funcionarioEntrega;
 	}
-	
+
 	/**
 	 * Captura o valor contido no parametro formaPagamento
 	 * 

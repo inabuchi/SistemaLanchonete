@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * Classe Modelo para os Adicionais do item de pedido
  * 
@@ -19,7 +21,7 @@ import javax.persistence.Table;
 @Table(name = "item_pedido_adicional")
 public class ItemPedidoAdicionalBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+	@JsonIgnore
 	@EmbeddedId
 	private ItemPedidoAdicionalPK pk;
 	

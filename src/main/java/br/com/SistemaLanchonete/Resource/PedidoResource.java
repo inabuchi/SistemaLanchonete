@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 import br.com.SistemaLanchonete.Domain.PedidoBean;
 import br.com.SistemaLanchonete.Service.PedidoService;
+import br.com.SistemaLanchonete.Validacao.Validacao;
 
 @Path("/pedido")
 public class PedidoResource {
@@ -76,10 +77,12 @@ public class PedidoResource {
 	}
 
 	@GET
-	@Path("/pedidos")
+	@Path("/pedidos/{campo}={valor}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<PedidoBean> findLike(PedidoBean pedido) {
+	public ArrayList<PedidoBean> findLike(@PathParam("campo") String campo, @PathParam("valor") String valor) {
 		try {
+			PedidoBean pedido = new PedidoBean();
+			pedido.setDtEmissao(Validacao.stringToDate(valor));
 			ArrayList<PedidoBean> pedidos = new PedidoService().findLike(pedido);
 			return pedidos;
 		} catch (Exception e) {

@@ -76,11 +76,15 @@ public class ProdutoCategoriaResource {
 	}
 
 	@GET
-	@Path("/produtoCategorias")
+	@Path("/produtoCategorias/{campo}={valor}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<ProdutoCategoriaBean> findLike(ProdutoCategoriaBean produtoCategoria) {
+	public ArrayList<ProdutoCategoriaBean> findLike(@PathParam("campo") String campo,
+			@PathParam("valor") String valor) {
 		try {
-			ArrayList<ProdutoCategoriaBean> produtoCategorias = new ProdutoCategoriaService().findLike(produtoCategoria);
+			ProdutoCategoriaBean produtoCategoria = new ProdutoCategoriaBean();
+			produtoCategoria.setDsCategoria(valor);
+			ArrayList<ProdutoCategoriaBean> produtoCategorias = new ProdutoCategoriaService()
+					.findLike(produtoCategoria);
 			return produtoCategorias;
 		} catch (Exception e) {
 			throw new WebApplicationException(500);

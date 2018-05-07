@@ -26,7 +26,7 @@ public class FuncionarioResource {
 	public Response insert(FuncionarioBean funcionario) {
 		try {
 			new FuncionarioService().save(funcionario);
-			return Response.status(201).entity("Funcionario Inserido com Sucesso").build();
+			return Response.status(200).entity("Funcionario Inserido com Sucesso").build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new WebApplicationException(500);
@@ -36,10 +36,10 @@ public class FuncionarioResource {
 	@PUT
 	@Path("/{cdPessoa}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(@PathParam("cdPessoa") int codigo) {
+	public Response update(@PathParam("cdPessoa") int cdPessoa) {
 		try {
 			FuncionarioBean funcionario = new FuncionarioBean();
-			funcionario.setCdPessoa(codigo);
+			funcionario.setCdPessoa(cdPessoa);
 			new FuncionarioService().save(funcionario);
 			return Response.status(200).entity("Funcionario alterado com sucesso").build();
 		} catch (Exception e) {
@@ -50,10 +50,10 @@ public class FuncionarioResource {
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{cdPessoa}")
-	public Response delete(@PathParam("cdPessoa") int codigo) {
+	public Response delete(@PathParam("cdPessoa") int cdPessoa) {
 		try {
 			FuncionarioBean funcionario = new FuncionarioBean();
-			funcionario.setCdPessoa(codigo);
+			funcionario.setCdPessoa(cdPessoa);
 			new FuncionarioService().remove(funcionario);
 			return Response.status(200).entity("Funcionario excluído com sucesso").build();
 		} catch (Exception e) {
@@ -64,10 +64,10 @@ public class FuncionarioResource {
 	@GET
 	@Path("/{cdPessoa}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public FuncionarioBean select(@PathParam("cdPessoa") int codigo) {
+	public FuncionarioBean select(@PathParam("cdPessoa") int cdPessoa) {
 		try {
 			FuncionarioBean funcionario = new FuncionarioBean();
-			funcionario.setCdPessoa(codigo);
+			funcionario.setCdPessoa(cdPessoa);
 			return new FuncionarioService().findById(funcionario);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -76,10 +76,12 @@ public class FuncionarioResource {
 	}
 
 	@GET
-	@Path("/funcionarios")
+	@Path("/funcionarios/{campo}={valor}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<FuncionarioBean> findLike(FuncionarioBean funcionario) {
+	public ArrayList<FuncionarioBean> findLike(@PathParam("campo") String campo, @PathParam("valor") String valor) {
 		try {
+			FuncionarioBean funcionario = new FuncionarioBean();
+			funcionario.setDsNome(valor);
 			ArrayList<FuncionarioBean> funcionarios = new FuncionarioService().findLike(funcionario);
 			return funcionarios;
 		} catch (Exception e) {

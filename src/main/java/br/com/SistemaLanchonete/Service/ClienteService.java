@@ -7,11 +7,12 @@ import br.com.SistemaLanchonete.Domain.ClienteBean;
 import br.com.SistemaLanchonete.Repository.BDException;
 import br.com.SistemaLanchonete.Repository.EErrosBD;
 import br.com.SistemaLanchonete.Repository.GenericDAO;
+import br.com.SistemaLanchonete.Validacao.Validacao;
 
 public class ClienteService {
 	private String retorno = "";
 	GenericDAO<ClienteBean> clienteDao = new GenericDAO<ClienteBean>();
-	Class<ClienteBean> clienteBean = ClienteBean.class;
+	Class<ClienteBean> clienteClasse = ClienteBean.class;
 
 	/**
 	 * Salva ou atualiza um cliente no banco de acordo com o objeto passado se id do
@@ -22,10 +23,9 @@ public class ClienteService {
 	 * @throws BDException
 	 */
 	public String save(ClienteBean cliente) throws BDException {
-		/*
-		 * TODO Fazer métodos auxiliares de validações de cliente
-		 */
-
+//		if (!validaCliente(cliente)) {
+//			return retorno;
+//		}
 		if (cliente.getCdPessoa() == 0) {
 			try {
 				clienteDao.save(cliente, 0);
@@ -52,9 +52,12 @@ public class ClienteService {
 	 * @throws BDException
 	 */
 	public String remove(ClienteBean cliente) throws BDException {
-		ClienteBean clienteRetorno = clienteDao.findById(clienteBean, cliente.getCdPessoa());
+		if (!validaCliente(cliente)) {
+			return retorno;
+		}
+		ClienteBean clienteRetorno = clienteDao.findById(clienteClasse, cliente.getCdPessoa());
 		try {
-			clienteDao.remove(clienteBean, clienteRetorno.getCdPessoa());
+			clienteDao.remove(clienteClasse, clienteRetorno.getCdPessoa());
 			retorno = "Dados removidos com sucesso na tabela";
 		} catch (Exception e) {
 			throw new BDException("Erro na remoÃ§o de dados:" + e.getMessage(), EErrosBD.EXCLUI_DADO);
@@ -70,15 +73,14 @@ public class ClienteService {
 	 * @return um cliente gravado no Banco de acordo com o cd do objeto passado
 	 */
 	public ClienteBean findById(ClienteBean cliente) {
+		
 		/*
 		 * o metodo find busca por chave primaria, mas como nao tenho a anotaï¿½ï¿½o @ID
 		 * no fucionario so retorna o funcinario que for igual na classe pessoa tem
 		 * ainda de fazer as mensagens de retorno se nao foi encontrado o cliente
 		 * precisa fazer uma query nao da para usar o mï¿½todo find do hibernate
 		 */
-		System.out.println(cliente);
-	
-		return clienteDao.findById(ClienteBean.class, cliente.getCdPessoa());
+		return clienteDao.findById(clienteClasse, cliente.getCdPessoa());
 
 	}
 
@@ -99,12 +101,45 @@ public class ClienteService {
 		 * precisa ver como se faz para pegar os campos de pesquisa na tela e tambem os
 		 * valores deles
 		 */
-		List<ClienteBean> lista2 = clienteDao.findLike(clienteBean, cliente);
+		List<ClienteBean> lista2 = clienteDao.findLike(clienteClasse, cliente);
 		for (ClienteBean model2 : lista2) {
 			lista.add(model2);
 		}
 		return lista;
 
+	}
+
+	/*
+	 * Validações do objeto cliente para utilizar nos metodos de DAO
+	 */
+	private boolean validaCliente(ClienteBean cliente) {
+		// Valida objeto cliente nulo
+		if (!Validacao.validaNulo(cliente)) {
+			retorno = "Cliente Nulo, não pode ser inserido no banco de dados";
+			return false;
+		}
+		// Valida objeto cliente sem dados
+		if (!Validacao.validaVazio(cliente)) {
+			retorno = "Cliente sem dados, não pode ser inserido no banco de dados";
+			return false;
+		}
+		// Validar Nome Obrigatório
+		if (!Validacao.testaStringNaoNula(cliente.getDsNome()) || !Validacao.testaStringNaoVazia(cliente.getDsNome())) {
+			retorno = "Campo nome está vazio e é obrigatório";
+			return false;
+		}
+		// Validar Telefone Obrigatório
+		if (Validacao.testaStringNaoNula(cliente.getDsTelefone1())
+				|| Validacao.testaStringNaoVazia(cliente.getDsTelefone1())) {
+			retorno = "Campo Telefone esta vázio e é obrigatório";
+			return false;
+		}
+		// Validar se os Telefones já existem na tabela de Cliente
+		if (!ValidarTelefoneCliente(cliente.getDsTelefone1(), cliente.getDsTelefone2())) {
+			retorno = "Telefone já existente";
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -115,7 +150,7 @@ public class ClienteService {
 	 *
 	 * @return Boolean
 	 */
-	public Boolean ValidarTelefoneCliente(String telefone1, String telefone2) {
+	private boolean ValidarTelefoneCliente(String telefone1, String telefone2) {
 		// Instancia um objeto cliente
 		ClienteBean cliente = new ClienteBean();
 
@@ -138,5 +173,4 @@ public class ClienteService {
 		}
 		return true;
 	}
-
 }

@@ -45,8 +45,13 @@ public class EnderecoBean implements Serializable {
 	@Column(name = "ds_observacao")
 	private String dsObservacao;
 	@JsonIgnore
-	@OneToMany(mappedBy = "endereco", targetEntity = EnderecoPessoaBean.class, fetch = FetchType.LAZY, cascade = {
-			CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH })
+	@OneToMany(mappedBy = "endereco", //
+			targetEntity = EnderecoPessoaBean.class, //
+			fetch = FetchType.LAZY, //
+			cascade = { CascadeType.MERGE, //
+					CascadeType.REMOVE, //
+					CascadeType.REFRESH, //
+					CascadeType.DETACH })
 	private List<EnderecoPessoaBean> enderecoPessoas;
 
 	/**

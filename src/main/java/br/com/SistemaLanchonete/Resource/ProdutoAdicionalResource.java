@@ -54,7 +54,7 @@ public class ProdutoAdicionalResource {
 		try {
 			ProdutoAdicionalBean produtoAdicional = new ProdutoAdicionalBean();
 			produtoAdicional.setCdProdutoAdicional(cdProdutoAdicional);
-			new ProdutoAdicionalService().remove(cdProdutoAdicional);
+			new ProdutoAdicionalService().remove(produtoAdicional);
 			return Response.status(200).entity("ProdutoAdicional excluído com sucesso").build();
 		} catch (Exception e) {
 			throw new WebApplicationException(500);
@@ -76,10 +76,13 @@ public class ProdutoAdicionalResource {
 	}
 
 	@GET
-	@Path("/produtoAdicionais")
+	@Path("/produtoAdicionais/{campo}={valor}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<ProdutoAdicionalBean> findLike(ProdutoAdicionalBean produtoAdicional) {
+	public ArrayList<ProdutoAdicionalBean> findLike(@PathParam("campo") String campo,
+			@PathParam("valor") String valor) {
 		try {
+			ProdutoAdicionalBean produtoAdicional = new ProdutoAdicionalBean();
+			produtoAdicional.setDsAdicional(valor);
 			ArrayList<ProdutoAdicionalBean> produtoAdicionais = new ProdutoAdicionalService()
 					.findLike(produtoAdicional);
 			return produtoAdicionais;
