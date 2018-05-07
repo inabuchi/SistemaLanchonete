@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * @author robertozbnu && Lino Pegoretti
+ * @author robertozbnu and Lino Pegoretti
  *
  */
 public class Validacao {
