@@ -153,27 +153,54 @@ public class CaixaService {
      * do caixa e da forma de pagamento.
 	 * @throws Exception 
      */
+	/*	Resumo de Caixa						<br>
+	-------------------------------------------------------	<br>
+	Resumo de caixa do dia:08/01/2016	   			<br>
+	-------------------------------------------------------	<br>
+	(+) Forma de Pagamento 1..............: 	99999999,99	<br>
+	(+) Forma de Pagamento 2..............: 	99999999,99	<br>
+	(+) Forma de Pagamento 3..............: 	99999999,99	<br>
+	(+) Forma de Pagamento 4..............: 	99999999,99	<br>
+	(+) Forma de Pagamento 5..............: 	99999999,99	<br>
+	-------------------------------------------------------	<br>
+	(=) Total de Pedidos do dia...........: 	99999999,99	<br>
+	-------------------------------------------------------	<br>
+	(+) Troco inicial ....................: 	99999999,99	<br>
+	-------------------------------------------------------	<br>
+	(=) Total em Caixa....................: 	99999999,99	<br>
+	
+	*Só fazer mais ou menos assim, nao precisa ser perfeito kkkk
+	*/
 	public ArrayList<String> gerarRelatorio(CaixaBean caixa) throws Exception {
 		try {
 			ArrayList<String> result = new ArrayList<String>();
 			PedidoBean pedidoBean = new PedidoBean();
-			pedidoBean.setDtEmissao(Validacao.formatarData(2, new Date()));
+			pedidoBean.setDtEmissao(Validacao.formatarData(2, new Date()));			
 			List<PedidoBean> pedidoCaixa = pedidoDao.findLike(pedidoClasse, pedidoBean);
-			
+			/*
+			 * Até so buscou os pedidos do dia
+			 */
 			CaixaBean caixaBean = new CaixaBean();
 			caixaBean.setDtAbertura(Validacao.formatarData(2, new Date()));
+			// aqui na verdade so tem de buscar o registro que nao tem data de fechamento
+			// nao uma coleção
 			Collection<CaixaBean> listaCaixa = caixaDao.findLike(caixaClasse, caixaBean);
+			/*
+			 * buscou o caixa aberto
+			 * nao tem mais de um caixa aberto
+			 */
+			FormaPagamentoBean formaPagamentoBean = new FormaPagamentoBean();
+			ArrayList<FormaPagamentoBean> listaForma = formaPagamentoDao.findLike(formaPagamentoClasse, formaPagamentoBean);
 			
-			FormaPagamentoBean formaPagamentoBean = new FormaPagamentoBean();			
+			// forzim na lista d ecaixas?? deveria ser no dia de hoje so um caixa
+			// dai fazia so 
 			for (CaixaBean model : listaCaixa) {			
 				result.add(Validacao.validaString(model));
+				//esse forzim
 				for (PedidoBean model2 : pedidoCaixa) {
 					result.add(Validacao.validaString(model2));
-					formaPagamentoBean.setCdFormaPagamento(Validacao.validaInteger(pedidoBean.getCdFormaPagamento()));
-					List<FormaPagamentoBean> formaPagameto = formaPagamentoDao.findLike(formaPagamentoClasse, formaPagamentoBean);
-					for (FormaPagamentoBean model3 : formaPagameto) {						
-						result.add(Validacao.validaString(model3.getDsFormaPagamento()));
-					}
+					FormaPagamentoBean formaPagameto = formaPagamentoDao.findById(formaPagamentoClasse, Validacao.validaInteger(pedidoBean.getCdFormaPagamento()));						
+					result.add(Validacao.validaString(formaPagameto.getDsFormaPagamento()));
 				}
 			}			
 			return result;
