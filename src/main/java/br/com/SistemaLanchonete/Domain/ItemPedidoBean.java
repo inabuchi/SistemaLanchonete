@@ -48,7 +48,7 @@ public class ItemPedidoBean implements Serializable {
 	private float vlDesconto;
 	@OneToMany(mappedBy = "itemPedido", targetEntity = ItemPedidoAdicionalBean.class, fetch = FetchType.LAZY, cascade = {
 			CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH })
-	private List<ItemPedidoAdicionalBean> itemPedidoAdicionais = new ArrayList<ItemPedidoAdicionalBean>();;
+	private List<ItemPedidoAdicionalBean> itemPedidoAdicionais = new ArrayList<ItemPedidoAdicionalBean>();
 
 	/**
 	 * Contrutor padrão da classe
