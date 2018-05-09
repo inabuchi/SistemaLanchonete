@@ -17,16 +17,39 @@ import javax.ws.rs.core.Response;
 import br.com.SistemaLanchonete.Domain.CaixaBean;
 import br.com.SistemaLanchonete.Service.CaixaService;
 
+/**
+ * * Classe REST para manipulação de objetos do tipo Caixa<br>
+ * <p>
+ * URI para acesso: http://localhost:8080/SistemaLanchonete/services/caixa
+ * 
+ * @author Lino Pegoretti
+ *
+ */
 @Path("/caixa")
 public class CaixaResource {
-
+	/**
+	 * Recurso REST para fazer a abertura do caixa diário
+	 * <p>
+	 * URI para acesso: http://localhost:8080/SistemaLanchonete/services/caixa/caixa
+	 * <p>
+	 * Arquivo JSON para modelo de caixa:
+	 * {@link br.com.SistemaLanchonete.ExemplosJSON.Caixa.json}
+	 * 
+	 * @param caixa
+	 *            - Um objeto do tipo CaixaBean para ser inserido no BD,<br>
+	 *            efetuando a abertura do caixa diário
+	 * 
+	 * @return Response - Uma resposta do servidor principal<br>
+	 *         200 quando inserido com sucesso<br>
+	 *         500 quando houver erro interno
+	 */
 	@POST
 	@Path("/caixa")
 	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response insert(CaixaBean caixa) {
+	public Response abreCaixa(CaixaBean caixa) {
 		try {
 			new CaixaService().save(caixa);
-			return Response.status(201).entity("Caixa Inserido com Sucesso").build();
+			return Response.status(200).entity("Caixa Aberto com Sucesso").build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new WebApplicationException(500);
@@ -36,7 +59,7 @@ public class CaixaResource {
 	@PUT
 	@Path("/{cdCaixa}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(@PathParam("cdCaixa") int cdCaixa) {
+	public Response fechaCaixa(@PathParam("cdCaixa") int cdCaixa) {
 		try {
 			CaixaBean caixa = new CaixaBean();
 			caixa.setCdCaixa(cdCaixa);

@@ -37,7 +37,7 @@ public class ProdutoResource {
 	 * Arquivo JSON para modelo de produto:
 	 * {@link br.com.SistemaLanchonete.ExemplosJSON.Produto.json}
 	 * 
-	 *  @param produto
+	 * @param produto
 	 *            - Um objeto do tipo ProdutoBean para ser inserido no BD
 	 * 
 	 * @return Response - Uma resposta do servidor principal<br>
@@ -56,6 +56,7 @@ public class ProdutoResource {
 			throw new WebApplicationException(500);
 		}
 	}
+
 	/**
 	 * Recurso REST para atualização de um produto no BD *
 	 * <p>
@@ -83,6 +84,7 @@ public class ProdutoResource {
 			throw new WebApplicationException(500);
 		}
 	}
+
 	/**
 	 * Recurso REST para remoção de um produto no BD
 	 * <p>
@@ -110,17 +112,18 @@ public class ProdutoResource {
 			throw new WebApplicationException(500);
 		}
 	}
+
 	/**
-	 * Recurso REST para busca de um único funcionario no BD
+	 * Recurso REST para busca de um único produto no BD
 	 * <p>
 	 * URI para acesso:
-	 * http://localhost:8080/SistemaLanchonete/services/funcionario/cdPessoa
+	 * http://localhost:8080/SistemaLanchonete/services/produto/cdProduto
 	 * <p>
 	 * 
-	 * @param cdPessoa
-	 *            - Um id de um FuncionarioBean para ser buscado no BD
+	 * @param cdProduto
+	 *            - Um id de um ProdutoBean para ser buscado no BD
 	 * 
-	 * @return FuncionarioBean - Um funcionario localizado no banco de dados<br>
+	 * @return ProdutoBean - Um produto localizado no banco de dados<br>
 	 *         500 quando houver erro interno
 	 */
 	@GET
@@ -137,13 +140,34 @@ public class ProdutoResource {
 		}
 	}
 
+	/**
+	 * Recurso REST para fazer uma busca de vários produtos no BD de acordo com o
+	 * campo e valor passado por parametro na URL
+	 * <p>
+	 * URI para acesso:
+	 * http://localhost:8080/SistemaLanchonete/services/produto/produtos/campo=valor
+	 * <p>
+	 * 
+	 * @param campo
+	 *            - Campo para pesquisa, implementado Referencia e Descrição
+	 * @param valor
+	 *            - Valor do campo para a pesquisa
+	 * 
+	 * @return ArrayList ProdutoBean - Uma lista de produtos de acordo com os
+	 *         parametros enviados<br>
+	 *         500 quando houver erro interno
+	 */
 	@GET
 	@Path("/produtos/{campo}={valor}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<ProdutoBean> findLike(@PathParam("campo") String campo, @PathParam("valor") String valor) {
-		try {
-			ProdutoBean produto = new ProdutoBean();
+		ProdutoBean produto = new ProdutoBean();
+		if (campo.equals("dsRefProduto")) {
+			produto.setDsRefProduto(valor);
+		} else {
 			produto.setDsProduto(valor);
+		}
+		try {
 			ArrayList<ProdutoBean> produtos = new ProdutoService().findLike(produto);
 			return produtos;
 		} catch (Exception e) {
