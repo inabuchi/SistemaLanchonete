@@ -160,9 +160,13 @@ public class FuncionarioResource {
 	@Path("/funcionarios/{campo}={valor}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<FuncionarioBean> findLike(@PathParam("campo") String campo, @PathParam("valor") String valor) {
-		try {
-			FuncionarioBean funcionario = new FuncionarioBean();
+		FuncionarioBean funcionario = new FuncionarioBean();
+		if (campo.equals("dsTelefone1")) {
+			funcionario.setDsTelefone1(valor);
+		} else {
 			funcionario.setDsNome(valor);
+		}
+		try {
 			ArrayList<FuncionarioBean> funcionarios = new FuncionarioService().findLike(funcionario);
 			return funcionarios;
 		} catch (Exception e) {

@@ -17,9 +17,33 @@ import javax.ws.rs.core.Response;
 import br.com.SistemaLanchonete.Domain.ProdutoAdicionalBean;
 import br.com.SistemaLanchonete.Service.ProdutoAdicionalService;
 
+/**
+ * * Classe REST para manipulação de objetos do tipo ProdutoAdicional<br>
+ * <p>
+ * URI para acesso:
+ * http://localhost:8080/SistemaLanchonete/services/produtoAdicional
+ * 
+ * @author Lino Pegoretti
+ *
+ */
 @Path("/produtoAdicional")
 public class ProdutoAdicionalResource {
-
+	/**
+	 * Recurso REST para inserção de um novo adicional de produto
+	 * <p>
+	 * URI para acesso:
+	 * http://localhost:8080/SistemaLanchonete/services/produtoAdicional/produtoAdicional
+	 * <p>
+	 * Arquivo JSON para modelo de adicional de produto:
+	 * {@link br.com.SistemaLanchonete.ExemplosJSON.ProdutoAdicional.json}
+	 * 
+	 * @param produtoAdicional
+	 *            - Um objeto do tipo ProdutoAdicionalBean para ser inserido no BD
+	 * 
+	 * @return Response - Uma resposta do servidor principal<br>
+	 *         200 quando inserido com sucesso<br>
+	 *         500 quando houver erro interno
+	 */
 	@POST
 	@Path("/produtoAdicional")
 	@Consumes({ MediaType.APPLICATION_JSON })
@@ -33,6 +57,20 @@ public class ProdutoAdicionalResource {
 		}
 	}
 
+	/**
+	 * Recurso REST para atualização de um novo adicional de produto
+	 * <p>
+	 * URI para acesso:
+	 * http://localhost:8080/SistemaLanchonete/services/produtoAdicional/cdProdutoAdicional
+	 * <p>
+	 * 
+	 * @param cdProdutoAdicional
+	 *            - Um id de um ProdutoAdicionalBean para ser atualizado no BD
+	 * 
+	 * @return Response - Uma resposta do servidor principal<br>
+	 *         200 quando atualizado com sucesso<br>
+	 *         500 quando houver erro interno
+	 */
 	@PUT
 	@Path("/{cdProdutoAdicional}")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -47,6 +85,20 @@ public class ProdutoAdicionalResource {
 		}
 	}
 
+	/**
+	 * Recurso REST para remoção de uma categoria de produto no BD
+	 * <p>
+	 * URI para acesso:
+	 * http://localhost:8080/SistemaLanchonete/services/produtoAdicional/cdProdutoAdicional
+	 * <p>
+	 * 
+	 * @param cdProdutoAdicional
+	 *            - Um id de um ProdutoAdicionalBean para ser removido do BD
+	 * 
+	 * @return Response - Uma resposta do servidor principal<br>
+	 *         200 quando removido com sucesso<br>
+	 *         500 quando houver erro interno
+	 */
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{cdProdutoAdicional}")
@@ -61,6 +113,20 @@ public class ProdutoAdicionalResource {
 		}
 	}
 
+	/**
+	 * Recurso REST para busca de um único adicional de produto no BD
+	 * <p>
+	 * URI para acesso:
+	 * http://localhost:8080/SistemaLanchonete/services/produtoAdicional/cdProdutoAdicional
+	 * <p>
+	 * 
+	 * @param cdProdutoAdicional
+	 *            - Um id de um ProdutoAdicionalBean para ser buscado no BD
+	 * 
+	 * @return ProdutoAdicionalBean - Um adicional de produto localizado no banco
+	 *         de dados<br>
+	 *         500 quando houver erro interno
+	 */
 	@GET
 	@Path("/{cdProdutoAdicional}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -75,14 +141,31 @@ public class ProdutoAdicionalResource {
 		}
 	}
 
+	/**
+	 * Recurso REST para fazer uma busca de vários adicionais de produto no BD de
+	 * acordo com o campo e valor passado por parametro na URL
+	 * <p>
+	 * URI para acesso:
+	 * http://localhost:8080/SistemaLanchonete/services/produtoAdicional/produtoAdicionais/campo=valor
+	 * <p>
+	 * 
+	 * @param campo
+	 *            - Campo para pesquisa, implementado descrição
+	 * @param valor
+	 *            - Valor do campo para a pesquisa
+	 * 
+	 * @return ArrayList ProdutoAdicionalBean - Uma lista de adicionais de produto
+	 *         de acordo com os parametros enviados<br>
+	 *         500 quando houver erro interno
+	 */
 	@GET
 	@Path("/produtoAdicionais/{campo}={valor}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<ProdutoAdicionalBean> findLike(@PathParam("campo") String campo,
 			@PathParam("valor") String valor) {
+		ProdutoAdicionalBean produtoAdicional = new ProdutoAdicionalBean();
+		produtoAdicional.setDsAdicional(valor);
 		try {
-			ProdutoAdicionalBean produtoAdicional = new ProdutoAdicionalBean();
-			produtoAdicional.setDsAdicional(valor);
 			ArrayList<ProdutoAdicionalBean> produtoAdicionais = new ProdutoAdicionalService()
 					.findLike(produtoAdicional);
 			return produtoAdicionais;
