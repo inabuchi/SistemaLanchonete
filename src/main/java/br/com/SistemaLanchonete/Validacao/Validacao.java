@@ -313,7 +313,7 @@ public class Validacao {
 	 * @return
 	 * @throws SistemaException
 	 */
-	public static int intToString(String intString) throws SistemaException {
+	public static int stringToInt(String intString) throws SistemaException {
 		int intRetorno = 0;
 		if (testaStringNaoNula(intString) && testaStringNaoVazia(intString)) {
 			try {
