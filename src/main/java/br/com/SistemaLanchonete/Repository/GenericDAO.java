@@ -3,6 +3,7 @@ package br.com.SistemaLanchonete.Repository;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,6 +12,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+
+import br.com.SistemaLanchonete.Validacao.Validacao;
 
 /**
  * Classe Genérica de Acesso ao banco de dados
@@ -37,7 +40,6 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 	public String save(MODEL model, int id) throws BDException {
 		try {
 			manager.getTransaction().begin();
-			System.out.println(model.toString());
 			if (id == 0) {
 				manager.persist(model);
 				retorno = "Dados salvos com sucesso na tabela";
@@ -111,7 +113,7 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 	 */
 	public ArrayList<MODEL> findLike(Class<MODEL> classe, MODEL model) {
 		ArrayList<MODEL> lista = new ArrayList<MODEL>();
-		System.out.println(model.toString());
+		
 		CriteriaBuilder cb = manager.getCriteriaBuilder();
 		CriteriaQuery<MODEL> cq = cb.createQuery(classe);
 		Root<MODEL> root = cq.from(classe);
@@ -134,18 +136,21 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 			}			
 			
 			if(value != null) {	
-				boolean podeFiltrar = false;
-				if(value instanceof Integer)
-					podeFiltrar = ((Integer)value) != 0;
-				else if(value instanceof String)
-					podeFiltrar = !((String)value).equalsIgnoreCase("");
-				else if(value instanceof Double)
-					podeFiltrar = ((Double)value) != 0;
-				else if(value instanceof Float)
-					podeFiltrar = ((Float)value) != 0;
-				// Fazer instancia de DATA.
-				if (podeFiltrar)
-					predicados.add(cb.like(root.get(fields.get(i).getName()), "%" + value + "%"));		
+				String filtro = "";
+				if(value instanceof Integer && ((Integer)value) != 0)
+					filtro = Integer.toString((Integer)value) ;
+				else if(value instanceof String && !Validacao.validaString(value).equalsIgnoreCase(""))
+					filtro = Validacao.validaString(value) ;
+				else if(value instanceof Double &&((Double)value) != 0)
+					filtro = Double.toString((Double)value) ;
+				else if(value instanceof Float && ((Float)value) != 0)
+					filtro = Float.toString((Float)value) ;
+				else if(value instanceof Date)
+					predicados.add(cb.between(root.<Date>get(fields.get(i).getName()), 
+							Validacao.getInicioDia(((Date) value)), Validacao.getFimDia((Date) value)));
+
+				if (!filtro.equalsIgnoreCase(""))
+					predicados.add(cb.like(root.get(fields.get(i).getName()), "%" + filtro + "%"));		
 			}
 			
 		}
