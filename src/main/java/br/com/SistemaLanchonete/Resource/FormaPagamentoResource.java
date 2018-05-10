@@ -10,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -143,27 +144,23 @@ public class FormaPagamentoResource {
 
 	/**
 	 * Recurso REST para fazer uma busca de várias formas de pagamento no BD de
-	 * acordo com o campo e valor passado por parametro na URL
+	 * acordo com o parametro passado na URL
 	 * <p>
 	 * URI para acesso:
-	 * http://localhost:8080/SistemaLanchonete/services/formaPagamento/formasPagamento/campo=valor
+	 * http://localhost:8080/SistemaLanchonete/services/formaPagamento/formasPagamento?dsDescricao=
 	 * <p>
 	 * 
-	 * @param campo
-	 *            - Campo para pesquisa, implementado descrição
-	 * @param valor
-	 *            - Valor do campo para a pesquisa
-	 * 
+	 * @param dsFormaPagamento
+	 *            - descrição da forma de pagamento para pesquisa
 	 * @return ArrayList FormaPagamentoBean - Uma lista de formas de pagamento de
 	 *         acordo com os parametros enviados<br>
 	 *         500 quando houver erro interno
 	 */
 	@GET
-	@Path("/formasPagamento/{campo}={valor}")
+	@Path("/formasPagamento")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<FormaPagamentoBean> findLike(@PathParam("campo") String campo, @PathParam("valor") String valor) {
-		FormaPagamentoBean formaPagamento = new FormaPagamentoBean();
-		formaPagamento.setDsFormaPagamento(valor);
+	public ArrayList<FormaPagamentoBean> findLike(@QueryParam("dsFormaPagamento") String dsFormaPagamento) {
+		FormaPagamentoBean formaPagamento = new FormaPagamentoBean(0, dsFormaPagamento);
 		try {
 			ArrayList<FormaPagamentoBean> formasPagamento = new FormaPagamentoService().findLike(formaPagamento);
 			return formasPagamento;

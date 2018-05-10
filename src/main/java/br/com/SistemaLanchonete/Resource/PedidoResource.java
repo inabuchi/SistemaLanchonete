@@ -1,6 +1,7 @@
 package br.com.SistemaLanchonete.Resource;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -10,6 +11,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -142,41 +144,43 @@ public class PedidoResource {
 	}
 
 	/**
-	 * Recurso REST para fazer uma busca de vários pedidos no BD de acordo com o
-	 * campo e valor passado por parametro na URL
+	 * Recurso REST para fazer uma busca de vários pedidos no BD de acordo com o o
+	 * valor passado por parametro na URL
 	 * <p>
 	 * URI para acesso:
-	 * http://localhost:8080/SistemaLanchonete/services/pedido/pedidos/campo=valor
+	 * http://localhost:8080/SistemaLanchonete/services/pedido/pedidos/cdNumPedido=&dtDataEmissao=
 	 * <p>
 	 * 
-	 * @param campo
-	 *            - Campo para pesquisa, implementado numero pedido e data emissao
-	 * @param valor
-	 *            - Valor do campo para a pesquisa
+	 * @param cdNumPedido
+	 *            - um numero interno de pedido para pesquisa, se vier numero
+	 *            invalido pesquisa por numPedido=0
+	 * @param dtEmissao
+	 *            - uma data para pesquisa dos pedidos, se vier datainvalida,
+	 *            pesquisa pela data atual
 	 * 
 	 * @return ArrayList PedidoBean - Uma lista de pedidos de acordo com os
 	 *         parametros enviados <br>
-	 *         404 - quando nao achado pedidos relacionados a pesquisa <br>
 	 *         500 quando houver erro interno
 	 */
 	@GET
-	@Path("/pedidos/{campo}={valor}")
+	@Path("/pedidos")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<PedidoBean> findLike(@PathParam("campo") String campo, @PathParam("valor") String valor) {
-		PedidoBean pedido = new PedidoBean();
-		if (campo.equals("cdNumPedido")) {
-			try {
-				pedido.setCdNumPedido(Validacao.stringToInt(valor));
-			} catch (SistemaException e) {
-				throw new WebApplicationException(404);
-			}
-		} else {
-			try {
-				pedido.setDtEmissao(Validacao.stringToDate(valor));
-			} catch (SistemaException e) {
-				throw new WebApplicationException(404);
-			}
+	public ArrayList<PedidoBean> findLike(@QueryParam("cdNumPedido") String cdNumPedido,
+			@QueryParam("dtEmissao") String dtEmissao) {
+		int numPedido;
+		try {
+			numPedido = Validacao.stringToInt(cdNumPedido);
+		} catch (SistemaException e1) {
+			numPedido = 0;
 		}
+		Date dataEmissao = null;
+		try {
+			dataEmissao = Validacao.stringToDate(dtEmissao);
+		} catch (SistemaException e1) {
+			dataEmissao = new Date();
+		}
+		PedidoBean pedido = new PedidoBean(0, null, null, null, null, numPedido, dataEmissao, 0, 0, 0, 0, null, 0,
+				null);
 		try {
 			ArrayList<PedidoBean> pedidos = new PedidoService().findLike(pedido);
 			return pedidos;

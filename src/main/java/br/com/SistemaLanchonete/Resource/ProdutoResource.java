@@ -10,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -145,28 +146,25 @@ public class ProdutoResource {
 	 * campo e valor passado por parametro na URL
 	 * <p>
 	 * URI para acesso:
-	 * http://localhost:8080/SistemaLanchonete/services/produto/produtos/campo=valor
+	 * http://localhost:8080/SistemaLanchonete/services/produto/produtos?dsRefProduto=&dsProduto=
 	 * <p>
 	 * 
-	 * @param campo
-	 *            - Campo para pesquisa, implementado Referencia e Descrição
+	 * @param dsRefProduto
+	 *            - Referencia de um produto para pesquisa
+	 * @param dsProduto
+	 *            - Descrição de um produto para pesquisa
 	 * @param valor
 	 *            - Valor do campo para a pesquisa
-	 * 
 	 * @return ArrayList ProdutoBean - Uma lista de produtos de acordo com os
 	 *         parametros enviados<br>
 	 *         500 quando houver erro interno
 	 */
 	@GET
-	@Path("/produtos/{campo}={valor}")
+	@Path("/produtos")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<ProdutoBean> findLike(@PathParam("campo") String campo, @PathParam("valor") String valor) {
-		ProdutoBean produto = new ProdutoBean();
-		if (campo.equals("dsRefProduto")) {
-			produto.setDsRefProduto(valor);
-		} else {
-			produto.setDsProduto(valor);
-		}
+	public ArrayList<ProdutoBean> findLike(@QueryParam("dsRefProduto") String dsRefProduto,
+			@QueryParam("dsProduto") String dsProduto) {
+		ProdutoBean produto = new ProdutoBean(0, null, dsRefProduto, dsProduto, true);
 		try {
 			ArrayList<ProdutoBean> produtos = new ProdutoService().findLike(produto);
 			return produtos;
