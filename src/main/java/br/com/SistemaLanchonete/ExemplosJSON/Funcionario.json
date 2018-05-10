@@ -1,33 +1,37 @@
 {
-	"dsNome": "",
-	"dsTelefone1": "",
-	"dsTelefone2": "",
-	"dtCadastro": 9999999999999,
-	"enderecoPessoas": [
-		{
-			"endereco": {
-				"logradouro": {
-					"bairro": {
-						"municipio": {
-							"estado": {
-								"dsEstado": "",
-								"dsSigla": ""
-							},
-							"dsMunicipio": ""
-						},
-						"dsBairro": ""
-					},
-					"cdCep": 99999999,
-					"dsLogradouro": ""
-				},
-				"cdNumero": 99999,
-				"dsComplemento": "",
-				"dsObservacao": ""
-			},
-			"dtAlteracao": 9999999999999,
-			"enderecoPadrao": true
-		}
-	],
-	"dsObservacao": "",
-	"ativo": false
+    "dsNome": "Fabiola gonsalves",
+    "dsTelefone1": "4733335555",
+    "dsTelefone2": "47988126544",
+    "dtCadastro": ,
+    "enderecoPessoas": [
+        {
+            "endereco": {
+                "logradouro": {
+                    "bairro": {
+                        "municipio": {
+                            "estado": {
+                                "dsEstado": "ACRE",
+                                "dsSigla": "AC"
+                            },
+                            "dsMunicipio": "Blumenau"
+                        },
+                        "dsBairro": "Centro"
+                    },
+                    "cdCep": 89010000,
+                    "dsLogradouro": "Rua Quinze De Novembro"
+                },
+                "cdNumero": 25,
+                "dsComplemento": "",
+                "dsObservacao": ""
+            },
+            "dtAlteracao": 1524625200000,
+            "enderecoPadrao": false
+        }
+    ],
+    "dsCargo": "Motoqueiro",
+    "dsLogin": "fabiola",
+    "dsSenha": "senha",
+    "cdNivel": 0,
+    "caixa": [],
+    "ativo": false
 }
