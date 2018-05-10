@@ -10,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -141,31 +142,28 @@ public class FuncionarioResource {
 
 	/**
 	 * Recurso REST para fazer uma busca de vários funcionarios no BD de acordo com
-	 * o campo e valor passado por parametro na URL
+	 * o valor passado por parametro na URL
 	 * <p>
 	 * URI para acesso:
-	 * http://localhost:8080/SistemaLanchonete/services/funcionario/funcionarios/campo=valor
+	 * http://localhost:8080/SistemaLanchonete/services/cliente/funcionarios?dsNome=&dsTelefone1=
 	 * <p>
 	 * 
-	 * @param campo
-	 *            - Campo para pesquisa, implementado Telefone e Nome
-	 * @param valor
-	 *            - Valor do campo para a pesquisa
+	 * @param dsNome
+	 *            - Valor do campo nome para pesquisa
+	 * @param dsTelefone1
+	 *            - Valor do campo telefone1 para a pesquisa
 	 * 
 	 * @return ArrayList FuncionarioBean - Uma lista de funcionarios de acordo com
 	 *         os parametros enviados<br>
 	 *         500 quando houver erro interno
 	 */
 	@GET
-	@Path("/funcionarios/{campo}={valor}")
+	@Path("/funcionarios")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<FuncionarioBean> findLike(@PathParam("campo") String campo, @PathParam("valor") String valor) {
-		FuncionarioBean funcionario = new FuncionarioBean();
-		if (campo.equals("dsTelefone1")) {
-			funcionario.setDsTelefone1(valor);
-		} else {
-			funcionario.setDsNome(valor);
-		}
+	public ArrayList<FuncionarioBean> findLike(@QueryParam("dsNome") String dsNome,
+			@QueryParam("dsTelefone1") String dsTelefone1) {
+		FuncionarioBean funcionario = new FuncionarioBean(0, dsNome, dsTelefone1, null, null, true, 0, null, null, null,
+				0);
 		try {
 			ArrayList<FuncionarioBean> funcionarios = new FuncionarioService().findLike(funcionario);
 			return funcionarios;

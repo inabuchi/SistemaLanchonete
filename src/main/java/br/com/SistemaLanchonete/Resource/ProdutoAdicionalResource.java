@@ -10,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -123,8 +124,8 @@ public class ProdutoAdicionalResource {
 	 * @param cdProdutoAdicional
 	 *            - Um id de um ProdutoAdicionalBean para ser buscado no BD
 	 * 
-	 * @return ProdutoAdicionalBean - Um adicional de produto localizado no banco
-	 *         de dados<br>
+	 * @return ProdutoAdicionalBean - Um adicional de produto localizado no banco de
+	 *         dados<br>
 	 *         500 quando houver erro interno
 	 */
 	@GET
@@ -142,29 +143,24 @@ public class ProdutoAdicionalResource {
 	}
 
 	/**
-	 * Recurso REST para fazer uma busca de vários adicionais de produto no BD de
-	 * acordo com o campo e valor passado por parametro na URL
+	 * Recurso REST para fazer uma busca de vários adicionais de produto no BD de o
+	 * valor passado por parametro na URL
 	 * <p>
 	 * URI para acesso:
-	 * http://localhost:8080/SistemaLanchonete/services/produtoAdicional/produtoAdicionais/campo=valor
+	 * http://localhost:8080/SistemaLanchonete/services/produtoAdicional/produtoAdicionais?dsAdicional=
 	 * <p>
 	 * 
-	 * @param campo
-	 *            - Campo para pesquisa, implementado descrição
-	 * @param valor
-	 *            - Valor do campo para a pesquisa
-	 * 
+	 * @param dsAdicional
+	 *            - descrição do adicional de produto para pesquisa
 	 * @return ArrayList ProdutoAdicionalBean - Uma lista de adicionais de produto
 	 *         de acordo com os parametros enviados<br>
 	 *         500 quando houver erro interno
 	 */
 	@GET
-	@Path("/produtoAdicionais/{campo}={valor}")
+	@Path("/produtoAdicionais")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<ProdutoAdicionalBean> findLike(@PathParam("campo") String campo,
-			@PathParam("valor") String valor) {
-		ProdutoAdicionalBean produtoAdicional = new ProdutoAdicionalBean();
-		produtoAdicional.setDsAdicional(valor);
+	public ArrayList<ProdutoAdicionalBean> findLike(@QueryParam("dsAdicional") String dsAdicional) {
+		ProdutoAdicionalBean produtoAdicional = new ProdutoAdicionalBean(0, dsAdicional, 0);
 		try {
 			ArrayList<ProdutoAdicionalBean> produtoAdicionais = new ProdutoAdicionalService()
 					.findLike(produtoAdicional);

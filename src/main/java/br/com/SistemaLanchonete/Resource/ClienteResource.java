@@ -10,6 +10,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -142,31 +143,27 @@ public class ClienteResource {
 
 	/**
 	 * Recurso REST para fazer uma busca de vários clientes no BD de acordo com o
-	 * campo e valor passado por parametro na URL
+	 * valor passado por parametro na URL
 	 * <p>
 	 * URI para acesso:
-	 * http://localhost:8080/SistemaLanchonete/services/cliente/clientes/campo=valor
+	 * http://localhost:8080/SistemaLanchonete/services/cliente/clientes?dsNome=&dsTelefone1=
 	 * <p>
 	 * 
-	 * @param campo
-	 *            - Campo para pesquisa, implementado Telefone e Nome
-	 * @param valor
-	 *            - Valor do campo para a pesquisa
+	 * @param dsNome
+	 *            - Valor do campo nome para pesquisa
+	 * @param dsTelefone1
+	 *            - Valor do campo telefone1 para a pesquisa
 	 * 
 	 * @return ArrayList ClienteBean - Uma lista de clientes de acordo com os
 	 *         parametros enviados<br>
 	 *         500 quando houver erro interno
 	 */
 	@GET
-	@Path("/clientes/{campo}={valor}")
+	@Path("/clientes")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<ClienteBean> findLike(@PathParam("campo") String campo, @PathParam("valor") String valor) {
-		ClienteBean cliente = new ClienteBean();
-		if (campo.equals("dsTelefone1")) {
-			cliente.setDsTelefone1(valor);
-		} else {
-			cliente.setDsNome(valor);
-		}
+	public ArrayList<ClienteBean> findLike(@QueryParam("dsNome") String dsNome,
+			@QueryParam("dsTelefone1") String dsTelefone1) {
+		ClienteBean cliente = new ClienteBean(0, dsNome, dsTelefone1, null, null, true, 0, null);
 		try {
 			ArrayList<ClienteBean> clientes = new ClienteService().findLike(cliente);
 			return clientes;

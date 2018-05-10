@@ -10,16 +10,19 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import br.com.SistemaLanchonete.Domain.ProdutoCategoriaBean;
 import br.com.SistemaLanchonete.Service.ProdutoCategoriaService;
+
 /**
  * * Classe REST para manipulação de objetos do tipo ProdutoCategoria<br>
  * <p>
- * URI para acesso: http://localhost:8080/SistemaLanchonete/services/produtoCategoria
+ * URI para acesso:
+ * http://localhost:8080/SistemaLanchonete/services/produtoCategoria
  * 
  * @author Lino Pegoretti
  *
@@ -54,6 +57,7 @@ public class ProdutoCategoriaResource {
 			throw new WebApplicationException(500);
 		}
 	}
+
 	/**
 	 * Recurso REST para atualização de uma categoria de produto no BD *
 	 * <p>
@@ -81,6 +85,7 @@ public class ProdutoCategoriaResource {
 			throw new WebApplicationException(500);
 		}
 	}
+
 	/**
 	 * Recurso REST para remoção de uma categoria de produto no BD
 	 * <p>
@@ -108,6 +113,7 @@ public class ProdutoCategoriaResource {
 			throw new WebApplicationException(500);
 		}
 	}
+
 	/**
 	 * Recurso REST para busca de uma única categoria de produto no BD
 	 * <p>
@@ -118,7 +124,8 @@ public class ProdutoCategoriaResource {
 	 * @param cdProdutoCategoria
 	 *            - Um id de um ProdutoCategoriaBean para ser buscado no BD
 	 * 
-	 * @return ProdutoCategoriaBean - Uma categoria de produto localizado no banco de dados<br>
+	 * @return ProdutoCategoriaBean - Uma categoria de produto localizado no banco
+	 *         de dados<br>
 	 *         500 quando houver erro interno
 	 */
 	@GET
@@ -134,30 +141,26 @@ public class ProdutoCategoriaResource {
 			throw new WebApplicationException(500);
 		}
 	}
+
 	/**
-	 * Recurso REST para fazer uma busca de várias categorias de produto no BD de acordo com o
-	 * campo e valor passado por parametro na URL
+	 * Recurso REST para fazer uma busca de várias categorias de produto no BD de
+	 * acordo com o valor passado por parametro na URL
 	 * <p>
 	 * URI para acesso:
-	 * http://localhost:8080/SistemaLanchonete/services/produtoCategoria/produtoCategorias/campo=valor
+	 * http://localhost:8080/SistemaLanchonete/services/produtoCategoria/produtoCategorias?dsCategoria=
 	 * <p>
 	 * 
-	 * @param campo
-	 *            - Campo para pesquisa, implementado descrição
-	 * @param valor
-	 *            - Valor do campo para a pesquisa
-	 * 
-	 * @return ArrayList ProdutoCategoriaBean - Uma lista de categorias de produto de acordo com os
-	 *         parametros enviados<br>
+	 * @param dsCategoria
+	 *            - Uma categoria para pesquisa
+	 * @return ArrayList ProdutoCategoriaBean - Uma lista de categorias de produto
+	 *         de acordo com os parametros enviados<br>
 	 *         500 quando houver erro interno
 	 */
 	@GET
-	@Path("/produtoCategorias/{campo}={valor}")
+	@Path("/produtoCategorias")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<ProdutoCategoriaBean> findLike(@PathParam("campo") String campo,
-			@PathParam("valor") String valor) {
-		ProdutoCategoriaBean produtoCategoria = new ProdutoCategoriaBean();
-		produtoCategoria.setDsCategoria(valor);
+	public ArrayList<ProdutoCategoriaBean> findLike(@QueryParam("dsCategoria") String dsCategoria) {
+		ProdutoCategoriaBean produtoCategoria = new ProdutoCategoriaBean(0, dsCategoria);
 		try {
 			ArrayList<ProdutoCategoriaBean> produtoCategorias = new ProdutoCategoriaService()
 					.findLike(produtoCategoria);
