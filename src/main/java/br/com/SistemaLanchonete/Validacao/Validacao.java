@@ -14,45 +14,64 @@ public class Validacao {
 
 	/*
 	 * 
-	 * Métodos para validação de String
+	 * M�todos para valida��o de String
 	 * 
 	 */
 
 	/**
-	 * Método validação de String
+	 * Converte um objeto para String vazia ou valor do objeto
 	 *
-	 * @param object
-	 * @return String
+	 * @param valor
+	 *            - um objeto gen�rico para ser convertido
+	 * @return String - O valor do objeto em String quando o objeto tiver
+	 *         conteudo<br>
+	 *         String vazia quando for nulo
 	 */
 	public static String validaString(Object valor) {
 		return valor == null ? "" : String.valueOf(valor);
 	}
 
 	/**
-	 * Testa String Nula
+	 * Retorna se uma string � nula ou n�o
 	 * 
 	 * @param stringValidacao
-	 * @return false quando nula
+	 *            - uma String para ser validada
+	 * @return true - quando for nula<br>
+	 *         false - quando vazia ou tem conte�do
 	 */
-	public static boolean testaStringNaoNula(String stringValidacao) {
-		return stringValidacao != null;
+	public static boolean testaStringNula(String stringValidacao) {
+		return stringValidacao == null ? true : false;
 	}
 
 	/**
-	 * Testa string nao vazia
+	 * Retorna se uma string � vazia ou nao
 	 * 
 	 * @param stringValidacao
-	 * @return false quando vazia
+	 *            - uma String para ser validada
+	 * @return true - quando for vazia<br>
+	 *         false - quando tiver conte�do
 	 */
-	public static boolean testaStringNaoVazia(String stringValidacao) {
-		return !stringValidacao.trim().equals("");
+	public static boolean testaStringVazia(String stringValidacao) {
+		return testaStringNula(stringValidacao) ? 
+				!testaStringNula(stringValidacao)
+				: stringValidacao.trim().equals("") ? true : false;
 	}
 
-	public static String stringToVazia(String stringConversao) {
-		if (stringConversao.equals(null)) {
-			stringConversao = "";
+	public static void main(String[] args) {
+		String[] valida = { null, " ", "", "      teste", "teste      ", "teste", "123456" };
+		System.out.println("validaString");
+		for (int i = 0; i < valida.length; i++) {
+			System.out.println(i + " --> " + valida[i] + " --> " + validaString(valida[i]));
 		}
-		return stringConversao;
+		System.out.println("testaStringNula = ");
+		for (int i = 0; i < valida.length; i++) {
+			System.out.println(i + " --> " + valida[i] + " --> " + testaStringNula(valida[i]));
+		}
+		System.out.println("testaStringVazia = ");
+		for (int i = 0; i < valida.length; i++) {
+			System.out.println(i + " --> " + valida[i] + " --> " + testaStringVazia(valida[i]));
+		}
+
 	}
 
 	/*
@@ -62,17 +81,15 @@ public class Validacao {
 	 */
 
 	/**
-	 * Valida um objeto nulo
+	 * Valida um objeto nulo, pode ser qualquer objeto
 	 * 
-	 * @param um
-	 *            objeto para ser validado
-	 * @return false - se objeto estï¿½ nulo true se nao for nulo
+	 * @param objetoValidacao
+	 *            - Objeto para ser validado
+	 * @return false - se objeto estiver nulo<br>
+	 *         true - se nao for nulo
 	 */
 	public static boolean validaNulo(Object objetoValidacao) {
-		if (objetoValidacao == null) {
-			return false;
-		}
-		return true;
+		return objetoValidacao == null;
 	}
 
 	/**
@@ -134,7 +151,8 @@ public class Validacao {
 			return 0d;
 		}
 
-		String valorString = obj.toString(); // Como implementação original, se não for numero, tenta-se trabalhar com
+		String valorString = obj.toString(); // Como implementação original, se não for numero, tenta-se trabalhar
+												// com
 												// base no toString. Strings retornam "this" neste método.
 		try {
 			return Double.valueOf(valorString);
@@ -159,7 +177,7 @@ public class Validacao {
 	public static String removerCaracteresEspeciais(String texto) {
 		return texto.replaceAll("[^aA-zZ-Z1-9 ]", "");
 	}
-	
+
 	/**
 	 * Método para obter a hora inicial da data passada como parâmetro
 	 *
@@ -193,11 +211,12 @@ public class Validacao {
 	}
 
 	/**
-	 * Método para obter o formato de data conforme abaixo 1 = dd/MM/yyyy HH:mm:ss 2
-	 * = dd/MM/yyyy 3 = HH:mm:ss 4 = dd 5 = MM 6 = yyyy 7 = HH 8 = mm 9 = ss 10 =
+	 * Método para obter o formato de data conforme abaixo 1 = dd/MM/yyyy HH:mm:ss
+	 * 2 = dd/MM/yyyy 3 = HH:mm:ss 4 = dd 5 = MM 6 = yyyy 7 = HH 8 = mm 9 = ss 10 =
 	 * HH:mm
 	 * 
-	 * @param int, date
+	 * @param int,
+	 *            date
 	 * @return date
 	 * @throws Exception
 	 */
@@ -241,7 +260,7 @@ public class Validacao {
 	 */
 	public static double stringToDouble(String stringDouble) throws SistemaException {
 		double doubleRetorno = 0;
-		if (testaStringNaoNula(stringDouble) && testaStringNaoVazia(stringDouble)) {
+		if (testaStringNula(stringDouble) && testaStringVazia(stringDouble)) {
 			try {
 				doubleRetorno = Double.parseDouble(stringDouble);
 			} catch (Exception e) {
@@ -261,7 +280,7 @@ public class Validacao {
 	 */
 	public static Date stringToDate(String dataString) throws SistemaException {
 		Date dataRetorno = null;
-		if (testaStringNaoNula(dataString) && testaStringNaoVazia(dataString)) {
+		if (testaStringNula(dataString) && testaStringVazia(dataString)) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			try {
 				dataRetorno = new Date(sdf.parse(dataString).getTime());
@@ -294,7 +313,7 @@ public class Validacao {
 	 */
 	public static int stringToCodigo(String codigoString) throws SistemaException {
 		int codigoRetorno = 0;
-		if (testaStringNaoNula(codigoString) && testaStringNaoVazia(codigoString)) {
+		if (testaStringNula(codigoString) && testaStringVazia(codigoString)) {
 			try {
 				codigoRetorno = Integer.parseInt(codigoString);
 			} catch (Exception e) {
@@ -315,7 +334,7 @@ public class Validacao {
 	 */
 	public static int stringToInt(String intString) throws SistemaException {
 		int intRetorno = 0;
-		if (testaStringNaoNula(intString) && testaStringNaoVazia(intString)) {
+		if (testaStringNula(intString) && testaStringVazia(intString)) {
 			try {
 				intRetorno = Integer.parseInt(intString);
 			} catch (Exception e) {
@@ -335,7 +354,7 @@ public class Validacao {
 
 	public static boolean stringToBoolean(String booleanString) throws SistemaException {
 		boolean booleanRetorno = false;
-		if (testaStringNaoNula(booleanString) && testaStringNaoVazia(booleanString)) {
+		if (testaStringNula(booleanString) && testaStringVazia(booleanString)) {
 			try {
 				booleanRetorno = Boolean.parseBoolean(booleanString);
 

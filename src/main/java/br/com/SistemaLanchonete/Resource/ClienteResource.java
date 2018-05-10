@@ -4,18 +4,22 @@ import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import br.com.SistemaLanchonete.Domain.ClienteBean;
 import br.com.SistemaLanchonete.Service.ClienteService;
+import br.com.SistemaLanchonete.Validacao.SistemaException;
+import br.com.SistemaLanchonete.Validacao.Validacao;
 
 /**
  * Classe REST para manipulação de objetos do tipo cliente<br>
@@ -158,14 +162,15 @@ public class ClienteResource {
 	 *         500 quando houver erro interno
 	 */
 	@GET
-	@Path("/clientes/{campo}={valor}")
+	@Path("/clientes?campo={campo}&valor={valor}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<ClienteBean> findLike(@PathParam("campo") String campo, @PathParam("valor") String valor) {
+	public ArrayList<ClienteBean> findLike(@QueryParam("campo") String campo, @QueryParam("valor") String valor) {
+		System.out.println(campo + "--> " + valor);
 		ClienteBean cliente = new ClienteBean();
-		if (campo.equals("dsTelefone1")) {
-			cliente.setDsTelefone1(valor);
-		} else {
+		if (campo.equals("dsNome")) {
 			cliente.setDsNome(valor);
+		} else {
+			cliente.setDsTelefone1(valor);
 		}
 		try {
 			ArrayList<ClienteBean> clientes = new ClienteService().findLike(cliente);
