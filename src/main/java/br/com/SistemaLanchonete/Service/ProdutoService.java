@@ -11,7 +11,7 @@ public class ProdutoService {
 
 	private static String retorno = "";
 	GenericDAO<ProdutoBean> produtoDAO = new GenericDAO<ProdutoBean>();
-	Class<ProdutoBean> produtoBean;
+	Class<ProdutoBean> produtoBean = ProdutoBean.class;
 
 	public String save(ProdutoBean produto, int id) throws BDException {
 		boolean resultado = verificaDescricaoECategoria(produto);
