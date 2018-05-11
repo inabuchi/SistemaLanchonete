@@ -6,6 +6,43 @@
 
 /**
  * 
+ * Carrega uma página em um elemento html por ajax
+ * 
+ * @param {String} txtUrlEnvio url de destino
+ * @param {String} txtElementoDOM id ou class da tag de destino da página, isto é, onde a página deverá ser carregada
+ */
+function abrirPagina(txtUrlEnvio, txtElementoDOM) {
+    try {
+        var nrFim = window.location.href.indexOf('#') || 0;
+        var txtUrl = window.location.href || '';
+        if (nrFim !== -1)
+            txtUrl = txtUrl.substr(0, nrFim);
+
+        var fnRetornoAjax = conteudo => {
+
+        };
+
+        // var obj = {
+        //     url: txtUrlEnvio,
+        //     selector: '.uma-classe'
+        // };
+
+        // var txtUrlCrypt = btoa(JSON.stringify(txtUrlEnvio));
+        var txtUrlCrypt = btoa(txtUrlEnvio);
+        window.location.href = `${txtUrl}#${txtUrlCrypt}`;
+
+        $(txtElementoDOM).html("");
+
+        $(txtElementoDOM).load(txtUrlEnvio);
+    } catch (ex) {
+        console.debug(ex);
+    }
+}
+
+/**
+ * 
+ * Envia objeto json para o restful via ajax
+ * 
  * @param {String} prUrl
  * @param {String} prMethod
  * @param {Object} prDados
