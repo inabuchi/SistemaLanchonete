@@ -1,0 +1,63 @@
+<!-- 
+    Document   	: ProdutoConsulta
+    Created on 	: 21/04/2018, 16:39:28
+    Author     	: Morgana e Sidnei
+	Função		: Lista de produtos (um exemplo de produto é o seu X-galinha)
+-->
+
+	<div id="includeMenu"></div>
+
+			<div class="content-title">
+				<i class="fa fa-barcode"></i>Produtos<i class="fa fa-angle-right"></i>Consulta de produtos
+			</div>
+
+			<div class="formtitle">Produtos</div>
+			<div class="page-consulta">
+				<a class="link-abrir" href="ProdutoCadastro.html"><button type="button"
+						class="btn btn-success" style="margin: 15px 15px 25px 15px;">
+						<i class="fa fa-plus-circle"></i>Adicionar produto
+					</button></a>
+				<table class="table table-bordered table-hover" id="data-table">
+					<thead>
+						<tr>
+							<th scope="col">Código</th>
+							<th scope="col">Categoria</th>
+							<th scope="col">Descrição</th>
+							<th scope="col">Valor</th>
+							<th scope="col">Opções</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>Lanche</td>
+							<td>X-Burguer</td>
+							<td>R$ 12,00</td>
+							<td class="table-buttons">
+							<a class="link-editar" href="ProdutoCadastro.html"><button type="button"
+										class="table-edit" title="Editar">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del"
+										title="Excluir">
+										<i class="fa fa-close"></i>
+									</button></a></td>
+						</tr>											
+					</tbody>
+				</table>
+
+			</div>
+
+	
+<script type="text/javascript"
+	src="controller/generics/validacoesGenericas.js"></script>
+
+
+<script type="text/javascript">
+	$(function() {
+		$("#includeMenu").load("Menu.html");
+	});
+</script>
+<!-- Tradução customizada do DataTable -->
+<script type="text/javascript"
+	src="controller/carregarDataTable.js"></script>
+
