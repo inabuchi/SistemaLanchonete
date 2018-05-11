@@ -1,0 +1,99 @@
+<!-- 
+    Document   	: ConsultaFuncionario
+    Created on 	: 21/04/2018, 16:39:28
+    Author     	: Morgana e Sidnei
+	Função		: Visualizar todos os funcionários cadastrados.
+-->
+
+
+	<div id="includeMenu"></div>
+	
+			<div class="content-title">
+				<i class="fa fa-id-card-o"></i>Pessoas<i class="fa fa-angle-right"></i>Consulta
+				de funcionários
+			</div>
+
+			<div class="formtitle">Funcionários</div>
+			<div class="page-consulta">
+				<a class="link-abrir" href="FuncionarioCadastro.html"><button type="button"
+						class="btn btn-success" style="margin: 15px 15px 25px 15px;">
+						<i class="fa fa-plus-circle"></i>Adicionar funcionário
+					</button></a>
+				<table class="table table-bordered table-hover" id="data-table">
+					<thead>
+						<tr>
+							<th scope="col">Código</th>
+							<th scope="col">Nome</th>
+							<th scope="col">Cargo</th>
+							<th scope="col">Telefone</th>
+							<th scope="col">Opções</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>Mark Otto</td>
+							<td>Gerente</td>
+							<td>(47) 95458-4555</td>
+							<td class="table-buttons"><a class="link-editar" href="FuncionarioCadastro.html"><button
+										type="button" class="table-edit" title="Editar">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del"
+										title="Excluir">
+										<i class="fa fa-close"></i>
+									</button></a></td>
+						</tr>
+						<tr>
+							<td>2
+							<td>Jacob Thornton</td>
+							<td>Caixa</td>
+							<td>(47) 3332-9895</td>
+							<td class="table-buttons"><a class="link-editar" href="FuncionarioCadastro.html"><button
+										type="button" class="table-edit">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del">
+										<i class="fa fa-close"></i>
+									</button></a></td>
+						</tr>
+						<tr>
+							<td>3
+							<td>Larry the Bird</td>
+							<td>Garçom</td>
+							<td>(47) 9999-2525</td>
+							<td class="table-buttons"><a class="link-editar" href="FuncionarioCadastro.html"><button
+										type="button" class="table-edit">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del">
+										<i class="fa fa-close"></i>
+									</button></a>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td>Jacob Thornton</td>
+							<td>Entregador</td>
+							<td>(33) 22222-3333</td>
+							<td class="table-buttons"><a class="link-editar" href="FuncionarioCadastro.html"><button
+										type="button" class="table-edit" title="Editar">
+										<i class="fa fa-pencil"></i>
+									</button></a> <a href="#"><button type="button" class="table-del"
+										title="Excluir">
+										<i class="fa fa-close"></i>
+									</button></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+
+
+<script type="text/javascript">
+	$(function() {
+		$("#includeMenu").load("Menu.html");
+	});
+</script>
+<!-- Tradução customizada do DataTable -->
+<script type="text/javascript"
+	src="controller/carregarDataTable.js"></script>
+	
+<script type="text/javascript"
+	src="controller/generics/validacoesGenericas.js"></script>
