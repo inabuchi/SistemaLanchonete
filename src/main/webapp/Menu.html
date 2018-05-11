@@ -1,44 +1,13 @@
+<!-- 
+    Document   	: Menu
+    Created on 	: 21/04/2018, 16:39:28
+    Author     	: Morgana e Sidnei
+	Função		: Principal meio de navegação do sistama. é chamado pelas outras páginas, então você não deve abrir ela sozinha no navegador.
+-->
 
-<!DOCTYPE html>
-<html>
-
-<head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Guten Burguer</title>
-
-<script src="library/jquery-3.2.1.min.js">
-	
-</script>
-<script type="text/javascript"
-	src="controller/cliente/cadastroCliente.js"></script>
-<script type="text/javascript"
-	src="controller/generics/validacoesGenericas.js"></script>
-
-<!-- DataTables -->
-<link rel="stylesheet" type="text/css"
-	href="library/DataTables/datatables.min.css" />
-<script type="text/javascript"
-	src="library/DataTables/datatables.min.js"></script>
-
-<!-- FontAwesome -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="path/to/font-awesome/css/font-awesome.min.css">
-
-<link
-	href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic'
-	rel='stylesheet' type='text/css'>
-
-<link href="css/style.css" rel="stylesheet" />
-</head>
-<body>
 	<nav class="navbar navbar-expand">
 		<a class="sidebar-toggle text-light"><i class="fa fa-bars"></i></a> <a
-			class="navbar-brand" href="#"><navcolor>Guten</navcolor> Burguer</a>
+			class="navbar-brand link-abrir" href="TelaDefault.html"><navcolor>Guten</navcolor> Burguer</a>
 		<div class="navbar-collapse collapse">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item dropdown"><a class="nav-link" href="#"
@@ -48,39 +17,49 @@
 				</a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="#">Gerenciar</a> <a
+						<a class="dropdown-item link-editar" href="#">Gerenciar</a> <a
 							class="dropdown-item" href="#">Sair</a>
 					</div></li>
 			</ul>
 		</div>
 	</nav>
 
-
 	<div class="d-flex align-items-stretch">
 		<div class="sidebar bg-dark">
 
-			<ul class="list-unstyled">
-				<li><a href="#submenu1" data-toggle="collapse"><i class="fa fa-id-card-o" style="font-size:14px"></i>Pessoas</a>
-					<ul id="submenu1" class="list-unstyled collapse">
-						<li><a href="ConsultaCliente.html"><i class="fa fa-angle-right"></i>Clientes</a></li>
-						<li><a href="ConsultaFuncionario.html"><i class="fa fa-angle-right"></i>Funcionários</a></li>
-						<li><a href="ConsultaCargo.html"><i class="fa fa-angle-right"></i>Cargos</a></li>
-					</ul></li>
-				<li><a href="#submenu2" data-toggle="collapse"><i class="fa fa-shopping-basket" style="font-size:14px"></i>Pedidos</a>
-					<ul id="submenu2" class="list-unstyled collapse">
-						<li><a href="CadastroPedido.html"><i class="fa fa-angle-right"></i>Cadastro de pedidos</a></li>
-						<li><a href="ConsultaPedido.html"><i class="fa fa-angle-right"></i>Lista de pedidos</a></li>
-						<li><a href="GerenciamentoEntrega.html"><i class="fa fa-angle-right"></i>Gerenciamento de entregas</a></li>
-					</ul></li>
-				<li><a href="ConsultaProduto.html"><i class="fa fa-barcode" style="font-size:14px"></i>Produtos</a>
-				</li>
-				<li><a href="#submenu4" dropdown-toggle data-toggle="collapse"><i class="fa fa-money" style="font-size:15px"></i>Fluxo de caixa</a>
-					<ul id="submenu4" class="list-unstyled collapse">
-						<li><a href="GerenciamentoCaixa.html"><i class="fa fa-angle-right"></i>Fechamento de caixa</a></li>
-						<li><a href="Relatorios.html"><i class="fa fa-angle-right"></i>Relatórios</a></li>
-					</ul></li>
+	<ul class="list-unstyled">				
+		<li>
+            <a href="#submenu1" data-toggle="collapse"><i class="fa fa-id-card-o"></i>Pessoas</a>
+            <ul id="submenu1" class="list-unstyled collapse">
+                <li><a class="link-abrir" href="ClienteConsulta.html"><i class="fa fa-angle-right"></i>Clientes</i></a></li> 
+                <li><a class="link-abrir" href="FuncionarioConsulta.html"><i class="fa fa-angle-right"></i>Funcionários</a></li>				 
+            </ul>
+        </li>
+        <li><a href="#submenu2" data-toggle="collapse"><i class="fa fa-shopping-basket" aria-hidden="true"></i>Pedidos</a>
+			<ul id="submenu2" class="list-unstyled collapse">
+			<li><a class="link-abrir" href="PedidoCadastro.html"><i class="fa fa-angle-right"></i>Cadastro de Pedidos</a></li>
+			<li><a class="link-abrir" href="PedidoConsulta.html"><i class="fa fa-angle-right"></i>Lista de Pedidos</a></li>
+            <li><a class="link-abrir" href="PedidoEntrega.html"><i class="fa fa-angle-right"></i>Gerenciamento de Entregas</a></li>
 			</ul>
-		</div>
+		</li>
+		<li><a href="#submenu3" data-toggle="collapse"><i class="fa fa-barcode" aria-hidden="true"></i>Produtos</a>
+			<ul id="submenu3" class="list-unstyled collapse">			
+			<li><a class="link-abrir" href="ProdutoConsulta.html"><i class="fa fa-angle-right"></i>Consulta de Produtos</a></li>
+            <li><a class="link-abrir" href="ProdutoCategoriaConsulta.html"><i class="fa fa-angle-right"></i>Categorias de Produtos</a></li>
+			<li><a class="link-abrir" href="ProdutoAdicionalConsulta.html"><i class="fa fa-angle-right"></i>Adicionais de Produtos</a></li>			
+			</ul>
+		</li>        
+        <li>
+			<a href="#submenu4" data-toggle="collapse"><i class="fa fa-money"></i>Fluxo de caixa</a>
+            <ul id="submenu4" class="list-unstyled collapse">
+                <li><a class="link-abrir" href="CaixaGerenciamento.html"><i class="fa fa-angle-right"></i>Fechamento de caixa</a></li>
+				<li><a class="link-abrir" href="Relatorio.html"><i class="fa fa-angle-right"></i>Relatórios</a></li>
+            </ul>
+        </li>
+		<li>
+            <a class="link-abrir" href="ConfigCadastro.html"><i class="fa fa-cog"></i>Configurações</a>            
+        </li>
+    </ul>
+</div>
 	</div>
-</body>
-</html>
+

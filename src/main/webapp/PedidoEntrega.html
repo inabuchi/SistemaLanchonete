@@ -1,0 +1,267 @@
+﻿<!-- 
+    Document   	: PedidoEntrega
+    Created on 	: 18/03/2018
+    Author     	: Sidnei
+	Função		: Fazer com que o responsável por entregar os pedidos aos motoqueiros possa planejar as viagens enquanto os pedidos são preparados, baseando-se na criticidade do pedido,
+					nas informações do pedido/cliente, no total de dinheiro que o entregador precisa levar e o quanto precisa retornar. Por fim, ele imprime essas informações.
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Guten Burguer - Gerenciamento de Entregas</title>
+
+    <!-- DataTables (Já chama jquery e bootstrap)-->
+    <link rel="stylesheet" type="text/css" href="library/DataTables/datatables.min.css" />
+	<script type="text/javascript" src="library/DataTables/datatables.min.js"></script>
+    <!-- Fontes-->
+    <link rel="stylesheet" href="fonts/font-awesome.css">
+    <link href='fonts/NotoSans.css' rel='stylesheet' type='text/css'>
+
+    <!-- CSS custimozado -->
+    <link href="css/style.css" rel="stylesheet" />
+	<link href="css/TemaJqueryUI.css" rel="stylesheet" />
+  
+  
+    <style>
+  #pedido { float: left; width: 40%; height: calc(314px *4);  padding: 1%;} //Caso queira cor na lista de pedido background-color: #b6b7b6;
+  .pedido.custom-state-active { background: #eee; }
+  .pedido li { float: left; width: 96px; padding: 0.4em; margin: 0.4em 0.4em 0.4em 0; text-align: center; background-color: #5de748; list-style-type: none;} 
+  .pedido li h5 { margin: 0 0 0.4em; cursor: move; }
+  .pedido li a { float: right; }
+  .pedido li a.ui-icon-zoomin { float: left; }
+  .pedido li img { width: 100%; cursor: move; }
+  .pedido .critico { background-color: orange }
+  .pedido h5 { line-height: 16px; margin: 0 0 0.4em; }
+  
+  .enquadra { width: calc(100% - 250px); margin-left: 250px; margin-top: 90px; font-size: 15px;}
+  
+  .descOculta { display: none; }
+  
+  .totais {text-align: right; }
+  .totaisn { float: right;}
+
+  .btEntrega {float: right; margin: 0 0 0 0;}
+  
+  .motoqueiro { float: right; width: 60%; min-height: 18em; padding: 1%; margin: 0 0 0.4em;} //Caso queira cor nos motoqueiros background-color: #34b4a699; 
+  .motoqueiro h5 { line-height: 16px; margin: 0 0 0.4em; }
+  
+  .pedido-highlight{ background-color: #4bc68e;}
+  .motoqueiro-highlight{ border: #4a3d8d; border-style: dashed;}  
+  </style>
+  <script type="text/javascript" src="library/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="library/jquery.ui.touch-punch.min.js"></script>
+  <script>
+  $( function() {
+ 
+    // Cria objetos das divs de Pedido e Motoqueiro
+    var $pedido = $( ".pedido" ),
+      $motoqueiro = $( ".motoqueiro" );
+ 
+    // Configurações para os itens dentro de Pedido serem arrastáveis
+    $( "li", $pedido ).draggable({
+      cancel: "a.ui-icon", // Faz com que clicar na lupa não permita arrastar
+      revert: "invalid", // Se colocado em um lugar fora da área aceita, o objeto retorna à posição inicial
+      containment: "document",
+      helper: "clone",
+      cursor: "move"
+    });
+ 
+    // Permite que os pedidos possam ser arrastados de Motoqueiro, aceitando tanto os que vêm do Pedido quanto de outros motoqueiros
+    $motoqueiro.droppable({
+      accept: "#pedido > li, .motoqueiro li",
+      classes: {
+        "ui-droppable-active": "ui-state-highlight motoqueiro-highlight"
+      },
+      drop: function( event, ui ) {
+		$motoqueiro =  $( this );
+        adicionaMotoqueiro( ui.draggable );
+      }
+    });
+ 
+    // Permite que os pedidos possam ser arrastados de Pedido para qualquer Motoqueiro
+    $pedido.droppable({
+      accept: ".motoqueiro li",
+      classes: {
+        "ui-droppable-active": "custom-state-active pedido-highlight"
+      },
+      drop: function( event, ui ) {
+        adicionaAListaPedido( ui.draggable );
+      }
+    });
+ 
+    // Função para adicionar pedido ao motoqueiro
+    var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='Retornar para a lista de pedido' class='ui-icon ui-icon-refresh'>Retorna Pedido</a>";
+    function adicionaMotoqueiro( $item ) {
+      $item.fadeOut(function() {
+        var $list = $( "ul", $motoqueiro ).length ?
+          $( "ul", $motoqueiro ) :
+          $( "<ul class='pedido ui-helper-reset'/>" ).appendTo( $motoqueiro );
+ 
+        $item.find( "a.ui-icon-refresh" ).remove(); //Remove o ícone de retornar à lista de pedidos. Qunado o pedido é arrastado de um motoqueiro para outro, é criada uma cópia do ícone.
+        $item.append( recycle_icon ).appendTo( $list ).fadeIn(function() {
+          $item
+            .animate({ width: "96px" })
+            .find( "img" )
+        });
+      });
+    }
+ 
+    // Função para retornar algum pedido que esteja em um Motoqueiro para a lista de Pedidos    
+    function adicionaAListaPedido( $item ) {
+      $item.fadeOut(function() {
+        $item
+          .find( "a.ui-icon-refresh" )
+            .remove()
+          .end()
+          .appendTo( $pedido )
+          .fadeIn();
+      });
+    }
+ 
+	//Define as configurações de como a janela de diálogo irá ser apresentada
+	$( "#dialog-pedido" ).dialog({
+      autoOpen: false,
+      height: 400,
+      width: 350,
+      modal: true,
+	  close: function() {
+        $( "#dialog-conteudo" ).empty(); 	//.empty() remove todo o conteúdo do objeto
+      }
+	});
+
+	
+    // Abre uma janela de diálogo com as informações do pedido que estão dentro da tag <p> "descOculta"
+    function verInfoPedido( $item ) {
+		$item
+          .find( ".descOculta" ).clone().removeClass("descOculta") //.find() procura uma <TAG>.CLASSE para colocar no dialog, clone() cria outra e deixa a original intácta
+          .appendTo( $( "#dialog-conteudo" ) ); 	//insere a tag <p> dentro do dialog (modal)
+     $( "#dialog-pedido" ).dialog( "open" ); 	//Abre a modal
+    }
+ 
+    // Dá à cada ícone sua devida função
+    $( "ul.pedido > li" ).on( "click", function( event ) {
+      var $item = $( this ),
+        $target = $( event.target );
+ 
+      if ( $target.is( "a.ui-icon-zoomin" ) ) {
+        verInfoPedido( $item );
+      } else if ( $target.is( "a.ui-icon-refresh" ) ) {
+        adicionaAListaPedido( $item );
+      }
+ 
+      return false;
+    });
+  } );
+  </script>
+</head>
+<body>
+	<div id="includeMenu"></div>
+	<div class="content-title">
+				<i class="fa fa-shopping-basket"></i>Pedidos<i class="fa fa-angle-right"></i>Gerenciamento de Entregas
+			</div>
+	<div class="enquadra">		
+		<ul id="pedido" class="pedido">
+			<h5>Pedidos</h5>
+			<li class="critico">
+				<h5 >#10001</h5>
+				<p class="descOculta">Está é a descrição do pedido 10001.</p>
+				<a href="#dialog-pedido" title="Visualizar a descrição do pedido" class="ui-icon ui-icon-zoomin">Visualizar a descrição do pedido</a>
+			</li>
+			<li class="">
+				<h5>#10002</h5>
+				<p class="descOculta">Está é a descrição do pedido 10002.</p>
+				<a href="#dialog-pedido" title="Visualizar a descrição do pedido" class="ui-icon ui-icon-zoomin">Visualizar a descrição do pedido</a>
+			</li>
+			<li class="">
+				<h5>#10003</h5>
+				<p class="descOculta">Está é a descrição do pedido 10003.</p>
+				<a href="#dialog-pedido" title="Visualizar a descrição do pedido" class="ui-icon ui-icon-zoomin">Visualizar a descrição do pedido</a>
+			</li>
+			<li class="critico">
+				<h5>#10004</h5>
+				<p class="descOculta">Está é a descrição do pedido 10004.</p>
+				<b class="descOculta">X-Galinha com bacon é o melhor!</b>
+				<a href="#dialog-pedido" title="Visualizar a descrição do pedido" class="ui-icon ui-icon-zoomin">Visualizar a descrição do pedido</a>
+			</li>
+		</ul>
+ 
+		<div class="motoqueiro">
+			<h5>Motqueiro 1</h5>
+			<h6 class="totaisn">300,00</h6>
+			<h6 class="totais">Total das entregas: R$</h6>
+			<h6 class="totaisn">50,00</h6>
+			<h6 class="totais">Troco para levar: R$</h6>
+			<h6 class="totaisn">250,00</h6>
+			<h6 class="totais">Motoqueiro retorna com: R$</h6>			
+			
+		</div>
+		<a
+				href="#"><button type="button"
+				class="btn btn-success btEntrega">
+				<i class="fa fa-save"></i>Gerar Entrega
+			</button>
+		</a>
+		<div class="motoqueiro">
+			<h5>Motqueiro 2</h5>
+			<h6 class="totaisn">300,00</h6>
+			<h6 class="totais">Total das entregas: R$</h6>
+			<h6 class="totaisn">50,00</h6>
+			<h6 class="totais">Troco para levar: R$</h6>
+			<h6 class="totaisn">250,00</h6>
+			<h6 class="totais">Motoqueiro retorna com: R$</h6>
+		</div>
+		<a
+				href="#"><button type="button"
+				class="btn btn-success btEntrega">
+				<i class="fa fa-save"></i>Gerar Entrega
+			</button>
+		</a>
+		<div class="motoqueiro">
+			<h5>Motqueiro 3</h5>
+			<h6 class="totaisn">300,00</h6>
+			<h6 class="totais">Total das entregas: R$</h6>
+			<h6 class="totaisn">50,00</h6>
+			<h6 class="totais">Troco para levar: R$</h6>
+			<h6 class="totaisn">250,00</h6>
+			<h6 class="totais">Motoqueiro retorna com: R$</h6>		
+		</div>
+		<a
+				href="#"><button type="button"
+				class="btn btn-success btEntrega">
+				<i class="fa fa-save"></i>Gerar Entrega
+			</button>
+		</a>
+		<div class="motoqueiro">
+			<h5>Motqueiro 4</h5>
+			<h6 class="totalEntrega">Total das entregas: R$</h6>
+			<h6 class="trocoEntrega">Troco para levar: R$</h6>
+			<h6 class="retornoEntrega">Motoqueiro retorna com: R$</h6>			
+		</div>
+		<a
+				href="#"><button type="button"
+				class="btn btn-success btEntrega">
+				<i class="fa fa-save"></i>Gerar Entrega
+			</button>
+		</a>
+	</div> 
+</body>
+
+<div id="dialog-pedido" title="Descrição do pedido">
+	<div id="dialog-conteudo"></div>
+</div>
+
+</html>
+<!-- Tradução customizada do DataTable -->
+<script type="text/javascript"
+	src="controller/carregarDataTable.js"></script>
+
+		<script type="text/javascript">
+	$(function() {
+		$("#includeMenu").load("Menu.html");
+	});
+</script>
