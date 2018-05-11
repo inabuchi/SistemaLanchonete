@@ -1,5 +1,4 @@
 
-const table = $("#data-table");
 const opcoes = '<td>' + '<td class="table-buttons">' +
 '<a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>'+   
 '<a href="#"><button type="button" class="table-hist" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>'+
@@ -9,94 +8,72 @@ const opcoes = '<td>' + '<td class="table-buttons">' +
 
 let clientes = [];
 
-function inserirLinhaTabela(data) {
-
-    // Captura a refer�ncia da tabela com id 'minhaTabela'
-    var table = document.getElementById("data-table");
-    // Captura a quantidade de linhas j� existentes na tabela
-    var numOfRows = table.rows.length;
-    // Captura a quantidade de colunas da �ltima linha da tabela
-    var numOfCols = table.rows[numOfRows - 1].cells.length;
-
-    // Insere uma linha no fim da tabela.
-    var newRow = table.insertRow(numOfRows);
-
-    // Faz um loop para criar as colunas
-    for (var j = 0; j < numOfCols; j++) {
-        // Insere uma coluna na nova linha 
-        newCell = newRow.insertCell(j);
-        // Insere um conte�do na coluna
-        newCell.innerHTML = data[j];
-    }
-
-}
-
-function popularTabela(lista) {
-    let lineData;
-    lista.forEach(cli => {
-        lineData = [];
-        for (let key in cli) {
-            lineData.push(cli[key]); 
-        }
-        inserirLinhaTabela(lineData);
-    });
-}
-
 $(document).ready(() => {
+	const table = $("#data-table");
 	$.ajax({
 		headers: {
 	        'Accept': 'application/json',
 	        'Content-Type': 'application/json'
 	    },
 	    type: 'GET'
-	    //, data: JSON.stringify({id:1})
 	    , dataType: 'json' //
-	    , url: 'http://localhost:8080/SistemaLanchonete/services/cliente/clientes/dsNome=jo'
+	    , url: 'http://localhost:8080/SistemaLanchonete/services/cliente/clientes?dsNome='
 	    , statusCode: {
 	    	200: (res)=>{
 	    		debugger;
-	    		if (res.length > 0) {
-	    			res.forEach(val => {
-		    			let obj = {
-		    					id: val.cdPessoa,
-		    					nome: val.dsNome,
-		    					telefone: val.dsTelefone1,
-		    					endereco: val.enderecoPessoas[0].endereco.logradouro.dsLogradouro,
-		    					opcoes
-		    			}
-		    			clientes.push(obj);
-		    		});
-		    		popularTabela(clientes);
-		    		$('#data-table').dataTable({
-		    			"language" : {
-		    				"sEmptyTable" : "Nenhum registro encontrado",
-		    				"sInfo" : "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-		    				"sInfoEmpty" : "Mostrando 0 até 0 de 0 registros",
-		    				"sInfoFiltered" : "(Filtrados de _MAX_ registros)",
-		    				"sInfoPostFix" : "",
-		    				"sInfoThousands" : ".",
-		    				"sLengthMenu" : "_MENU_ resultados por página",
-		    				"sLoadingRecords" : "Carregando...",
-		    				"sProcessing" : "Processando...",
-		    				"sZeroRecords" : "Nenhum registro encontrado",
-		    				"sSearch" : "Pesquisar",
-		    				"oPaginate" : {
-		    					"sNext" : "Próximo",
-		    					"sPrevious" : "Anterior",
-		    					"sFirst" : "Primeiro",
-		    					"sLast" : "Último"
-		    				},
-		    				"oAria" : {
-		    					"sSortAscending" : ": Ordenar colunas de forma ascendente",
-		    					"sSortDescending" : ": Ordenar colunas de forma descendente"
-		    				}
-		    			}
-		    		});
-	    		}
+	    		const dataSet = [];
+	    		res.forEach(val => {
+	    			let data = []
+	    			let endereco = '';
+    				if (val.enderecoPessoas[0]) {
+    					endereco = (val.enderecoPessoas[0].endereco.logradouro.dsLogradouro || '') + ', Nº:' + (val.enderecoPessoas[0].endereco.cdNumero || '')
+    							   + ', Cep:' + (val.enderecoPessoas[0].endereco.logradouro.cdCep || '') + ', ' + 'B:'+(val.enderecoPessoas[0].endereco.logradouro.dsBairro || '');
+    				}
+    				
+    				data.push(val.cdPessoa);
+    				data.push(val.dsNome);
+    				data.push(val.dsTelefone1);
+    				data.push(endereco);
+    				data.push(opcoes);
+    				dataSet.push(data);
+	    		});
+	    		table.DataTable( {
+    		        data: dataSet,
+    		        columns: [
+    		            { title: "ID" },
+    		            { title: "Nome" },
+    		            { title: "Telefone" },
+    		            { title: "Endereço" },
+    		            { title: "Opções" }
+    		        ],
+    		        "language" : {
+	    				"sEmptyTable" : "Nenhum registro encontrado",
+	    				"sInfo" : "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+	    				"sInfoEmpty" : "Mostrando 0 até 0 de 0 registros",
+	    				"sInfoFiltered" : "(Filtrados de _MAX_ registros)",
+	    				"sInfoPostFix" : "",
+	    				"sInfoThousands" : ".",
+	    				"sLengthMenu" : "_MENU_ resultados por página",
+	    				"sLoadingRecords" : "Carregando...",
+	    				"sProcessing" : "Processando...",
+	    				"sZeroRecords" : "Nenhum registro encontrado",
+	    				"sSearch" : "Pesquisar",
+	    				"oPaginate" : {
+	    					"sNext" : "Próximo",
+	    					"sPrevious" : "Anterior",
+	    					"sFirst" : "Primeiro",
+	    					"sLast" : "Último"
+	    				},
+	    				"oAria" : {
+	    					"sSortAscending" : ": Ordenar colunas de forma ascendente",
+	    					"sSortDescending" : ": Ordenar colunas de forma descendente"
+	    				}
+	    			}
+    		    });
 	    	}, 
 	    	404: ()=>{
 	    		debugger;
-	    		alert('Not Found');
+	    		alert('Página não encontrada!');
 	    	},
 	    	415: ()=> {
 	    		debugger;
@@ -104,9 +81,8 @@ $(document).ready(() => {
 	    	},
 	    	500: () => {
 	    		debugger;
-	    		alert('ErroInterno');
+	    		alert('Ocorreu um erro interno, verifique com o administrador do sistema.');
 	    	}
 	    }
 	});
-	
 });

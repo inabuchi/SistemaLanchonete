@@ -102,3 +102,9 @@ form.ready(() => {
         }
     });
 });
+
+function registrarUpdate(telefone) {
+	
+
+
+}
