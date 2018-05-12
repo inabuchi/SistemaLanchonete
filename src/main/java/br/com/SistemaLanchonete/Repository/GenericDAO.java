@@ -188,4 +188,29 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 	            return;
 	    }
 	}
+	
+	public ArrayList<MODEL> findDate(Class<MODEL> classe, Date data1, Date data2, String nomeCampo) throws Exception {
+		ArrayList<MODEL> lista = new ArrayList<MODEL>();
+		
+		CriteriaBuilder cb = manager.getCriteriaBuilder();
+		CriteriaQuery<MODEL> cq = cb.createQuery(classe);
+		Root<MODEL> root = cq.from(classe);
+		
+		List<Expression<Boolean>> predicados = new ArrayList<Expression<Boolean>>();
+		
+		if ((!"".equalsIgnoreCase(Validacao.validaString(data1)))
+				&& (!"".equalsIgnoreCase(Validacao.validaString(data2)))) {		
+			predicados.add(cb.between(root.<Date>get(nomeCampo),
+					Validacao.formatarData(11, data1), Validacao.formatarData(11, data2)));		
+		}
+
+		cq.where( cb.and(predicados.toArray(new Predicate[0])));
+		cq.select(root);	
+		
+		List<MODEL> lista2 = manager.createQuery(cq).getResultList();
+		for (MODEL model2 : lista2) {
+			lista.add(model2);
+		}
+		return lista;
+	}
 }
