@@ -1,11 +1,4 @@
 
-const opcoes = '<td>' + '<td class="table-buttons">' +
-'<a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>'+   
-'<a href="#"><button type="button" class="table-hist" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>'+
-'<a href="CadastroCliente.html?state=e"><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>' +
-'<a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>' +                             
-'</td>';
-
 let clientes = [];
 
 $(document).ready(() => {
@@ -29,7 +22,13 @@ $(document).ready(() => {
     					endereco = (val.enderecoPessoas[0].endereco.logradouro.dsLogradouro || '') + ', Nº:' + (val.enderecoPessoas[0].endereco.cdNumero || '')
     							   + ', Cep:' + (val.enderecoPessoas[0].endereco.logradouro.cdCep || '') + ', ' + 'B:'+(val.enderecoPessoas[0].endereco.logradouro.dsBairro || '');
     				}
-    				
+    				let edit = '"CadastroCliente.html#'+ val.cdPessoa + '"';
+    				const opcoes = '<td>' + '<td class="table-buttons">' +
+    				'<a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>'+   
+    				'<a href="#"><button type="button" class="table-hist" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>'+
+    				'<a href='+edit+'><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>' +
+    				'<a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>' +                             
+    				'</td>';
     				data.push(val.cdPessoa);
     				data.push(val.dsNome);
     				data.push(val.dsTelefone1);
