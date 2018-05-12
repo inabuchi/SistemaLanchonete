@@ -240,6 +240,8 @@ public class Validacao {
 				formatarDate = new SimpleDateFormat("ss");
 			} else if (formato == 10) {
 				formatarDate = new SimpleDateFormat("HH:mm");
+			} else if (formato == 11) {
+				formatarDate = new SimpleDateFormat("yyyy-MM-dd");
 			}
 			Date date = formatarDate.parse(validaString(data));
 			return date;

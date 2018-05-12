@@ -124,13 +124,12 @@ public class ClienteService {
 			return false;
 		}
 		// Validar Nome Obrigatório
-		if (!Validacao.testaStringNaoNula(cliente.getDsNome()) || !Validacao.testaStringNaoVazia(cliente.getDsNome())) {
+		if ("".equalsIgnoreCase(Validacao.validaString(cliente.getDsNome()))) {
 			retorno = "Campo nome está vazio e é obrigatório";
 			return false;
 		}
 		// Validar Telefone Obrigatório
-		if (Validacao.testaStringNaoNula(cliente.getDsTelefone1())
-				|| Validacao.testaStringNaoVazia(cliente.getDsTelefone1())) {
+		if ("".equalsIgnoreCase(Validacao.validaString(cliente.getDsTelefone1()))) {
 			retorno = "Campo Telefone esta vázio e é obrigatório";
 			return false;
 		}

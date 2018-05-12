@@ -50,7 +50,7 @@ public class ProdutoResource {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response insert(ProdutoBean produto) {
 		try {
-			new ProdutoService().save(produto);
+			new ProdutoService().save(produto, 0);
 			return Response.status(200).entity("Produto Inserido com Sucesso").build();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -79,7 +79,7 @@ public class ProdutoResource {
 		try {
 			ProdutoBean produto = new ProdutoBean();
 			produto.setCdProduto(cdProduto);
-			new ProdutoService().save(produto);
+			new ProdutoService().save(produto, 0);
 			return Response.status(200).entity("Produto alterado com sucesso").build();
 		} catch (Exception e) {
 			throw new WebApplicationException(500);
