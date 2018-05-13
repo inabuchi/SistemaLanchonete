@@ -1,6 +1,7 @@
 package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Id;
@@ -14,6 +15,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * Classe de Endereços cadastrados no sistema
  * 
@@ -27,23 +31,29 @@ public class EnderecoBean implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cd_endereco")
 	private int cdEndereco;
-	
+
 	@ManyToOne
-	@JoinColumn(name="cd_logradouro", referencedColumnName="cd_logradouro")
+	@JoinColumn(name = "cd_logradouro", referencedColumnName = "cd_logradouro")
 	private LogradouroBean logradouro;
-	
+
 	@Column(name = "cd_numero")
 	private int cdNumero;
-	
+
 	@Column(name = "ds_complemento")
 	private String dsComplemento;
 
 	@Column(name = "ds_observacao")
 	private String dsObservacao;
-	
-	@OneToMany(mappedBy = "endereco", targetEntity = EnderecoPessoaBean.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnore
+	@OneToMany(mappedBy = "endereco", //
+			targetEntity = EnderecoPessoaBean.class, //
+			fetch = FetchType.LAZY, //
+			cascade = { CascadeType.MERGE, //
+					CascadeType.REMOVE, //
+					CascadeType.REFRESH, //
+					CascadeType.DETACH })
 	private List<EnderecoPessoaBean> enderecoPessoas;
-	
+
 	/**
 	 * Construtor padrão da classe
 	 */
@@ -59,15 +69,16 @@ public class EnderecoBean implements Serializable {
 	 * @param dsComplemento
 	 * @param dsObservacao
 	 */
-	public EnderecoBean(int cdEndereco, LogradouroBean logradouro, int cdNumero, String dsComplemento, String dsObservacao) {
+	public EnderecoBean(int cdEndereco, LogradouroBean logradouro, int cdNumero, String dsComplemento,
+			String dsObservacao) {
 		this.cdEndereco = cdEndereco;
 		this.logradouro = logradouro;
 		this.cdNumero = cdNumero;
 		this.dsComplemento = dsComplemento;
 		this.dsObservacao = dsObservacao;
+		this.enderecoPessoas = new ArrayList<EnderecoPessoaBean>();
 	}
 
-	
 	/**
 	 * Captura o valor contido no parametro cdEndereco
 	 * 
@@ -77,7 +88,6 @@ public class EnderecoBean implements Serializable {
 		return cdEndereco;
 	}
 
-	
 	/**
 	 * Setar o valor para o parametro cdEndereco
 	 * 
@@ -87,7 +97,6 @@ public class EnderecoBean implements Serializable {
 		this.cdEndereco = cdEndereco;
 	}
 
-	
 	/**
 	 * Captura o valor contido no parametro logradouro
 	 * 
@@ -97,7 +106,6 @@ public class EnderecoBean implements Serializable {
 		return logradouro;
 	}
 
-	
 	/**
 	 * Setar o valor para o parametro logradouro
 	 * 
@@ -107,7 +115,6 @@ public class EnderecoBean implements Serializable {
 		this.logradouro = logradouro;
 	}
 
-	
 	/**
 	 * Captura o valor contido no parametro idcdNumero
 	 * 
@@ -117,7 +124,6 @@ public class EnderecoBean implements Serializable {
 		return cdNumero;
 	}
 
-	
 	/**
 	 * Setar o valor para o parametro cdNumero
 	 * 
@@ -127,7 +133,6 @@ public class EnderecoBean implements Serializable {
 		this.cdNumero = cdNumero;
 	}
 
-	
 	/**
 	 * Captura o valor contido no parametro dsComplemento
 	 * 
@@ -137,7 +142,6 @@ public class EnderecoBean implements Serializable {
 		return dsComplemento;
 	}
 
-	
 	/**
 	 * Setar o valor para o parametro dsComplemento
 	 * 
@@ -147,7 +151,6 @@ public class EnderecoBean implements Serializable {
 		this.dsComplemento = dsComplemento;
 	}
 
-	
 	/**
 	 * Captura o valor contido no parametro dsObservacao
 	 * 
@@ -157,7 +160,6 @@ public class EnderecoBean implements Serializable {
 		return dsObservacao;
 	}
 
-	
 	/**
 	 * Setar o valor para o parametro dsObservacao
 	 * 
@@ -170,7 +172,7 @@ public class EnderecoBean implements Serializable {
 	/**
 	 * Retorna a lista de pessoas desse endereço
 	 * 
-	 *	@return enderecoPessoas
+	 * @return enderecoPessoas
 	 */
 	public List<EnderecoPessoaBean> getEnderecoPessoas() {
 		return enderecoPessoas;
@@ -184,7 +186,7 @@ public class EnderecoBean implements Serializable {
 	public void setEnderecoPessoas(List<EnderecoPessoaBean> enderecoPessoas) {
 		this.enderecoPessoas = enderecoPessoas;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -211,8 +213,9 @@ public class EnderecoBean implements Serializable {
 	public String toString() {
 		return "\nClasse ....................: " + getClass().getSimpleName() + //
 				"\nNumero....................: " + getCdNumero() + //
-				"\nLogradouro................: " + getLogradouro() != null? getLogradouro().getDsLogradouro() : "Sem logradouro." +//
-				"\nComplemento...............: " + getDsComplemento() +//
-				"\nObservacao................: " + getDsObservacao() ;//
+				"\nLogradouro................: " + getLogradouro() != null ? getLogradouro().getDsLogradouro()
+						: "Sem logradouro." + //
+								"\nComplemento...............: " + getDsComplemento() + //
+								"\nObservacao................: " + getDsObservacao();//
 	}
 }

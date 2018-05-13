@@ -703,3 +703,35 @@ button-cestinha {
 	font-size: 30px;
 	color: #aaa;
 }
+
+pedido {
+	float: left;
+	width: 40%;
+	height: calc(314px *4);
+	padding: 1%;
+	}
+ 
+  #pedido { float: left; width: 40%; height: calc(314px *4);  padding: 1%;}
+  .pedido.custom-state-active { background: #eee; }
+  .pedido li { float: left; width: 96px; padding: 0.4em; margin: 0.4em 0.4em 0.4em 0; text-align: center; background-color: #5de748; list-style-type: none;} 
+  .pedido li h5 { margin: 0 0 0.4em; cursor: move; }
+  .pedido li a { float: right; }
+  .pedido li a.ui-icon-zoomin { float: left; }
+  .pedido li img { width: 100%; cursor: move; }
+  .pedido .critico { background-color: orange }
+  .pedido h5 { line-height: 16px; margin: 0 0 0.4em; }
+  
+  .enquadra { width: calc(100% - 250px); margin-left: 250px; margin-top: 90px; font-size: 15px;}
+  
+  .descOculta { display: none; }
+  
+  .totais {text-align: right; }
+  .totaisn { float: right;}
+
+  .btEntrega {float: right; margin: 0 0 0 0;}
+  
+  .motoqueiro { float: right; width: 60%; min-height: 18em; padding: 1%; margin: 0 0 0.4em; background-color: #eee;}
+  .motoqueiro h5 { line-height: 16px; margin: 0 0 0.4em; }
+  
+  .pedido-highlight{ background-color: #4bc68e;}
+  .motoqueiro-highlight{ border: #4a3d8d; border-style: dashed;}  

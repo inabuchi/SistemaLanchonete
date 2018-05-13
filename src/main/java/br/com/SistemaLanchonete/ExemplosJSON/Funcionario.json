@@ -1,0 +1,37 @@
+{
+    "dsNome": "Fabiola gonsalves",
+    "dsTelefone1": "4733335555",
+    "dsTelefone2": "47988126544",
+    "dtCadastro": "12/05/2018 10:33:15",
+    "enderecoPessoas": [
+        {
+            "endereco": {
+                "logradouro": {
+                    "bairro": {
+                        "municipio": {
+                            "estado": {
+                                "dsEstado": "ACRE",
+                                "dsSigla": "AC"
+                            },
+                            "dsMunicipio": "Blumenau"
+                        },
+                        "dsBairro": "Centro"
+                    },
+                    "cdCep": 89010000,
+                    "dsLogradouro": "Rua Quinze De Novembro"
+                },
+                "cdNumero": 25,
+                "dsComplemento": "",
+                "dsObservacao": ""
+            },
+            "dtAlteracao": 1524625200000,
+            "enderecoPadrao": false
+        }
+    ],
+    "dsCargo": "Motoqueiro",
+    "dsLogin": "fabiola",
+    "dsSenha": "senha",
+    "cdNivel": 0,
+    "caixa": [],
+    "ativo": false
+}

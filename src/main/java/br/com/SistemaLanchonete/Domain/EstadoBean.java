@@ -1,22 +1,26 @@
 package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 /**
  * Classe de Estados cadastrados no sistema
  * 
- * @author Yago
+ * @author Patrick
  */
+
 @Entity
 @Table(name = "estado")
 public class EstadoBean implements Serializable {
@@ -29,8 +33,9 @@ public class EstadoBean implements Serializable {
 	private String dsEstado;
 	@Column(name = "ds_sigla")
 	private String dsSigla;
+	@JsonIgnore	
 	@OneToMany(mappedBy = "estado", targetEntity = MunicipioBean.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<MunicipioBean> municipios;
+	private List<MunicipioBean> municipios = new ArrayList<MunicipioBean>();
 
 	/**
 	 * Construtor padrão da classe
@@ -147,9 +152,9 @@ public class EstadoBean implements Serializable {
 
 	@Override
 	public String toString() {
-		return "\nClasse .................: " + getClass().getSimpleName() + //
-				"\nIdentificador do Estado: " + getDsSigla() + //
-				"\nNome...................: " + getDsEstado();//
+		return "\nClasse .................: " + getClass().getSimpleName() + 
+				"\nIdentificador do Estado: " + getDsSigla() + 
+				"\nNome...................: " + getDsEstado();
 	}
 
 }

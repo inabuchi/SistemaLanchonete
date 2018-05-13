@@ -1,0 +1,143 @@
+﻿<!-- 
+    Document   	: PedidoEntrega
+    Created on 	: 18/03/2018
+    Author     	: Sidnei
+	Função		: Fazer com que o responsável por entregar os pedidos aos motoqueiros possa planejar as viagens enquanto os pedidos são preparados, baseando-se na criticidade do pedido,
+					nas informações do pedido/cliente, no total de dinheiro que o entregador precisa levar e o quanto precisa retornar. Por fim, ele imprime essas informações.
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Guten Burguer - Gerenciamento de Entregas</title>
+
+    <!-- DataTables (Já chama jquery e bootstrap)-->
+    <link rel="stylesheet" type="text/css" href="library/DataTables/datatables.min.css" />
+	<script type="text/javascript" src="library/DataTables/datatables.min.js"></script>
+    <!-- Fontes-->
+    <link rel="stylesheet" href="fonts/font-awesome.css">
+    <link href='fonts/NotoSans.css' rel='stylesheet' type='text/css'>
+
+    <!-- CSS custimozado -->
+    <link href="css/style.css" rel="stylesheet" />
+	<link href="css/TemaJqueryUI.css" rel="stylesheet" />
+  
+      
+  
+</head>
+<body>
+	<div id="includeMenu"></div>
+	<div class="content-title">
+				<i class="fa fa-shopping-basket"></i>Pedidos<i class="fa fa-angle-right"></i>Gerenciamento de Entregas
+			</div>
+	<div class="enquadra">		
+		<ul id="pedido" class="pedido">
+			<h5>Pedidos</h5>
+			<li class="critico">
+				<h5 >#10001</h5>
+				<p class="descOculta">Está é a descrição do pedido 10001.</p>
+				<a href="#dialog-pedido" title="Visualizar a descrição do pedido" class="ui-icon ui-icon-zoomin">Visualizar a descrição do pedido</a>
+			</li>
+			<li class="">
+				<h5>#10002</h5>
+				<p class="descOculta">Está é a descrição do pedido 10002.</p>
+				<a href="#dialog-pedido" title="Visualizar a descrição do pedido" class="ui-icon ui-icon-zoomin">Visualizar a descrição do pedido</a>
+			</li>
+			<li class="">
+				<h5>#10003</h5>
+				<p class="descOculta">Está é a descrição do pedido 10003.</p>
+				<a href="#dialog-pedido" title="Visualizar a descrição do pedido" class="ui-icon ui-icon-zoomin">Visualizar a descrição do pedido</a>
+			</li>
+			<li class="critico">
+				<h5>#10004</h5>
+				<p class="descOculta">Está é a descrição do pedido 10004.</p>
+				<b class="descOculta">X-Galinha com bacon é o melhor!</b>
+				<a href="#dialog-pedido" title="Visualizar a descrição do pedido" class="ui-icon ui-icon-zoomin">Visualizar a descrição do pedido</a>
+			</li>
+		</ul>
+ 
+		<div class="motoqueiro">
+			<h5>Motqueiro 1</h5>
+			<h6 class="totaisn">300,00</h6>
+			<h6 class="totais">Total das entregas: R$</h6>
+			<h6 class="totaisn">50,00</h6>
+			<h6 class="totais">Troco para levar: R$</h6>
+			<h6 class="totaisn">250,00</h6>
+			<h6 class="totais">Motoqueiro retorna com: R$</h6>			
+			
+		</div>
+		<a
+				href="#"><button type="button"
+				class="btn btn-success btEntrega">
+				<i class="fa fa-save"></i>Gerar Entrega
+			</button>
+		</a>
+		<div class="motoqueiro">
+			<h5>Motqueiro 2</h5>
+			<h6 class="totaisn">300,00</h6>
+			<h6 class="totais">Total das entregas: R$</h6>
+			<h6 class="totaisn">50,00</h6>
+			<h6 class="totais">Troco para levar: R$</h6>
+			<h6 class="totaisn">250,00</h6>
+			<h6 class="totais">Motoqueiro retorna com: R$</h6>
+		</div>
+		<a
+				href="#"><button type="button"
+				class="btn btn-success btEntrega">
+				<i class="fa fa-save"></i>Gerar Entrega
+			</button>
+		</a>
+		<div class="motoqueiro">
+			<h5>Motqueiro 3</h5>
+			<h6 class="totaisn">300,00</h6>
+			<h6 class="totais">Total das entregas: R$</h6>
+			<h6 class="totaisn">50,00</h6>
+			<h6 class="totais">Troco para levar: R$</h6>
+			<h6 class="totaisn">250,00</h6>
+			<h6 class="totais">Motoqueiro retorna com: R$</h6>		
+		</div>
+		<a
+				href="#"><button type="button"
+				class="btn btn-success btEntrega">
+				<i class="fa fa-save"></i>Gerar Entrega
+			</button>
+		</a>
+		<div class="motoqueiro">
+			<h5>Motqueiro 4</h5>
+			<h6 class="totaisn">300,00</h6>
+			<h6 class="totais">Total das entregas: R$</h6>
+			<h6 class="totaisn">50,00</h6>
+			<h6 class="totais">Troco para levar: R$</h6>
+			<h6 class="totaisn">250,00</h6>
+			<h6 class="totais">Motoqueiro retorna com: R$</h6>		
+		</div>
+		<a
+				href="#"><button type="button"
+				class="btn btn-success btEntrega">
+				<i class="fa fa-save"></i>Gerar Entrega
+			</button>
+		</a>
+	</div> 
+</body>
+
+<div id="dialog-pedido" title="Descrição do pedido">
+	<div id="dialog-conteudo"></div>
+</div>
+
+</html>
+<!-- Tradução customizada do DataTable -->
+<script type="text/javascript"
+	src="controller/carregarDataTable.js"></script>
+	<script type="text/javascript" src="library/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="library/jquery.ui.touch-punch.min.js"></script>
+	<script type="text/javascript" src="controller/pedido/pedidoEntrega.js"></script>
+	
+		<script type="text/javascript">
+	$(function() {
+		$("#includeMenu").load("Menu.html");
+	});
+</script>

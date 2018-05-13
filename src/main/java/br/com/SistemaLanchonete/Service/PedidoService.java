@@ -1,11 +1,11 @@
 package br.com.SistemaLanchonete.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import br.com.SistemaLanchonete.Domain.PedidoBean;
 import br.com.SistemaLanchonete.Repository.BDException;
 import br.com.SistemaLanchonete.Repository.EErrosBD;
 import br.com.SistemaLanchonete.Repository.GenericDAO;
-
 
 /**
  * Service de Pedidos
@@ -15,10 +15,10 @@ import br.com.SistemaLanchonete.Repository.GenericDAO;
 public class PedidoService {
 	private String retorno = "";
 	GenericDAO<PedidoBean> pedidoDao = new GenericDAO<PedidoBean>();
-	Class<PedidoBean> PedidoBean;
+	Class<PedidoBean> pedidoClasse = PedidoBean.class;
 
-	public String save(PedidoBean pedido, int id) throws BDException {
-		if (id == 0) {
+	public String save(PedidoBean pedido) throws BDException {
+		if (pedido.getCdPedido() == 0) {
 			try {
 				// aqui precisa validar os dados que vem da tela
 				pedidoDao.save(pedido, 0);
@@ -29,7 +29,7 @@ public class PedidoService {
 			retorno = "Dados salvos com sucesso na tabela";
 		} else {
 			try {
-				pedidoDao.save(pedido, id);
+				pedidoDao.save(pedido, pedido.getCdPedido());
 			} catch (BDException e) {
 				throw new BDException("Erro na atualizacao de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 
@@ -40,16 +40,16 @@ public class PedidoService {
 	}
 
 	public String remove(PedidoBean pedido) throws Exception {
-		PedidoBean pedidoRetorno = pedidoDao.findById(PedidoBean, pedido.getCdPedido());
-			try {
-				pedidoDao.remove(PedidoBean, pedidoRetorno.getCdPedido());
-			} catch (BDException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				throw new BDException("Erro na remoção de dados:" + e.getMessage(), EErrosBD.EXCLUI_DADO);
-			}
-			retorno = "Dados removidos com sucesso na tabela";
-		
+		PedidoBean pedidoRetorno = pedidoDao.findById(pedidoClasse, pedido.getCdPedido());
+		try {
+			pedidoDao.remove(pedidoClasse, pedidoRetorno.getCdPedido());
+		} catch (BDException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BDException("Erro na remoção de dados:" + e.getMessage(), EErrosBD.EXCLUI_DADO);
+		}
+		retorno = "Dados removidos com sucesso na tabela";
+
 		return retorno;
 	}
 
@@ -61,7 +61,7 @@ public class PedidoService {
 		 * precisa fazer uma query nao da para usar o mï¿½todo find do hibernate
 		 */
 
-		return pedidoDao.findById(PedidoBean, pedido.getCdPedido());
+		return pedidoDao.findById(pedidoClasse, pedido.getCdPedido());
 
 	}
 
@@ -72,7 +72,7 @@ public class PedidoService {
 		 * lista aproximada utilizadno o parametro LIKE Tanto faz se for List ou
 		 * ArrayList, ou qq outra collection
 		 */
-		List<PedidoBean> lista2 = pedidoDao.findLike(PedidoBean, pedido);
+		List<PedidoBean> lista2 = pedidoDao.findLike(pedidoClasse, pedido);
 		for (PedidoBean model2 : lista2) {
 			lista.add(model2);
 		}
@@ -80,8 +80,4 @@ public class PedidoService {
 
 	}
 
-
-	
-	
-	
 }

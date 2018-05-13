@@ -8,9 +8,9 @@ public class ConectionFactory {
 	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("Sistema-Lanchonete");
 
 	/**
-	 * Cria uma conexão com o banco de dados
+	 * Cria uma conex�o com o banco de dados
 	 * 
-	 * @return EntityManager - uma conexão com o banco de dados
+	 * @return EntityManager - uma conexÃ£o com o banco de dados
 	 */
 	public static EntityManager getEntityManager() {
 		return factory.createEntityManager();

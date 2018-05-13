@@ -1,7 +1,9 @@
 <!-- 
-    Document   : TelaDefault
-    Created on : 29/04/2018, 16:39:28
-    Author     : Morgana
+    Document   	: TelaDefault
+    Created on 	: 21/04/2018, 16:39:28
+    Author     	: Morgana e Everton
+	Função		: Tela principal do sistema aberta após o login e a finalização de um pedido. Ela apresenta Todos os pedidos feitos até o momento durante o expediente,
+					os pedidos cancelados, retirados no balcão e entregues pelo delivery.
 -->
 
 <!DOCTYPE html>
@@ -48,6 +50,7 @@
 </script>
 </head>
 <body>	
+
 	<div id="includeMenu"></div>
 
 	<div class="d-flex align-items-stretch">
@@ -79,8 +82,10 @@
 			<number-entr>40</number-entr>
 		</div>
 		
+
 		<a href="CadastroPedido.html">
 		<div class="buttons-default">
+
 			<button-cestinha><i class="fa fa-shopping-basket" style="margin-left:10px"></i></button-cestinha>
 			<br/>
 			Cadastrar pedido
@@ -103,10 +108,12 @@
 				<center><button type="button" class="btn btn-danger" style="width:160px; margin-top:2%" data-toggle="modal" data-target="#ModalResumoCaixa"><i class="fa fa-close"></i>Fechar caixa</button>
 				</center>			
 		</div>
+
 		
 				
 		</div>	
 			
+	</div>
 	</div>
 	
 	<!-- Modal Resumo de caixa -->
@@ -203,3 +210,17 @@
 		})
 	</script>
 </html>
+
+<script type="text/javascript">
+	$(function() {
+		$("#includeMenu").load("Menu.html");
+	});
+</script>
+<!-- Tradução customizada do DataTable -->
+<script type="text/javascript"
+	src="controller/carregarDataTable.js"></script>
+
+				
+<script type="text/javascript" src="controller/generics/validacoesGenericas.js"></script>
+<script type="text/javascript" src="controller/generics/requestService.js"></script>
+

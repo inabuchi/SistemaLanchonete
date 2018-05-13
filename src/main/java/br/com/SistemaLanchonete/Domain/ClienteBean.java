@@ -1,14 +1,19 @@
 package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * Classe Modelo para os Clientes Cadastrados no Sistema
@@ -26,8 +31,9 @@ public class ClienteBean extends PessoaBean implements Serializable {
 	private int cdCliente;
 	@Column(name = "ds_observacao")
 	private String dsObservacao;
-	@Column(name = "dt_cadastro")
-	private Date dtCadastro = new Date();
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente")
+	private List<PedidoBean> pedidos = new ArrayList<PedidoBean>();
 
 	public ClienteBean() {
 	}
@@ -49,7 +55,6 @@ public class ClienteBean extends PessoaBean implements Serializable {
 		super(cdPessoa, dsNome, dsTelefone1, dsTelefone2, dtCadastro, isAtivo);
 		this.cdCliente = cdCliente;
 		this.dsObservacao = dsObservacao;
-		this.dtCadastro = dtCadastro;
 	}
 
 	/**
@@ -88,12 +93,12 @@ public class ClienteBean extends PessoaBean implements Serializable {
 		this.dsObservacao = dsObservacao;
 	}
 
-	public Date getDtCadastro() {
-		return dtCadastro;
+	public List<PedidoBean> getPedidos() {
+		return pedidos;
 	}
 
-	public void setDtCadastro(Date dtCadastro) {
-		this.dtCadastro = dtCadastro;
+	public void setPedidos(List<PedidoBean> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 	/*

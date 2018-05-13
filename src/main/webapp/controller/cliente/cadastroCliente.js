@@ -77,14 +77,34 @@ form.ready(() => {
                 },
                 type: 'POST'
                 , data: JSON.stringify(params)
-                , dataType: 'json'
+                , dataType: 'json' //
                 , url: 'http://localhost:8080/SistemaLanchonete/services/cliente/cliente'
-            }).done(response => {
-                alert("Cliente cadastrado com sucesso!");
-                $(location).attr('href','ConsultaCliente.html');
-            }).fail(response => {
-                alert("Falha no cadastro, tente novamente!");
+                , statusCode: {
+                	200: ()=>{
+                		debugger;
+                		alert("Cliente cadastrado com sucesso!");
+                        $(location).attr('href','ConsultaCliente.html');
+                	}, 
+                	404: ()=>{
+                		debugger;
+                		alert('Not Found');
+                	},
+                	415: ()=> {
+                		debugger;
+                		alert('Não suportado')
+                	},
+                	500: () => {
+                		debugger;
+                		alert('ErroInterno');
+                	}
+                }
             });
         }
     });
 });
+
+function registrarUpdate(telefone) {
+	
+
+
+}
