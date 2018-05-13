@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 /**
  * Classe modelo ProdutoBean para população dos produtos
+ * 
  * @author Jonatan José Soares
  *
  */
@@ -18,33 +19,32 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "produto")
 public class ProdutoBean {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column (name= "cd_produto")
+	@Column(name = "cd_produto")
 	private int cdProduto;
-	
+
 	@ManyToOne
-	@JoinColumn(name="cd_categoria", referencedColumnName="cd_categoria")
+	@JoinColumn(name = "cd_categoria", referencedColumnName = "cd_categoria")
 	private ProdutoCategoriaBean categoria;
-	
-	@Column (name = "ds_ref_produto")
+
+	@Column(name = "ds_ref_produto")
 	private String dsRefProduto;
-	
+
 	@Column(name = "ds_produto")
 	private String dsProduto;
-	
+
 	@Column(name = "is_ativo")
 	private boolean isAtivo;
-	
+
 	/**
 	 * Constructor padrão da Classe ProdutoBean;
 	 */
-	
+
 	public ProdutoBean() {
 	}
-	
-	
+
 	/**
 	 * Construtor da classe
 	 *
@@ -54,9 +54,9 @@ public class ProdutoBean {
 	 * @param dsProduto
 	 * @param isAtivo
 	 */
-	
-	public ProdutoBean(int cdProduto, ProdutoCategoriaBean categoria,
-			String dsRefProduto, String dsProduto, boolean isAtivo) {
+
+	public ProdutoBean(int cdProduto, ProdutoCategoriaBean categoria, String dsRefProduto, String dsProduto,
+			boolean isAtivo) {
 		super();
 		this.cdProduto = cdProduto;
 		this.categoria = categoria;
@@ -64,7 +64,6 @@ public class ProdutoBean {
 		this.dsProduto = dsProduto;
 		this.isAtivo = isAtivo;
 	}
-
 
 	/**
 	 * 
@@ -74,15 +73,14 @@ public class ProdutoBean {
 		return categoria;
 	}
 
-
 	/**
 	 * 
-	 * @param Setar valor para categoria
+	 * @param Setar
+	 *            valor para categoria
 	 */
 	public void setCategoria(ProdutoCategoriaBean categoria) {
 		this.categoria = categoria;
 	}
-
 
 	/**
 	 * 
@@ -92,16 +90,15 @@ public class ProdutoBean {
 		return cdProduto;
 	}
 
-
-
 	/**
 	 * 
-	 * @param Setar valor para cdProduto
+	 * @param Setar
+	 *            valor para cdProduto
 	 */
 	public void setCdProduto(int cdProduto) {
 		this.cdProduto = cdProduto;
 	}
-	
+
 	/**
 	 * 
 	 * @return Retorna a descrição da referência do Produto
@@ -109,14 +106,16 @@ public class ProdutoBean {
 	public String getDsRefProduto() {
 		return dsRefProduto;
 	}
+
 	/**
 	 * 
-	 * @param Setar valor para dsRefProduto 
+	 * @param Setar
+	 *            valor para dsRefProduto
 	 */
 	public void setDsRefProduto(String dsRefProduto) {
 		this.dsRefProduto = dsRefProduto;
 	}
-	
+
 	/**
 	 * 
 	 * @return Retorna a descrição do Produto
@@ -124,15 +123,16 @@ public class ProdutoBean {
 	public String getDsProduto() {
 		return dsProduto;
 	}
-	
+
 	/**
 	 * 
-	 * @param Setar valor para dsProduto
+	 * @param Setar
+	 *            valor para dsProduto
 	 */
 	public void setDsProduto(String dsProduto) {
 		this.dsProduto = dsProduto;
 	}
-	
+
 	/**
 	 * 
 	 * @return Retorna se produto está ativo ou não
@@ -140,15 +140,15 @@ public class ProdutoBean {
 	public boolean getIsAtivo() {
 		return isAtivo;
 	}
-	
+
 	/**
 	 * 
-	 * @param Setar valor para isAtivo (True or False)
+	 * @param Setar
+	 *            valor para isAtivo (True or False)
 	 */
 	public void setIsAtivo(boolean isAtivo) {
 		this.isAtivo = isAtivo;
 	}
-	
 
 	/*
 	 * (non-Javadoc)
@@ -164,24 +164,17 @@ public class ProdutoBean {
 		if (getClass() != obj.getClass())
 			return false;
 		ProdutoBean other = (ProdutoBean) obj;
-		if (cdProduto!= other.cdProduto)
+		if (cdProduto != other.cdProduto)
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString() +
-				"\nClasse: " + ProdutoBean.class.getName() +
-				"\nCódigo do Produto: " + getCdProduto() +
-				"\nDescrição da Referência do Produto " +  getDsRefProduto() +
-				"\nDescrição do Produto " + getDsProduto() +
-				"\nIsAtivo: " + getIsAtivo();
+		return "\nClasse ................: " + getClass().getSimpleName() + //
+				"\nCódigo do Produto......: " + getCdProduto() + //
+				"\nRef. Interna...........: " + getDsRefProduto() + //
+				"\nDescrição do Produto...: " + getDsProduto() + //
+				"\nAtivo..................: " + (getIsAtivo() ? "Sim" : "Não");//
 	}
-	
-	
-	
-	
-
 }

@@ -1,7 +1,6 @@
 package br.com.SistemaLanchonete.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import br.com.SistemaLanchonete.Domain.ProdutoAdicionalBean;
 import br.com.SistemaLanchonete.Repository.BDException;
@@ -27,7 +26,8 @@ public class ProdutoAdicionalService {
 			try {
 				produtoDAO.save(produtoAdicional, produtoAdicional.getCdProdutoAdicional());
 			} catch (BDException e) {
-				throw new BDException("Erro ao atualizar Produto " + produtoAdicional.getCdProdutoAdicional() + e.getMessage(),
+				throw new BDException(
+						"Erro ao atualizar Produto " + produtoAdicional.getCdProdutoAdicional() + e.getMessage(),
 						EErrosBD.ATUALIZA_DADO);
 
 			}
@@ -40,7 +40,6 @@ public class ProdutoAdicionalService {
 		ProdutoAdicionalBean produtoAdicionalRetorna = produtoDAO.findById(produtoAdicionalClasse,
 				produtoAdicional.getCdProdutoAdicional());
 		try {
-			;
 			produtoDAO.remove(produtoAdicionalClasse, produtoAdicionalRetorna.getCdProdutoAdicional());
 			retorno = "Dados removidos com sucesso na tabela";
 		} catch (Exception e) {
@@ -52,16 +51,10 @@ public class ProdutoAdicionalService {
 
 	public ProdutoAdicionalBean findById(ProdutoAdicionalBean produtoAdicional) {
 		return produtoDAO.findById(produtoAdicionalClasse, produtoAdicional.getCdProdutoAdicional());
-
 	}
 
 	public ArrayList<ProdutoAdicionalBean> findLike(ProdutoAdicionalBean produtoAdicional) {
-		ArrayList<ProdutoAdicionalBean> lista = new ArrayList<ProdutoAdicionalBean>();
-		List<ProdutoAdicionalBean> lista2 = produtoDAO.findLike(produtoAdicionalClasse, produtoAdicional);
-		for (ProdutoAdicionalBean model2 : lista2) {
-			lista.add(model2);
-		}
-		return lista;
+		return produtoDAO.findLike(produtoAdicionalClasse, produtoAdicional);
 	}
 
 }

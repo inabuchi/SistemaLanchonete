@@ -14,7 +14,7 @@ import br.com.SistemaLanchonete.Validacao.Validacao;
 
 public class CaixaService {
 	private String retorno = "";
-	GenericDAO<CaixaBean> caixaDao = new GenericDAO<CaixaBean>();	
+	GenericDAO<CaixaBean> caixaDao = new GenericDAO<CaixaBean>();
 	Class<CaixaBean> caixaClasse = CaixaBean.class;
 	GenericDAO<PedidoBean> pedidoDao = new GenericDAO<PedidoBean>();
 	Class<PedidoBean> pedidoClasse = PedidoBean.class;
@@ -25,7 +25,8 @@ public class CaixaService {
 	 * Salva ou atualiza um caixa no banco de acordo com o objeto passado se id do
 	 * objeto = 0 salva senao update
 	 * 
-	 * @param object: caixa
+	 * @param object:
+	 *            caixa
 	 * @return String: Mensagem de retorno informando a situação
 	 * @throws BDException
 	 */
@@ -57,7 +58,8 @@ public class CaixaService {
 	/**
 	 * Remove um caixa no banco de acordo com o objeto passado
 	 * 
-	 * @param Object: caixa
+	 * @param Object:
+	 *            caixa
 	 * @return String: Mensagem de retorno informando a situação
 	 * @throws BDException
 	 */
@@ -76,8 +78,10 @@ public class CaixaService {
 	/**
 	 * Pesquisa um caixa pelo seu código de acordo com o objeto vindo da tela
 	 * 
-	 * @param Object: caixa
-	 * @return Object: um caixa gravado no Banco de acordo com o cd do objeto passado
+	 * @param Object:
+	 *            caixa
+	 * @return Object: um caixa gravado no Banco de acordo com o cd do objeto
+	 *         passado
 	 */
 	public CaixaBean findById(CaixaBean cliente) {
 		/*
@@ -94,7 +98,8 @@ public class CaixaService {
 	 * Retorna uma lista de caixa cadastrados de acordo com o atributo e valor
 	 * passado por parametro da tela
 	 * 
-	 * @param Object: caixa
+	 * @param Object:
+	 *            caixa
 	 * @return ArrayList<Object>: lista de caixa
 	 */
 	public ArrayList<CaixaBean> findLike(CaixaBean caixa) {
@@ -114,18 +119,18 @@ public class CaixaService {
 		return listaCaixa;
 
 	}
-	
+
 	/**
-     * Método para fechamento de caixa
-     * Obrigatório informar funcionário
-     *
-     * @param Object: Caixa
-     * @return Double: Valor do caixa fechado
-     */
+	 * Método para fechamento de caixa Obrigatório informar funcionário
+	 *
+	 * @param Object:
+	 *            Caixa
+	 * @return Double: Valor do caixa fechado
+	 */
 	public Double fecharCaixa(CaixaBean caixa) throws Exception {
 		try {
 			PedidoBean pedidoBean = new PedidoBean();
-			pedidoBean.setDtEmissao(Validacao.formatarData(11, new Date()));
+			pedidoBean.setDtEmissao(Validacao.formatarData(2, new Date()));
 			pedidoBean.setCdFuncionario(caixa.getFuncionario());
 			List<PedidoBean> pedidoCaixa = pedidoDao.findLike(pedidoClasse, pedidoBean);
 			Double result = 0.0;
@@ -133,7 +138,7 @@ public class CaixaService {
 				result += Validacao.validaDouble(item.getVlPago());
 			}
 			CaixaBean caixaBean = new CaixaBean();
-			caixaBean.setDtAbertura(Validacao.formatarData(11, new Date()));
+			caixaBean.setDtAbertura(Validacao.formatarData(2, new Date()));
 			List<CaixaBean> listaCaixa = caixaDao.findLike(caixaClasse, caixaBean);
 			for (CaixaBean item : listaCaixa) {
 				result += Validacao.validaDouble(item.getVlTrocoInicial());
@@ -143,27 +148,27 @@ public class CaixaService {
 			throw new BDException("Erro no fechamento do caixa:" + e.getMessage(), EErrosBD.CONSULTA_DADO);
 		}
 	}
-	
+
 	/**
-     * Método para gerar relatório de pedidos
-     * separado por forma de pagamento
-     *
-     * @param Object: caixa
-     * @return ArrayList<Object>: Retorna array de object com todos os dados do pedido,
-     * separado por forma de pagamento.
-	 * @throws Exception 
-     */	
-	public ArrayList<Object> gerarRelFechaCaixa(CaixaBean caixa) throws Exception {
+	 * Método para gerar relatório
+	 *
+	 * @param Object:
+	 *            caixa
+	 * @return ArrayList<Object>: Retorna array de object com todos os dados do
+	 *         pedido, separado por forma de pagamento.
+	 * @throws Exception
+	 */
+	public ArrayList<Object> gerarRelatorio(CaixaBean caixa) throws Exception {
 		try {
 			ArrayList<Object> result = new ArrayList<Object>();
 			PedidoBean pedidoBean = new PedidoBean();
-			pedidoBean.setDtEmissao(Validacao.formatarData(11, new Date()));			
+			pedidoBean.setDtEmissao(Validacao.formatarData(2, new Date()));
 			List<PedidoBean> pedidoCaixa = pedidoDao.findLike(pedidoClasse, pedidoBean);
-			
+
 			CaixaBean caixaBean = new CaixaBean();
-			caixaBean.setDtAbertura(Validacao.formatarData(11, new Date()));
+			caixaBean.setDtAbertura(Validacao.formatarData(2, new Date()));
 			List<CaixaBean> listaCaixa = caixaDao.findLike(caixaClasse, caixaBean);
-			
+
 			FormaPagamentoBean formaPagamentoBean = new FormaPagamentoBean();
 			List<FormaPagamentoBean> listaForma = formaPagamentoDao.findLike(formaPagamentoClasse, formaPagamentoBean);
 			for (CaixaBean model : listaCaixa) {
@@ -171,67 +176,9 @@ public class CaixaService {
 				for (FormaPagamentoBean model2 : listaForma) {
 					result.add(model2);
 					for (PedidoBean model3 : pedidoCaixa) {
-						if (Validacao.validaInteger(model2.getCdFormaPagamento()) == Validacao.validaInteger(model3.getCdFormaPagamento())) {
-							result.add(model3);
-						}
+						result.add(model3);
 					}
 				}
-			}
-			return result;
-		} catch (Exception e) {
-			throw new BDException("Erro ao gerar relatório:" + e.getMessage(), EErrosBD.CONSULTA_DADO);
-		}
-	}
-	
-	/**
-     * Método para verificar se o caixa está aberto
-     *
-     * @return boolean: Retorna true para aberto e false para fechado
-     * 
-	 * @throws Exception 
-     */	
-	public boolean verificaCaixaAberto() throws Exception {
-		try {
-			String nomeCampo = "dt_fechamento";
-			CaixaBean caixaBean = new CaixaBean();
-			Date data = Validacao.formatarData(11, new Date());
-			ArrayList<CaixaBean> listaCaixa = caixaDao.findDateNull(caixaClasse, nomeCampo);
-			Boolean result = false;
-			for (CaixaBean model : listaCaixa) {
-				if ("".equalsIgnoreCase(Validacao.validaString(model.getDtFechamento()))) {
-					result = Validacao.validaInteger(model.getCdCaixa()) == 0 ? false : true;
-				}				
-			}
-			return result;
-		} catch (Exception e) {
-			throw new BDException("Erro na verificação se o caixa está aberto ou fechado:" + e.getMessage(), EErrosBD.CONSULTA_DADO);
-		}
-	}
-	
-	/**
-     * Método para gerar relatório de caixa fechado ou aberto entre duas datas
-     *
-     * @param Object: caixa, data inicial, data final, aberturaFechamento
-     * 
-     * @param aberturaFechamento
-     * parâmetro de aberturaFechamento recebe 1 para abertura e qualquer
-     * outro numero para fechamento 
-     * 
-     * @return ArrayList<Object>: Retorna um ArrayList de object
-     * com todos os dados do caixa
-     * 
-	 * @throws Exception 
-     */	
-	public ArrayList<Object> gerarRelCaixa(CaixaBean caixa, Date data1, Date data2, int value) throws Exception {
-		try {
-			String nomeCampo = (value == 1) ? "dt_abertura" : "dt_fechamento";
-			
-			CaixaBean caixaBean = new CaixaBean();
-			caixaBean.setDtAbertura(Validacao.formatarData(11, new Date()));
-			ArrayList<CaixaBean> listaCaixa = caixaDao.findDate(caixaClasse, data1, data2, nomeCampo);
-			ArrayList<Object> result = new ArrayList<Object>();
-			for (CaixaBean model : listaCaixa) {
-				result.add(model);
 			}
 			return result;
 		} catch (Exception e) {

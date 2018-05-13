@@ -1,23 +1,33 @@
 package br.com.SistemaLanchonete.Service;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.List;
 
 import br.com.SistemaLanchonete.Domain.ProdutoCategoriaBean;
 import br.com.SistemaLanchonete.Repository.BDException;
 import br.com.SistemaLanchonete.Repository.EErrosBD;
 import br.com.SistemaLanchonete.Repository.GenericDAO;
+import br.com.SistemaLanchonete.Validacao.Validacao;
 
+// TODO tem de verificar se essa classe está ok
 public class ProdutoCategoriaService {
 
 	private static String retorno = "";
 	GenericDAO<ProdutoCategoriaBean> produtoDAO = new GenericDAO<ProdutoCategoriaBean>();
 	Class<ProdutoCategoriaBean> produtoCategoriaClasse = ProdutoCategoriaBean.class;
+	static Field[] CAMPOS = ProdutoCategoriaBean.class.getDeclaredFields();
 
-	public String save(ProdutoCategoriaBean produto) throws BDException {
-		if (produto.getCdProdutoCategoria() == 0) {
+	// CAMPOS[0] --> ProdutoCategoriaBean --> serialVersionUID
+	// CAMPOS[1] --> ProdutoCategoriaBean --> cdProdutoCategoria
+	// CAMPOS[2] --> ProdutoCategoriaBean --> dsCategoria
+
+	public String save(ProdutoCategoriaBean categoria) throws BDException {
+		if (!validaCategoria(categoria)) {
+			return retorno;
+		}
+		if (categoria.getCdProdutoCategoria() == 0) {
 			try {
-				produtoDAO.save(produto, 0);
+				produtoDAO.save(categoria, 0);
 			} catch (BDException e) {
 				throw new BDException("Erro ao Salvar dados no banco" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 
@@ -25,9 +35,9 @@ public class ProdutoCategoriaService {
 			retorno = "Dados salvos com sucesso na tabela";
 		} else {
 			try {
-				produtoDAO.save(produto, produto.getCdProdutoCategoria());
+				produtoDAO.save(categoria, categoria.getCdProdutoCategoria());
 			} catch (BDException e) {
-				throw new BDException("Erro ao atualizar Produto " + produto.getCdProdutoCategoria() + e.getMessage(),
+				throw new BDException("Erro ao atualizar Produto " + categoria.getCdProdutoCategoria() + e.getMessage(),
 						EErrosBD.ATUALIZA_DADO);
 
 			}
@@ -40,7 +50,6 @@ public class ProdutoCategoriaService {
 		ProdutoCategoriaBean produtoCategoriaRetorna = produtoDAO.findById(produtoCategoriaClasse,
 				produtoCategoria.getCdProdutoCategoria());
 		try {
-			;
 			produtoDAO.remove(produtoCategoriaClasse, produtoCategoriaRetorna.getCdProdutoCategoria());
 			retorno = "Dados removidos com sucesso na tabela";
 		} catch (Exception e) {
@@ -52,16 +61,33 @@ public class ProdutoCategoriaService {
 
 	public ProdutoCategoriaBean findById(ProdutoCategoriaBean produtoCategoria) {
 		return produtoDAO.findById(produtoCategoriaClasse, produtoCategoria.getCdProdutoCategoria());
-
 	}
 
 	public ArrayList<ProdutoCategoriaBean> findLike(ProdutoCategoriaBean produtoCategoria) {
-		ArrayList<ProdutoCategoriaBean> lista = new ArrayList<ProdutoCategoriaBean>();
-		List<ProdutoCategoriaBean> lista2 = produtoDAO.findLike(produtoCategoriaClasse, produtoCategoria);
-		for (ProdutoCategoriaBean model2 : lista2) {
-			lista.add(model2);
+		return produtoDAO.findLike(produtoCategoriaClasse, produtoCategoria);
+	}
+
+	public boolean validaCategoria(ProdutoCategoriaBean categoria) {
+		// Valida objeto categoria nulo
+		if (!Validacao.validaNulo(categoria)) {
+			retorno = "Categoria Nula, não pode ser inserido no banco de dados";
+			return false;
 		}
-		return lista;
+		// Validar descrição Obrigatório
+		categoria.setDsCategoria(categoria.getDsCategoria().trim());
+		try {
+			Validacao.validaAtributoNulo(categoria, CAMPOS[2]);
+			Validacao.validaAtributoVazio(categoria, CAMPOS[2]);
+		} catch (Exception e) {
+			retorno = "Campo descrição está vazio e é obrigatório";
+		}
+		// Validar categoria duplicada
+		ArrayList<ProdutoCategoriaBean> lista = findLike(categoria);
+		if (!lista.isEmpty()) {
+			retorno = "Categoria com descrição já cadastrada";
+			return false;
+		}
+		return true;
 	}
 
 }
