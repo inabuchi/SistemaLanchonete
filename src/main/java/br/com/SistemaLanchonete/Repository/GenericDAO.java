@@ -201,8 +201,29 @@ public class GenericDAO<MODEL> implements IDAO<MODEL> {
 		if ((!"".equalsIgnoreCase(Validacao.validaString(data1)))
 				&& (!"".equalsIgnoreCase(Validacao.validaString(data2)))) {		
 			predicados.add(cb.between(root.<Date>get(nomeCampo),
-					Validacao.formatarData(11, data1), Validacao.formatarData(11, data2)));		
+					Validacao.getInicioDia(Validacao.formatarData(11, data1)), Validacao.getFimDia(Validacao.formatarData(11, data2))));		
 		}
+
+		cq.where( cb.and(predicados.toArray(new Predicate[0])));
+		cq.select(root);	
+		
+		List<MODEL> lista2 = manager.createQuery(cq).getResultList();
+		for (MODEL model2 : lista2) {
+			lista.add(model2);
+		}
+		return lista;
+	}
+	
+	public ArrayList<MODEL> findDateNull(Class<MODEL> classe, String nomeCampo) throws Exception {
+		ArrayList<MODEL> lista = new ArrayList<MODEL>();
+		
+		CriteriaBuilder cb = manager.getCriteriaBuilder();
+		CriteriaQuery<MODEL> cq = cb.createQuery(classe);
+		Root<MODEL> root = cq.from(classe);
+		
+		List<Expression<Boolean>> predicados = new ArrayList<Expression<Boolean>>();
+		
+		predicados.add(root.<Date>get(nomeCampo).isNull());
 
 		cq.where( cb.and(predicados.toArray(new Predicate[0])));
 		cq.select(root);	

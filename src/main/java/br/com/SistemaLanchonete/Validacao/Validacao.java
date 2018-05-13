@@ -243,7 +243,8 @@ public class Validacao {
 			} else if (formato == 11) {
 				formatarDate = new SimpleDateFormat("yyyy-MM-dd");
 			}
-			Date date = formatarDate.parse(validaString(data));
+
+			Date date = formatarDate.parse(formatarDate.format(data));
 			return date;
 		} catch (Exception e) {
 			throw e;
