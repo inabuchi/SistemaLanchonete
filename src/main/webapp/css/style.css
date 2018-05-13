@@ -616,38 +616,46 @@ logincolor {
 
 .buttons-principal {
 	padding: 45px;
-	width: 40%;
+	width: 98%;
 	height: 155px;
 	background-color: #fff;
 	text-align: center;
 	border: 1px solid #ddd;
-	margin: 10px;
+	margin: 2%;
 	border: 1px solid #ddd;
 	border-width: 1px 1px 3px;
 	border-radius: 0px 3px 3px;	
 	margin: auto;
+	margin-left: 0px;
+	float: left;
 }
 
 .buttons-default-area {
 	margin: auto;
 	text-align: center;
-	width: 70%;
+	width: 50%;
+	min-width: 300px;
 	height: auto;
-	margin-top: 15px;
+}
+
+.buttons-default-area  a:hover {
+	background-color: #eee;
 }
 
 .buttons-default {
 	padding: 30px;
-	width: 30.5%;
+	width: 48%;
 	height: 125px;
 	background-color: #fff;
 	text-align: center;
 	border: 1px solid #ddd;
 	float: left;
-	margin: 10px;
 	border: 1px solid #ddd;
 	border-width: 1px 1px 3px;
 	border-radius: 0px 3px 3px;
+	margin: 2%;
+	margin-left: 0px;
+	margin-bottom: 0px;
 }
 
 .buttons-cad-pedido {
@@ -692,7 +700,7 @@ number-total {
 }
 
 button-cestinha {
-	font-size: 40px;
+	font-size: 30px;
 	color: #aaa;
 }
 
