@@ -8,6 +8,12 @@ import br.com.SistemaLanchonete.Repository.BDException;
 import br.com.SistemaLanchonete.Repository.EErrosBD;
 import br.com.SistemaLanchonete.Repository.GenericDAO;
 
+/*
+ * TODO Essa classe tem de ser refeita de acordo com a classe ClienteService
+ * Criar um método somente para validar login, temos de definir como vai ser feito
+ * talvez fazer um novo rest de Login e mandar para um metodo aqui
+ * esperar o Oldenburg colcoar o controle de sessão antes de acertar isso
+ */
 public class FuncionarioService {
 	private String retorno = "";
 	GenericDAO<FuncionarioBean> funcionarioDao = new GenericDAO<FuncionarioBean>();
@@ -132,8 +138,8 @@ public class FuncionarioService {
 		// funcionario = funcionarioDao.ValidarLogin(funcionario);
 
 		// Se objeto retornar nulo não foi encontrado.
-		if (funcionario == null)
-			return 0;
+		// if (funcionario == null)
+		//	return 0;
 		return funcionario.getCdNivel();
 
 	}

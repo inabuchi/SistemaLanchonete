@@ -44,8 +44,6 @@ public class PedidoService {
 		try {
 			pedidoDao.remove(pedidoClasse, pedidoRetorno.getCdPedido());
 		} catch (BDException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			throw new BDException("Erro na remoção de dados:" + e.getMessage(), EErrosBD.EXCLUI_DADO);
 		}
 		retorno = "Dados removidos com sucesso na tabela";
