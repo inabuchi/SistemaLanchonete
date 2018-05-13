@@ -8,6 +8,7 @@
  * 
  * Carrega uma página em um elemento html por ajax
  * 
+ * @author Igor Vieira Rodrigues
  * @param {String} txtUrlEnvio url de destino
  * @param {String} txtElementoDOM id ou class da tag de destino da página, isto é, onde a página deverá ser carregada
  */
@@ -43,6 +44,7 @@ function abrirPagina(txtUrlEnvio, txtElementoDOM) {
  * 
  * Envia objeto json para o restful via ajax
  * 
+ * @author Igor Vieira Rodrigues
  * @param {String} prUrl
  * @param {String} prMethod
  * @param {Object} prDados
@@ -77,7 +79,7 @@ function enviarAjax(prUrl, prMethod, prDados, prDoneCallBack, prFailCallBack) {
         data: prDados,
         statusCode: {
             404: function () {
-                alert("page not found");
+                console.error("404 - página não encontrada");
             }
         }
     }).done(prDoneCallBack).fail(prFailCallBack);
@@ -86,6 +88,9 @@ function enviarAjax(prUrl, prMethod, prDados, prDoneCallBack, prFailCallBack) {
 
 /**
  * 
+ * Retorna os dados preenchidos no formulário em formato JSON 
+ * 
+ * @author Igor Vieira Rodrigues
  * @param {HTMLForm} prForm
  * @returns {JSON}
  */
@@ -107,4 +112,28 @@ function getFormCampos(prForm) {
     }
 
     return objRetorno;
+}
+
+/**
+ * 
+ * Preenche um formulário com o objeto JSON, e retorna o próprio formulário
+ * 
+ * @author Igor Vieira Rodrigues
+ * @param {HTMLForm} prForm
+ * @param {JSON} prJSON
+ * @returns {HTMLForm}
+ */
+function setFormCampos(prForm, prJSON) {
+    var n = 0;
+    var objRetorno = {};
+    while (prForm[n]) {
+        var txtNome = prForm[n].name;
+
+        prForm[n].value = prJson[txtNome];
+
+
+        n++;
+    }
+
+    return prForm;
 }
