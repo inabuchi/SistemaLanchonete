@@ -140,7 +140,7 @@ public class CaixaService {
 			}
 			return result;
 		} catch (Exception e) {
-			throw new BDException("Erro no fechamento do caixa:" + e.getMessage(), EErrosBD.CONSULTA_DADO);
+			throw new BDException("Erro ao fechar caixa:" + e.getMessage(), EErrosBD.CONSULTA_DADO);
 		}
 	}
 	
@@ -179,7 +179,7 @@ public class CaixaService {
 			}
 			return result;
 		} catch (Exception e) {
-			throw new BDException("Erro ao gerar relatório:" + e.getMessage(), EErrosBD.CONSULTA_DADO);
+			throw new BDException("Erro ao gerar relatório de fechamento de caixa:" + e.getMessage(), EErrosBD.CONSULTA_DADO);
 		}
 	}
 	
@@ -204,7 +204,7 @@ public class CaixaService {
 			}
 			return result;
 		} catch (Exception e) {
-			throw new BDException("Erro na verificação se o caixa está aberto ou fechado:" + e.getMessage(), EErrosBD.CONSULTA_DADO);
+			throw new BDException("Erro ao verificar se o caixa está aberto:" + e.getMessage(), EErrosBD.CONSULTA_DADO);
 		}
 	}
 	
@@ -235,7 +235,7 @@ public class CaixaService {
 			}
 			return result;
 		} catch (Exception e) {
-			throw new BDException("Erro ao gerar relatório:" + e.getMessage(), EErrosBD.CONSULTA_DADO);
+			throw new BDException("Erro ao gerar relatório de Caixa:" + e.getMessage(), EErrosBD.CONSULTA_DADO);
 		}
 	}
 
