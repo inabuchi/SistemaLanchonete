@@ -435,7 +435,8 @@ public class Validacao {
 			} else if (formato == 10) {
 				formatarDate = new SimpleDateFormat("HH:mm");
 			}
-			Date date = formatarDate.parse(validaString(data));
+
+			Date date = formatarDate.parse(formatarDate.format(data));
 			return date;
 		} catch (Exception e) {
 			throw e;
