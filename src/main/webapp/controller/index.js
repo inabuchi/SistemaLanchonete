@@ -1,9 +1,10 @@
 /**
+ * @author Igor Vieira Rodrigues
  * páginas abertas
  */
 ($ => $(document).ready(() => {
-	
-	$("#includeMenu").load("Menu.html");
+
+    $("#includeMenu").load("Menu.html");
 
     carregarPaginaInicial();
 
@@ -20,12 +21,13 @@
 
     $(document.body).on('click', '#includeMenu ul.collapse li > a',
         /**
-         * 
-         * Evento que visa abrir p�ginas dentro de um div espec�fico
-         * 
-         * @param {Event} e
-         * @returns {Boolean}
-         */
+		 * 
+		 * Evento que visa abrir páginas dentro de um div específico
+		 * 
+		 * @param {Event}
+		 *            e
+		 * @returns {Boolean}
+		 */
         e => {
             e.preventDefault();
             e.stopImmediatePropagation();
@@ -36,24 +38,36 @@
             $liPrincipal.addClass('active');
             $(self).append('<i class="fa fa-caret-left"></i>');
 
-            // $('#includeMenu > div.sidebar.bg-dark > ul.list-unstyled:not(.show)').each((index, elemento) => {
-            //     if ($(self).parents('ul.list-unstyled.collapse') !== $(elemento)) {
-
-            //     }
-            // });
-
-            //-- Abrir página via ajax na div de id conteudo
+            // -- Abrir página via ajax na div de id conteudo
             abrirPagina(self.href, '#conteudo');
 
             return false;
-	}).on('click', 'a.link-abrir', e => {
-		e.preventDefault();
-		e.stopImmediatePropagation();
+        }).on('click', 'a.link-abrir', e => {
+            e.preventDefault();
+            e.stopImmediatePropagation();
 
-		abrirPagina(e.currentTarget.href, '#conteudo');
+            abrirPagina(e.currentTarget.href, '#conteudo');
 
-		return false;
-});
+            return false;
+        }).on('click', 'a.link-editar', e => {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
+
+            abrirPagina(e.currentTarget.href, '#conteudo');
+
+            $('#conteudo form').each((index, formulario) => {
+
+                var cdCliente = Number($(e.currentTarget.href).attr('data-id'));
+                enviarAjax('<caminho do restful para obter clientes>',
+                    'GET',
+                    { 'cdCliente': cdCliente },
+                    res => setFormCampos(formulario, res),
+                    prFailCallBack);
+            });
+
+            return false;
+        });
 
 }))(jQuery);
 

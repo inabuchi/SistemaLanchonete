@@ -1,10 +1,12 @@
 package br.com.SistemaLanchonete.Validacao;
 
+import java.lang.reflect.Field;
 import java.text.DecimalFormatSymbols;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import br.com.SistemaLanchonete.Repository.ETipoCampo;
 
 /**
  * @author robertozbnu and Lino Pegoretti
@@ -12,9 +14,30 @@ import java.util.Date;
  */
 public class Validacao {
 
+	public static final String MSG_ATRIBUTO_VAZIO = "Campo %1s  não pode ser vazio";
+	public static final String MSG_ATRIBUTO_NULO = "Campo %1s não pode ser nulo";
+	public static final String MSG_OBJETO_NULO = "Objeto %1s não pode ser nulo";
+	public static final String MSG_OBJETO_GRAVADO = "Objeto %1s gravado com sucesso";
+
+	public static void main(String[] args) {
+		String[] valida = { null, " ", "", "      teste", "teste      ", "teste", "123456" };
+		System.out.println("validaString");
+		for (int i = 0; i < valida.length; i++) {
+			System.out.println(i + " --> " + valida[i] + " --> " + validaString(valida[i]));
+		}
+		System.out.println("testaStringNula = ");
+		for (int i = 0; i < valida.length; i++) {
+			System.out.println(i + " --> " + valida[i] + " --> " + testaStringNula(valida[i]));
+		}
+		System.out.println("testaStringVazia = ");
+		for (int i = 0; i < valida.length; i++) {
+			System.out.println(i + " --> " + valida[i] + " --> " + testaStringVazia(valida[i]));
+		}
+
+	}
 	/*
 	 * 
-	 * Métodos para validação de String
+	 * Métodos para manipulação de String
 	 * 
 	 */
 
@@ -56,31 +79,133 @@ public class Validacao {
 				: stringValidacao.trim().equals("") ? true : false;
 	}
 
-	public static void main(String[] args) {
-		String[] valida = { null, " ", "", "      teste", "teste      ", "teste", "123456" };
-		System.out.println("validaString");
-		for (int i = 0; i < valida.length; i++) {
-			System.out.println(i + " --> " + valida[i] + " --> " + validaString(valida[i]));
+	/**
+	 * Conversão de String para Double
+	 * 
+	 * @param stringDouble
+	 *            - um número Double em formato de String
+	 * @return double - um número convertido em double
+	 * @throws SistemaException
+	 *             - um erro de sistema interno
+	 */
+	public static double stringToDouble(String stringDouble) throws SistemaException {
+		double doubleRetorno = 0;
+		if (testaStringNula(stringDouble) && testaStringVazia(stringDouble)) {
+			try {
+				doubleRetorno = Double.parseDouble(stringDouble);
+			} catch (Exception e) {
+				throw new SistemaException(e.getMessage(), EErrosSistema.VALOR_DECIMAL_INVALIDO);
+			}
 		}
-		System.out.println("testaStringNula = ");
-		for (int i = 0; i < valida.length; i++) {
-			System.out.println(i + " --> " + valida[i] + " --> " + testaStringNula(valida[i]));
-		}
-		System.out.println("testaStringVazia = ");
-		for (int i = 0; i < valida.length; i++) {
-			System.out.println(i + " --> " + valida[i] + " --> " + testaStringVazia(valida[i]));
-		}
+		return doubleRetorno;
+	}
 
+	/**
+	 * Conversão de String para Java.Util.Date
+	 * 
+	 * @param dataString
+	 *            - uma data formatada como String
+	 * @return Date - uma data no formato Date do JAVA
+	 * @throws SistemaException
+	 *             - um erro de sistema interno
+	 */
+	public static Date stringToDate(String dataString) throws SistemaException {
+		Date dataRetorno = null;
+		if (testaStringNula(dataString) && testaStringVazia(dataString)) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			try {
+				dataRetorno = new Date(sdf.parse(dataString).getTime());
+			} catch (Exception e) {
+				throw new SistemaException(e.getMessage(), EErrosSistema.DATA_INVALIDA);
+			}
+		} else {
+			dataRetorno = new Date();
+		}
+		return dataRetorno;
+	}
+
+	/**
+	 * Conerter da classe Java.Util.Date para String
+	 * 
+	 * @param dataRetorno
+	 *            - uma data a ser formatada
+	 * @return Date(dd/MM/yyyy) - uma data nesse formato
+	 */
+	public static String getDataFormatada(Date dataRetorno) {
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		return formato.format(dataRetorno);
+	}
+
+	/**
+	 * Método para converter String para ID de Classe
+	 * 
+	 * @param codigoString
+	 * @return
+	 * @throws SistemaException
+	 */
+	public static int stringToCodigo(String codigoString) throws SistemaException {
+		int codigoRetorno = 0;
+		if (testaStringNula(codigoString) && testaStringVazia(codigoString)) {
+			try {
+				codigoRetorno = Integer.parseInt(codigoString);
+			} catch (Exception e) {
+				throw new SistemaException(e.getMessage(), EErrosSistema.CODIGO_INVALIDO);
+			}
+		} else {
+			throw new SistemaException("Erro de Sistema - ", EErrosSistema.CODIGO_NULO);
+		}
+		return codigoRetorno;
+	}
+
+	/**
+	 * Método para converter String para int
+	 * 
+	 * @param intString
+	 * @return
+	 * @throws SistemaException
+	 */
+	public static int stringToInt(String intString) throws SistemaException {
+		int intRetorno = 0;
+		if (testaStringNula(intString) && testaStringVazia(intString)) {
+			try {
+				intRetorno = Integer.parseInt(intString);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new SistemaException(e.getMessage(), EErrosSistema.VALOR_DECIMAL_INVALIDO);
+			}
+		}
+		return intRetorno;
+	}
+
+	/**
+	 * Método para converter String para boolean
+	 * 
+	 * @param parameter
+	 * @throws SistemaException
+	 */
+
+	public static boolean stringToBoolean(String booleanString) throws SistemaException {
+		boolean booleanRetorno = false;
+		if (testaStringNula(booleanString) && testaStringVazia(booleanString)) {
+			try {
+				booleanRetorno = Boolean.parseBoolean(booleanString);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new SistemaException(e.getMessage(), EErrosSistema.OPCAO_INVALIDA);
+			}
+		}
+		return booleanRetorno;
 	}
 
 	/*
 	 * 
-	 * MÃ©todos para validaÃ§Ãµes de objetos
+	 * Métodos para validações de objetos
 	 * 
 	 */
 
 	/**
-	 * Valida um objeto nulo, pode ser qualquer objeto
+	 * Método de validação de objeto nulo(não instanciado),pode ser qualquer objeto
 	 * 
 	 * @param objetoValidacao
 	 *            - Objeto para ser validado
@@ -88,7 +213,10 @@ public class Validacao {
 	 *         true - se nao for nulo
 	 */
 	public static boolean validaNulo(Object objetoValidacao) {
-		return objetoValidacao == null;
+		if (objetoValidacao == null) {
+			throw new IllegalArgumentException(String.format(MSG_OBJETO_NULO, Object.class.getSimpleName()));
+		}
+		return true;
 	}
 
 	/**
@@ -97,14 +225,80 @@ public class Validacao {
 	 * @param objetoValidacao
 	 *            - objeto para ser validado
 	 * @return true - se objeto nao for vazio <br>
-	 * 		false - se objeto estiver vazio
+	 *         false - se objeto estiver vazio
 	 */
 	public static boolean validaVazio(Object objetoValidacao) {
 		return objetoValidacao.equals("") ? true : false;
 	}
 
 	/**
-	 * MÃ©todo validaÃ§Ã£o de Long
+	 * 
+	 * Método de validação de atributo nulo
+	 * 
+	 * @param objeto
+	 *            - um objeto passado por parametro
+	 * @param field
+	 *            - um campo do objeto passado por parametro
+	 * @return true se o atributo nao for nulo exceção se for nulo
+	 * @throws Exception
+	 */
+	public static boolean validaAtributoNulo(Object objeto, Field field) throws Exception {
+		field.setAccessible(true);
+		if (field.get(objeto) == null) {
+			throw new Exception(String.format(MSG_ATRIBUTO_NULO, field.getName()));
+		}
+		field.setAccessible(false);
+		return true;
+	}
+
+	/**
+	 * 
+	 * Método de validação de atributo vazio, zerado, ou em branco
+	 * 
+	 * @param objeto
+	 *            - um objeto passado por parametro
+	 * @param field
+	 *            - um campo do objeto passado por parametro
+	 * @return true se o atributo nao for vazio, zerado, ou em branco, caso
+	 *         contrário exceção
+	 * @throws Exception
+	 */
+	public static boolean validaAtributoVazio(Object objeto, Field field) throws Exception {
+		ETipoCampo tipo = ETipoCampo.valueOf(field.getType().getSimpleName().toUpperCase());
+		switch (tipo) {
+		case INT:
+			field.setAccessible(true);
+			if (field.getInt(objeto) == 0) {
+				throw new Exception(String.format(MSG_ATRIBUTO_VAZIO, field.getName()));
+			}
+			field.setAccessible(false);
+			break;
+		case STRING:
+			field.setAccessible(true);
+			if (field.get(objeto).toString().equals("")) {
+				throw new Exception(String.format(MSG_ATRIBUTO_VAZIO, field.getName()));
+			}
+			field.setAccessible(false);
+			break;
+		case DOUBLE:
+			field.setAccessible(true);
+			if (field.getDouble(objeto) == 0) {
+				throw new Exception(String.format(MSG_ATRIBUTO_VAZIO, field.getName()));
+			}
+			field.setAccessible(false);
+			break;
+		default:
+			break;
+		}
+		return true;
+	}
+
+	/*
+	 * Métodos para conversões numericas de objetos
+	 */
+
+	/**
+	 * Método validação de Long
 	 *
 	 * @param object
 	 * @return Long
@@ -114,7 +308,7 @@ public class Validacao {
 	}
 
 	/**
-	 * MÃ©todo validaÃ§Ã£o de Integer
+	 * Método validação de Integer
 	 *
 	 * @param object
 	 * @return Integer
@@ -124,7 +318,7 @@ public class Validacao {
 	}
 
 	/**
-	 * MÃ©todo validaÃ§Ã£o de Float
+	 * Método validação de Float
 	 *
 	 * @param object
 	 * @return Float
@@ -134,7 +328,7 @@ public class Validacao {
 	}
 
 	/**
-	 * MÃ©todo validaÃ§Ã£o de Double
+	 * Método validação de Double
 	 *
 	 * @param object
 	 * @return Double
@@ -148,9 +342,8 @@ public class Validacao {
 			return 0d;
 		}
 
-		String valorString = obj.toString(); // Como implementaÃ§Ã£o original, se nÃ£o for numero, tenta-se trabalhar
-												// com
-												// base no toString. Strings retornam "this" neste mÃ©todo.
+		String valorString = obj.toString(); // Como implementação original, se não for numero, tenta-se trabalhar
+												// com base no toString. Strings retornam "this" neste método.
 		try {
 			return Double.valueOf(valorString);
 		} catch (NumberFormatException e) {
@@ -166,17 +359,7 @@ public class Validacao {
 	}
 
 	/**
-	 * MÃ©todo de remoÃ§Ã£o de caracteres especiais
-	 *
-	 * @param String
-	 * @return String
-	 */
-	public static String removerCaracteresEspeciais(String texto) {
-		return texto.replaceAll("[^aA-zZ-Z1-9 ]", "");
-	}
-
-	/**
-	 * MÃ©todo para obter a hora inicial da data passada como parÃ¢metro
+	 * Método para obter a hora inicial da data passada como parâmetro
 	 *
 	 * @param date
 	 * @return date
@@ -192,7 +375,7 @@ public class Validacao {
 	}
 
 	/**
-	 * MÃ©todo para obter a hora final da data passada como parÃ¢metro
+	 * Método para obter a hora final da data passada como parâmetro
 	 *
 	 * @param date
 	 * @return date
@@ -208,13 +391,24 @@ public class Validacao {
 	}
 
 	/**
-	 * MÃ©todo para obter o formato de data conforme abaixo 1 = dd/MM/yyyy HH:mm:ss
-	 * 2 = dd/MM/yyyy 3 = HH:mm:ss 4 = dd 5 = MM 6 = yyyy 7 = HH 8 = mm 9 = ss 10 =
-	 * HH:mm
+	 * Método para obter o formato de data conforme abaixo<br>
+	 * <br>
+	 * 1 = dd/MM/yyyy HH:mm:ss <br>
+	 * 2 = dd/MM/yyyy <br>
+	 * 3 = HH:mm:ss <br>
+	 * 4 = dd <br>
+	 * 5 = MM <br>
+	 * 6 = yyyy <br>
+	 * 7 = HH <br>
+	 * 8 = mm <br>
+	 * 9 = ss <br>
+	 * 10 = HH:mm
 	 * 
-	 * @param int,
-	 *            date
-	 * @return date
+	 * @param formato
+	 *            - um inteiro como a lista acima
+	 * @param data
+	 *            - uma data para ser formatada
+	 * @return uma data formatada
 	 * @throws Exception
 	 */
 	public static Date formatarData(int formato, Date data) throws Exception {
@@ -241,7 +435,8 @@ public class Validacao {
 			} else if (formato == 10) {
 				formatarDate = new SimpleDateFormat("HH:mm");
 			}
-			Date date = formatarDate.parse(validaString(data));
+
+			Date date = formatarDate.parse(formatarDate.format(data));
 			return date;
 		} catch (Exception e) {
 			throw e;
@@ -249,117 +444,12 @@ public class Validacao {
 	}
 
 	/**
-	 * MÃ©todo para conversÃ£o de String para Double
-	 * 
-	 * @param stringDouble
-	 * @return
-	 * @throws SistemaException
+	 * Método de remoção de caracteres especiais
+	 *
+	 * @param String
+	 * @return String
 	 */
-	public static double stringToDouble(String stringDouble) throws SistemaException {
-		double doubleRetorno = 0;
-		if (testaStringNula(stringDouble) && testaStringVazia(stringDouble)) {
-			try {
-				doubleRetorno = Double.parseDouble(stringDouble);
-			} catch (Exception e) {
-				throw new SistemaException(e.getMessage(), EErrosSistema.VALOR_DECIMAL_INVALIDO);
-			}
-		}
-		return doubleRetorno;
-	}
-
-	/**
-	 * MÃ©todo para conversÃ£o de String para Date
-	 * 
-	 * @param dataString
-	 * @return
-	 * @throws SistemaException
-	 * @throws ParseException
-	 */
-	public static Date stringToDate(String dataString) throws SistemaException {
-		Date dataRetorno = null;
-		if (testaStringNula(dataString) && testaStringVazia(dataString)) {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			try {
-				dataRetorno = new Date(sdf.parse(dataString).getTime());
-			} catch (Exception e) {
-				throw new SistemaException(e.getMessage(), EErrosSistema.DATA_INVALIDA);
-			}
-		} else {
-			dataRetorno = new Date();
-		}
-		return dataRetorno;
-	}
-
-	/**
-	 * MÃ©todo para converter data formatada para String
-	 * 
-	 * @param dataRetorno
-	 * @return
-	 */
-	public static String getDataFormatada(Date dataRetorno) {
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		return formato.format(dataRetorno);
-	}
-
-	/**
-	 * MÃ©todo para converter String para ID de Classe
-	 * 
-	 * @param codigoString
-	 * @return
-	 * @throws SistemaException
-	 */
-	public static int stringToCodigo(String codigoString) throws SistemaException {
-		int codigoRetorno = 0;
-		if (testaStringNula(codigoString) && testaStringVazia(codigoString)) {
-			try {
-				codigoRetorno = Integer.parseInt(codigoString);
-			} catch (Exception e) {
-				throw new SistemaException(e.getMessage(), EErrosSistema.CODIGO_INVALIDO);
-			}
-		} else {
-			throw new SistemaException("Erro de Sistema - ", EErrosSistema.CODIGO_NULO);
-		}
-		return codigoRetorno;
-	}
-
-	/**
-	 * MÃ©todo para converter String para int
-	 * 
-	 * @param intString
-	 * @return
-	 * @throws SistemaException
-	 */
-	public static int stringToInt(String intString) throws SistemaException {
-		int intRetorno = 0;
-		if (testaStringNula(intString) && testaStringVazia(intString)) {
-			try {
-				intRetorno = Integer.parseInt(intString);
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new SistemaException(e.getMessage(), EErrosSistema.VALOR_DECIMAL_INVALIDO);
-			}
-		}
-		return intRetorno;
-	}
-
-	/**
-	 * MÃ©todo para converter String para boolean
-	 * 
-	 * @param parameter
-	 * @throws SistemaException
-	 */
-
-	public static boolean stringToBoolean(String booleanString) throws SistemaException {
-		boolean booleanRetorno = false;
-		if (testaStringNula(booleanString) && testaStringVazia(booleanString)) {
-			try {
-				booleanRetorno = Boolean.parseBoolean(booleanString);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new SistemaException(e.getMessage(), EErrosSistema.OPCAO_INVALIDA);
-			}
-		}
-		return booleanRetorno;
+	public static String removerCaracteresEspeciais(String texto) {
+		return texto.replaceAll("[^aA-zZ-Z1-9 ]", "");
 	}
 }

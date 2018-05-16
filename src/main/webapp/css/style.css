@@ -160,7 +160,7 @@ table {
 	font-size: 14px;
 }
 
-.table .table-visu, .table-edit, .table-del, .table-hist, .table-add {
+.table .table-visu, .table-edit, .table-del, .table-hist, .table-add, .table-eye {
 	border: 1px solid #ddd;
 	width: 35px;
 	height: 35px;
@@ -213,6 +213,18 @@ table {
 
 .table .table-hist:hover {
 	background-color: #666;
+}
+
+.table .table-eye {
+	background-color: #eee;
+	color: #000;
+	padding-left: 8px;
+	font-size: 16px;
+	margin-left: -2px;
+}
+
+.table .table-eye:hover {
+	background-color: #ddd;
 }
 
 .table .table-add {
@@ -616,38 +628,46 @@ logincolor {
 
 .buttons-principal {
 	padding: 45px;
-	width: 40%;
+	width: 98%;
 	height: 155px;
 	background-color: #fff;
 	text-align: center;
 	border: 1px solid #ddd;
-	margin: 10px;
+	margin: 2%;
 	border: 1px solid #ddd;
 	border-width: 1px 1px 3px;
 	border-radius: 0px 3px 3px;	
 	margin: auto;
+	margin-left: 0px;
+	float: left;
 }
 
 .buttons-default-area {
 	margin: auto;
 	text-align: center;
-	width: 70%;
+	width: 50%;
+	min-width: 300px;
 	height: auto;
-	margin-top: 15px;
+}
+
+.buttons-default-area  a:hover {
+	background-color: #eee;
 }
 
 .buttons-default {
 	padding: 30px;
-	width: 30.5%;
+	width: 48%;
 	height: 125px;
 	background-color: #fff;
 	text-align: center;
 	border: 1px solid #ddd;
 	float: left;
-	margin: 10px;
 	border: 1px solid #ddd;
 	border-width: 1px 1px 3px;
 	border-radius: 0px 3px 3px;
+	margin: 2%;
+	margin-left: 0px;
+	margin-bottom: 0px;
 }
 
 .buttons-cad-pedido {
@@ -692,7 +712,7 @@ number-total {
 }
 
 button-cestinha {
-	font-size: 40px;
+	font-size: 30px;
 	color: #aaa;
 }
 
@@ -703,7 +723,8 @@ pedido {
 	padding: 1%;
 	}
  
-.pedido.custom-state-active { background: #eee; }
+  #pedido { float: left; width: 40%; height: calc(314px *4);  padding: 1%;}
+  .pedido.custom-state-active { background: #eee; }
   .pedido li { float: left; width: 96px; padding: 0.4em; margin: 0.4em 0.4em 0.4em 0; text-align: center; background-color: #5de748; list-style-type: none;} 
   .pedido li h5 { margin: 0 0 0.4em; cursor: move; }
   .pedido li a { float: right; }
