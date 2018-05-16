@@ -64,7 +64,7 @@ function enviarAjax(prUrl, prMethod, prDados, prDoneCallBack, prFailCallBack) {
         alert('página não encontrada');
     });
     return $.ajax({
-        url: prUrl.toLocaleLowerCase(),
+        url: prUrl,
         type: prMethod.toUpperCase(),
         headers: {
             'Cache-Control': 'no-cache',
@@ -129,7 +129,7 @@ function setFormCampos(prForm, prJSON) {
     while (prForm[n]) {
         var txtNome = prForm[n].name;
 
-        prForm[n].value = prJson[txtNome];
+        prForm[n].value = prJSON[txtNome];
 
 
         n++;
