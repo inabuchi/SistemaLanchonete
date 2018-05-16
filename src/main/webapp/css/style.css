@@ -160,7 +160,7 @@ table {
 	font-size: 14px;
 }
 
-.table .table-visu, .table-edit, .table-del, .table-hist, .table-add {
+.table .table-visu, .table-edit, .table-del, .table-hist, .table-add, .table-eye {
 	border: 1px solid #ddd;
 	width: 35px;
 	height: 35px;
@@ -213,6 +213,18 @@ table {
 
 .table .table-hist:hover {
 	background-color: #666;
+}
+
+.table .table-eye {
+	background-color: #eee;
+	color: #000;
+	padding-left: 8px;
+	font-size: 16px;
+	margin-left: -2px;
+}
+
+.table .table-eye:hover {
+	background-color: #ddd;
 }
 
 .table .table-add {
