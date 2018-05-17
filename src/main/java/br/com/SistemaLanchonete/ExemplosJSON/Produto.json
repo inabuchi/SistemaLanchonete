@@ -1,0 +1,10 @@
+{
+    "cdProduto": 999,
+    "categoria": {
+        "cdProdutoCategoria": 9999,
+        "dsCategoria": "XXXXXXXXXXX"
+    },
+    "dsRefProduto": "XXXX",
+    "dsProduto": "XXXXXXXXXXXXXXXXXXX",
+    "isAtivo": false
+}
