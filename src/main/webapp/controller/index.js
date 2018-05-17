@@ -53,18 +53,22 @@
             e.preventDefault();
             e.stopImmediatePropagation();
 
+            console.log(e.currentTarget.attributes);
+            
+            var nrId = parseInt(e.currentTarget.getAttribute('data-id') ||'0');
+            var txtServico = e.currentTarget.getAttribute('data-servico');
+            var txtKey = e.currentTarget.getAttribute('data-key');
 
             abrirPagina(e.currentTarget.href, '#conteudo');
 
-            $('#conteudo form').each((index, formulario) => {
+            setTimeout(() =>            $('#conteudo form').each((index, formulario) => {
 
-                var cdCliente = Number($(e.currentTarget.href).attr('data-id'));
-                enviarAjax('<caminho do restful para obter clientes>',
+                enviarAjax(`/SistemaLanchonete/services/${txtServico}/${nrId}`,
                     'GET',
-                    { 'cdCliente': cdCliente },
+                    { txtKey: nrId },
                     res => setFormCampos(formulario, res),
-                    prFailCallBack);
-            });
+                    res => console.error(res));
+            }), 500);
 
             return false;
         });
