@@ -13,20 +13,8 @@ import br.com.SistemaLanchonete.Repository.EErrosBD;
 import br.com.SistemaLanchonete.Repository.GenericDAO;
 
 public class EnderecoService {
-	private String retorno = "";
-	GenericDAO<EnderecoBean> enderecoDao = new GenericDAO<EnderecoBean>();
-	GenericDAO<EnderecoPessoaBean> enderecoPessoaDao = new GenericDAO<EnderecoPessoaBean>();
-	GenericDAO<BairroBean> bairroDao = new GenericDAO<BairroBean>();
-	GenericDAO<EstadoBean> estadoDao = new GenericDAO<EstadoBean>();
-	GenericDAO<LogradouroBean> logradouroDao = new GenericDAO<LogradouroBean>();
-	GenericDAO<MunicipioBean> municipioDao = new GenericDAO<MunicipioBean>();
-
-	Class<EnderecoBean> enderecoBean = EnderecoBean.class;
-	Class<EnderecoPessoaBean> enderecoPessoaBean = EnderecoPessoaBean.class;
-	Class<BairroBean> bairroBean = BairroBean.class;
-	Class<EstadoBean> estadoBean = EstadoBean.class;
-	Class<LogradouroBean> logradouroBean = LogradouroBean.class;
-	Class<MunicipioBean> municipioBean = MunicipioBean.class;
+	private String retorno = "";	
+	GenericDAO<EnderecoPessoaBean> enderecoPessoaDao = new GenericDAO<EnderecoPessoaBean>();		
 
 	public String save(EnderecoPessoaBean enderecoPessoa) throws BDException {
 
@@ -37,15 +25,21 @@ public class EnderecoService {
 
 	private String SalvarEndereco(EnderecoBean endereco) throws BDException {
 		SalvarLogradouro(endereco.getLogradouro());
+		
+		GenericDAO<EnderecoBean> enderecoDao = new GenericDAO<EnderecoBean>();
 
-		EnderecoBean enderecoCon = new EnderecoBean(0, null, endereco.getCdNumero(), endereco.getDsComplemento(), "");
+		EnderecoBean enderecoCon = new EnderecoBean(0, null, 0, endereco.getDsComplemento(), "");
 		GenericDAO<EnderecoBean> endDao = new GenericDAO<EnderecoBean>();
 
-		// Está dando erro aqui
 		ArrayList<EnderecoBean> lista = endDao.findLike(EnderecoBean.class, enderecoCon);
 
 		if (!lista.isEmpty()) {
-			endereco.setCdEndereco(lista.get(0).getCdEndereco());
+			for (int i = 0; i < lista.size(); i++) {
+				if (endereco.getLogradouro().getCdLogradouro() == lista.get(i).getLogradouro().getCdLogradouro()) {
+					endereco.setCdEndereco(lista.get(i).getCdEndereco());
+					break;
+				}
+			}
 		}
 
 		if (endereco.getCdEndereco() == 0) {
@@ -55,7 +49,12 @@ public class EnderecoService {
 				lista = endDao.findLike(EnderecoBean.class, enderecoCon);
 
 				if (!lista.isEmpty()) {
-					endereco.setCdEndereco(lista.get(0).getCdEndereco());
+					for (int i = 0; i < lista.size(); i++) {
+						if (endereco.getLogradouro().getCdLogradouro() == lista.get(i).getLogradouro().getCdLogradouro()) {
+							endereco.setCdEndereco(lista.get(i).getCdEndereco());
+							break;
+						}
+					}
 				}
 			} catch (BDException e) {
 				throw new BDException("Erro ao Salvar dados no banco" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
@@ -65,19 +64,20 @@ public class EnderecoService {
 			try {
 				enderecoDao.save(endereco, endereco.getCdEndereco());
 			} catch (BDException e) {
-				throw new BDException("Erro na atualizaÃ§Ã£o de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
+				throw new BDException("Erro na atualização de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 			}
 			retorno = "Dados atualizados com sucesso na tabela";
 		}
 		return retorno;
 	}
 
-	private String SalvarEnderecoPessoa(EnderecoPessoaBean enderecoPessoa) throws BDException {
+	/*private String SalvarEnderecoPessoa(EnderecoPessoaBean enderecoPessoa) throws BDException {
 		return retorno = "Salvo com Sucesso";
-	}
+	}*/
 
 	private String SalvarBairro(BairroBean bairro) throws BDException {
 		SalvarMunicipio(bairro.getMunicipio());
+			
 
 		BairroBean bairroCon = new BairroBean(0, null, bairro.getDsBairro());
 		GenericDAO<BairroBean> bairroDao = new GenericDAO<BairroBean>();
@@ -85,7 +85,12 @@ public class EnderecoService {
 		ArrayList<BairroBean> lista = bairroDao.findLike(BairroBean.class, bairroCon);
 
 		if (!lista.isEmpty()) {
-			bairro.setCdBairro(lista.get(0).getCdBairro());
+			for (int i = 0; i < lista.size(); i++) {
+				if (lista.get(i).getMunicipio().getCdMunicipio() == bairro.getMunicipio().getCdMunicipio()) {
+					bairro.setCdBairro(lista.get(i).getCdBairro());
+					break;
+				}
+			}			
 		}
 
 		if (bairro.getCdBairro() == 0) {
@@ -93,8 +98,14 @@ public class EnderecoService {
 				bairroDao.save(bairro, 0);
 
 				lista = bairroDao.findLike(BairroBean.class, bairroCon);
+
 				if (!lista.isEmpty()) {
-					bairro.setCdBairro(lista.get(0).getCdBairro());
+					for (int i = 0; i < lista.size(); i++) {
+						if (lista.get(i).getMunicipio().getCdMunicipio() == bairro.getMunicipio().getCdMunicipio()) {
+							bairro.setCdBairro(lista.get(i).getCdBairro());
+							break;
+						}
+					}			
 				}
 			} catch (BDException e) {
 				throw new BDException("Erro ao Salvar dados no banco" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
@@ -104,7 +115,7 @@ public class EnderecoService {
 			try {
 				bairroDao.save(bairro, bairro.getCdBairro());
 			} catch (BDException e) {
-				throw new BDException("Erro na atualizaÃ§Ã£o de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
+				throw new BDException("Erro na atualização de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 			}
 			retorno = "Dados atualizados com sucesso na tabela";
 		}
@@ -115,6 +126,7 @@ public class EnderecoService {
 		EstadoBean estCon = new EstadoBean(0, "", estado.getDsSigla());
 		GenericDAO<EstadoBean> estDao = new GenericDAO<EstadoBean>();
 
+		GenericDAO<EstadoBean> estadoDao = new GenericDAO<EstadoBean>();
 		ArrayList<EstadoBean> lista = estDao.findLike(EstadoBean.class, estCon);
 
 		if (!lista.isEmpty()) {
@@ -137,7 +149,7 @@ public class EnderecoService {
 			try {
 				estadoDao.save(estado, estado.getCdEstado());
 			} catch (BDException e) {
-				throw new BDException("Erro na atualizaÃ§Ã£o de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
+				throw new BDException("Erro na atualização de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 			}
 			retorno = "Dados atualizados com sucesso na tabela";
 		}
@@ -147,23 +159,32 @@ public class EnderecoService {
 	private String SalvarLogradouro(LogradouroBean logradouro) throws BDException {
 		SalvarBairro(logradouro.getBairro());
 
+		GenericDAO<LogradouroBean> logradouroDao = new GenericDAO<LogradouroBean>();
 		LogradouroBean logCon = new LogradouroBean(0, null, 0, logradouro.getDsLogradouro());
 		GenericDAO<LogradouroBean> logDao = new GenericDAO<LogradouroBean>();
 
 		ArrayList<LogradouroBean> lista = logDao.findLike(LogradouroBean.class, logCon);
-
+		
 		if (!lista.isEmpty()) {
-			logradouro.setCdLogradouro(lista.get(0).getCdLogradouro());
+			for (int i = 0; i < lista.size(); i++) {
+				if (lista.get(i).getBairro().getCdBairro() == logradouro.getBairro().getCdBairro());
+					logradouro.setCdLogradouro(lista.get(i).getCdLogradouro());	
+				break;
+			}
 		}
 
 		if (logradouro.getCdLogradouro() == 0) {
 			try {
 				logradouroDao.save(logradouro, 0);
-
-				lista = logDao.findLike(LogradouroBean.class, logCon);
+				
+				lista = logDao.findLike(LogradouroBean.class, logCon);				
 
 				if (!lista.isEmpty()) {
-					logradouro.setCdLogradouro(lista.get(0).getCdLogradouro());
+					for (int i = 0; i < lista.size(); i++) {
+						if (lista.get(i).getBairro().getCdBairro() == logradouro.getBairro().getCdBairro());
+							logradouro.setCdLogradouro(lista.get(i).getCdLogradouro());	
+						break;
+					}
 				}
 			} catch (BDException e) {
 				throw new BDException("Erro ao Salvar dados no banco" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
@@ -173,7 +194,7 @@ public class EnderecoService {
 			try {
 				logradouroDao.save(logradouro, logradouro.getCdLogradouro());
 			} catch (BDException e) {
-				throw new BDException("Erro na atualizaÃ§Ã£o de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
+				throw new BDException("Erro na atualização de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 			}
 			retorno = "Dados atualizados com sucesso na tabela";
 		}
@@ -183,13 +204,19 @@ public class EnderecoService {
 	private String SalvarMunicipio(MunicipioBean municipio) throws BDException {
 		SalvarEstado(municipio.getEstado());
 
+		GenericDAO<MunicipioBean> municipioDao = new GenericDAO<MunicipioBean>();
 		MunicipioBean munCon = new MunicipioBean(0, municipio.getEstado(), municipio.getDsMunicipio());
 		GenericDAO<MunicipioBean> munDao = new GenericDAO<MunicipioBean>();
 
 		ArrayList<MunicipioBean> lista = munDao.findLike(MunicipioBean.class, munCon);
 
 		if (!lista.isEmpty()) {
-			municipio.setCdMunicipio(lista.get(0).getCdMunicipio());
+			for (int i = 0; i < lista.size(); i++) {
+				if (lista.get(i).getEstado().getCdEstado() == municipio.getEstado().getCdEstado()) {
+				  municipio.setCdMunicipio(lista.get(i).getCdMunicipio());
+				  break;
+				}
+			}			
 		}
 
 		if (municipio.getCdMunicipio() == 0) {
@@ -199,7 +226,12 @@ public class EnderecoService {
 				lista = munDao.findLike(MunicipioBean.class, munCon);
 
 				if (!lista.isEmpty()) {
-					municipio.setCdMunicipio(lista.get(0).getCdMunicipio());
+					for (int i = 0; i < lista.size(); i++) {
+						if (lista.get(i).getEstado().getCdEstado() == municipio.getEstado().getCdEstado()) {
+						  municipio.setCdMunicipio(lista.get(i).getCdMunicipio());
+						  break;
+						}
+					}			
 				}
 			} catch (BDException e) {
 				throw new BDException("Erro ao Salvar dados no banco" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
@@ -209,7 +241,7 @@ public class EnderecoService {
 			try {
 				municipioDao.save(municipio, municipio.getCdMunicipio());
 			} catch (BDException e) {
-				throw new BDException("Erro na atualizaÃ§Ã£o de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
+				throw new BDException("Erro na atualização de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 			}
 			retorno = "Dados atualizados com sucesso na tabela";
 		}
