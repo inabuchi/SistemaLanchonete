@@ -628,12 +628,12 @@ logincolor {
 
 .buttons-principal {
 	padding: 45px;
-	width: 98%;
+	width: 98.5%;
 	height: 155px;
 	background-color: #fff;
 	text-align: center;
 	border: 1px solid #ddd;
-	margin: 2%;
+	margin: 1.5%;
 	border: 1px solid #ddd;
 	border-width: 1px 1px 3px;
 	border-radius: 0px 3px 3px;	
@@ -645,7 +645,7 @@ logincolor {
 .buttons-default-area {
 	margin: auto;
 	text-align: center;
-	width: 50%;
+	width: 55%;
 	min-width: 300px;
 	height: auto;
 }
@@ -656,7 +656,7 @@ logincolor {
 
 .buttons-default {
 	padding: 30px;
-	width: 48%;
+	width: 48.5%;
 	height: 125px;
 	background-color: #fff;
 	text-align: center;
@@ -665,7 +665,7 @@ logincolor {
 	border: 1px solid #ddd;
 	border-width: 1px 1px 3px;
 	border-radius: 0px 3px 3px;
-	margin: 2%;
+	margin: 1.5%;
 	margin-left: 0px;
 	margin-bottom: 0px;
 }
