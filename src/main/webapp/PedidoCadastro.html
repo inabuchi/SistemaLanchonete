@@ -25,7 +25,7 @@
                                  <input class="form-control" id="nomeCli" type="text" maxlength="255" value="" disabled>                               
                              </div>
                              
-                            <a href="CadastroCliente.html"><button type="button" class="button-add"><i class="fa fa-plus"></i>Cadastrar cliente</button></a>
+                            <a class="link-abrir" href="ClienteCadastro.html"><button type="button" class="button-add"><i class="fa fa-plus"></i>Cadastrar cliente</button></a>
 						</div>
 						
 						<!-- Programador, ao clicar em "Buscar" e não encontrar o telefone, deverá habilitar o campo "Nome",
@@ -37,7 +37,7 @@
 						<div class="form-row">
                              <div class="form-group col-md-5">
                                  <label for="endCli" class="control-label required">Endereço de entrega</label>
-                                 <select class="form-control" id="endCli" min="1" required>										 
+                                 <select class="form-control" id="endCli" min="1" required onchange="calculaTempo()" >										 
 									<option value="1">Rua VX, 552, Centro, Blumenau, SC</option>
 									<option value="2">Rua Sete de Setembro, 1234, Centro, Blumenau, SC</option>
 									<option value="0">Endereço alternativo</option>
@@ -51,7 +51,7 @@
 								<label for="autocomplete" class="control-label required">Auto-complete</label>
 								<input id="autocomplete"
 									placeholder="Digite o endereço para auto completar os campos"
-									class="form-control" onFocus="geolocate()" type="text"></input>
+									class="form-control" type="text"></input>
 							</div>
 						</div>
 
@@ -63,7 +63,7 @@
 									maxlength="255" required>
 							</div>
 							 <div class="form-group col-md-1">								
-								<label for="street_number" class="control-label required">Número</label>
+								<label for="street_number" class="control-label required">Nº</label>
 								<input class="form-control" id="street_number" type="number" min="1"
 									required>
 							</div>
@@ -109,6 +109,8 @@
 							<label for="obsEndCli" class="control-label">Observação</label>
 							<textarea class="form-control" rows="4" id="obsEndCli"></textarea>
 						</div>
+						<div id="sublocality_level_1" type="text" maxlength="2" visible=false></div>
+						<div id="administrative_area_level_2" type="text" maxlength="2" visible=false></div>
 						<script>
 							var placeSearch, autocomplete;
 							var componentForm = {
@@ -116,8 +118,9 @@
 								route : 'long_name',
 								locality : 'long_name',
 								administrative_area_level_1 : 'short_name',
-								country : 'long_name',
-								postal_code : 'short_name'
+								postal_code : 'short_name',
+								sublocality_level_1 : 'short_name',
+								administrative_area_level_2 : 'short_name'
 							};
 
 							function initAutocomplete() {
@@ -143,39 +146,71 @@
 									document.getElementById(component).value = '';
 									document.getElementById(component).disabled = false;
 								}
+								document.getElementById('baiCli').value = '';
+								document.getElementById('locality').value = '';
 
 								// Get each component of the address from the place details
 								// and fill the corresponding field on the form.
 								for (var i = 0; i < place.address_components.length; i++) {
 									var addressType = place.address_components[i].types[0];
 									if (componentForm[addressType]) {
+										
 										var val = place.address_components[i][componentForm[addressType]];
-										document.getElementById(addressType).value = val;
+										if (addressType == "sublocality_level_1"){
+											document.getElementById('baiCli').value = val;
+										} else if (addressType == "administrative_area_level_2"){
+											document.getElementById('locality').value = val;
+										} else {
+											document.getElementById(addressType).value = val;
+										}
 									}
-								}
-							}
+								}	
+																
+								var origin = "Rua Presidente Costa e Silva, 3644, Pomerode, SC, Brasil",
+    							destination =  document.getElementById("autocomplete").value,
+    							service = new google.maps.DistanceMatrixService();
 
-							// Bias the autocomplete object to the user's geographical location,
-							// as supplied by the browser's 'navigator.geolocation' object.
-							function geolocate() {
-								if (navigator.geolocation) {
-									navigator.geolocation
-											.getCurrentPosition(function(
-													position) {
-												var geolocation = {
-													lat : position.coords.latitude,
-													lng : position.coords.longitude
-												};
-												var circle = new google.maps.Circle(
-														{
-															center : geolocation,
-															radius : position.coords.accuracy
-														});
-												autocomplete.setBounds(circle
-														.getBounds());
-											});
-								}
+    							service.getDistanceMatrix(
+									{
+										origins: [origin],
+										destinations: [destination],
+										travelMode: google.maps.TravelMode.DRIVING,
+										avoidHighways: false,
+										avoidTolls: false
+									}, 
+									callback
+								);
 							}
+							
+							function calculaTempo() {
+								var t = document.getElementById("endCli");
+								var selectedText = t.options[t.selectedIndex].text;
+								var origin = "Rua Presidente Costa e Silva, 3644, Pomerode, SC, Brasil",
+    							destination =  selectedText,
+    							service = new google.maps.DistanceMatrixService();
+
+    							service.getDistanceMatrix(
+									{
+										origins: [origin],
+										destinations: [destination],
+										travelMode: google.maps.TravelMode.DRIVING,
+										avoidHighways: false,
+										avoidTolls: false
+									}, 
+									callback
+								);
+							
+							}
+							
+							function callback(response, status) {
+
+							if(status=="OK") {								
+								document.getElementById('distance').value = response.rows[0].elements[0].distance.text;
+								document.getElementById('duration').value = response.rows[0].elements[0].duration.text;
+							} else {
+								alert("Error: " + status);
+						   }
+						   }
 						</script>
 						<script
 							src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxDxbtdTs7_ViJD346_X6rj2-a9gIJeE8&libraries=places&callback=initAutocomplete"
@@ -311,6 +346,16 @@
 								<label for="pedtroco" class="control-label">Troco</label>
                                 <input class="form-control" id="pedtroco" type="text">                               
 							</div>
+							<div class="form-group col-md-3">
+								<label for="locality" class="control-label ">Distância até local</label>
+								<input class="form-control" id="distance" type="text"
+									maxlength="255" required>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="locality" class="control-label ">Tempo estimado de entrega</label>
+								<input class="form-control" id="duration" type="text"
+									maxlength="255" required>
+							</div>
 							</div>
 							<table class="table table-bordered" style="text-align:right;  margin-left: 60%; width: 40%; background-color:#f5f5f5">
 							<tr>
@@ -325,10 +370,10 @@
 							<td>Total do pedido:</td>
 							<td style="font-weight:bold">R$ 92,00</td>
 							</tr>
-							<tr>
+							<!--<tr>
 							<td>Tempo estimado de entrega:</td>
 							<td style="font-weight:bold">1 hora</td>
-							</tr>
+							</tr> -->
 							</table>					
 						<br>
 						<center>

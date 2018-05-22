@@ -57,8 +57,8 @@
 							<div id="locationField" class="form-group col-md-12">
 								<label for="autocomplete" class="control-label required">Auto-complete</label>
 								<input id="autocomplete"
-									placeholder="Digite o endereço para auto completar os campos"
-									class="form-control" onFocus="geolocate()" type="text"></input>
+									placeholder="Digite o número seguido do endereço para auto completar os campos"
+									class="form-control" type="text"></input>
 							</div>
 						</div>
 
@@ -70,7 +70,7 @@
 									maxlength="255" required>
 							</div>
 							 <div class="form-group col-md-1">								
-								<label for="street_number" class="control-label required">Número</label>
+								<label for="street_number" class="control-label required">Nº</label>
 								<input class="form-control" id="street_number" type="number" min="1"
 									required>
 							</div>
@@ -116,6 +116,8 @@
 							<label for="obsEndCli" class="control-label">Observação</label>
 							<textarea class="form-control" rows="4" id="obsEndCli"></textarea>
 						</div>
+						<div id="sublocality_level_1" type="text" maxlength="2" visible=false></div>
+						<div id="administrative_area_level_2" type="text" maxlength="2" visible=false></div>
 						<script>
 							var placeSearch, autocomplete;
 							var componentForm = {
@@ -123,8 +125,9 @@
 								route : 'long_name',
 								locality : 'long_name',
 								administrative_area_level_1 : 'short_name',
-								country : 'long_name',
-								postal_code : 'short_name'
+								postal_code : 'short_name',
+								sublocality_level_1 : 'short_name',
+								administrative_area_level_2 : 'short_name'
 							};
 
 							function initAutocomplete() {
@@ -150,38 +153,25 @@
 									document.getElementById(component).value = '';
 									document.getElementById(component).disabled = false;
 								}
+								document.getElementById('baiCli').value = '';
+								document.getElementById('locality').value = '';
 
 								// Get each component of the address from the place details
 								// and fill the corresponding field on the form.
 								for (var i = 0; i < place.address_components.length; i++) {
 									var addressType = place.address_components[i].types[0];
 									if (componentForm[addressType]) {
+										
 										var val = place.address_components[i][componentForm[addressType]];
-										document.getElementById(addressType).value = val;
+										if (addressType == "sublocality_level_1"){
+											document.getElementById('baiCli').value = val;
+										} else if (addressType == "administrative_area_level_2"){
+											document.getElementById('locality').value = val;
+										} else {
+											document.getElementById(addressType).value = val;
+										}
 									}
-								}
-							}
-
-							// Bias the autocomplete object to the user's geographical location,
-							// as supplied by the browser's 'navigator.geolocation' object.
-							function geolocate() {
-								if (navigator.geolocation) {
-									navigator.geolocation
-											.getCurrentPosition(function(
-													position) {
-												var geolocation = {
-													lat : position.coords.latitude,
-													lng : position.coords.longitude
-												};
-												var circle = new google.maps.Circle(
-														{
-															center : geolocation,
-															radius : position.coords.accuracy
-														});
-												autocomplete.setBounds(circle
-														.getBounds());
-											});
-								}
+								}	
 							}
 						</script>
 						<script
@@ -197,7 +187,7 @@
 								Blumenau </br> UF: SC </br> Observação: Lorem ipsum dolor sit amet,
 								consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
 								labore et dolore magna aliqua. </br> 
-								<a href="CadastroEndereco.html" class="end-edit">Editar</a>
+								<a href="EnderecoCadastro.html" class="end-edit">Editar</a>
 								<a href="#" class="end-del">Excluir</a>
 							</p>
 							<a  class="add-end"><i
@@ -231,5 +221,3 @@
    <!-- Tradução customizada do DataTable -->
 <script type="text/javascript"
 	src="controller/carregarDataTable.js"></script>
-
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
