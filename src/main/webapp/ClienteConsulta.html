@@ -1,11 +1,20 @@
-﻿<!-- 
+<!-- 
     Document   	: ClienteConsulta
     Created on 	: 21/04/2018, 16:39:28
     Author     	: Morgana e Sidnei
-	Função		: Visualizar todos os clientes cadastrados. É possível visualizar o histórico de pedidos de um determinado cliente.
+	Funï¿½ï¿½o		: Visualizar todos os clientes cadastrados. ï¿½ possï¿½vel visualizar o histï¿½rico de pedidos de um determinado cliente.
 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="fonts/font-awesome.css">
+<link href='fonts/NotoSans.css' rel='stylesheet' type='text/css'>
+<link href="css/style.css" rel="stylesheet" /> 
 
-
+<script type="text/javascript" src="library/DataTables/jQuery-3.2.1/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="controller/cliente/consultaCliente.js"></script>
+<script type="text/javascript" src="library/DataTables/datatables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="library/DataTables/datatables.min.css">
+	
 	<div id="includeMenu"></div>
 
 			<div class="content-title">
@@ -18,35 +27,17 @@
 						class="btn btn-success" style="margin: 15px 15px 25px 15px;">
 						<i class="fa fa-plus-circle"></i>Adicionar cliente
 					</button></a>
-				<table class="table table-bordered table-hover" id="data-table">
+				<table class="table table-bordered table-hover" id="table-cliente">
 					<thead>
 						<tr>
-							<th scope="col">Código</th>
+							<th scope="col">Cï¿½digo</th>
 							<th scope="col">Nome</th>
 							<th scope="col">Telefone</th>
-							<th scope="col">Endereço</th>
-							<th scope="col">Opções</th>
+							<th scope="col">Endereï¿½o</th>
+							<th scope="col">Opï¿½ï¿½es</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>							
-						<tr>
-							<td>12
-							</th>
-							<td>Larry the Bird</td>
-							<td>(47) 9999-2525</td>
-							<td>Beira Rio</td>
-							<td class="table-buttons"><a href="#"><button
-										type="button" class="table-hist" data-toggle="modal"
-										data-target="#ModalHistorico" title="Histórico de pedidos">
-										<i class="fa fa-file-text-o"></i>
-									</button></a> <a class="link-editar" href="ClienteCadastro.html"><button
-										type="button" class="table-edit">
-										<i class="fa fa-pencil"></i>
-									</button></a> <a href="#"><button type="button" class="table-del">
-										<i class="fa fa-close"></i>
-									</button></a>
-						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -58,7 +49,7 @@
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="ModalTitulo">Histórico de Pedidos</h5>
+						<h5 class="modal-title" id="ModalTitulo">Histï¿½rico de Pedidos</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -69,10 +60,10 @@
 						<table class="table table-bordered table-hover">
 							<thead>
 								<tr>
-									<th scope="col">Código</th>
+									<th scope="col">Cï¿½digo</th>
 									<th scope="col">Data</th>
-									<th scope="col">Preço</th>
-									<th scope="col">Opções</th>
+									<th scope="col">Preï¿½o</th>
+									<th scope="col">Opï¿½ï¿½es</th>
 								</tr>
 							</thead>
 							<tbody>								
@@ -105,6 +96,3 @@
 		$("#includeMenu").load("Menu.html");
 	});
 </script>
-   <!-- Tradução customizada do DataTable -->
-<script type="text/javascript"
-	src="controller/carregarDataTable.js"></script>

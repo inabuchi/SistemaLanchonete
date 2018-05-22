@@ -2,7 +2,7 @@
 let clientes = [];
 
 $(document).ready(() => {
-	const table = $("#data-table");
+	const table = $("#table-cliente");
 	$.ajax({
 		headers: {
 	        'Accept': 'application/json',
