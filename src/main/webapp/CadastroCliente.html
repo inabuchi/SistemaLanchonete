@@ -1,13 +1,55 @@
-<!-- 
-    Document   	: ClienteCadastro
-    Created on 	: 21/04/2018, 16:39:28
-    Author     	: Morgana e Sidnei
-	Função		: Cadastrar/modificar um cliente e cadastrar/modificar seu(s) respectivo(s) endereço(s).
+ï»¿<!-- 
+    Document   : CadastroCliente
+    Created on : 21/04/2018, 16:39:28
+    Author     : Morgana e Sidnei
 -->
 
+<!DOCTYPE html>
+<html>
 
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Guten Burguer - Adicionar cliente</title>
+
+<script src="library/DataTables/jQuery-3.2.1/jquery-3.2.1.min.js">
+	
+</script>
+<script type="text/javascript"
+	src="controller/cliente/cadastroCliente.js"></script>
+<script type="text/javascript"
+	src="controller/generics/validacoesGenericas.js"></script>
+
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css"
+	href="library/DataTables/datatables.min.css" />
+<script type="text/javascript"
+	src="library/DataTables/datatables.min.js"></script>
+
+<!-- FontAwesome -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="path/to/font-awesome/css/font-awesome.min.css">
+
+<link
+	href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic'
+	rel='stylesheet' type='text/css'>
+
+<link href="css/style.css" rel="stylesheet" />
+<script type="text/javascript">
+	$(function() {
+		$("#includeMenu").load("Menu.html");
+	});
+</script>
+</head>
+<body>
 	<div id="includeMenu"></div>
+	<div class="d-flex align-items-stretch">
 
+		<div class="content p-4">
 			<div class="content-title">
 				<i class="fa fa-id-card-o"></i>Pessoas<i class="fa fa-angle-right"></i><a
 					href="ConsultaCliente.html">Consulta de clientes</a><i
@@ -21,7 +63,7 @@
 
 						<div class="form-row">
 							<div class="form-group col-md-2">
-								<label for="codCli">Código cliente</label> <input
+								<label for="codCli">CÃ³digo cliente</label> <input
 									class="form-control" id="codCli" type="number" min="1" required>
 							</div>
 						</div>
@@ -43,34 +85,34 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="obsCli">Observação</label>
+							<label for="obsCli">ObservaÃ§Ã£o</label>
 							<textarea class="form-control" rows="4" id="obsCli"></textarea>
 						</div>
 
 					</fieldset>
 
 
-					<fieldset class="well">
-						<legend class="well-legend">Endereço</legend>
+					<fieldset class="well" id='fsEnd'>
+						<legend class="well-legend">EndereÃ§o</legend>
 
 						<div class="form-row">
 							<div id="locationField" class="form-group col-md-12">
 								<label for="autocomplete" class="control-label required">Auto-complete</label>
 								<input id="autocomplete"
-									placeholder="Digite o número seguido do endereço para auto completar os campos"
-									class="form-control" type="text"></input>
+									placeholder="Digite o endereÃ§o para auto completar os campos"
+									class="form-control" onFocus="geolocate()" type="text"></input>
 							</div>
 						</div>
 
 						<div class="form-row">
 
 							<div class="form-group col-md-6">
-								<label for="route" class="control-label required">Endereço</label>
+								<label for="route" class="control-label required">EndereÃ§o</label>
 								<input class="form-control" id="route" type="text"
 									maxlength="255" required>
 							</div>
 							 <div class="form-group col-md-1">								
-								<label for="street_number" class="control-label required">Nº</label>
+								<label for="street_number" class="control-label required">NÃºmero</label>
 								<input class="form-control" id="street_number" type="number" min="1"
 									required>
 							</div>
@@ -107,17 +149,15 @@
 									class="form-control" id="administrative_area_level_1" type="text" maxlength="2">
 							</div>
 							<div class="form-group col-md-12">
-								<label for="country" class="control-label required">País</label>
+								<label for="country" class="control-label required">PaÃ­s</label>
 								<input class="form-control" id="country" type="text"
 									maxlength="255" required>
 							</div>							 
 						</div>
 						<div class="form-group">
-							<label for="obsEndCli" class="control-label">Observação</label>
+							<label for="obsEndCli" class="control-label">ObservaÃ§Ã£o</label>
 							<textarea class="form-control" rows="4" id="obsEndCli"></textarea>
 						</div>
-						<div id="sublocality_level_1" type="text" maxlength="2" visible=false></div>
-						<div id="administrative_area_level_2" type="text" maxlength="2" visible=false></div>
 						<script>
 							var placeSearch, autocomplete;
 							var componentForm = {
@@ -125,9 +165,8 @@
 								route : 'long_name',
 								locality : 'long_name',
 								administrative_area_level_1 : 'short_name',
-								postal_code : 'short_name',
-								sublocality_level_1 : 'short_name',
-								administrative_area_level_2 : 'short_name'
+								country : 'long_name',
+								postal_code : 'short_name'
 							};
 
 							function initAutocomplete() {
@@ -153,45 +192,57 @@
 									document.getElementById(component).value = '';
 									document.getElementById(component).disabled = false;
 								}
-								document.getElementById('baiCli').value = '';
-								document.getElementById('locality').value = '';
 
 								// Get each component of the address from the place details
 								// and fill the corresponding field on the form.
 								for (var i = 0; i < place.address_components.length; i++) {
 									var addressType = place.address_components[i].types[0];
 									if (componentForm[addressType]) {
-										
 										var val = place.address_components[i][componentForm[addressType]];
-										if (addressType == "sublocality_level_1"){
-											document.getElementById('baiCli').value = val;
-										} else if (addressType == "administrative_area_level_2"){
-											document.getElementById('locality').value = val;
-										} else {
-											document.getElementById(addressType).value = val;
-										}
+										document.getElementById(addressType).value = val;
 									}
-								}	
+								}
+							}
+
+							// Bias the autocomplete object to the user's geographical location,
+							// as supplied by the browser's 'navigator.geolocation' object.
+							function geolocate() {
+								if (navigator.geolocation) {
+									navigator.geolocation
+											.getCurrentPosition(function(
+													position) {
+												var geolocation = {
+													lat : position.coords.latitude,
+													lng : position.coords.longitude
+												};
+												var circle = new google.maps.Circle(
+														{
+															center : geolocation,
+															radius : position.coords.accuracy
+														});
+												autocomplete.setBounds(circle
+														.getBounds());
+											});
+								}
 							}
 						</script>
 						<script
 							src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxDxbtdTs7_ViJD346_X6rj2-a9gIJeE8&libraries=places&callback=initAutocomplete"
 							async defer></script>
 					</fieldset>
-					<fieldset class="well" style="padding-bottom: 18px">
-						<legend class="well-legend">Endereços</legend>
-						<div class="area-end">
-							<p>
-								Endereço: Rua XV de Novembro </br> Número: 888 </br> Logradouro: Rua </br> CEP:
+					<fieldset class="well" style="padding-bottom: 18px" id='fsEnds'>
+						<legend class="well-legend">EndereÃ§os</legend>
+						<div class="area-end" id="endCards">
+							<!--  <p>
+								EndereÃ§o: Rua XV de Novembro </br> NÃºmero: 888 </br> Logradouro: Rua </br> CEP:
 								89055-555 </br> Bairro: Centro </br> Complemento: Andar 2 </br> Cidade:
-								Blumenau </br> UF: SC </br> Observação: Lorem ipsum dolor sit amet,
+								Blumenau </br> UF: SC </br> ObservaÃ§Ã£o: Lorem ipsum dolor sit amet,
 								consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
 								labore et dolore magna aliqua. </br> 
-								<a href="EnderecoCadastro.html" class="end-edit">Editar</a>
+								<a href="CadastroEndereco.html" class="end-edit">Editar</a>
 								<a href="#" class="end-del">Excluir</a>
-							</p>
-							<a  class="add-end"><i
-								class="fa fa-plus"></i>Adicionar endereço</a>
+							</p>-->
+							<!--  <a  class="add-end"><i class="fa fa-plus"></i>Adicionar endereÃ§o</a>-->
 						</div>
 					</fieldset>
 
@@ -204,18 +255,7 @@
 					</center>
 				</div>
 			</form>
-		
-
-	
-<script type="text/javascript"
-	src="controller/cliente/cadastroCliente.js"></script>
-	
-<script type="text/javascript"src="controller/generics/validacoesGenericas.js"></script>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-	
-<script type="text/javascript">
-	$(function() {
-		$("#includeMenu").load("Menu.html");
-	});
-</script>
-
+		</div>
+	</div>
+</body>
+</html>
