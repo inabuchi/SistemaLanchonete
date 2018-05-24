@@ -4,7 +4,19 @@
     Author     	: Morgana e Sidnei
 	Função		: Cadastrar/modificar um cliente e cadastrar/modificar seu(s) respectivo(s) endereço(s).
 -->
+<script src="library/DataTables/jQuery-3.2.1/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="controller/cliente/cadastroCliente.js"></script>
+<script type="text/javascript" src="controller/generics/validacoesGenericas.js"></script>
 
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css" href="library/DataTables/datatables.min.css" />
+<script type="text/javascript" src="library/DataTables/datatables.min.js"></script>
+
+<!-- FontAwesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+<link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
+<link href="css/style.css" rel="stylesheet" />
 
 	<div id="includeMenu"></div>
 
@@ -50,7 +62,7 @@
 					</fieldset>
 
 
-					<fieldset class="well">
+					<fieldset class="well" id="fsEnd">
 						<legend class="well-legend">Endereço</legend>
 
 						<div class="form-row">
@@ -178,7 +190,7 @@
 							src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxDxbtdTs7_ViJD346_X6rj2-a9gIJeE8&libraries=places&callback=initAutocomplete"
 							async defer></script>
 					</fieldset>
-					<fieldset class="well" style="padding-bottom: 18px">
+					<fieldset class="well" style="padding-bottom: 18px" id="fsEnds">
 						<legend class="well-legend">Endereços</legend>
 						<div class="area-end">
 							<p>

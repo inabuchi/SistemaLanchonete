@@ -6,7 +6,7 @@ form.ready(() => {
 	 const index = window.location.href.indexOf('#');
      const cdPessoa = index !== -1 ? href.substr(index+1, href.length) : '';
      
-     tratarCamposCadastro(cdPessoa)
+     tratarCamposCadastro(cdPessoa);
      if (cdPessoa) {
     	 $('#btnSaveCliente').text('Editar Cliente');
     	 ativarDadosCliente();
