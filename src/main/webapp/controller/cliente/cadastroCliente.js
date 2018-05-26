@@ -1,11 +1,10 @@
 
-const form = $("#formCliente");
-
+var form = $("#formCliente");
+debugger;
 form.ready(() => {
-	 const href = window.location.href || '';
-	 const index = window.location.href.indexOf('#');
+	 const href = getUrl() || '';
+	 const index =href.indexOf('#');
      const cdPessoa = index !== -1 ? href.substr(index+1, href.length) : '';
-     
      tratarCamposCadastro(cdPessoa);
      if (cdPessoa) {
     	 $('#btnSaveCliente').text('Editar Cliente');
@@ -73,17 +72,13 @@ form.ready(() => {
     	        	params.dsObservacao = obsCli.val();
     	        	if (!cdPessoa) {
     	        		type = 'POST';
-    	        		/*params.enderecoCliente = [
-    	                	{	dsRua: rua.val(),
-    			                dsBairro: bairro.val(),
-    			                cep: cep.val(),
-    			                dsObservacaoEnd: obsEnd.val(),
-    			                dsLogradouro: logradouro.val(),
-    			                dsCidade: cidade.val(),
-    			                dsEstado: uf.val(),
-    	                    dsPais: pais.val()
-    			            }
-    	                ];*/
+    	        		/*
+						 * params.enderecoCliente = [ { dsRua: rua.val(),
+						 * dsBairro: bairro.val(), cep: cep.val(),
+						 * dsObservacaoEnd: obsEnd.val(), dsLogradouro:
+						 * logradouro.val(), dsCidade: cidade.val(), dsEstado:
+						 * uf.val(), dsPais: pais.val() } ];
+						 */
     	        	}
 
     	            const urlSave = cdPessoa ? 'http://localhost:8080/SistemaLanchonete/services/cliente/' + cdPessoa

@@ -6,560 +6,605 @@
 					os produtos que ele deseja e possíveis adicionais para eles e o troco caso seja em dinheiro. Por fim o atendente informa o valor total e o tempo estimado.
 -->
 
-	<div id="includeMenu"></div>
-                <div class="content-title"><i class="fa fa-id-shopping-basket"></i>Pedidos<i class="fa fa-angle-right"></i>Cadastro de Pedidos</div>
-					<div class="formtitle">Cadastrar pedido</div>                					
-                    <form id="formPedido">
-                    <div class="page-cad">
-                         <div class="form-row">	
-								<div class="form-group col-md-2">
-							<label for="foneCli" class="control-label">Telefone</label>
-							<input class="form-control" id="foneCli" type="text"
-								maxlength="15">
-						</div>
-						
-						<button type="button" class="button-buscar" title="Buscar dados do cliente">Buscar</button>
-					
-                             <div class="form-group col-md-5">
-                                 <label for="nomeCli" class="control-label">Nome</label>
-                                 <input class="form-control" id="nomeCli" type="text" maxlength="255" value="" disabled>                               
-                             </div>
-                             
-                            <a class="link-abrir" href="ClienteCadastro.html"><button type="button" class="button-add"><i class="fa fa-plus"></i>Cadastrar cliente</button></a>
-						</div>
-						
-						<!-- Programador, ao clicar em "Buscar" e não encontrar o telefone, deverá habilitar o campo "Nome",
+<script type="text/javascript"
+	src="controller/cliente/cadastroCliente.js"></script>
+<script type="text/javascript"
+	src="controller/generics/validacoesGenericas.js"></script>
+<script type="text/javascript"
+	src="controller/produto/cadastroProduto.js"></script>
+<script type="text/javascript"
+	src="controller/generics/requestService.js"></script>
+<script type="text/javascript"
+	src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+<!-- Script para o modal -->
+<script type="text/javascript">
+	$('#ModalAdicionais').on('show.bs.modal', function(event) {
+		var button = $(event.relatedTarget) // Botão que dispoarou o modal
+		var nome = button.data('nome') // Extraí a string do atributo data-nome			
+		// A requisição AJAX vai aqui.
+
+		// Atualiza o conteúdo da modal.
+		var modal = $(this)
+		modal.find('.modal-title').text('Lista de adicionais do(a) ' + nome)
+	})
+</script>
+
+<div class="content-title">
+	<i class="fa fa-id-shopping-basket"></i>Pedidos<i
+		class="fa fa-angle-right"></i>Cadastro de Pedidos
+</div>
+<div class="formtitle">Cadastrar pedido</div>
+<form id="formPedido">
+	<div class="page-cad">
+		<div class="form-row">
+			<div class="form-group col-md-2">
+				<label for="foneCli" class="control-label">Telefone</label> <input
+					class="form-control" id="foneCli" type="text" maxlength="15">
+			</div>
+
+			<button type="button" class="button-buscar"
+				title="Buscar dados do cliente">Buscar</button>
+
+			<div class="form-group col-md-5">
+				<label for="nomeCli" class="control-label">Nome</label> <input
+					class="form-control" id="nomeCli" type="text" maxlength="255"
+					value="" disabled>
+			</div>
+
+			<a class="link-abrir" href="ClienteCadastro.html"><button
+					type="button" class="button-add">
+					<i class="fa fa-plus"></i>Cadastrar cliente
+				</button></a>
+		</div>
+
+		<!-- Programador, ao clicar em "Buscar" e não encontrar o telefone, deverá habilitar o campo "Nome",
 						exibir o botão "Cadastrar cliente" e exibir a mensagem abaixo. -->
-						
-						<div class="alert alert-danger" role="alert">
- 						  Telefone não encontrado! Busque pelo nome do cliente ou realize o cadastro do cliente.
-						</div>
-						<div class="form-row">
-                             <div class="form-group col-md-5">
-                                 <label for="endCli" class="control-label required">Endereço de entrega</label>
-                                 <select class="form-control" id="endCli" min="1" required onchange="calculaTempo()" >										 
-									<option value="1">Rua VX, 552, Centro, Blumenau, SC</option>
-									<option value="2">Rua Sete de Setembro, 1234, Centro, Blumenau, SC</option>
-									<option value="0">Endereço alternativo</option>
-									</select>
-                             </div>
-							 <fieldset class="well">
-						<legend class="well-legend">Endereço</legend>
 
-						<div class="form-row">
-							<div id="locationField" class="form-group col-md-12">
-								<label for="autocomplete" class="control-label required">Auto-complete</label>
-								<input id="autocomplete"
-									placeholder="Digite o endereço para auto completar os campos"
-									class="form-control" type="text"></input>
-							</div>
-						</div>
+		<div class="alert alert-danger" role="alert">Telefone não
+			encontrado! Busque pelo nome do cliente ou realize o cadastro do
+			cliente.</div>
+		<div class="form-row">
+			<div class="form-group col-md-5">
+				<label for="endCli" class="control-label required">Endereço
+					de entrega</label> <select class="form-control" id="endCli" min="1"
+					required onchange="calculaTempo()">
+					<option value="1">Rua VX, 552, Centro, Blumenau, SC</option>
+					<option value="2">Rua Sete de Setembro, 1234, Centro,
+						Blumenau, SC</option>
+					<option value="0">Endereço alternativo</option>
+				</select>
+			</div>
+			<fieldset class="well">
+				<legend class="well-legend">Endereço</legend>
 
-						<div class="form-row">
+				<div class="form-row">
+					<div id="locationField" class="form-group col-md-12">
+						<label for="autocomplete" class="control-label required">Auto-complete</label>
+						<input id="autocomplete"
+							placeholder="Digite o endereço para auto completar os campos"
+							class="form-control" type="text"></input>
+					</div>
+				</div>
 
-							<div class="form-group col-md-6">
-								<label for="route" class="control-label required">Endereço</label>
-								<input class="form-control" id="route" type="text"
-									maxlength="255" required>
-							</div>
-							 <div class="form-group col-md-1">								
-								<label for="street_number" class="control-label required">Nº</label>
-								<input class="form-control" id="street_number" type="number" min="1"
-									required>
-							</div>
-							<div class="form-group col-md-3">
-								<label for="logrEndCli" class="control-label">Logradouro</label>
-								<input class="form-control" id="logrEndCli" 
-									maxlength="255">
-							</div>
-							<div class="form-group col-md-2">
-								<label for="postal_code" class="control-label required">CEP</label> <input
-									class="form-control" id="postal_code" required>																	
-							</div>
-						</div>
+				<div class="form-row">
 
-						<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="route" class="control-label required">Endereço</label>
+						<input class="form-control" id="route" type="text" maxlength="255"
+							required>
+					</div>
+					<div class="form-group col-md-1">
+						<label for="street_number" class="control-label required">Nº</label>
+						<input class="form-control" id="street_number" type="number"
+							min="1" required>
+					</div>
+					<div class="form-group col-md-3">
+						<label for="logrEndCli" class="control-label">Logradouro</label> <input
+							class="form-control" id="logrEndCli" maxlength="255">
+					</div>
+					<div class="form-group col-md-2">
+						<label for="postal_code" class="control-label required">CEP</label>
+						<input class="form-control" id="postal_code" required>
+					</div>
+				</div>
 
-							<div class="form-group col-md-3">
-								<label for="baiCli" class="control-label required">Bairro</label>
-								<input class="form-control" id="baiCli" type="text"
-									maxlength="255" required>
-							</div>
-							<div class="form-group col-md-3">
-								<label for="compEndCli" class="control-label">Complemento</label>
-								<input class="form-control" id="compEndCli" type="text"
-									maxlength="255">
-							</div>
-							<div class="form-group col-md-5">
-								<label for="locality" class="control-label required">Cidade</label>
-								<input class="form-control" id="locality" type="text"
-									maxlength="255" required>
-							</div>
-							<div class="form-group col-md-1">
-								<label for="administrative_area_level_1" class="control-label">UF</label> <input
-									class="form-control" id="administrative_area_level_1" type="text" maxlength="2">
-							</div>
-							<div class="form-group col-md-12">
-								<label for="country" class="control-label required">País</label>
-								<input class="form-control" id="country" type="text"
-									maxlength="255" required>
-							</div>							 
-						</div>
-						<div class="form-group">
-							<label for="obsEndCli" class="control-label">Observação</label>
-							<textarea class="form-control" rows="4" id="obsEndCli"></textarea>
-						</div>
-						<div id="sublocality_level_1" type="text" maxlength="2" visible=false></div>
-						<div id="administrative_area_level_2" type="text" maxlength="2" visible=false></div>
-						<script>
-							var placeSearch, autocomplete;
-							var componentForm = {
-								street_number : 'short_name',
-								route : 'long_name',
-								locality : 'long_name',
-								administrative_area_level_1 : 'short_name',
-								postal_code : 'short_name',
-								sublocality_level_1 : 'short_name',
-								administrative_area_level_2 : 'short_name'
-							};
+				<div class="form-row">
 
-							function initAutocomplete() {
-								// Create the autocomplete object, restricting the search to geographical
-								// location types.
-								autocomplete = new google.maps.places.Autocomplete(
-								/** @type {!HTMLInputElement} */
-								(document.getElementById('autocomplete')), {
-									types : [ 'geocode' ]
-								});
+					<div class="form-group col-md-3">
+						<label for="baiCli" class="control-label required">Bairro</label>
+						<input class="form-control" id="baiCli" type="text"
+							maxlength="255" required>
+					</div>
+					<div class="form-group col-md-3">
+						<label for="compEndCli" class="control-label">Complemento</label>
+						<input class="form-control" id="compEndCli" type="text"
+							maxlength="255">
+					</div>
+					<div class="form-group col-md-5">
+						<label for="locality" class="control-label required">Cidade</label>
+						<input class="form-control" id="locality" type="text"
+							maxlength="255" required>
+					</div>
+					<div class="form-group col-md-1">
+						<label for="administrative_area_level_1" class="control-label">UF</label>
+						<input class="form-control" id="administrative_area_level_1"
+							type="text" maxlength="2">
+					</div>
+					<div class="form-group col-md-12">
+						<label for="country" class="control-label required">País</label> <input
+							class="form-control" id="country" type="text" maxlength="255"
+							required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="obsEndCli" class="control-label">Observação</label>
+					<textarea class="form-control" rows="4" id="obsEndCli"></textarea>
+				</div>
+				<div id="sublocality_level_1" type="text" maxlength="2"
+					visible=false></div>
+				<div id="administrative_area_level_2" type="text" maxlength="2"
+					visible=false></div>
+				<script>
+					var placeSearch, autocomplete;
+					var componentForm = {
+						street_number : 'short_name',
+						route : 'long_name',
+						locality : 'long_name',
+						administrative_area_level_1 : 'short_name',
+						postal_code : 'short_name',
+						sublocality_level_1 : 'short_name',
+						administrative_area_level_2 : 'short_name'
+					};
 
-								// When the user selects an address from the dropdown, populate the address
-								// fields in the form.
-								autocomplete.addListener('place_changed',
-										fillInAddress);
-							}
+					function initAutocomplete() {
+						// Create the autocomplete object, restricting the search to geographical
+						// location types.
+						autocomplete = new google.maps.places.Autocomplete(
+						/** @type {!HTMLInputElement} */
+						(document.getElementById('autocomplete')), {
+							types : [ 'geocode' ]
+						});
 
-							function fillInAddress() {
-								// Get the place details from the autocomplete object.
-								var place = autocomplete.getPlace();
+						// When the user selects an address from the dropdown, populate the address
+						// fields in the form.
+						autocomplete
+								.addListener('place_changed', fillInAddress);
+					}
 
-								for ( var component in componentForm) {
-									document.getElementById(component).value = '';
-									document.getElementById(component).disabled = false;
+					function fillInAddress() {
+						// Get the place details from the autocomplete object.
+						var place = autocomplete.getPlace();
+
+						for ( var component in componentForm) {
+							document.getElementById(component).value = '';
+							document.getElementById(component).disabled = false;
+						}
+						document.getElementById('baiCli').value = '';
+						document.getElementById('locality').value = '';
+
+						// Get each component of the address from the place details
+						// and fill the corresponding field on the form.
+						for (var i = 0; i < place.address_components.length; i++) {
+							var addressType = place.address_components[i].types[0];
+							if (componentForm[addressType]) {
+
+								var val = place.address_components[i][componentForm[addressType]];
+								if (addressType == "sublocality_level_1") {
+									document.getElementById('baiCli').value = val;
+								} else if (addressType == "administrative_area_level_2") {
+									document.getElementById('locality').value = val;
+								} else {
+									document.getElementById(addressType).value = val;
 								}
-								document.getElementById('baiCli').value = '';
-								document.getElementById('locality').value = '';
-
-								// Get each component of the address from the place details
-								// and fill the corresponding field on the form.
-								for (var i = 0; i < place.address_components.length; i++) {
-									var addressType = place.address_components[i].types[0];
-									if (componentForm[addressType]) {
-										
-										var val = place.address_components[i][componentForm[addressType]];
-										if (addressType == "sublocality_level_1"){
-											document.getElementById('baiCli').value = val;
-										} else if (addressType == "administrative_area_level_2"){
-											document.getElementById('locality').value = val;
-										} else {
-											document.getElementById(addressType).value = val;
-										}
-									}
-								}	
-																
-								var origin = "Rua Presidente Costa e Silva, 3644, Pomerode, SC, Brasil",
-    							destination =  document.getElementById("autocomplete").value,
-    							service = new google.maps.DistanceMatrixService();
-
-    							service.getDistanceMatrix(
-									{
-										origins: [origin],
-										destinations: [destination],
-										travelMode: google.maps.TravelMode.DRIVING,
-										avoidHighways: false,
-										avoidTolls: false
-									}, 
-									callback
-								);
 							}
-							
-							function calculaTempo() {
-								var t = document.getElementById("endCli");
-								var selectedText = t.options[t.selectedIndex].text;
-								var origin = "Rua Presidente Costa e Silva, 3644, Pomerode, SC, Brasil",
-    							destination =  selectedText,
-    							service = new google.maps.DistanceMatrixService();
+						}
 
-    							service.getDistanceMatrix(
-									{
-										origins: [origin],
-										destinations: [destination],
-										travelMode: google.maps.TravelMode.DRIVING,
-										avoidHighways: false,
-										avoidTolls: false
-									}, 
-									callback
-								);
-							
-							}
-							
-							function callback(response, status) {
+						var origin = "Rua Presidente Costa e Silva, 3644, Pomerode, SC, Brasil", destination = document
+								.getElementById("autocomplete").value, service = new google.maps.DistanceMatrixService();
 
-							if(status=="OK") {								
-								document.getElementById('distance').value = response.rows[0].elements[0].distance.text;
-								document.getElementById('duration').value = response.rows[0].elements[0].duration.text;
-							} else {
-								alert("Error: " + status);
-						   }
-						   }
-						</script>
-						<script
-							src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxDxbtdTs7_ViJD346_X6rj2-a9gIJeE8&libraries=places&callback=initAutocomplete"
-							async defer></script>
-					</fieldset>
-							 <div class="form-group col-md-3">
-								<label for="formaPgto" class="control-label">Forma de pagamento</label>
-                                <select class="form-control" id="endCli" min="1">										 									
-									<option value="1">Cartão de crédito</option>
-									<option value="2">Cartão de débito</option>
-									<option value="3">Dinheiro</option>
-									</select>                              
-							</div>							
-						</div>                                                                                                     
+						service.getDistanceMatrix({
+							origins : [ origin ],
+							destinations : [ destination ],
+							travelMode : google.maps.TravelMode.DRIVING,
+							avoidHighways : false,
+							avoidTolls : false
+						}, callback);
+					}
 
-						
-						<br>						
-						<fieldset class="well">
-						<legend class="well-legend">Itens do pedido</legend>
-						
-						<div class="form-row">					
-								
-						<div class="form-group col-md-7">
-							<label for="descProd" class="control-label">Produto</label>
-							<input class="form-control" id="descProd" type="text"
-								maxlength="70">
-						</div>
-						
-						<button type="button" class="button-search" title="Consultar produtos" data-toggle="modal" data-target="#ModalProdutos"><i class="fa fa-search"></i></button>
-						
-						<div class="form-group col-md-2">
-							<label for="qtdProd">Quantidade</label> <input class="form-control"
-								id="qtdProd" value="1" type="number" min="1">
-						</div>
-						
-						<a href="#"><button type="button" class="button-add"><i class="fa fa-plus"></i>Adicionar produto</button></a>
-						
-						</div>
-						
-						<div class="itens-content">		
-						<div class="itens-body">					
-						<table class="table table-bordered table-hover">
-							<thead>
-								<tr>
-									<th scope="col">Código</th>
-									<th scope="col">Nome</th>
-									<th scope="col">Preço</th>
-									<th scope="col">Quantidade</th>
-									<th scope="col">Total</th>
-									<th scope="col">Opções</th>
-								</tr>
-							</thead>								
-							<tbody>                            
-								<tr>
-									<td>1</td>
-									<td>X-Burger</td>
-									<td>R$8,50</td>	
-									<td>2</td>		
-									<td>R$17,00</td>								
-									<td class="table-buttons-pedido">
-									<button type="button" class="table-add" data-toggle="modal" data-target="#ModalAdicionais" data-nome="X-Burger" data-codigo="3" title="Incluir adicionais ao item"><i class="fa fa-plus-circle"></i></button>
-									<a href="#"><button type="button" class="table-del" title="Excluir item"><i class="fa fa-close"></i></button></a>
-									</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>X-Bacon</td>
-									<td>R$10,00</td>	
-									<td>1</td>		
-									<td>R$10,00</td>								
-									<td class="table-buttons-pedido">
-									<button type="button" class="table-add" data-toggle="modal" data-target="#ModalAdicionais" data-nome="X-Bacon" data-codigo="3" title="Incluir adicionais ao item"><i class="fa fa-plus-circle"></i></button>
-									<a href="#"><button type="button" class="table-del" title="Excluir item"><i class="fa fa-close"></i></button></a>
-									</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Porção de fritas</td>
-									<td>R$7,00</td>	
-									<td>2</td>		
-									<td>R$14,00</td>								
-									<td class="table-buttons-pedido">
-									<button type="button" class="table-add" data-toggle="modal" data-target="#ModalAdicionais" data-nome="Porção de fritas" data-codigo="3" title="Incluir adicionais ao item"><i class="fa fa-plus-circle"></i></button>
-									<a href="#"><button type="button" class="table-del" title="Excluir item"><i class="fa fa-close"></i></button></a>
-									</td>
-								</tr>
-								<tr>
-									<td>4</td>
-									<td>X-Burger</td>
-									<td>R$8,50</td>	
-									<td>2</td>		
-									<td>R$17,00</td>								
-									<td class="table-buttons-pedido">
-									<button type="button" class="table-add" data-toggle="modal" data-target="#ModalAdicionais" data-nome="X-Burger" data-codigo="3" title="Incluir adicionais ao item"><i class="fa fa-plus-circle"></i></button>
-									<a href="#"><button type="button" class="table-del" title="Excluir item"><i class="fa fa-close"></i></button></a>
-									</td>
-								</tr>
-								<tr>
-									<td>5</td>
-									<td>X-Bacon</td>
-									<td>R$10,00</td>	
-									<td>1</td>		
-									<td>R$10,00</td>								
-									<td class="table-buttons-pedido">
-									<button type="button" class="table-add" data-toggle="modal" data-target="#ModalAdicionais" data-nome="X-Bacon" data-codigo="3" title="Incluir adicionais ao item"><i class="fa fa-plus-circle"></i></button>
-									<a href="#"><button type="button" class="table-del" title="Excluir item"><i class="fa fa-close"></i></button></a>
-									</td>
-								</tr>
-								<tr>
-									<td>6</td>
-									<td>Porção de fritas</td>
-									<td>R$7,00</td>	
-									<td>2</td>		
-									<td>R$14,00</td>								
-									<td class="table-buttons-pedido">
-									<button type="button" class="table-add" data-toggle="modal" data-target="#ModalAdicionais" data-nome="Porção de fritas" data-codigo="3" title="Incluir adicionais ao item"><i class="fa fa-plus-circle"></i></button>
-									<a href="#"><button type="button" class="table-del" title="Excluir item"><i class="fa fa-close"></i></button></a>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						</div>
-						</div>
-						</fieldset>
-						<div class="form-row">
-						<div class="form-group col-md-12">
-							<label for="obsPed" class="control-label">Observações do pedido</label>
-							<textarea class="form-control" rows="4" id="obsPed"></textarea>
-							</div>							
-						</div>
-						<div class="form-row">
-							<div class="form-group col-md-2" style="margin-left: 83.2%">
-								<label for="pedtroco" class="control-label">Troco</label>
-                                <input class="form-control" id="pedtroco" type="text">                               
-							</div>
-							<div class="form-group col-md-3">
-								<label for="locality" class="control-label ">Distância até local</label>
-								<input class="form-control" id="distance" type="text"
-									maxlength="255" required>
-							</div>
-							<div class="form-group col-md-3">
-								<label for="locality" class="control-label ">Tempo estimado de entrega</label>
-								<input class="form-control" id="duration" type="text"
-									maxlength="255" required>
-							</div>
-							</div>
-							<table class="table table-bordered" style="text-align:right;  margin-left: 60%; width: 40%; background-color:#f5f5f5">
+					function calculaTempo() {
+						var t = document.getElementById("endCli");
+						var selectedText = t.options[t.selectedIndex].text;
+						var origin = "Rua Presidente Costa e Silva, 3644, Pomerode, SC, Brasil", destination = selectedText, service = new google.maps.DistanceMatrixService();
+
+						service.getDistanceMatrix({
+							origins : [ origin ],
+							destinations : [ destination ],
+							travelMode : google.maps.TravelMode.DRIVING,
+							avoidHighways : false,
+							avoidTolls : false
+						}, callback);
+
+					}
+
+					function callback(response, status) {
+
+						if (status == "OK") {
+							document.getElementById('distance').value = response.rows[0].elements[0].distance.text;
+							document.getElementById('duration').value = response.rows[0].elements[0].duration.text;
+						} else {
+							alert("Error: " + status);
+						}
+					}
+				</script>
+				<script
+					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxDxbtdTs7_ViJD346_X6rj2-a9gIJeE8&libraries=places&callback=initAutocomplete"
+					async defer></script>
+			</fieldset>
+			<div class="form-group col-md-3">
+				<label for="formaPgto" class="control-label">Forma de
+					pagamento</label> <select class="form-control" id="endCli" min="1">
+					<option value="1">Cartão de crédito</option>
+					<option value="2">Cartão de débito</option>
+					<option value="3">Dinheiro</option>
+				</select>
+			</div>
+		</div>
+
+
+		<br>
+		<fieldset class="well">
+			<legend class="well-legend">Itens do pedido</legend>
+
+			<div class="form-row">
+
+				<div class="form-group col-md-7">
+					<label for="descProd" class="control-label">Produto</label> <input
+						class="form-control" id="descProd" type="text" maxlength="70">
+				</div>
+
+				<button type="button" class="button-search"
+					title="Consultar produtos" data-toggle="modal"
+					data-target="#ModalProdutos">
+					<i class="fa fa-search"></i>
+				</button>
+
+				<div class="form-group col-md-2">
+					<label for="qtdProd">Quantidade</label> <input class="form-control"
+						id="qtdProd" value="1" type="number" min="1">
+				</div>
+
+				<a href="#"><button type="button" class="button-add">
+						<i class="fa fa-plus"></i>Adicionar produto
+					</button></a>
+
+			</div>
+
+			<div class="itens-content">
+				<div class="itens-body">
+					<table class="table table-bordered table-hover">
+						<thead>
 							<tr>
-							<td>Total dos itens:</td>
-							<td>R$ 82,00</td>
+								<th scope="col">Código</th>
+								<th scope="col">Nome</th>
+								<th scope="col">Preço</th>
+								<th scope="col">Quantidade</th>
+								<th scope="col">Total</th>
+								<th scope="col">Opções</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>X-Burger</td>
+								<td>R$8,50</td>
+								<td>2</td>
+								<td>R$17,00</td>
+								<td class="table-buttons-pedido">
+									<button type="button" class="table-add" data-toggle="modal"
+										data-target="#ModalAdicionais" data-nome="X-Burger"
+										data-codigo="3" title="Incluir adicionais ao item">
+										<i class="fa fa-plus-circle"></i>
+									</button> <a href="#"><button type="button" class="table-del"
+											title="Excluir item">
+											<i class="fa fa-close"></i>
+										</button></a>
+								</td>
 							</tr>
 							<tr>
-							<td>Taxa de entrega:</td>
-							<td>R$ 10,00</td>
+								<td>2</td>
+								<td>X-Bacon</td>
+								<td>R$10,00</td>
+								<td>1</td>
+								<td>R$10,00</td>
+								<td class="table-buttons-pedido">
+									<button type="button" class="table-add" data-toggle="modal"
+										data-target="#ModalAdicionais" data-nome="X-Bacon"
+										data-codigo="3" title="Incluir adicionais ao item">
+										<i class="fa fa-plus-circle"></i>
+									</button> <a href="#"><button type="button" class="table-del"
+											title="Excluir item">
+											<i class="fa fa-close"></i>
+										</button></a>
+								</td>
 							</tr>
 							<tr>
-							<td>Total do pedido:</td>
-							<td style="font-weight:bold">R$ 92,00</td>
+								<td>3</td>
+								<td>Porção de fritas</td>
+								<td>R$7,00</td>
+								<td>2</td>
+								<td>R$14,00</td>
+								<td class="table-buttons-pedido">
+									<button type="button" class="table-add" data-toggle="modal"
+										data-target="#ModalAdicionais" data-nome="Porção de fritas"
+										data-codigo="3" title="Incluir adicionais ao item">
+										<i class="fa fa-plus-circle"></i>
+									</button> <a href="#"><button type="button" class="table-del"
+											title="Excluir item">
+											<i class="fa fa-close"></i>
+										</button></a>
+								</td>
 							</tr>
-							<!--<tr>
+							<tr>
+								<td>4</td>
+								<td>X-Burger</td>
+								<td>R$8,50</td>
+								<td>2</td>
+								<td>R$17,00</td>
+								<td class="table-buttons-pedido">
+									<button type="button" class="table-add" data-toggle="modal"
+										data-target="#ModalAdicionais" data-nome="X-Burger"
+										data-codigo="3" title="Incluir adicionais ao item">
+										<i class="fa fa-plus-circle"></i>
+									</button> <a href="#"><button type="button" class="table-del"
+											title="Excluir item">
+											<i class="fa fa-close"></i>
+										</button></a>
+								</td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td>X-Bacon</td>
+								<td>R$10,00</td>
+								<td>1</td>
+								<td>R$10,00</td>
+								<td class="table-buttons-pedido">
+									<button type="button" class="table-add" data-toggle="modal"
+										data-target="#ModalAdicionais" data-nome="X-Bacon"
+										data-codigo="3" title="Incluir adicionais ao item">
+										<i class="fa fa-plus-circle"></i>
+									</button> <a href="#"><button type="button" class="table-del"
+											title="Excluir item">
+											<i class="fa fa-close"></i>
+										</button></a>
+								</td>
+							</tr>
+							<tr>
+								<td>6</td>
+								<td>Porção de fritas</td>
+								<td>R$7,00</td>
+								<td>2</td>
+								<td>R$14,00</td>
+								<td class="table-buttons-pedido">
+									<button type="button" class="table-add" data-toggle="modal"
+										data-target="#ModalAdicionais" data-nome="Porção de fritas"
+										data-codigo="3" title="Incluir adicionais ao item">
+										<i class="fa fa-plus-circle"></i>
+									</button> <a href="#"><button type="button" class="table-del"
+											title="Excluir item">
+											<i class="fa fa-close"></i>
+										</button></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</fieldset>
+		<div class="form-row">
+			<div class="form-group col-md-12">
+				<label for="obsPed" class="control-label">Observações do
+					pedido</label>
+				<textarea class="form-control" rows="4" id="obsPed"></textarea>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-2" style="margin-left: 83.2%">
+				<label for="pedtroco" class="control-label">Troco</label> <input
+					class="form-control" id="pedtroco" type="text">
+			</div>
+			<div class="form-group col-md-3">
+				<label for="locality" class="control-label ">Distância até
+					local</label> <input class="form-control" id="distance" type="text"
+					maxlength="255" required>
+			</div>
+			<div class="form-group col-md-3">
+				<label for="locality" class="control-label ">Tempo estimado
+					de entrega</label> <input class="form-control" id="duration" type="text"
+					maxlength="255" required>
+			</div>
+		</div>
+		<table class="table table-bordered"
+			style="text-align: right; margin-left: 60%; width: 40%; background-color: #f5f5f5">
+			<tr>
+				<td>Total dos itens:</td>
+				<td>R$ 82,00</td>
+			</tr>
+			<tr>
+				<td>Taxa de entrega:</td>
+				<td>R$ 10,00</td>
+			</tr>
+			<tr>
+				<td>Total do pedido:</td>
+				<td style="font-weight: bold">R$ 92,00</td>
+			</tr>
+			<!--<tr>
 							<td>Tempo estimado de entrega:</td>
 							<td style="font-weight:bold">1 hora</td>
 							</tr> -->
-							</table>					
-						<br>
-						<center>
-							<a href="#"><button type="button" class="btn btn-secondary">Cancelar</button></a>
-							<a href="#"><button id="btnSavePed" type="button" class="btn btn-success"></i><i class="fa fa-save"></i>Gerar Pedido</button></a>          
-						</center> 
-						</div>
-                    </form>                                 
-    
-    <!-- Modal produtos -->
-	<div class="modal fade" id="ModalProdutos" tabindex="-1"
-			role="dialog" aria-labelledby="ModalTitulo" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="ModalTitulo">Lista de produtos</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
+		</table>
+		<br>
+		<center>
+			<a href="#"><button type="button" class="btn btn-secondary">Cancelar</button></a>
+			<a href="#"><button id="btnSavePed" type="button"
+					class="btn btn-success">
+					</i><i class="fa fa-save"></i>Gerar Pedido
+				</button></a>
+		</center>
+	</div>
+</form>
 
-						<table class="table table-bordered table-hover" style="cursor:pointer" title="Duplo clique para selecionar">
-							<thead>
-								<tr>
-									<th scope="col">Código</th>
-									<th scope="col">Descrição</th>
-									<th scope="col">Preço</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>101</td>
-									<td>Maionese</td>
-									<td>R$1,50</td>
-								</tr>
-								<tr>
-									<td>102</td>
-									<td>Ervilha</td>
-									<td>R$1,00</td>
-								</tr>
-								<tr>
-									<td>103</td>
-									<td>Batata palha</td>
-									<td>R$0,50</td>
-								</tr>
-								<tr>
-									<td>104</td>
-									<td>Fritas</td>
-									<td>R$4,50</td>
-								</tr>
-								<tr>
-									<td>105</td>
-									<td>Maionese</td>
-									<td>R$1,50</td>
-								</tr>
-								<tr>
-									<td>106</td>
-									<td>Ervilha</td>
-									<td>R$1,00</td>
-								</tr>
-								<tr>
-									<td>107</td>
-									<td>Batata palha</td>
-									<td>R$0,50</td>
-								</tr>
-								<tr>
-									<td>108</td>
-									<td>Fritas</td>
-									<td>R$4,50</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="modal-footer">
-					</div>
-				</div>
+<!-- Modal produtos -->
+<div class="modal fade" id="ModalProdutos" tabindex="-1" role="dialog"
+	aria-labelledby="ModalTitulo" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="ModalTitulo">Lista de produtos</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+
+				<table class="table table-bordered table-hover"
+					style="cursor: pointer" title="Duplo clique para selecionar">
+					<thead>
+						<tr>
+							<th scope="col">Código</th>
+							<th scope="col">Descrição</th>
+							<th scope="col">Preço</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>101</td>
+							<td>Maionese</td>
+							<td>R$1,50</td>
+						</tr>
+						<tr>
+							<td>102</td>
+							<td>Ervilha</td>
+							<td>R$1,00</td>
+						</tr>
+						<tr>
+							<td>103</td>
+							<td>Batata palha</td>
+							<td>R$0,50</td>
+						</tr>
+						<tr>
+							<td>104</td>
+							<td>Fritas</td>
+							<td>R$4,50</td>
+						</tr>
+						<tr>
+							<td>105</td>
+							<td>Maionese</td>
+							<td>R$1,50</td>
+						</tr>
+						<tr>
+							<td>106</td>
+							<td>Ervilha</td>
+							<td>R$1,00</td>
+						</tr>
+						<tr>
+							<td>107</td>
+							<td>Batata palha</td>
+							<td>R$0,50</td>
+						</tr>
+						<tr>
+							<td>108</td>
+							<td>Fritas</td>
+							<td>R$4,50</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer"></div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal adicionais -->
+<div class="modal fade" id="ModalAdicionais" tabindex="-1" role="dialog"
+	aria-labelledby="ModalTitulo" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="ModalTitulo"></h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th scope="col">Código</th>
+							<th scope="col">Nome</th>
+							<th scope="col">Preço</th>
+							<th scope="col">Adicionar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>101</td>
+							<td>Maionese</td>
+							<td>R$1,50</td>
+							<td><input class="check-adicionais" type="checkbox"></td>
+						</tr>
+						<tr>
+							<td>102</td>
+							<td>Ervilha</td>
+							<td>R$1,00</td>
+							<td><input class="check-adicionais" type="checkbox"></td>
+						</tr>
+						<tr>
+							<td>103</td>
+							<td>Batata palha</td>
+							<td>R$0,50</td>
+							<td><input class="check-adicionais" type="checkbox"></td>
+						</tr>
+						<tr>
+							<td>104</td>
+							<td>Fritas</td>
+							<td>R$4,50</td>
+							<td><input class="check-adicionais" type="checkbox"></td>
+						</tr>
+						<tr>
+							<td>105</td>
+							<td>Maionese</td>
+							<td>R$1,50</td>
+							<td><input class="check-adicionais" type="checkbox"></td>
+						</tr>
+						<tr>
+							<td>106</td>
+							<td>Ervilha</td>
+							<td>R$1,00</td>
+							<td><input class="check-adicionais" type="checkbox"></td>
+						</tr>
+						<tr>
+							<td>107</td>
+							<td>Batata palha</td>
+							<td>R$0,50</td>
+							<td><input class="check-adicionais" type="checkbox"></td>
+						</tr>
+						<tr>
+							<td>108</td>
+							<td>Fritas</td>
+							<td>R$4,50</td>
+							<td><input class="check-adicionais" type="checkbox"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" data-dismiss="modal">Salvar
+					adicionais</button>
 			</div>
 		</div>
-		    
-	<!-- Modal adicionais -->
-	<div class="modal fade" id="ModalAdicionais" tabindex="-1"
-			role="dialog" aria-labelledby="ModalTitulo" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="ModalTitulo"></h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-
-						<table class="table table-bordered table-hover">
-							<thead>
-								<tr>
-									<th scope="col">Código</th>
-									<th scope="col">Nome</th>
-									<th scope="col">Preço</th>
-									<th scope="col">Adicionar</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>101</td>
-									<td>Maionese</td>
-									<td>R$1,50</td>
-									<td><input class="check-adicionais" type="checkbox"></td>
-								</tr>
-								<tr>
-									<td>102</td>
-									<td>Ervilha</td>
-									<td>R$1,00</td>
-									<td><input class="check-adicionais" type="checkbox"></td>
-								</tr>
-								<tr>
-									<td>103</td>
-									<td>Batata palha</td>
-									<td>R$0,50</td>
-									<td><input class="check-adicionais" type="checkbox"></td>
-								</tr>
-								<tr>
-									<td>104</td>
-									<td>Fritas</td>
-									<td>R$4,50</td>
-									<td><input class="check-adicionais" type="checkbox"></td>
-								</tr>
-								<tr>
-									<td>105</td>
-									<td>Maionese</td>
-									<td>R$1,50</td>
-									<td><input class="check-adicionais" type="checkbox"></td>
-								</tr>
-								<tr>
-									<td>106</td>
-									<td>Ervilha</td>
-									<td>R$1,00</td>
-									<td><input class="check-adicionais" type="checkbox"></td>
-								</tr>
-								<tr>
-									<td>107</td>
-									<td>Batata palha</td>
-									<td>R$0,50</td>
-									<td><input class="check-adicionais" type="checkbox"></td>
-								</tr>
-								<tr>
-									<td>108</td>
-									<td>Fritas</td>
-									<td>R$4,50</td>
-									<td><input class="check-adicionais" type="checkbox"></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-success"
-							data-dismiss="modal">Salvar adicionais</button>
-					</div>
-				</div>
-			</div>
-		</div>
-    </body>
-
-<!-- Script para o modal -->	
-	<script type="text/javascript">
-		$('#ModalAdicionais').on('show.bs.modal', function (event) {
-			var button = $(event.relatedTarget) // Botão que dispoarou o modal
-			var nome = button.data('nome') // Extraí a string do atributo data-nome			
-			// A requisição AJAX vai aqui.
-			
-			// Atualiza o conteúdo da modal.
-			var modal = $(this)
-			modal.find('.modal-title').text('Lista de adicionais do(a) ' + nome)
-		})
-	</script>
-	<script type="text/javascript">
-	$(function() {
-		$("#includeMenu").load("Menu.html");
-	});
-	</script>
-	<script type="text/javascript" src="controller/cliente/cadastroCliente.js"></script>
-	<script type="text/javascript" src="controller/generics/validacoesGenericas.js"></script>	
-	<script type="text/javascript" src="controller/produto/cadastroProduto.js"></script>	
-	<script type="text/javascript" src="controller/generics/requestService.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-	<!-- Tradução customizada do DataTable -->
-	
+	</div>
+</div>

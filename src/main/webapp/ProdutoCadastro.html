@@ -4,81 +4,67 @@
     Author     	: Morgana e Sidnei
 	Função		: Cadastrar/modificar um produto (um exemplo de produto é o seu X-galinha)
 -->
+<script type="text/javascript"
+	src="controller/produto/cadastroProduto.js"></script>
+
+<div class="content-title">
+	<i class="fa fa-barcode"></i>Produtos<i class="fa fa-angle-right"></i><a
+		class="link-abrir" href="ProdutoConsulta.html">Consulta de
+		produtos</a><i class="fa fa-angle-right"></i>Adicionar produto
+</div>
+
+<div class="formtitle">Adicionar produto</div>
+<form>
+	<div class="page-cad">
 
 
-	<div id="includeMenu"></div>
-
-			<div class="content-title">
-				<i class="fa fa-barcode"></i>Produtos<i class="fa fa-angle-right"></i><a class="link-abrir"
-					href="ProdutoConsulta.html">Consulta de produtos</a><i class="fa fa-angle-right"></i>Adicionar produto
+		<div class="form-row">
+			<div class="form-group col-md-2">
+				<label for="codProd">Código</label> <input class="form-control"
+					id="codProd" type="number" min="1">
 			</div>
+			<div class="form-group col-md-2">
+				<label for="codCategoria">Categoria</label> <select
+					class="form-control" id="codCategoria">
+					<option>Lanche</option>
+					<option>Bebida</option>
+					<option>Porção</option>
+					<option>Adicional</option>
+				</select>
+			</div>
+			<div class="form-group col-md-2">
+				<label for="refProd" class="control-label required">Referência</label>
+				<input class="form-control" id="" refProd"" type="text"
+					maxlength="12" required>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-10">
+				<label for="descProd" class="control-label required">Descrição</label>
+				<input class="form-control" id="descProd" type="text" maxlength="70"
+					required>
+			</div>
+			<div class="form-group col-md-2">
+				<label for="valorProd" class="control-label required">Valor</label>
+				<input class="form-control" id="valorProd" type="number" required>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" checked="checked"
+					id="prodAtivo"> <label class="form-check-label"
+					for="prodAtivo">Ativo</label>
+			</div>
+		</div>
 
-			<div class="formtitle">Adicionar produto</div>
-			<form>
-				<div class="page-cad">
-
-
-					<div class="form-row">
-						<div class="form-group col-md-2">
-							<label for="codProd">Código</label> <input class="form-control"
-								id="codProd" type="number" min="1">
-						</div>
-						<div class="form-group col-md-2">
-							<label for="codCategoria">Categoria</label> <select
-								class="form-control" id="codCategoria">
-								<option>Lanche</option>
-								<option>Bebida</option>
-								<option>Porção</option>
-								<option>Adicional</option>
-							</select>
-						</div>
-						<div class="form-group col-md-2">
-							<label for="refProd" class="control-label required">Referência</label>
-							<input class="form-control" id="" refProd"" type="text"
-								maxlength="12" required>
-						</div>
-					</div>
-					<div class="form-row">
-						<div class="form-group col-md-10">
-							<label for="descProd" class="control-label required">Descrição</label>
-							<input class="form-control" id="descProd" type="text"
-								maxlength="70" required>
-						</div>
-						<div class="form-group col-md-2">
-							<label for="valorProd" class="control-label required">Valor</label>
-							<input class="form-control" id="valorProd" type="number" required>
-						</div>
-					</div>
-					<div class="form-row">
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" checked="checked"
-								id="prodAtivo"> <label class="form-check-label"
-								for="prodAtivo">Ativo</label>
-						</div>
-					</div>
-
-					<center>
-						<a class="link-abrir" href="TelaDefault.html"><button type="button"
-								class="btn btn-secondary">Cancelar</button></a> <a
-							href="#">
-						<button type="button"class="btn btn-success" id="btnSave">
-								<i class="fa fa-save"></i>Cadastrar produto
-							</button></a>
-					</center>
-				</div>
-			</form>
-
-
-
-<script type="text/javascript" src="controller/cliente/cadastroCliente.js"></script>
-<script type="text/javascript" src="controller/generics/validacoesGenericas.js"></script>
-<script type="text/javascript" src="controller/produto/cadastroProduto.js"></script>
-<script type="text/javascript" src="controller/generics/validacoesGenericas.js"></script>
-<script type="text/javascript" src="controller/generics/requestService.js"></script>
-
-<script type="text/javascript">
-	$(function() {
-		$("#includeMenu").load("Menu.html");
-	});
-</script>
-
+		<center>
+			<a class="link-abrir" href="TelaDefault.html"><button
+					type="button" class="btn btn-secondary">Cancelar</button></a> <a
+				href="#">
+				<button type="button" class="btn btn-success" id="btnSave">
+					<i class="fa fa-save"></i>Cadastrar produto
+				</button>
+			</a>
+		</center>
+	</div>
+</form>

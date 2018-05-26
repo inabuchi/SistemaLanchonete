@@ -9,8 +9,11 @@
  * Carrega uma página em um elemento html por ajax
  * 
  * @author Igor Vieira Rodrigues
- * @param {String} txtUrlEnvio url de destino
- * @param {String} txtElementoDOM id ou class da tag de destino da página, isto é, onde a página deverá ser carregada
+ * @param {String}
+ *            txtUrlEnvio url de destino
+ * @param {String}
+ *            txtElementoDOM id ou class da tag de destino da página, isto é,
+ *            onde a página deverá ser carregada
  */
 function abrirPagina(txtUrlEnvio, txtElementoDOM) {
     try {
@@ -24,8 +27,8 @@ function abrirPagina(txtUrlEnvio, txtElementoDOM) {
         };
 
         // var obj = {
-        //     url: txtUrlEnvio,
-        //     selector: '.uma-classe'
+        // url: txtUrlEnvio,
+        // selector: '.uma-classe'
         // };
 
         // var txtUrlCrypt = btoa(JSON.stringify(txtUrlEnvio));
@@ -45,12 +48,17 @@ function abrirPagina(txtUrlEnvio, txtElementoDOM) {
  * Envia objeto json para o restful via ajax
  * 
  * @author Igor Vieira Rodrigues
- * @param {String} prUrl
- * @param {String} prMethod
- * @param {Object} prDados
- * @param {Function} prDoneCallBack
- * @param {Function} prFailCallBack
- * @returns {jqXHR} 
+ * @param {String}
+ *            prUrl
+ * @param {String}
+ *            prMethod
+ * @param {Object}
+ *            prDados
+ * @param {Function}
+ *            prDoneCallBack
+ * @param {Function}
+ *            prFailCallBack
+ * @returns {jqXHR}
  */
 function enviarAjax(prUrl, prMethod, prDados, prDoneCallBack, prFailCallBack) {
     prUrl = prUrl || '';
@@ -88,10 +96,11 @@ function enviarAjax(prUrl, prMethod, prDados, prDoneCallBack, prFailCallBack) {
 
 /**
  * 
- * Retorna os dados preenchidos no formulário em formato JSON 
+ * Retorna os dados preenchidos no formulário em formato JSON
  * 
  * @author Igor Vieira Rodrigues
- * @param {HTMLForm} prForm
+ * @param {HTMLForm}
+ *            prForm
  * @returns {JSON}
  */
 function getFormCampos(prForm) {
@@ -119,8 +128,10 @@ function getFormCampos(prForm) {
  * Preenche um formulário com o objeto JSON, e retorna o próprio formulário
  * 
  * @author Igor Vieira Rodrigues
- * @param {HTMLForm} prForm
- * @param {JSON} prJSON
+ * @param {HTMLForm}
+ *            prForm
+ * @param {JSON}
+ *            prJSON
  * @returns {HTMLForm}
  */
 function setFormCampos(prForm, prJSON) {
@@ -136,4 +147,21 @@ function setFormCampos(prForm, prJSON) {
     }
 
     return prForm;
+}
+
+/**
+ * Função para retornar a url atual
+ * 
+ * @returns
+ */
+function getUrl(){
+	var nrFim = window.location.href.indexOf('#') || 0;
+	var txtUrl = '';
+	if (nrFim !== -1){
+		txtUrl = window.location.href.substr(nrFim + 1);
+		return atob(txtUrl);
+	}else{
+		return '';
+	}
+	
 }
