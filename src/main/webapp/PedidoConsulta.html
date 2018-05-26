@@ -2,252 +2,29 @@
     Document   : PedidoConsulta
     Created on : 15/05/2018, 21:31:28
     Author     : Morgana
-    Função	   : Visualizar todos os pedidos e as informações de cada pedido.
+    Funï¿½ï¿½o	   : Visualizar todos os pedidos e as informaï¿½ï¿½es de cada pedido.
     
 -->
 
-	<div id="includeMenu"></div>
-	
-	<nav class="navbar navbar-expand">
-		<a class="sidebar-toggle text-light"><i class="fa fa-bars"></i></a> <a
-			class="navbar-brand link-abrir" href="TelaDefault.html"><navcolor>Guten</navcolor> Burguer</a>
-		<div class="navbar-collapse collapse">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item dropdown"><a class="nav-link" href="#"
-					id="navbarDropdownMenuLink" data-toggle="dropdown"> <i
-						class="fa fa-user-circle"></i>Username<i class="fa fa-caret-down"
-						style="margin-left: 10px"></i>
-				</a>
-					<div class="dropdown-menu dropdown-menu-right"
-						aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item link-editar" href="#">Gerenciar</a> <a
-							class="dropdown-item" href="#">Sair</a>
-					</div></li>
-			</ul>
-		</div>
-	</nav>
-
-	<div class="d-flex align-items-stretch">
-		<div class="sidebar bg-dark">
-
-	<ul class="list-unstyled">				
-		<li>
-            <a href="#submenu1" data-toggle="collapse"><i class="fa fa-id-card-o"></i>Pessoas</a>
-            <ul id="submenu1" class="list-unstyled collapse">
-                <li><a class="link-abrir" href="ClienteConsulta.html"><i class="fa fa-angle-right"></i>Clientes</i></a></li> 
-                <li><a class="link-abrir" href="FuncionarioConsulta.html"><i class="fa fa-angle-right"></i>Funcionários</a></li>				 
-            </ul>
-        </li>
-        <li><a href="#submenu2" data-toggle="collapse"><i class="fa fa-shopping-basket" aria-hidden="true"></i>Pedidos</a>
-			<ul id="submenu2" class="list-unstyled collapse">
-			<li><a class="link-abrir" href="PedidoCadastro.html"><i class="fa fa-angle-right"></i>Cadastro de Pedidos</a></li>
-			<li><a class="link-abrir" href="PedidoConsulta.html"><i class="fa fa-angle-right"></i>Lista de Pedidos</a></li>
-            <li><a class="link-abrir" href="PedidoEntrega.html"><i class="fa fa-angle-right"></i>Gerenciamento de Entregas</a></li>
-			</ul>
-		</li>
-		<li><a href="#submenu3" data-toggle="collapse"><i class="fa fa-barcode" aria-hidden="true"></i>Produtos</a>
-			<ul id="submenu3" class="list-unstyled collapse">			
-			<li><a class="link-abrir" href="ProdutoConsulta.html"><i class="fa fa-angle-right"></i>Consulta de Produtos</a></li>
-            <li><a class="link-abrir" href="ProdutoCategoriaConsulta.html"><i class="fa fa-angle-right"></i>Categorias de Produtos</a></li>
-			<li><a class="link-abrir" href="ProdutoAdicionalConsulta.html"><i class="fa fa-angle-right"></i>Adicionais de Produtos</a></li>			
-			</ul>
-		</li>        
-        <li>
-			<a href="#submenu4" data-toggle="collapse"><i class="fa fa-money"></i>Fluxo de caixa</a>
-            <ul id="submenu4" class="list-unstyled collapse">
-                <li><a class="link-abrir" href="CaixaGerenciamento.html"><i class="fa fa-angle-right"></i>Fechamento de caixa</a></li>
-				<li><a class="link-abrir" href="Relatorio.html"><i class="fa fa-angle-right"></i>Relatórios</a></li>
-            </ul>
-        </li>
-		<li>
-            <a class="link-abrir" href="ConfigCadastro.html"><i class="fa fa-cog"></i>Configurações</a>            
-        </li>
-    </ul>
-</div>
-	</div>
-
-
-	<div class="d-flex align-items-stretch">
-		<div class="content p-4">
-			<div class="content-title">
-				<i class="fa fa-shopping-basket" aria-hidden="true"></i>Pedidos<i class="fa fa-angle-right"></i>Lista de pedidos
-			</div>
-
-			<div class="formtitle">Pedidos</div>
-			<div class="page-consulta">
-				<a href="CadastroPedido.html?state=i"><button type="button"
-						class="btn btn-success" style="margin: 15px 15px 25px 15px;">
-						<i class="fa fa-plus-circle"></i>Cadastrar pedido
-					</button></a>
-				<table class="table table-bordered table-hover" id="data-table">
-					<thead>
-						<tr>
-							<th scope="col">Código</th>
-							<th scope="col">Forma de pagamento</th>
-							<th scope="col">Valor</th>
-							<th scope="col">Opções</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1001</td>
-							<td>Dinheiro</td>
-							<td>R$ 121,99</td>
-							<td class="table-buttons">
-							<button type="button" class="table-eye" title="Visualizar pedido" data-toggle="modal" data-nome="1001" data-target="#ModalPedido">
-							<i class="fa fa-eye"></i>
-							</button>
-							<a href="CadastroPedido.html"><button type="button" class="table-edit" title="Editar pedido">
-							<i class="fa fa-pencil"></i>
-							</button></a> 
-							<a href="#"><button type="button" class="table-del" title="Cancelar pedido">
-							<i class="fa fa-close"></i>
-							</button></a></td>
-						</tr>
-						<tr>
-							<td>1002</td>
-							<td>Dinheiro</td>
-							<td>R$ 50,00</td>
-							<td class="table-buttons">
-							<button type="button" class="table-eye" title="Visualizar pedido" data-toggle="modal" data-nome="1002" data-target="#ModalPedido">
-							<i class="fa fa-eye"></i>
-							</button>
-							<a href="CadastroPedido.html"><button type="button" class="table-edit" title="Editar pedido">
-							<i class="fa fa-pencil"></i>
-							</button></a> 
-							<a href="#"><button type="button" class="table-del" title="Cancelar pedido">
-							<i class="fa fa-close"></i>
-							</button></a></td>
-						</tr>
-						<tr>
-							<td>1003</td>
-							<td>Cartão de crédito</td>
-							<td>R$ 150,00</td>
-							<td class="table-buttons">
-							<button type="button" class="table-eye" title="Visualizar pedido" data-toggle="modal" data-nome="1003" data-target="#ModalPedido">
-							<i class="fa fa-eye"></i>
-							</button>
-							<a href="CadastroPedido.html"><button type="button" class="table-edit" title="Editar pedido">
-							<i class="fa fa-pencil"></i>
-							</button></a> 
-							<a href="#"><button type="button" class="table-del" title="Cancelar pedido">
-							<i class="fa fa-close"></i>
-							</button></a></td>
-						</tr>
-					</tbody>
-				</table>
-
-			</div>
-		</div>
-	</div>
-	
-	<!-- Modal -->
-		<div class="modal fade" id="ModalPedido" tabindex="-1"
-			role="dialog" aria-labelledby="ModalTitulo" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="ModalTitulo">Resumo do pedido</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					
-					
-					<div class="modal-body">
-					
-					<fieldset class="well">
-						<legend class="well-legend">Itens do pedido</legend>
-
-
-						<table class="table table-bordered table-hover">
-							<thead>
-								<tr>
-									<th scope="col">Produto</th>
-									<th scope="col">Quantidade</th>
-									<th scope="col">Valor</th>
-									<th scope="col">Adicionais</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>X-Burguer</td>
-									<td>2</td>
-									<td>R$49,99</td>
-									<td>Maionese</td>
-								</tr>
-								<tr>
-									<td>X-Galinha</td>
-									<td>1</td>
-									<td>R$11,00</td>
-									<td>Pepino, Milho</td>
-								</tr>
-								<tr>
-									<td>X-Bacon</td>
-									<td>1</td>
-									<td>R$11,00</td>
-									<td>-</td>
-								</tr>
-								<tr>
-									<td>Porção de fritas</td>
-									<td>2</td>
-									<td>R$50,00</td>
-									<td>Maionese, Bacon</td>
-								</tr>
-								
-							</tbody>
-						</table>
-						</fieldset>
-						
-					<fieldset class="well">
-						<legend class="well-legend">Informações de entrega</legend>
-						Endereço: Rua XV de Novembro, 888 </br>
-						Cidade: Blumenau, SC </br>
-						Bairro: Centro </br>
-						</p>
-					</fieldset>
-					
-					<fieldset class="well">
-						<legend class="well-legend">Geral</legend>
-						Forma de pagamento: Dinheiro </br>
-						Data do pedido: dd/mm/yyyy </br>
-						Cliente: 1 - João da Silva </br>
-						Total do pedido: 121,99
-						Observação: Teste 
-						</p>
-					</fieldset>
-					
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	
-</body>
 <script type="text/javascript">
 	$('#data-table').dataTable({
 		"language" : {
 			"sEmptyTable" : "Nenhum registro encontrado",
-			"sInfo" : "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-			"sInfoEmpty" : "Mostrando 0 até 0 de 0 registros",
+			"sInfo" : "Mostrando de _START_ atï¿½ _END_ de _TOTAL_ registros",
+			"sInfoEmpty" : "Mostrando 0 atï¿½ 0 de 0 registros",
 			"sInfoFiltered" : "(Filtrados de _MAX_ registros)",
 			"sInfoPostFix" : "",
 			"sInfoThousands" : ".",
-			"sLengthMenu" : "_MENU_ resultados por página",
+			"sLengthMenu" : "_MENU_ resultados por pï¿½gina",
 			"sLoadingRecords" : "Carregando...",
 			"sProcessing" : "Processando...",
 			"sZeroRecords" : "Nenhum registro encontrado",
 			"sSearch" : "Pesquisar",
 			"oPaginate" : {
-				"sNext" : "Próximo",
+				"sNext" : "Prï¿½ximo",
 				"sPrevious" : "Anterior",
 				"sFirst" : "Primeiro",
-				"sLast" : "Último"
+				"sLast" : "ï¿½ltimo"
 			},
 			"oAria" : {
 				"sSortAscending" : ": Ordenar colunas de forma ascendente",
@@ -257,4 +34,164 @@
 	});
 </script>
 
-</html>
+<div class="d-flex align-items-stretch">
+	<div class="content p-4">
+		<div class="content-title">
+			<i class="fa fa-shopping-basket" aria-hidden="true"></i>Pedidos<i
+				class="fa fa-angle-right"></i>Lista de pedidos
+		</div>
+
+		<div class="formtitle">Pedidos</div>
+		<div class="page-consulta">
+			<a href="CadastroPedido.html?state=i"><button type="button"
+					class="btn btn-success" style="margin: 15px 15px 25px 15px;">
+					<i class="fa fa-plus-circle"></i>Cadastrar pedido
+				</button></a>
+			<table class="table table-bordered table-hover" id="data-table">
+				<thead>
+					<tr>
+						<th scope="col">Cï¿½digo</th>
+						<th scope="col">Forma de pagamento</th>
+						<th scope="col">Valor</th>
+						<th scope="col">Opï¿½ï¿½es</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1001</td>
+						<td>Dinheiro</td>
+						<td>R$ 121,99</td>
+						<td class="table-buttons">
+							<button type="button" class="table-eye" title="Visualizar pedido"
+								data-toggle="modal" data-nome="1001" data-target="#ModalPedido">
+								<i class="fa fa-eye"></i>
+							</button> <a href="CadastroPedido.html"><button type="button"
+									class="table-edit" title="Editar pedido">
+									<i class="fa fa-pencil"></i>
+								</button></a> <a href="#"><button type="button" class="table-del"
+									title="Cancelar pedido">
+									<i class="fa fa-close"></i>
+								</button></a>
+						</td>
+					</tr>
+					<tr>
+						<td>1002</td>
+						<td>Dinheiro</td>
+						<td>R$ 50,00</td>
+						<td class="table-buttons">
+							<button type="button" class="table-eye" title="Visualizar pedido"
+								data-toggle="modal" data-nome="1002" data-target="#ModalPedido">
+								<i class="fa fa-eye"></i>
+							</button> <a href="CadastroPedido.html"><button type="button"
+									class="table-edit" title="Editar pedido">
+									<i class="fa fa-pencil"></i>
+								</button></a> <a href="#"><button type="button" class="table-del"
+									title="Cancelar pedido">
+									<i class="fa fa-close"></i>
+								</button></a>
+						</td>
+					</tr>
+					<tr>
+						<td>1003</td>
+						<td>Cartï¿½o de crï¿½dito</td>
+						<td>R$ 150,00</td>
+						<td class="table-buttons">
+							<button type="button" class="table-eye" title="Visualizar pedido"
+								data-toggle="modal" data-nome="1003" data-target="#ModalPedido">
+								<i class="fa fa-eye"></i>
+							</button> <a href="CadastroPedido.html"><button type="button"
+									class="table-edit" title="Editar pedido">
+									<i class="fa fa-pencil"></i>
+								</button></a> <a href="#"><button type="button" class="table-del"
+									title="Cancelar pedido">
+									<i class="fa fa-close"></i>
+								</button></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalPedido" tabindex="-1" role="dialog"
+	aria-labelledby="ModalTitulo" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="ModalTitulo">Resumo do pedido</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+
+			<div class="modal-body">
+
+				<fieldset class="well">
+					<legend class="well-legend">Itens do pedido</legend>
+
+
+					<table class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th scope="col">Produto</th>
+								<th scope="col">Quantidade</th>
+								<th scope="col">Valor</th>
+								<th scope="col">Adicionais</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>X-Burguer</td>
+								<td>2</td>
+								<td>R$49,99</td>
+								<td>Maionese</td>
+							</tr>
+							<tr>
+								<td>X-Galinha</td>
+								<td>1</td>
+								<td>R$11,00</td>
+								<td>Pepino, Milho</td>
+							</tr>
+							<tr>
+								<td>X-Bacon</td>
+								<td>1</td>
+								<td>R$11,00</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>Porï¿½ï¿½o de fritas</td>
+								<td>2</td>
+								<td>R$50,00</td>
+								<td>Maionese, Bacon</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</fieldset>
+
+				<fieldset class="well">
+					<legend class="well-legend">Informaï¿½ï¿½es de entrega</legend>
+					Endereï¿½o: Rua XV de Novembro, 888 </br> Cidade: Blumenau, SC </br> Bairro:
+					Centro </br>
+					</p>
+				</fieldset>
+
+				<fieldset class="well">
+					<legend class="well-legend">Geral</legend>
+					Forma de pagamento: Dinheiro </br> Data do pedido: dd/mm/yyyy </br> Cliente:
+					1 - Joï¿½o da Silva </br> Total do pedido: 121,99 Observaï¿½ï¿½o: Teste
+					</p>
+				</fieldset>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

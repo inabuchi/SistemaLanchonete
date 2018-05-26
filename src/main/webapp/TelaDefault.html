@@ -4,261 +4,209 @@
     Author     	: Morgana e Everton
 	Função		: Tela principal do sistema aberta após o login e a finalização de um pedido. Ela apresenta Todos os pedidos feitos até o momento durante o expediente,
 					os pedidos cancelados, retirados no balcão e entregues pelo delivery.
--->
+<!--
 
-<!DOCTYPE html>
-<html>
-
-<head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Guten Burguer - Principal</title>
-
-<script src="library/jquery-3.2.1.min.js">
-	
-</script>
-<script type="text/javascript" src="controller/cliente/cadastroCliente.js"></script>
-<script type="text/javascript" src="controller/generics/validacoesGenericas.js"></script>
-<script src="library/DataTables/jQuery-3.2.1/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="controller/produto/cadastroProduto.js"></script>
-<script type="text/javascript" src="controller/generics/validacoesGenericas.js"></script>
-<script type="text/javascript" src="controller/generics/requestService.js"></script>
-<!-- DataTables -->
-<link rel="stylesheet" type="text/css"
-	href="library/DataTables/datatables.min.css" />
-<script type="text/javascript"
-	src="library/DataTables/datatables.min.js"></script>
-
-<!-- FontAwesome -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="path/to/font-awesome/css/font-awesome.min.css">
-
-<link
-	href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic'
-	rel='stylesheet' type='text/css'>
-
-
-<link href="css/style.css" rel="stylesheet" />
+<!-- Script para o modal -->
 <script type="text/javascript">
-	$(function() {
-		$("#includeMenu").load("Menu.html");
-	});
+	$('#ModalResumoCaixa').on('show.bs.modal', function(event) {
+		var button = $(event.relatedTarget) // Botão que dispoarou o modal
+		var nome = button.data('nome') // Extraí a string do atributo data-nome			
+		// A requisição AJAX vai aqui.
+	})
 </script>
-</head>
-<body>	
-		
-		
-		<div class="buttons-default-area">
-		<div class="buttons-principal">
-			Total de pedidos
-			<br/>
-			<number-total>55</number-total>
-		</div>
-		
-		
-		<div class="buttons-default">
-			Total canceladas
-			<br/>
-			<number-canc>5</number-canc>
-		</div>
-		
-		<div class="buttons-default">
-			Total balcão
-			<br/>
-			<number-entr>10</number-entr>
-		</div>
-		
-		<div class="buttons-default">
-			Total entregas
-			<br/>
-			<number-entr>40</number-entr>
-		</div>
-		
+<div class="buttons-default-area">
+	<div class="buttons-principal">
+		Total de pedidos <br />
+		<number-total>55</number-total>
+	</div>
 
-		<a class="link-abrir" href="PedidoCadastro.html">
-		<div class="buttons-default">
+	<div class="buttons-default">
+		Total canceladas <br />
+		<number-canc>5</number-canc>
+	</div>
 
-			<button-cestinha><i class="fa fa-shopping-basket" style="margin-left:10px"></i></button-cestinha>
-			<br/>
+	<div class="buttons-default">
+		Total balcão <br />
+		<number-entr>10</number-entr>
+	</div>
+
+	<div class="buttons-default">
+		Total entregas <br />
+		<number-entr>40</number-entr>
+	</div>
+
+	<div class="buttons-default">
+		<a class="link-abrir" href="PedidoCadastro.html"> <button-cestinha>
+			<i class="fa fa-shopping-basket" style="margin-left: 10px"></i></button-cestinha> <br />
 			Cadastrar pedido
-		</div>
 		</a>
-		
-		<!-- Programador, a div abaixo deverá aparecer quando o caixa ainda estiver fechado. -->
-		<div class="buttons-principal" style="margin-top:1.5%">
-			<div class="form-group row" style="margin-top:1.5%">
-				<label for="vlrTrocoIni" class="col-form-label">Valor troco inicial: </label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="vlrTrocoIni" required>
-				</div>
-				<button type="button" class="btn btn-success" style="width:150px"><i class="fa fa-check"></i>Abrir caixa</button>
-			</div>			
+	</div>
+
+	<!-- Programador, a div abaixo deverá aparecer quando o caixa ainda estiver fechado. -->
+	<div class="buttons-principal" style="margin-top: 1.5%">
+		<div class="form-group row" style="margin-top: 1.5%">
+			<label for="vlrTrocoIni" class="col-form-label">Valor troco
+				inicial: </label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" id="vlrTrocoIni" required>
+			</div>
+			<button type="button" class="btn btn-success" style="width: 150px">
+				<i class="fa fa-check"></i>Abrir caixa
+			</button>
 		</div>
-		
-		<!-- Programador, a div abaixo deverá aparecer quando o caixa já estiver aberto. -->
-		<div class="buttons-principal" style="margin-top:1.5%">
-				<center><button type="button" class="btn btn-danger" style="width:160px; margin-top:2%" data-toggle="modal" data-target="#ModalResumoCaixa"><i class="fa fa-close"></i>Fechar caixa</button>
-				</center>			
+	</div>
+
+	<!-- Programador, a div abaixo deverá aparecer quando o caixa já estiver aberto. -->
+	<div class="buttons-principal" style="margin-top: 1.5%" align="center">
+		<button type="button" class="btn btn-danger"
+			style="width: 160px; margin-top: 2%" data-toggle="modal"
+			data-target="#ModalResumoCaixa">
+			<i class="fa fa-close"></i>Fechar caixa
+		</button>
+	</div>
+
+	<div class="buttons-entregadores" style="margin-top: 1.5%">
+		<fieldset class="well">
+			<legend class="well-legend">Entregadores do dia</legend>
+
+			<div class="entregadores-dia">
+				<div class="entregadores-dia-item">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" checked="checked"
+							style="transform: scale(1.4); margin-top: 6px"> <label
+							class="form-check-label">Mark Otto</label>
+					</div>
+				</div>
+
+				<div class="entregadores-dia-item">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" checked="checked"
+							style="transform: scale(1.4); margin-top: 6px"> <label
+							class="form-check-label">Jacob Thornton</label>
+					</div>
+				</div>
+				<div class="entregadores-dia-item">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" checked="checked"
+							style="transform: scale(1.4); margin-top: 6px"> <label
+							class="form-check-label">Larry the Bird</label>
+					</div>
+				</div>
+
+				<div class="entregadores-dia-item">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" checked="checked"
+							style="transform: scale(1.4); margin-top: 6px"> <label
+							class="form-check-label">Jacob Thornton</label>
+					</div>
+				</div>
+
+				<div class="entregadores-dia-item">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" checked="checked"
+							style="transform: scale(1.4); margin-top: 6px"> <label
+							class="form-check-label">João da Silva</label>
+					</div>
+				</div>
+
+				<div class="entregadores-dia-item">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" checked="checked"
+							style="transform: scale(1.4); margin-top: 6px"> <label
+							class="form-check-label">Mark Otto</label>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+
+	</div>
+</div>
+
+
+<!-- Modal Resumo de caixa -->
+<div class="modal fade" id="ModalResumoCaixa" tabindex="-1"
+	role="dialog" aria-labelledby="ModalTitulo" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="ModalTitulo">Resumo de caixa do
+					dia: dd/mm/yyyy</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th scope="col">Forma de pagamento</th>
+							<th scope="col">Valor</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Dinheiro</td>
+							<td>R$99.999.999,99</td>
+						</tr>
+						<tr>
+							<td>Dinheiro</td>
+							<td>R$99.999.999,99</td>
+						</tr>
+						<tr>
+							<td>Cartão de crédito</td>
+							<td>R$99.999.999,99</td>
+						</tr>
+						<tr>
+							<td>Cartão de débido</td>
+							<td>R$99.999.999,99</td>
+						</tr>
+						<tr>
+							<td>Dinheiro</td>
+							<td>R$99.999.999,99</td>
+						</tr>
+						<tr>
+							<td>Dinheiro</td>
+							<td>R$99.999.999,99</td>
+						</tr>
+						<tr>
+							<td>Cartão de crédito</td>
+							<td>R$99.999.999,99</td>
+						</tr>
+						<tr>
+							<td>Cartão de débito</td>
+							<td>R$99.999.999,99</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<td scope="col"
+								style="font-weight: bold; background-color: #eee; font-size: 14px">Total
+								de pedidos do dia</td>
+							<td scope="col">1000</td>
+						</tr>
+						<tr>
+							<td scope="col"
+								style="font-weight: bold; background-color: #eee; font-size: 14px">Troco
+								inicial</td>
+							<td scope="col">R$99.999.999,99</td>
+						</tr>
+						<tr>
+							<td scope="col"
+								style="font-weight: bold; background-color: #eee; font-size: 14px">Total
+								em caixa</td>
+							<td scope="col">R$99.999.999,99</td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" data-dismiss="modal">
+					<i class="fa fa-print"></i>Imprimir resumo
+				</button>
+			</div>
 		</div>
-		
-		<div class="buttons-entregadores" style="margin-top:1.5%">				
-			<fieldset class="well">
-				<legend class="well-legend">Entregadores do dia</legend>
-				
-				<div class="entregadores-dia">
-				<div class="entregadores-dia-item">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" checked="checked" style="transform: scale(1.4); margin-top: 6px"> 
-							<label class="form-check-label">Mark Otto</label>
-					</div>
-				</div>
-				
-				<div class="entregadores-dia-item">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" checked="checked" style="transform: scale(1.4); margin-top: 6px"> 
-							<label class="form-check-label">Jacob Thornton</label>
-					</div>
-				</div>	
-				<div class="entregadores-dia-item">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" checked="checked" style="transform: scale(1.4); margin-top: 6px"> 
-							<label class="form-check-label">Larry the Bird</label>
-					</div>
-				</div>	
-				
-				<div class="entregadores-dia-item">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" checked="checked" style="transform: scale(1.4); margin-top: 6px"> 
-							<label class="form-check-label">Jacob Thornton</label>
-					</div>
-				</div>
-				
-				<div class="entregadores-dia-item">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" checked="checked" style="transform: scale(1.4); margin-top: 6px"> 
-							<label class="form-check-label">João da Silva</label>
-					</div>
-				</div>
-				
-				<div class="entregadores-dia-item">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" checked="checked" style="transform: scale(1.4); margin-top: 6px"> 
-							<label class="form-check-label">Mark Otto</label>
-					</div>
-				</div>
-				</div>
-			</fieldset>
-							
-		</div>
-
-		
-				
-		</div>	
-			
-	
-	<!-- Modal Resumo de caixa -->
-	<div class="modal fade" id="ModalResumoCaixa" tabindex="-1"
-			role="dialog" aria-labelledby="ModalTitulo" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="ModalTitulo">Resumo de caixa do dia: dd/mm/yyyy</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-
-						<table class="table table-bordered table-hover">
-							<thead>
-								<tr>
-									<th scope="col">Forma de pagamento</th>
-									<th scope="col">Valor</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Dinheiro</td>
-									<td>R$99.999.999,99</td>
-								</tr>
-								<tr>
-									<td>Dinheiro</td>
-									<td>R$99.999.999,99</td>
-								</tr>
-								<tr>
-									<td>Cartão de crédito</td>
-									<td>R$99.999.999,99</td>
-								</tr>
-								<tr>
-									<td>Cartão de débido</td>
-									<td>R$99.999.999,99</td>
-								</tr>
-								<tr>
-									<td>Dinheiro</td>
-									<td>R$99.999.999,99</td>
-								</tr>
-								<tr>
-									<td>Dinheiro</td>
-									<td>R$99.999.999,99</td>
-								</tr>
-								<tr>
-									<td>Cartão de crédito</td>
-									<td>R$99.999.999,99</td>
-								</tr>
-								<tr>
-									<td>Cartão de débito</td>
-									<td>R$99.999.999,99</td>
-								</tr>
-							</tbody>
-						</table>
-						
-						<table class="table table-bordered table-hover">
-							<thead>
-								<tr>
-									<td scope="col" style="font-weight:bold; background-color:#eee; font-size:14px">Total de pedidos do dia</td>
-									<td scope="col">1000</td>
-								</tr>
-								<tr>
-									<td scope="col" style="font-weight:bold; background-color:#eee; font-size:14px">Troco inicial</td>
-									<td scope="col">R$99.999.999,99</td>
-								</tr>
-								<tr>
-									<td scope="col" style="font-weight:bold; background-color:#eee; font-size:14px">Total em caixa</td>
-									<td scope="col">R$99.999.999,99</td>
-								</tr>
-							</thead>
-						</table>
-						
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-success"
-							data-dismiss="modal"><i class="fa fa-print"></i>Imprimir resumo</button>
-					</div>
-				</div>
-		
-</body>
-
-<!-- Script para o modal -->	
-	<script type="text/javascript">
-		$('#ModalResumoCaixa').on('show.bs.modal', function (event) {
-			var button = $(event.relatedTarget) // Botão que dispoarou o modal
-			var nome = button.data('nome') // Extraí a string do atributo data-nome			
-			// A requisição AJAX vai aqui.
-		})
-	</script>
-</html>
-
-<script type="text/javascript">
-	$(function() {
-		$("#includeMenu").load("Menu.html");
-	});
-</script>
-				
-<script type="text/javascript" src="controller/generics/validacoesGenericas.js"></script>
-<script type="text/javascript" src="controller/generics/requestService.js"></script>
-
+	</div>
+</div>

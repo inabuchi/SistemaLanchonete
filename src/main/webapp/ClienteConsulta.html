@@ -2,97 +2,76 @@
     Document   	: ClienteConsulta
     Created on 	: 21/04/2018, 16:39:28
     Author     	: Morgana e Sidnei
-	Funï¿½ï¿½o		: Visualizar todos os clientes cadastrados. ï¿½ possï¿½vel visualizar o histï¿½rico de pedidos de um determinado cliente.
+	Função		: Visualizar todos os clientes cadastrados. É possível visualizar o histórico de pedidos de um determinado cliente.
 -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="fonts/font-awesome.css">
-<link href='fonts/NotoSans.css' rel='stylesheet' type='text/css'>
-<link href="css/style.css" rel="stylesheet" /> 
+<script type="text/javascript"
+	src="controller/cliente/consultaCliente.js"></script>
+<div class="content-title">
+	<i class="fa fa-id-card-o"></i>Pessoas<i class="fa fa-angle-right"></i>Consulta
+	de clientes
+</div>
 
-<script type="text/javascript" src="library/DataTables/jQuery-3.2.1/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="controller/cliente/consultaCliente.js"></script>
-<script type="text/javascript" src="library/DataTables/datatables.min.js"></script>
-<link rel="stylesheet" type="text/css" href="library/DataTables/datatables.min.css">
-	
-	<div id="includeMenu"></div>
-		<div class="content p-4">
-			<div class="content-title">
-				<i class="fa fa-id-card-o"></i>Pessoas<i class="fa fa-angle-right"></i>Consulta de clientes
+<div class="formtitle">Clientes</div>
+<div class="page-consulta">
+	<a class="link-abrir" href="ClienteCadastro.html"><button
+			type="button" class="btn btn-success"
+			style="margin: 15px 15px 25px 15px;">
+			<i class="fa fa-plus-circle"></i>Adicionar cliente
+		</button></a>
+	<table class="table table-bordered table-hover" id="table-cliente">
+		<thead>
+			<tr>
+				<th scope="col">Código</th>
+				<th scope="col">Nome</th>
+				<th scope="col">Telefone</th>
+				<th scope="col">Endereço</th>
+				<th scope="col">Opções</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="ModalHistorico" tabindex="-1" role="dialog"
+	aria-labelledby="ModalTitulo" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="ModalTitulo">Histórico de Pedidos</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
+			<div class="modal-body">
 
-			<div class="formtitle">Clientes</div>
-			<div class="page-consulta">
-				<a class="link-abrir" href="ClienteCadastro.html"><button type="button"
-						class="btn btn-success" style="margin: 15px 15px 25px 15px;">
-						<i class="fa fa-plus-circle"></i>Adicionar cliente
-					</button></a>
-				<table class="table table-bordered table-hover" id="table-cliente">
+				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
-							<th scope="col">Cï¿½digo</th>
-							<th scope="col">Nome</th>
-							<th scope="col">Telefone</th>
-							<th scope="col">Endereï¿½o</th>
-							<th scope="col">Opï¿½ï¿½es</th>
+							<th scope="col">Código</th>
+							<th scope="col">Data</th>
+							<th scope="col">Preço</th>
+							<th scope="col">Opções</th>
 						</tr>
 					</thead>
 					<tbody>
+						<tr>
+							<td>120</td>
+							<td>19/02/2018</td>
+							<td>R$20,19</td>
+							<td class="table-buttons-hist"><a class="link-editar"
+								href="PedidoCadastro.html"><button type="button"
+										class="table-edit" title="Editar">
+										<i class="fa fa-pencil"></i>
+									</button></a></td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
-
-
-		<!-- Modal -->
-		<div class="modal fade" id="ModalHistorico" tabindex="-1"
-			role="dialog" aria-labelledby="ModalTitulo" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="ModalTitulo">Histï¿½rico de Pedidos</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-
-						<table class="table table-bordered table-hover">
-							<thead>
-								<tr>
-									<th scope="col">Cï¿½digo</th>
-									<th scope="col">Data</th>
-									<th scope="col">Preï¿½o</th>
-									<th scope="col">Opï¿½ï¿½es</th>
-								</tr>
-							</thead>
-							<tbody>								
-								<tr>
-									<td>120
-									</th>
-									<td>19/02/2018</td>
-									<td>R$20,19</td>
-									<td class="table-buttons-hist"><a class="link-editar"
-										href="PedidoCadastro.html"><button type="button"
-												class="table-edit" title="Editar">
-												<i class="fa fa-pencil"></i>
-											</button></a></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Close</button>
-					</div>
-				</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
 		</div>
-
-
-	
-<script type="text/javascript">
-	$(function() {
-		$("#includeMenu").load("Menu.html");
-	});
-</script>
+	</div>
+</div>

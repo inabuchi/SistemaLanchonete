@@ -4,64 +4,44 @@
     Author     	: Morgana e Sidnei
 	Função		: Cadastrar/modificar uma Categoria de produto (alguns exemplos de categoria são lanche, petisco, bebida)
 -->
+<div class="content-title">
+	<i class="fa fa-barcode"></i>Produtos<a class="link-abrir"
+		href="ProdutoCategoriaConsulta.html"><i class="fa fa-angle-right"></i>Categorias
+		de produtos</a> <i class="fa fa-angle-right"></i>Adicionar categoria
+</div>
+
+<div class="formtitle">Adicionar categoria</div>
+<form>
+	<div class="page-cad">
 
 
-	<div id="includeMenu"></div>
-
-
-			<div class="content-title">
-				<i class="fa fa-barcode"></i>Produtos<a class="link-abrir"
-					href="ProdutoCategoriaConsulta.html"><i class="fa fa-angle-right"></i>Categorias de produtos</a>
-					<i class="fa fa-angle-right"></i>Adicionar categoria
+		<div class="form-row">
+			<div class="form-group col-md-2">
+				<label for="codCat">Código</label> <input class="form-control"
+					id="codCat" type="number" min="1">
 			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-10">
+				<label for="descCat" class="control-label required">Descrição</label>
+				<input class="form-control" id="descCat" type="text" maxlength="70"
+					required>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" checked="checked"
+					id="ativoCat"> <label class="form-check-label"
+					for="ativoCat">Ativo</label>
+			</div>
+		</div>
 
-			<div class="formtitle">Adicionar categoria</div>
-			<form>
-				<div class="page-cad">
-
-
-					<div class="form-row">
-						<div class="form-group col-md-2">
-							<label for="codCat">Código</label> <input class="form-control"
-								id="codCat" type="number" min="1">
-						</div>												
-					</div>
-					<div class="form-row">
-						<div class="form-group col-md-10">
-							<label for="descCat" class="control-label required">Descrição</label>
-							<input class="form-control" id="descCat" type="text"
-								maxlength="70" required>
-						</div>						
-					</div>
-					<div class="form-row">
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" checked="checked"
-								id="ativoCat"> <label class="form-check-label"
-								for="ativoCat">Ativo</label>
-						</div>
-					</div>
-
-					<center>
-						<a class="link-abrir" href="#"><button type="button"
-								class="btn btn-secondary">Cancelar</button></a> <a
-							href="#"><button type="button"
-								class="btn btn-success" id="btnSave">
-								<i class="fa fa-save"></i>Cadastrar categoria
-							</button></a>
-					</center>
-				</div>
-			</form>
-
-
-	
-<script type="text/javascript">
-	$(function() {
-		$("#includeMenu").load("Menu.html");
-	});
-</script>
-
-<script type="text/javascript"
-	src="controller/cliente/cadastroCliente.js"></script>
-	
-<script type="text/javascript"
-	src="controller/generics/validacoesGenericas.js"></script>
+		<center>
+			<a class="link-abrir" href="#"><button type="button"
+					class="btn btn-secondary">Cancelar</button></a> <a href="#"><button
+					type="button" class="btn btn-success" id="btnSave">
+					<i class="fa fa-save"></i>Cadastrar categoria
+				</button></a>
+		</center>
+	</div>
+</form>

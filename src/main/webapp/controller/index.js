@@ -1,6 +1,5 @@
 /**
- * @author Igor Vieira Rodrigues
- * páginas abertas
+ * @author Igor Vieira Rodrigues páginas abertas
  */
 ($ => $(document).ready(() => {
 
@@ -74,14 +73,11 @@
         });
 
 }))(jQuery);
-
 function carregarPaginaInicial() {
-    var nrFim = window.location.href.indexOf('#') || 0;
-    var txtUrl = '';
-    if (nrFim !== -1)
-        txtUrl = window.location.href.substr(nrFim + 1);
-
+    var txtUrl = getUrl();
     if (txtUrl.length > 0)
-        abrirPagina(atob(txtUrl), '#conteudo');
+        abrirPagina(txtUrl, '#conteudo');
+    else
+    	abrirPagina('TelaDefault.html', '#conteudo');
 }
 

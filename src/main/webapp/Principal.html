@@ -1,0 +1,47 @@
+<!-- 
+    Document   	: principal
+    Created on 	: 21/04/2018, 16:39:28
+    Author     	: Sidnei e Igor
+	Função		: Página molde onde todas as páginas de conteúdo (basicamente todas exceto o Login e o Menu) são encaixadas
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Guten Burguer</title>
+<!-- DataTables (Já chama jquery e bootstrap)-->
+<link rel="stylesheet" type="text/css"
+	href="library/DataTables/datatables.min.css" />
+<script type="text/javascript"
+	src="library/DataTables/datatables.min.js"></script>
+
+<!-- Fontes-->
+<link rel="stylesheet" href="fonts/font-awesome.css">
+<link rel="stylesheet" href="fonts/font-awesome.min.css">
+<link rel='stylesheet' href='fonts/NotoSans.css' type='text/css'>
+
+<!-- CSS customizado -->
+<link href="css/style.css" rel="stylesheet" />
+
+<!-- Scripts Personalizados do sistema-->
+<script type="text/javascript" src="controller/sistema.js"></script>
+<script type="text/javascript" src="controller/index.js"></script>
+
+</head>
+<body>
+	<div class="d-flex align-items-stretch">
+		<div id="includeMenu">
+			<!-- Aqui vai o include do menu principal -->
+		</div>
+		<div id="conteudo" class="content p-4"></div>
+	</div>
+	<script type="text/javascript">
+		$(function() {
+			$("#includeMenu").load("Menu.html");
+		});
+	</script>
+</body>
+</html>
