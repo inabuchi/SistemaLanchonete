@@ -103,6 +103,11 @@ public class EnderecoPessoaBean implements Serializable {
 		this.pessoa = pessoa;
 		pk.setCdPessoa(pessoa != null ? pessoa.getCdPessoa() : 0);
 	}
+	
+    public void setEnderecoPessoaPK(int cdEndereco, int cdPessoa) {
+    	pk.setCdEndereco(cdEndereco);    	
+    	pk.setCdPessoa(cdPessoa);    	
+    }
 
 	/**
 	 * Captura o valor contido no parametro dtAlteracao

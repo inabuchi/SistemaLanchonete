@@ -3,13 +3,14 @@ package br.com.SistemaLanchonete.Teste;
 import java.util.Date;
 
 import br.com.SistemaLanchonete.Domain.BairroBean;
+import br.com.SistemaLanchonete.Domain.ClienteBean;
 import br.com.SistemaLanchonete.Domain.EnderecoBean;
 import br.com.SistemaLanchonete.Domain.EnderecoPessoaBean;
 import br.com.SistemaLanchonete.Domain.EstadoBean;
 import br.com.SistemaLanchonete.Domain.LogradouroBean;
 import br.com.SistemaLanchonete.Domain.MunicipioBean;
 import br.com.SistemaLanchonete.Repository.BDException;
-import br.com.SistemaLanchonete.Service.EnderecoService;
+import br.com.SistemaLanchonete.Service.ClienteService;
 
 public class Principal {
 
@@ -26,9 +27,17 @@ public class Principal {
 		
 		EnderecoPessoaBean endPessoa = new EnderecoPessoaBean(end, null, new Date(), true);
 				
-		EnderecoService endSer = new EnderecoService();
+		/*EnderecoService endSer = new EnderecoService();*/
 		
-		endSer.save(endPessoa);
+		ClienteBean cli = new ClienteBean(0, "Genivaldo", "(47) 3333-3333", "(47) 4444-4444", new Date(), true, 0, "");
+		
+		cli.addEnderecoPessoa(endPessoa);
+		
+		ClienteService cliSer = new ClienteService();
+		
+		cliSer.save(cli);
+		
+		/*endSer.save(endPessoa);*/
 	}
 
 }

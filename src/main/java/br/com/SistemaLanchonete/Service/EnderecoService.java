@@ -16,9 +16,11 @@ public class EnderecoService {
 	private String retorno = "";	
 	GenericDAO<EnderecoPessoaBean> enderecoPessoaDao = new GenericDAO<EnderecoPessoaBean>();		
 
-	public String save(EnderecoPessoaBean enderecoPessoa) throws BDException {
-
+	public String save(EnderecoPessoaBean enderecoPessoa, int cdPessoa) throws BDException {			
 		SalvarEndereco(enderecoPessoa.getEndereco());
+
+		enderecoPessoa.setEnderecoPessoaPK(enderecoPessoa.getEndereco().getCdEndereco(), cdPessoa);
+		enderecoPessoaDao.save(enderecoPessoa, enderecoPessoa.getEndereco().getCdEndereco());		
 
 		return retorno;
 	}
