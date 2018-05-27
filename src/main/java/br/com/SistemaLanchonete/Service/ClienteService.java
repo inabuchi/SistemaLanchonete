@@ -41,19 +41,34 @@ public class ClienteService {
 	 * @throws BDException
 	 */
 	public String save(ClienteBean cliente) throws BDException {
-		if (!validaCliente(cliente)) {
+		//Se tiver esse if, nunca vai atualizar o telefone de um cliente que já existe,
+		//pois sempre que existe o telefone ele já cai no return
+		//if (!validaCliente(cliente)) {
+		//	return retorno;
+		//}
+		if (!validaCliente(cliente) && (cliente.getCdPessoa() == 0)) {
 			return retorno;
 		}
+		
 		if (cliente.getCdPessoa() == 0) {
 			try {
 				clienteDao.save(cliente, 0);
+				
+				ValidarTelefoneCliente(cliente); //Busca o código em que foi inserido o cliente
+
+				SaveEndereco(cliente);		
+				
 			} catch (BDException e) {
 				throw new BDException("Erro ao Salvar dados no banco" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 			}
 			retorno = "Dados salvos com sucesso na tabela";
 		} else {
 			try {
+				//ERRO AQUI
 				clienteDao.save(cliente, cliente.getCdPessoa());
+				
+				SaveEndereco(cliente);	
+				
 			} catch (BDException e) {
 				throw new BDException("Erro na atualização de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 			}
@@ -161,20 +176,43 @@ public class ClienteService {
 			 * so isso que precisa no telefone
 			 */
 			for (ClienteBean clienteLista : listaTelefone) {
-				if (clienteLista.getDsTelefone1() == cliente.getDsTelefone1())
+				if (clienteLista.getDsTelefone1().equals(cliente.getDsTelefone1())) {
+					cliente.setCdPessoa(clienteLista.getCdPessoa());
 					return false;
-				if (clienteLista.getDsTelefone1() == cliente.getDsTelefone2())
+				}else
+				if (clienteLista.getDsTelefone1().equals(cliente.getDsTelefone2())) {
+					cliente.setCdPessoa(clienteLista.getCdPessoa());					
 					return false;
+				}else
 				if (cliente.getDsTelefone1() == null || cliente.getDsTelefone2().trim().equals(""))
 					continue;
 				else {
-					if (clienteLista.getDsTelefone2() == cliente.getDsTelefone1())
+					if (clienteLista.getDsTelefone2().equals(cliente.getDsTelefone1())) {
+						cliente.setCdPessoa(clienteLista.getCdPessoa());						
 						return false;
-					if (clienteLista.getDsTelefone2() == cliente.getDsTelefone2())
+					}else
+					if (clienteLista.getDsTelefone2().equals(cliente.getDsTelefone2())) {
+						cliente.setCdPessoa(clienteLista.getCdPessoa());						
 						return false;
+					}
 				}
 			}
 		}
+		return true;
+	}
+	
+	private boolean SaveEndereco(ClienteBean cliente) {
+		EnderecoService endSer = new EnderecoService();
+		
+		for (int i = 0; i < cliente.getEnderecoPessoas().size(); i++) {
+			try {
+				endSer.save(cliente.getEnderecoPessoas().get(i), cliente.getCdPessoa());				
+				
+			} catch(Exception e) {
+				return false;
+			}			
+		}	
+		
 		return true;
 	}
 }
