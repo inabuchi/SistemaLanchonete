@@ -28,37 +28,37 @@
 			<div class="form-row">
 				<div class="form-group col-md-2">
 					<label for="codFun">Código funcionário</label> <input
-						class="form-control" id="codFun" min="1" required>
+						class="form-control" id="cdFuncionario" min="1" required>
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-8">
-					<label for="nomeFun" class="control-label required">Nome</label> <input
-						class="form-control" id="nomeFun" type="text" maxlength="255"
+					<label for="dsNome" class="control-label required">Nome</label> <input
+						class="form-control" id="dsNome" type="text" maxlength="255"
 						required>
 				</div>
 				<div class="form-group col-md-2">
-					<label for="telFun01" class="control-label required">Telefone</label>
-					<input class="form-control" id="telFun01" type="text"
+					<label for="dsTelefone1" class="control-label required">Telefone</label>
+					<input class="form-control" id="dsTelefone1" type="text"
 						maxlength="15" required>
 				</div>
 				<div class="form-group col-md-2">
-					<label for="telFun02" class="control-label">Telefone
-						adicional</label> <input class="form-control" id="telFun02" type="text"
+					<label for="dsTelefone2" class="control-label">Telefone
+						adicional</label> <input class="form-control" id="dsTelefone2" type="text"
 						maxlength="15">
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-2">
-					<label for="cargoFun" class="control-label">Cargo</label> <input
-						class="form-control" id="cargoFun" type="text" maxlength="255"
+					<label for="dsCargo" class="control-label">Cargo</label> <input
+						class="form-control" id="dsCargo" type="text" maxlength="255"
 						required>
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-2">
-					<label for="permFun" class="control-label required">Nível
-						de permissão</label> <select class="form-control" id="permFun" min="1"
+					<label for="cdNivel" class="control-label required">Nível
+						de permissão</label> <select class="form-control" id="cdNivel" min="1"
 						required>
 						<option value="0" selected>Sem acesso</option>
 						<option value="1">Mínima</option>
@@ -67,19 +67,19 @@
 					</select>
 				</div>
 				<div class="form-group col-md-2">
-					<label for="loginFun" class="control-label">Login de
-						usuário</label> <input class="form-control" id="loginFun" min="1">
+					<label for="dsLogin" class="control-label">Login de
+						usuário</label> <input class="form-control" id="dsLogin" min="1">
 				</div>
 				<div class="form-group col-md-2">
-					<label for="senhaFun" class="control-label">Senha</label> <input
-						class="form-control" id="senhaFun" min="1">
+					<label for="dsSenha" class="control-label">Senha</label> <input
+						class="form-control" id="dsSenha" min="1">
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-check">
 					<input class="form-check-input" type="checkbox" checked="checked"
-						id="ativoCat"> <label class="form-check-label"
-						for="ativoCat">Ativo</label>
+						id="ativo"> <label class="form-check-label"
+						for="ativo">Ativo</label>
 				</div>
 			</div>
 
@@ -261,7 +261,9 @@
 					89055-555 </br> Bairro: Centro </br> Complemento: Andar 2 </br> Cidade: Blumenau </br>
 					UF: SC </br> Observação: Lorem ipsum dolor sit amet, consectetur
 					adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-					dolore magna aliqua. </br> <a class="link-editar"
+					dolore magna aliqua. </br> <a class="link-editar" data-id="1"
+								data-key="cdFuncionario"
+								data-servico="funcionario"
 						href="EnderecoCadastro.html" class="end-edit">Editar</a> <a
 						href="#" class="end-del">Excluir</a>
 				</p>

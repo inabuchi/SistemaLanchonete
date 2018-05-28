@@ -6,34 +6,6 @@
     
 -->
 
-<script type="text/javascript">
-	$('#data-table').dataTable({
-		"language" : {
-			"sEmptyTable" : "Nenhum registro encontrado",
-			"sInfo" : "Mostrando de _START_ at� _END_ de _TOTAL_ registros",
-			"sInfoEmpty" : "Mostrando 0 at� 0 de 0 registros",
-			"sInfoFiltered" : "(Filtrados de _MAX_ registros)",
-			"sInfoPostFix" : "",
-			"sInfoThousands" : ".",
-			"sLengthMenu" : "_MENU_ resultados por p�gina",
-			"sLoadingRecords" : "Carregando...",
-			"sProcessing" : "Processando...",
-			"sZeroRecords" : "Nenhum registro encontrado",
-			"sSearch" : "Pesquisar",
-			"oPaginate" : {
-				"sNext" : "Pr�ximo",
-				"sPrevious" : "Anterior",
-				"sFirst" : "Primeiro",
-				"sLast" : "�ltimo"
-			},
-			"oAria" : {
-				"sSortAscending" : ": Ordenar colunas de forma ascendente",
-				"sSortDescending" : ": Ordenar colunas de forma descendente"
-			}
-		}
-	});
-</script>
-
 <div class="d-flex align-items-stretch">
 	<div class="content p-4">
 		<div class="content-title">
@@ -50,10 +22,10 @@
 			<table class="table table-bordered table-hover" id="data-table">
 				<thead>
 					<tr>
-						<th scope="col">C�digo</th>
+						<th scope="col">Código</th>
 						<th scope="col">Forma de pagamento</th>
 						<th scope="col">Valor</th>
-						<th scope="col">Op��es</th>
+						<th scope="col">Opções</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -65,7 +37,9 @@
 							<button type="button" class="table-eye" title="Visualizar pedido"
 								data-toggle="modal" data-nome="1001" data-target="#ModalPedido">
 								<i class="fa fa-eye"></i>
-							</button> <a href="CadastroPedido.html"><button type="button"
+							</button> <a class="link-editar" data-id="1001" 
+							data-key="cdPedido" data-servico="pedido" 
+							href="CadastroPedido.html"><button type="button"
 									class="table-edit" title="Editar pedido">
 									<i class="fa fa-pencil"></i>
 								</button></a> <a href="#"><button type="button" class="table-del"
@@ -73,41 +47,7 @@
 									<i class="fa fa-close"></i>
 								</button></a>
 						</td>
-					</tr>
-					<tr>
-						<td>1002</td>
-						<td>Dinheiro</td>
-						<td>R$ 50,00</td>
-						<td class="table-buttons">
-							<button type="button" class="table-eye" title="Visualizar pedido"
-								data-toggle="modal" data-nome="1002" data-target="#ModalPedido">
-								<i class="fa fa-eye"></i>
-							</button> <a href="CadastroPedido.html"><button type="button"
-									class="table-edit" title="Editar pedido">
-									<i class="fa fa-pencil"></i>
-								</button></a> <a href="#"><button type="button" class="table-del"
-									title="Cancelar pedido">
-									<i class="fa fa-close"></i>
-								</button></a>
-						</td>
-					</tr>
-					<tr>
-						<td>1003</td>
-						<td>Cart�o de cr�dito</td>
-						<td>R$ 150,00</td>
-						<td class="table-buttons">
-							<button type="button" class="table-eye" title="Visualizar pedido"
-								data-toggle="modal" data-nome="1003" data-target="#ModalPedido">
-								<i class="fa fa-eye"></i>
-							</button> <a href="CadastroPedido.html"><button type="button"
-									class="table-edit" title="Editar pedido">
-									<i class="fa fa-pencil"></i>
-								</button></a> <a href="#"><button type="button" class="table-del"
-									title="Cancelar pedido">
-									<i class="fa fa-close"></i>
-								</button></a>
-						</td>
-					</tr>
+					</tr>					
 				</tbody>
 			</table>
 
