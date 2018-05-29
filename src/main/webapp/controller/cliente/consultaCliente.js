@@ -22,7 +22,7 @@ $(document).ready(() => {
     				const opcoes = '<td>' + '<td class="table-buttons">' +
     				'<a href="#"><button type="button" class="table-visu" title="Visualizar"><i class="fa fa-eye"></i></button></a>'+   
     				'<a href="#"><button type="button" class="table-hist" title="Histórico de pedidos"><i class="fa fa-file-text-o"></i></button></a>'+
-    				'<a href="ClienteCadastro.html#'+ val.cdPessoa + '" class="link-abrir" ><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>' +
+    				'<a href="ClienteCadastro.html" onClick="editarCliente('+ val.cdPessoa +')" class="link-abrir" ><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>' +
     				'<a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>' +                             
     				'</td>';
     				data.push(val.cdPessoa);
