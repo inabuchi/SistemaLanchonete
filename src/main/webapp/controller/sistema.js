@@ -165,3 +165,8 @@ function getUrl(){
 	}
 	
 }
+
+var cdPessoa;
+function editarCliente(id) {
+	cdPessoa = id;
+}
