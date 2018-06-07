@@ -177,6 +177,7 @@ function tratarVisibilidadeCampos() {
 		$('#lCdFunc').hide();
 		$('#cdFuncionario').hide();
 	} else {
+		$('#cdFuncionario').prop("readonly", true);
 		$('#lDsLogin').hide();
 		$('#dsLogin').hide();
 		$('#lDsSenha').hide();
