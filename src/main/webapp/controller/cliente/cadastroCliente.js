@@ -149,7 +149,7 @@ function ativarDadosCliente() {
    });
 }
 
-function tratarCamposCadastro() {
+function tratarCardsEndereco() {
 	 if (cdEdit) {
 		 $('#fsEnd').css('visibility', 'hidden');
 		 $('#fsEnd').css('height', '0');
@@ -170,7 +170,7 @@ $("#formCliente").ready(() => {
 			$('#btnSaveCliente').text('Cadastrar Cliente');
 		}
 		registrarOnSaveCliente();
-		tratarCamposCadastro();
+		tratarCardsEndereco();
 		cdPessoa = null;
 	}
 });
