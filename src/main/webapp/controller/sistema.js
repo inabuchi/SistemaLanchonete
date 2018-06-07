@@ -167,6 +167,11 @@ function getUrl(){
 }
 
 var cdPessoa;
+var cdFuncionario
 function editarCliente(id) {
 	cdPessoa = id;
+}
+
+function editarFuncionario(id) {
+	cdFuncionario = id;
 }

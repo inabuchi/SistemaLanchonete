@@ -20,14 +20,14 @@
 		de funcionários</a><i class="fa fa-angle-right"></i>Adicionar funcionário
 </div>
 <div class="formtitle">Adicionar funcionário</div>
-<form>
+<form id="formFuncionario">
 	<div class="page-cad">
 		<fieldset class="well">
 			<legend class="well-legend">Dados pessoais</legend>
 
 			<div class="form-row">
 				<div class="form-group col-md-2">
-					<label for="codFun">Código funcionário</label> <input
+					<label for="codFun" id="lCdFunc">Código funcionário</label> <input
 						class="form-control" id="cdFuncionario" min="1" required>
 				</div>
 			</div>
@@ -67,12 +67,12 @@
 					</select>
 				</div>
 				<div class="form-group col-md-2">
-					<label for="dsLogin" class="control-label">Login de
+					<label for="dsLogin" class="control-label" id="lDsLogin">Login de
 						usuário</label> <input class="form-control" id="dsLogin" min="1">
 				</div>
 				<div class="form-group col-md-2">
-					<label for="dsSenha" class="control-label">Senha</label> <input
-						class="form-control" id="dsSenha" min="1">
+					<label for="dsSenha" class="control-label" id="lDsSenha">Senha</label> 
+					<input type="password" class="form-control" id="dsSenha" min="1">
 				</div>
 			</div>
 			<div class="form-row">
@@ -86,7 +86,7 @@
 		</fieldset>
 
 
-		<fieldset class="well">
+		<fieldset class="well" id="fsEnd">
 			<legend class="well-legend">Endereço</legend>
 
 			<div class="form-row">
@@ -253,32 +253,17 @@
 			</script>
 
 		</fieldset>
-		<fieldset class="well" style="padding-bottom: 18px">
+		<fieldset class="well" style="padding-bottom: 18px" id="fsEnds">
 			<legend class="well-legend">Endereços</legend>
-			<div class="area-end">
-				<p>
-					Endereço: Rua XV de Novembro </br> Número: 888 </br> Logradouro: Rua </br> CEP:
-					89055-555 </br> Bairro: Centro </br> Complemento: Andar 2 </br> Cidade: Blumenau </br>
-					UF: SC </br> Observação: Lorem ipsum dolor sit amet, consectetur
-					adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-					dolore magna aliqua. </br> <a class="link-editar" data-id="1"
-								data-key="cdFuncionario"
-								data-servico="funcionario"
-						href="EnderecoCadastro.html" class="end-edit">Editar</a> <a
-						href="#" class="end-del">Excluir</a>
-				</p>
-				<a class="link-abrir" href="EnderecoCadastro.html" class="add-end"><i
-					class="fa fa-plus"></i>Adicionar endereço</a>
+			<div class="area-end" id="cardEnds">
+				
 			</div>
 		</fieldset>
 
 		<center>
 			<a class="link-abrir" href="FuncionarioConsulta.html"><button
-					type="button" class="btn btn-secondary">Cancelar</button></a> <a
-				href="FuncionarioConsulta.html"><button id="btnSaveFunc"
-					type="button" class="btn btn-success">
-					<i class="fa fa-save"></i>Cadastrar funcionário
-				</button></a>
+					type="button" class="btn btn-secondary">Cancelar</button></a> 
+			<button id="btnSaveFunc" type="button" class="btn btn-success"> <i class="fa fa-save"></i>Cadastrar funcionário</button>
 		</center>
 	</div>
 </form>

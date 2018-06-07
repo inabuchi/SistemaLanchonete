@@ -3,6 +3,7 @@ var cdEdit;
 function registrarOnSaveCliente() {
 	 const btnSave = $("#btnSaveCliente");
 	 btnSave.click(() => {
+		 const codigo = $('#cdPessoa').val();
 	        const name = $('#dsNome');
 	        const phone1 = $('#dsTelefone1');
 	        const phone2 = $('#dsTelefone2');
@@ -31,7 +32,7 @@ function registrarOnSaveCliente() {
 	                alert(res.message);
 	                return false;
 	            }
-	            if (!cdEdit) {
+	            if (!codigo) {
 	            	res = validaEndereco(rua.val(), nr.val(), cep.val(), bairro.val(), cidade.val());
 	            }
 	            if (res.message) {
@@ -51,12 +52,12 @@ function registrarOnSaveCliente() {
 
 	        if (validaFomularioCliente()) {
 	        	const params = {};
-	            const type = 'PUT';
+	            let type = 'PUT';
 	        	params.dsNome = name.val();
 	        	params.dsTelefone1 = phone1.val();
 	        	params.dsTelefone2 = phone2.val();
 	        	params.dsObservacao = obsCli.val();
-	        	if (!cdEdit) {
+	        	if (!codigo) {
 	        		type = 'POST';
 	        		/*
 					 * params.enderecoCliente = [ { dsRua: rua.val(),
@@ -67,7 +68,7 @@ function registrarOnSaveCliente() {
 					 */
 	        	}
 
-	            const urlSave = cdEdit ? 'http://localhost:8080/SistemaLanchonete/services/cliente/' + cdEdit
+	            const urlSave = codigo ? 'http://localhost:8080/SistemaLanchonete/services/cliente/' + codigo
 	            						 :'http://localhost:8080/SistemaLanchonete/services/cliente/cliente';
 	            $.ajax({
 	            	headers: {
@@ -80,7 +81,11 @@ function registrarOnSaveCliente() {
 	                , url: urlSave
 	                , statusCode: {
 	                	200: ()=>{
-	                		alert("Cliente cadastrado com sucesso!");
+	                		if (codigo) {
+	                			alert("Cliente alterado com sucesso!");
+	                		} else {
+	                			alert("Cliente cadastrado com sucesso!");
+	                		}
 	                        $(location).attr('href','ConsultaCliente.html');
 	                	}, 
 	                	404: ()=>{
@@ -99,7 +104,7 @@ function registrarOnSaveCliente() {
 }
 
 function ativarDadosCliente() {
-	const url = 'http://localhost:8080/SistemaLanchonete/services/cliente/' + cdEdit;
+	const url = 'http://localhost:8080/SistemaLanchonete/services/cliente/' + codigo;
 	$.ajax({
    	headers: {
            'Accept': 'application/json',
@@ -149,13 +154,18 @@ function ativarDadosCliente() {
    });
 }
 
-function tratarCamposCadastro() {
+function tratarVisibilidadeCampos() {
 	 if (cdEdit) {
 		 $('#fsEnd').css('visibility', 'hidden');
 		 $('#fsEnd').css('height', '0');
+		 $('#lcdCliente').show();
+		 $('#cdCliente').show();
+		 $('#cdCliente').prop("readonly", true);
 	 } else {
 		 $('#fsEnds').css('visibility', 'hidden'); 
 		 $('#fsEnds').css('height', '0');
+		 $('#lcdCliente').hide();
+		 $('#cdCliente').hide();
 	 }
 }
 
@@ -170,8 +180,9 @@ $("#formCliente").ready(() => {
 			$('#btnSaveCliente').text('Cadastrar Cliente');
 		}
 		registrarOnSaveCliente();
-		tratarCamposCadastro();
-		cdPessoa = null;
+		tratarVisibilidadeCampos();
+		cdPessoa = undefined;
+		cdEdit = undefined;
 	}
 });
 
