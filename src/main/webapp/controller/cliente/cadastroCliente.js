@@ -51,7 +51,7 @@ function registrarOnSaveCliente() {
 
 	        if (validaFomularioCliente()) {
 	        	const params = {};
-	            const type = 'PUT';
+	            let type = 'PUT';
 	        	params.dsNome = name.val();
 	        	params.dsTelefone1 = phone1.val();
 	        	params.dsTelefone2 = phone2.val();
@@ -149,13 +149,18 @@ function ativarDadosCliente() {
    });
 }
 
-function tratarCardsEndereco() {
+function tratarVisibilidadeCampos() {
 	 if (cdEdit) {
 		 $('#fsEnd').css('visibility', 'hidden');
 		 $('#fsEnd').css('height', '0');
+		 $('#lcdCliente').show();
+		 $('#cdCliente').show();
+		 $('#cdCliente').prop("readonly", true);
 	 } else {
 		 $('#fsEnds').css('visibility', 'hidden'); 
 		 $('#fsEnds').css('height', '0');
+		 $('#lcdCliente').hide();
+		 $('#cdCliente').hide();
 	 }
 }
 
@@ -170,8 +175,9 @@ $("#formCliente").ready(() => {
 			$('#btnSaveCliente').text('Cadastrar Cliente');
 		}
 		registrarOnSaveCliente();
-		tratarCardsEndereco();
-		cdPessoa = null;
+		tratarVisibilidadeCampos();
+		cdPessoa = undefined;
+		cdEdit = undefined;
 	}
 });
 

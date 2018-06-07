@@ -2,8 +2,9 @@ var firstActivation = true;
 var cdFunc;
 
 function registrarOnSaveFuncionario() {
-	 const btnSave = $("#btnSaveFunc");
-	 btnSave.click(() => {
+	debugger
+	 $("#btnSaveFunc").click(() => {
+		 const codigo = getVal('cdFuncionario');
 	        const validaFomularioFuncionario = () => {
 	            let mandatoryFields = '';
 	            if (!getVal('dsNome')) {
@@ -30,7 +31,7 @@ function registrarOnSaveFuncionario() {
 	            	mandatoryFields += 'Senha, ';
 	            }
 	            
-	            if (!cdFunc) {
+	            if (!codigo) {
 	            	res = validaEndereco(getVal('route'), getVal('street_number'), getVal('postal_code'), getVal('baiEnd'), getVal('locality'));
 	            }
 	            if (res.message) {
@@ -50,7 +51,7 @@ function registrarOnSaveFuncionario() {
 
 	        if (validaFomularioFuncionario()) {
 	        	const params = {};
-	            const type = 'PUT';
+	            let type = 'PUT';
 	        	params.dsNome = getVal('dsNome');
 	        	params.dsTelefone1 = getVal('dsTelefone1');
 	        	params.dsTelefone2 = getVal('dsTelefone2');
@@ -59,7 +60,7 @@ function registrarOnSaveFuncionario() {
 	        	params.dsCargo = getVal('dsCargo')
 	        	params.dsLogin = getVal('dsLogin');
 	        	params.dsSenha = getVal('dsSenha');
-	        	if (!cdEdit) {
+	        	if (!codigo) {
 	        		type = 'POST';
 	        		/*
 					 * params.enderecos = [ { dsRua: rua.val(),
@@ -69,8 +70,8 @@ function registrarOnSaveFuncionario() {
 					 * uf.val(), dsPais: pais.val() } ];
 					 */
 	        	}
-
-	            const urlSave = cdEdit ? 'http://localhost:8080/SistemaLanchonete/services/funcionario/' + cdFunc
+	        		
+	            const urlSave = codigo ? 'http://localhost:8080/SistemaLanchonete/services/funcionario/' + codigo
 	            						 :'http://localhost:8080/SistemaLanchonete/services/funcionario/funcionario';
 	            $.ajax({
 	            	headers: {
@@ -83,7 +84,11 @@ function registrarOnSaveFuncionario() {
 	                , url: urlSave
 	                , statusCode: {
 	                	200: ()=>{
-	                		alert("Funcionario cadastrado com sucesso!");
+	                		if (!codigo) {
+	                			alert("Funcionário cadastrado com sucesso!");
+	                		} else {
+	                			alert("Funcionário alterado com sucesso!");
+	                		}
 	                        $(location).attr('href','ConsultaFuncionario.html');
 	                	}, 
 	                	404: ()=>{
@@ -171,7 +176,6 @@ function tratarVisibilidadeCampos() {
 	if (!cdFuncionario) {
 		$('#lCdFunc').hide();
 		$('#cdFuncionario').hide();
-		debugger
 	} else {
 		$('#lDsLogin').hide();
 		$('#dsLogin').hide();
@@ -181,18 +185,18 @@ function tratarVisibilidadeCampos() {
 }
 
 $('#formFuncionario').ready(()=>{
-	esconderCardsEndereco();
-	tratarVisibilidadeCampos();
 	if (firstActivation) {
-		cdFunc = cdFuncionario;
 		firstActivation = false;
+		cdFunc = cdFuncionario;
+		esconderCardsEndereco();
+		tratarVisibilidadeCampos();
 		if (cdFunc) {
 			$('#btnSaveFunc').text('Editar Funcionário');
 			ativarDadosFuncionario();
 		} else {
 			$('#btnSaveFunc').text('Cadastrar Funcionário');
 		}
+		registrarOnSaveFuncionario();
 		cdFuncionario = null;
 	}
-	registrarOnSaveFuncionario();
 });
