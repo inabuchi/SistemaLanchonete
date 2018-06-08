@@ -4,6 +4,7 @@ function registrarOnSaveCliente() {
 	 const btnSave = $("#btnSaveCliente");
 	 btnSave.click(() => {
 		 const codigo = $('#cdPessoa').val();
+		 debugger
 	        const name = $('#dsNome');
 	        const phone1 = $('#dsTelefone1');
 	        const phone2 = $('#dsTelefone2');
@@ -104,7 +105,7 @@ function registrarOnSaveCliente() {
 }
 
 function ativarDadosCliente() {
-	const url = 'http://localhost:8080/SistemaLanchonete/services/cliente/' + codigo;
+	const url = 'http://localhost:8080/SistemaLanchonete/services/cliente/' + cdEdit;
 	$.ajax({
    	headers: {
            'Accept': 'application/json',
@@ -137,7 +138,7 @@ function ativarDadosCliente() {
 	        	        		let p = '<p>' + texto + botoes + '</p>';
 	        	        		content += p; 
 	       	        	});
-	       	        	$('#cardEnds').html(content + '<a href="CadastroEndereco.html" class="add-end"><i class="fa fa-plus"></i>Adicionar endereço</a>');
+	       	        	$('#cardEnds').html(content + '<a data-toggle="modal" data-target="#ModalEndereco" class="add-end"><i class="fa fa-plus"></i>Adicionar endereço</a>');
 	       	        }
        		}
        	},
@@ -171,7 +172,7 @@ function tratarVisibilidadeCampos() {
 
 $("#formCliente").ready(() => {
 	if (firstActivation) {
-		cdEdit = cdPessoa;
+		cdEdit = getId();
 		firstActivation = false;
 		if (cdEdit) {
 			$('#btnSaveCliente').text('Editar Cliente');

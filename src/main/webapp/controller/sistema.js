@@ -166,11 +166,16 @@ function getUrl(){
 	
 }
 
-var cdPessoa;
-var cdFuncionario
-function editarCliente(id) {
-	cdPessoa = id;
+function getId() {
+	const url = getUrl();
+	const p = url.indexOf('#')+1;
+	if (p >= 0)
+		return parseInt(url.substr(p));
+	else
+		return 0;
 }
+
+var cdFuncionario
 
 function editarFuncionario(id) {
 	cdFuncionario = id;

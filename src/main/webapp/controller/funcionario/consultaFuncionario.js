@@ -17,7 +17,6 @@ $(document).ready(() => {
 	    			
     				const opcoes = '<td>' + '<td class="table-buttons">' +
     				'<a href="ClienteCadastro.html" onClick="editarFuncionario('+ val.cdFuncionario +')" class="link-abrir" ><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>' +
-    				'<a href="#"><button type="button" class="table-del" title="Excluir"><i class="fa fa-close"></i></button></a>' +                             
     				'</td>';
     				data.push(val.cdFuncionario);
     				data.push(val.dsNome);

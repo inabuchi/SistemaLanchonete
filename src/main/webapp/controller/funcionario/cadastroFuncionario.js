@@ -141,7 +141,7 @@ function ativarDadosFuncionario() {
 		        	    let p = '<p>' + texto + botoes + '</p>';
 		        	    content += p; 
 	       	        });
-	       	        	$('#cardEnds').html(content + '<a href="CadastroEndereco.html" class="add-end"><i class="fa fa-plus"></i>Adicionar endereço</a>');
+	       	        	$('#cardEnds').html(content + '<a data-toggle="modal" data-target="#ModalEndereco" class="add-end"><i class="fa fa-plus"></i>Adicionar endereço</a>');
 	       	        }
        		}
        	},

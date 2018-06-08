@@ -34,3 +34,48 @@
 		</tbody>
 	</table>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalHistorico" tabindex="-1" role="dialog"
+	aria-labelledby="ModalTitulo" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="ModalTitulo">Histórico de Pedidos</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th scope="col">Código</th>
+							<th scope="col">Data</th>
+							<th scope="col">Preço</th>
+							<th scope="col">Opções</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>120</td>
+							<td>19/02/2018</td>
+							<td>R$20,19</td>
+							<td class="table-buttons-hist"><a class="link-editar" data-id="120"
+							data-key="cdPedido" data-servico="pedido"
+								href="PedidoCadastro.html"><button type="button"
+										class="table-edit" title="Editar">
+										<i class="fa fa-pencil"></i>
+									</button></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
