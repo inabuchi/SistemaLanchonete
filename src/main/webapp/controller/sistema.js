@@ -22,8 +22,11 @@ function abrirPagina(txtUrlEnvio, txtElementoDOM) {
         if (nrFim !== -1)
             txtUrl = txtUrl.substr(0, nrFim);
 
-        var fnRetornoAjax = conteudo => {
-
+        var fnRetornoAjax = (res, status, xhr) => {
+        	if ('error' == status){
+        		$(txtElementoDOM).html(res);
+        		console.error(xhr);
+        	}
         };
 
         // var obj = {
@@ -37,7 +40,7 @@ function abrirPagina(txtUrlEnvio, txtElementoDOM) {
 
         $(txtElementoDOM).html("");
 
-        $(txtElementoDOM).load(txtUrlEnvio);
+        $(txtElementoDOM).load(txtUrlEnvio, fnRetornoAjax);
     } catch (ex) {
         console.debug(ex);
     }
