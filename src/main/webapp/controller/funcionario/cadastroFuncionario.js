@@ -2,7 +2,6 @@ var firstActivation = true;
 var cdFunc;
 
 function registrarOnSaveFuncionario() {
-	debugger
 	 $("#btnSaveFunc").click(() => {
 		 const codigo = getVal('cdFuncionario');
 	        const validaFomularioFuncionario = () => {
@@ -51,7 +50,8 @@ function registrarOnSaveFuncionario() {
 
 	        if (validaFomularioFuncionario()) {
 	        	const params = {};
-	            let type = 'PUT';
+	            let type = 'POST';
+	            let urlSave = 'http://localhost:8080/SistemaLanchonete/services/funcionario/funcionario';
 	        	params.dsNome = getVal('dsNome');
 	        	params.dsTelefone1 = getVal('dsTelefone1');
 	        	params.dsTelefone2 = getVal('dsTelefone2');
@@ -60,19 +60,39 @@ function registrarOnSaveFuncionario() {
 	        	params.dsCargo = getVal('dsCargo')
 	        	params.dsLogin = getVal('dsLogin');
 	        	params.dsSenha = getVal('dsSenha');
-	        	if (!codigo) {
-	        		type = 'POST';
-	        		/*
-					 * params.enderecos = [ { dsRua: rua.val(),
-					 * dsBairro: bairro.val(), cep: cep.val(),
-					 * dsObservacaoEnd: obsEnd.val(), dsLogradouro:
-					 * logradouro.val(), dsCidade: cidade.val(), dsEstado:
-					 * uf.val(), dsPais: pais.val() } ];
-					 */
-	        	}
+	        	if (codigo) {
+	        		type = 'PUT';
+	        		urlSave = 'http://localhost:8080/SistemaLanchonete/services/funcionario/' + codigo;
+	        		params.cdFuncionario = getVal('cdFuncionario');
+	        	} else {
 	        		
-	            const urlSave = codigo ? 'http://localhost:8080/SistemaLanchonete/services/funcionario/' + codigo
-	            						 :'http://localhost:8080/SistemaLanchonete/services/funcionario/funcionario';
+	        		params.enderecoPessoas = [
+	        			{
+		        			endereco: {
+	        					logradouro: {
+	        						bairro: {
+	        							municipio: {
+	        								estado: {
+	        									dsEstado: "",
+	        									dsSigla: getVal('administrative_area_level_1')
+	        								},
+	        								dsMunicipio: getVal('locality')
+	        							},
+	        							dsBairro: getVal('baiEnd')
+	        						},
+	        						cdCep: getVal('postal_code'),
+	        						dsLogradouro: getVal('route')
+	        					},
+	        					cdNumero: getVal('street_number'),
+	        					dsComplemento: getVal('compEnd'),
+	        					dsObservacao: getVal('obsEndFunc')
+	        				},
+	        				//dtAlteracao: 9999999999999,
+	        				enderecoPadrao: true
+	        			}
+	        		];
+	        	}
+
 	            $.ajax({
 	            	headers: {
 	                    'Accept': 'application/json',
@@ -131,7 +151,7 @@ function ativarDadosFuncionario() {
 	       	        enderecos.forEach(end => {
 		       	        let logradouro = end.endereco.logradouro;
 		       	        let url = '"CadastroEndereco.html#'+ end.endereco.cdEndereco + '"';
-		       	        let botoes = '<a href=' + url + 'class="end-edit">Editar</a>' + 
+		       	        let botoes = '<a data-toggle="modal" data-target="#ModalEndereco" onClick="setCdEndereco('+ end.endereco.cdEndereco +')" class="end-edit">Editar</a>' + 
 		       	        			 '<a href="#" class="end-del">Excluir</a>';
 		       	        let texto = 'Rua: ' + logradouro.dsLogradouro + '<br>' +
 		       	        'Número: ' + end.endereco.cdNumero + 
@@ -173,7 +193,7 @@ function esconderCardsEndereco() {
 }
 
 function tratarVisibilidadeCampos() {
-	if (!cdFuncionario) {
+	if (!cdFunc) {
 		$('#lCdFunc').hide();
 		$('#cdFuncionario').hide();
 	} else {
@@ -186,9 +206,11 @@ function tratarVisibilidadeCampos() {
 }
 
 $('#formFuncionario').ready(()=>{
+	debugger;
 	if (firstActivation) {
+		debugger;
 		firstActivation = false;
-		cdFunc = cdFuncionario;
+		cdFunc = getId();
 		esconderCardsEndereco();
 		tratarVisibilidadeCampos();
 		if (cdFunc) {

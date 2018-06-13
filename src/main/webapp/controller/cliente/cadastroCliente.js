@@ -3,7 +3,7 @@ var cdEdit;
 function registrarOnSaveCliente() {
 	 const btnSave = $("#btnSaveCliente");
 	 btnSave.click(() => {
-		 const codigo = $('#cdPessoa').val();
+		 const codigo = $('#cdCliente').val();
 		 debugger
 	        const name = $('#dsNome');
 	        const phone1 = $('#dsTelefone1');
@@ -53,24 +53,44 @@ function registrarOnSaveCliente() {
 
 	        if (validaFomularioCliente()) {
 	        	const params = {};
-	            let type = 'PUT';
+	            let type = 'POST';
 	        	params.dsNome = name.val();
 	        	params.dsTelefone1 = phone1.val();
 	        	params.dsTelefone2 = phone2.val();
 	        	params.dsObservacao = obsCli.val();
-	        	if (!codigo) {
-	        		type = 'POST';
-	        		/*
-					 * params.enderecoCliente = [ { dsRua: rua.val(),
-					 * dsBairro: bairro.val(), cep: cep.val(),
-					 * dsObservacaoEnd: obsEnd.val(), dsLogradouro:
-					 * logradouro.val(), dsCidade: cidade.val(), dsEstado:
-					 * uf.val(), dsPais: pais.val() } ];
-					 */
+	        	let urlSave = 'http://localhost:8080/SistemaLanchonete/services/cliente/cliente';
+	        	if (codigo) {
+	        		type = 'PUT';
+	        		urlSave = 'http://localhost:8080/SistemaLanchonete/services/cliente/' + codigo;
+	        		params.cdPessoa = parseInt(codigo);
+	        	} else {
+	        		params.enderecoPessoas = [
+	        			{
+		        			endereco: {
+	        					logradouro: {
+	        						bairro: {
+	        							municipio: {
+	        								estado: {
+	        									dsEstado: "",
+	        									dsSigla: uf.val()
+	        								},
+	        								dsMunicipio: cidade.val()
+	        							},
+	        							dsBairro: bairro.val()
+	        						},
+	        						cdCep: cep.val(),
+	        						dsLogradouro: rua.val()
+	        					},
+	        					cdNumero: nr.val(),
+	        					dsComplemento: complemento.val(),
+	        					dsObservacao: obsEnd.val()
+	        				},
+	        				//dtAlteracao: 9999999999999,
+	        				enderecoPadrao: true
+	        			}
+	        		];
 	        	}
 
-	            const urlSave = codigo ? 'http://localhost:8080/SistemaLanchonete/services/cliente/' + codigo
-	            						 :'http://localhost:8080/SistemaLanchonete/services/cliente/cliente';
 	            $.ajax({
 	            	headers: {
 	                    'Accept': 'application/json',
@@ -126,9 +146,10 @@ function ativarDadosCliente() {
 	       	        if (enderecos && enderecos.length > 0) {
 	       	        	let content = '';
 	       	        	enderecos.forEach(end => {
+	       	        		listaEnderecos.push(end);
 	       	        		let logradouro = end.endereco.logradouro;
-	       	        		let url = '"CadastroEndereco.html#'+ end.endereco.cdEndereco + '"';
-	       	        		let botoes = '<a href=' + url + 'class="end-edit">Editar</a>' + 
+	       	        		
+	       	        		let botoes = '<a data-toggle="modal" data-target="#ModalEndereco" onClick="setCdEndereco('+ end.endereco.cdEndereco +')" class="end-edit">Editar</a>' + 
 	       	        					 '<a href="#" class="end-del">Excluir</a>';
 	       	        		let texto = 'Rua: ' + logradouro.dsLogradouro + '<br>' +
 	       	        					'Número: ' + end.endereco.cdNumero + 

@@ -13,10 +13,10 @@ $(document).ready(() => {
 	    	200: (res)=>{
 	    		const dataSet = [];
 	    		res.forEach(val => {
-	    			let data = []
+	    			let data = [];
 	    			
     				const opcoes = '<td>' + '<td class="table-buttons">' +
-    				'<a href="ClienteCadastro.html" onClick="editarFuncionario('+ val.cdFuncionario +')" class="link-abrir" ><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>' +
+    				`<a href="FuncionarioCadastro.html#${val.cdFuncionario}" class="link-abrir" ><button type="button" class="table-edit" title="Editar"><i class="fa fa-pencil"></i></button></a>` +
     				'</td>';
     				data.push(val.cdFuncionario);
     				data.push(val.dsNome);
