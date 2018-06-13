@@ -29,16 +29,19 @@ public class EstadoBean implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cd_estado")
 	private int cdEstado;
+	
 	@Column(name = "ds_estado")
 	private String dsEstado;
+	
 	@Column(name = "ds_sigla")
 	private String dsSigla;
+	
 	@JsonIgnore	
 	@OneToMany(mappedBy = "estado", targetEntity = MunicipioBean.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<MunicipioBean> municipios = new ArrayList<MunicipioBean>();
 
 	/**
-	 * Construtor padr„o da classe
+	 * Construtor padr√£o da classe
 	 */
 	public EstadoBean() {
 	}
@@ -51,6 +54,7 @@ public class EstadoBean implements Serializable {
 	 * @param dsSigla
 	 */
 	public EstadoBean(int cdEstado, String dsEstado, String dsSigla) {
+		super();
 		this.cdEstado = cdEstado;
 		this.dsEstado = dsEstado;
 		this.dsSigla = dsSigla;
@@ -128,6 +132,11 @@ public class EstadoBean implements Serializable {
 		this.municipios = municipios;
 	}
 	
+	
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -136,17 +145,24 @@ public class EstadoBean implements Serializable {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (!(obj instanceof EstadoBean)) {
 			return false;
+		}
 		EstadoBean other = (EstadoBean) obj;
-		if (cdEstado != other.cdEstado)
+		if (cdEstado != other.cdEstado) {
 			return false;
+		}
 		return true;
 	}
 

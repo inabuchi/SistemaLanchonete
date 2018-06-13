@@ -9,11 +9,11 @@ import br.com.SistemaLanchonete.Repository.EErrosBD;
 import br.com.SistemaLanchonete.Repository.GenericDAO;
 import br.com.SistemaLanchonete.Validacao.Validacao;
 
-// TODO tem de verificar se essa classe está ok
+// TODO tem de verificar se essa classe estï¿½ ok
 public class ProdutoCategoriaService {
 
 	private static String retorno = "";
-	GenericDAO<ProdutoCategoriaBean> produtoDAO = new GenericDAO<ProdutoCategoriaBean>();
+	GenericDAO<ProdutoCategoriaBean> produtoCategoriaDAO = new GenericDAO<ProdutoCategoriaBean>();
 	Class<ProdutoCategoriaBean> produtoCategoriaClasse = ProdutoCategoriaBean.class;
 	static Field[] CAMPOS = ProdutoCategoriaBean.class.getDeclaredFields();
 
@@ -27,7 +27,7 @@ public class ProdutoCategoriaService {
 		}
 		if (categoria.getCdProdutoCategoria() == 0) {
 			try {
-				produtoDAO.save(categoria, 0);
+				produtoCategoriaDAO.save(categoria, 0);
 			} catch (BDException e) {
 				throw new BDException("Erro ao Salvar dados no banco" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 
@@ -35,7 +35,7 @@ public class ProdutoCategoriaService {
 			retorno = "Dados salvos com sucesso na tabela";
 		} else {
 			try {
-				produtoDAO.save(categoria, categoria.getCdProdutoCategoria());
+				produtoCategoriaDAO.save(categoria, categoria.getCdProdutoCategoria());
 			} catch (BDException e) {
 				throw new BDException("Erro ao atualizar Produto " + categoria.getCdProdutoCategoria() + e.getMessage(),
 						EErrosBD.ATUALIZA_DADO);
@@ -47,10 +47,10 @@ public class ProdutoCategoriaService {
 	}
 
 	public String remove(ProdutoCategoriaBean produtoCategoria) throws BDException {
-		ProdutoCategoriaBean produtoCategoriaRetorna = produtoDAO.findById(produtoCategoriaClasse,
+		ProdutoCategoriaBean produtoCategoriaRetorna = produtoCategoriaDAO.findById(produtoCategoriaClasse,
 				produtoCategoria.getCdProdutoCategoria());
 		try {
-			produtoDAO.remove(produtoCategoriaClasse, produtoCategoriaRetorna.getCdProdutoCategoria());
+			produtoCategoriaDAO.remove(produtoCategoriaClasse, produtoCategoriaRetorna.getCdProdutoCategoria());
 			retorno = "Dados removidos com sucesso na tabela";
 		} catch (Exception e) {
 			throw new BDException("Erro ao remover : " + produtoCategoria.getCdProdutoCategoria() + e.getMessage(),
@@ -60,31 +60,31 @@ public class ProdutoCategoriaService {
 	}
 
 	public ProdutoCategoriaBean findById(ProdutoCategoriaBean produtoCategoria) {
-		return produtoDAO.findById(produtoCategoriaClasse, produtoCategoria.getCdProdutoCategoria());
+		return produtoCategoriaDAO.findById(produtoCategoriaClasse, produtoCategoria.getCdProdutoCategoria());
 	}
 
 	public ArrayList<ProdutoCategoriaBean> findLike(ProdutoCategoriaBean produtoCategoria) {
-		return produtoDAO.findLike(produtoCategoriaClasse, produtoCategoria);
+		return produtoCategoriaDAO.findLike(produtoCategoriaClasse, produtoCategoria);
 	}
 
 	public boolean validaCategoria(ProdutoCategoriaBean categoria) {
 		// Valida objeto categoria nulo
 		if (!Validacao.validaNulo(categoria)) {
-			retorno = "Categoria Nula, não pode ser inserido no banco de dados";
+			retorno = "Categoria Nula, nï¿½o pode ser inserido no banco de dados";
 			return false;
 		}
-		// Validar descrição Obrigatório
+		// Validar descriï¿½ï¿½o Obrigatï¿½rio
 		categoria.setDsCategoria(categoria.getDsCategoria().trim());
 		try {
 			Validacao.validaAtributoNulo(categoria, CAMPOS[2]);
 			Validacao.validaAtributoVazio(categoria, CAMPOS[2]);
 		} catch (Exception e) {
-			retorno = "Campo descrição está vazio e é obrigatório";
+			retorno = "Campo descriï¿½ï¿½o estï¿½ vazio e ï¿½ obrigatï¿½rio";
 		}
 		// Validar categoria duplicada
 		ArrayList<ProdutoCategoriaBean> lista = findLike(categoria);
 		if (!lista.isEmpty()) {
-			retorno = "Categoria com descrição já cadastrada";
+			retorno = "Categoria com descriï¿½ï¿½o jï¿½ cadastrada";
 			return false;
 		}
 		return true;

@@ -45,7 +45,7 @@ public class BairroBean implements Serializable {
 	private List<LogradouroBean> logradouros = new ArrayList<LogradouroBean>();
 
 	/**
-	 * Construtor padrão da classe
+	 * Construtor padrÃ£o da classe
 	 */
 	public BairroBean() {
 	}
@@ -141,7 +141,7 @@ public class BairroBean implements Serializable {
 		return "\nClasse ....................: " + getClass().getSimpleName() + //
 				"\nNome......................: " + getDsBairro() + //
 				"\nMunicipio.................: " + getMunicipio() != null ? getMunicipio().getDsMunicipio()
-						: "Sem município.";//
+						: "Sem municï¿½pio.";//
 	}
 
 	@Override

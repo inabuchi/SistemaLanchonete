@@ -1,9 +1,10 @@
-	package br.com.SistemaLanchonete.Domain;
+package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * Chave composta da classe EnderecoPessoaBean
@@ -14,55 +15,37 @@ import javax.persistence.Column;
 @Embeddable
 public class EnderecoPessoaPK implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@ManyToOne
+	@JoinColumn(name = "cd_endereco", nullable = false)
+	private EnderecoBean endereco;
 	
-	@Column(name = "cd_endereco", nullable = false)	
-	private int cdEndereco;
-	
-	@Column(name = "cd_pessoa", nullable = false)	
-	private int cdPessoa;
+	@ManyToOne
+	@JoinColumn(name = "cd_pessoa", nullable = false)
+	private PessoaBean pessoa;
 
-	/**
-	 * Captura o valor contido no parametro cdEndereco
-	 * 
-	 * @return cdEndereco
-	 */
-	public int getCdEndereco() {
-		return cdEndereco;
+
+	public EnderecoBean getEndereco() {
+		return endereco;
 	}
 
-	/**
-	 * Setar o valor para o parametro cdEndereco
-	 * 
-	 * @param cdEndereco
-	 */
-	public void setCdEndereco(int cdEndereco) {
-		this.cdEndereco = cdEndereco;
+	public void setEndereco(EnderecoBean endereco) {
+		this.endereco = endereco;
 	}
 
-	/**
-	 * Captura o valor contido no parametro cdPessoa
-	 * 
-	 * @return cdPessoa
-	 */
-	public int getCdPessoa() {
-		return cdPessoa;
+	public PessoaBean getPessoa() {
+		return pessoa;
 	}
 
-	/**
-	 * Setar o valor para o parametro cdPessoa
-	 * 
-	 * @param cdPessoa
-	 */
-	public void setCdPessoa(int cdPessoa) {
-		this.cdPessoa = cdPessoa;
+	public void setPessoa(PessoaBean pessoa) {
+		this.pessoa = pessoa;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + cdEndereco;
-		result = prime * result + cdPessoa;
+		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
+		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
 		return result;
 	}
 
@@ -75,10 +58,17 @@ public class EnderecoPessoaPK implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		EnderecoPessoaPK other = (EnderecoPessoaPK) obj;
-		if (cdEndereco != other.cdEndereco)
+		if (endereco == null) {
+			if (other.endereco != null)
+				return false;
+		} else if (!endereco.equals(other.endereco))
 			return false;
-		if (cdPessoa != other.cdPessoa)
+		if (pessoa == null) {
+			if (other.pessoa != null)
+				return false;
+		} else if (!pessoa.equals(other.pessoa))
 			return false;
 		return true;
 	}
+
 }

@@ -6,15 +6,13 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * Classe Modelo para os itens do pedido
@@ -27,18 +25,9 @@ import javax.persistence.Table;
 public class ItemPedidoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cd_item_pedido")
-	private int cdItemPedido;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cd_pedido")
-	private PedidoBean pedido;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cd_produto")
-	private ProdutoBean produto;
+	@EmbeddedId
+	@JsonIgnore
+	private ItemPedidoPK pk = new ItemPedidoPK();
 
 	@Column(name = "qt_unitaria")
 	private float qtUnitaria;
@@ -46,7 +35,7 @@ public class ItemPedidoBean implements Serializable {
 	private float vlUnitario;
 	@Column(name = "vl_desconto")
 	private float vlDesconto;
-	@OneToMany(mappedBy = "itemPedido", targetEntity = ItemPedidoAdicionalBean.class, fetch = FetchType.LAZY, cascade = {
+	@OneToMany(mappedBy = "pk.itemPedido", targetEntity = ItemPedidoAdicionalBean.class, fetch = FetchType.LAZY, cascade = {
 			CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH })
 	private List<ItemPedidoAdicionalBean> itemPedidoAdicionais = new ArrayList<ItemPedidoAdicionalBean>();
 
@@ -68,14 +57,13 @@ public class ItemPedidoBean implements Serializable {
 	 */
 	public ItemPedidoBean(int cdItemPedido, PedidoBean pedido, ProdutoBean produto, float qtUnitaria, float vlUnitario,
 			float vlDesconto) {
-		this();
-
-		this.pedido = pedido;
-		this.produto = produto;
+		
+		this.pk.setPedido(pedido);
+		this.pk.setProduto(produto);
 		this.qtUnitaria = qtUnitaria;
 		this.vlUnitario = vlUnitario;
 		this.vlDesconto = vlDesconto;
-		this.cdItemPedido = cdItemPedido;
+		this.pk.setCdItemPedido(cdItemPedido);
 	}
 
 	/**
@@ -84,7 +72,7 @@ public class ItemPedidoBean implements Serializable {
 	 * @return cdItemPedido
 	 */
 	public int getCdItemPedido() {
-		return cdItemPedido;
+		return pk.getCdItemPedido();
 	}
 
 	/**
@@ -93,7 +81,7 @@ public class ItemPedidoBean implements Serializable {
 	 * @param cdItemPedido
 	 */
 	public void setCdItemPedido(int cdItemPedido) {
-		this.cdItemPedido = cdItemPedido;
+		this.pk.setCdItemPedido(cdItemPedido);
 	}
 
 	/**
@@ -102,7 +90,7 @@ public class ItemPedidoBean implements Serializable {
 	 * @return pedido
 	 */
 	public PedidoBean getPedido() {
-		return pedido;
+		return pk.getPedido();
 	}
 
 	/**
@@ -111,7 +99,7 @@ public class ItemPedidoBean implements Serializable {
 	 * @param pedido
 	 */
 	public void setPedido(PedidoBean pedido) {
-		this.pedido = pedido;
+		this.pk.setPedido(pedido);
 	}
 
 	/**
@@ -120,7 +108,7 @@ public class ItemPedidoBean implements Serializable {
 	 * @return produto
 	 */
 	public ProdutoBean getProduto() {
-		return produto;
+		return pk.getProduto();
 	}
 
 	/**
@@ -129,7 +117,7 @@ public class ItemPedidoBean implements Serializable {
 	 * @param produto
 	 */
 	public void setProduto(ProdutoBean produto) {
-		this.produto = produto;
+		this.pk.setProduto(produto);
 	}
 
 	/**
@@ -229,7 +217,7 @@ public class ItemPedidoBean implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + cdItemPedido;
+		result = prime * result + pk.getCdItemPedido();
 		return result;
 	}
 
@@ -242,7 +230,7 @@ public class ItemPedidoBean implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ItemPedidoBean other = (ItemPedidoBean) obj;
-		if (cdItemPedido != other.cdItemPedido)
+		if (pk.getCdItemPedido() != other.pk.getCdItemPedido())
 			return false;
 		return true;
 	}

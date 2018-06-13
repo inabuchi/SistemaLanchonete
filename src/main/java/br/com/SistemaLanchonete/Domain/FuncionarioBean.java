@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * Classe Modelo para os Funcion�rios da empresa
  * 
@@ -37,8 +39,9 @@ public class FuncionarioBean extends PessoaBean {
 	private String dsSenha;
 	@Column(name = "cd_nivel")
 	private int cdNivel;
-
-	@OneToMany(mappedBy = "funcionario", targetEntity = CaixaBean.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnore
+	@OneToMany(mappedBy = "funcionario", targetEntity = CaixaBean.class, fetch =
+	FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<CaixaBean> caixa = new ArrayList<CaixaBean>();
 
 	/**
@@ -165,7 +168,7 @@ public class FuncionarioBean extends PessoaBean {
 
 	/**
 	 * Retorna a lista de Caixas Desse Funcionario
-	 * 
+	 *
 	 * @return caixa
 	 */
 	public List<CaixaBean> getCaixa() {
@@ -174,7 +177,7 @@ public class FuncionarioBean extends PessoaBean {
 
 	/**
 	 * Setar o valor para o parametro caixa
-	 * 
+	 *
 	 * @param caixa
 	 */
 	public void setCaixa(List<CaixaBean> caixa) {

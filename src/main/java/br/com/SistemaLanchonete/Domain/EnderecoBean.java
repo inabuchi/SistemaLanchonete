@@ -4,22 +4,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
- * Classe de Endereços cadastrados no sistema
+ * Classe de Endereï¿½os cadastrados no sistema
  * 
  * @author Yago
  */
@@ -44,18 +44,16 @@ public class EnderecoBean implements Serializable {
 
 	@Column(name = "ds_observacao")
 	private String dsObservacao;
+
 	@JsonIgnore
-	@OneToMany(mappedBy = "endereco", //
+	@OneToMany(mappedBy = "pk.endereco", //
 			targetEntity = EnderecoPessoaBean.class, //
 			fetch = FetchType.LAZY, //
-			cascade = { CascadeType.MERGE, //
-					CascadeType.REMOVE, //
-					CascadeType.REFRESH, //
-					CascadeType.DETACH })
-	private List<EnderecoPessoaBean> enderecoPessoas;
+			cascade = CascadeType.ALL)
+	private List<EnderecoPessoaBean> enderecoPessoas = new ArrayList<EnderecoPessoaBean>();
 
 	/**
-	 * Construtor padrão da classe
+	 * Construtor padrï¿½o da classe
 	 */
 	public EnderecoBean() {
 	}
@@ -71,12 +69,12 @@ public class EnderecoBean implements Serializable {
 	 */
 	public EnderecoBean(int cdEndereco, LogradouroBean logradouro, int cdNumero, String dsComplemento,
 			String dsObservacao) {
+		super();
 		this.cdEndereco = cdEndereco;
 		this.logradouro = logradouro;
 		this.cdNumero = cdNumero;
 		this.dsComplemento = dsComplemento;
 		this.dsObservacao = dsObservacao;
-		this.enderecoPessoas = new ArrayList<EnderecoPessoaBean>();
 	}
 
 	/**
@@ -170,7 +168,7 @@ public class EnderecoBean implements Serializable {
 	}
 
 	/**
-	 * Retorna a lista de pessoas desse endereço
+	 * Retorna a lista de pessoas desse endereï¿½o
 	 * 
 	 * @return enderecoPessoas
 	 */

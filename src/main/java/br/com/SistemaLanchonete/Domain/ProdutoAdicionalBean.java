@@ -1,10 +1,15 @@
 package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -27,6 +32,10 @@ public class ProdutoAdicionalBean implements Serializable {
 	@Column(name = "vl_adicional")
 	private float vlAdicional;
 
+	@OneToMany(mappedBy = "pk.adicional", targetEntity = ItemPedidoAdicionalBean.class, fetch = FetchType.LAZY, cascade = {
+			CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH })
+	private List<ItemPedidoAdicionalBean> itemPedidoAdicionais = new ArrayList<ItemPedidoAdicionalBean>();
+	
 	/**
 	 * Contrutor padr�o da classe
 	 */

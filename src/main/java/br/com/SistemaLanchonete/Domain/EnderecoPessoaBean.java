@@ -6,9 +6,6 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -23,16 +20,9 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 public class EnderecoPessoaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private EnderecoPessoaPK pk;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "cd_endereco", insertable = false, updatable = false, nullable = false)
-	private EnderecoBean endereco;
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "cd_pessoa", insertable = false, updatable = false, nullable = false)
-	private PessoaBean pessoa;
+	@EmbeddedId
+	private EnderecoPessoaPK pk = new EnderecoPessoaPK();
 
 	@Column(name = "dt_alteracao")
 	private Date dtAlteracao;
@@ -41,10 +31,9 @@ public class EnderecoPessoaBean implements Serializable {
 	private boolean isEnderecoPadrao;
 
 	/**
-	 * Construtor padrão da classe
+	 * Construtor padrï¿½o da classe
 	 */
 	public EnderecoPessoaBean() {
-		pk = new EnderecoPessoaPK();
 	}
 
 	/**
@@ -55,43 +44,23 @@ public class EnderecoPessoaBean implements Serializable {
 	 * @param dtAlteracao
 	 * @param isEnderecoPadrao
 	 */
-	public EnderecoPessoaBean(EnderecoBean endereco, PessoaBean pessoa, Date dtAlteracao, boolean isEnderecoPadrao) {
-		this();
-		this.endereco = endereco;
-		this.pessoa = pessoa;
+	public EnderecoPessoaBean(PessoaBean pessoa, EnderecoBean endereco, Date dtAlteracao, boolean isEnderecoPadrao) {
+		super();
+		pk.setPessoa(pessoa);
+		pk.setEndereco(endereco);
 		this.dtAlteracao = dtAlteracao;
 		this.isEnderecoPadrao = isEnderecoPadrao;
-
-		pk.setCdEndereco(endereco != null ? endereco.getCdEndereco() : 0);
-		pk.setCdPessoa(pessoa != null ? pessoa.getCdPessoa() : 0);
 	}
 
-	/**
-	 * Captura o valor contido no parametro endereco
-	 * 
-	 * @return endereco
-	 */
-	public EnderecoBean getEndereco() {
-		return endereco;
-	}
-
-	/**
-	 * Setar o valor para o parametro endereco
-	 * 
-	 * @param endereco
-	 */
-	public void setEndereco(EnderecoBean endereco) {
-		this.endereco = endereco;
-		pk.setCdEndereco(endereco != null ? endereco.getCdEndereco() : 0);
-	}
-
+	
 	/**
 	 * Captura o valor contido no parametro pessoa
 	 * 
 	 * @return pessoa
 	 */
+	@JsonIgnore
 	public PessoaBean getPessoa() {
-		return pessoa;
+		return pk.getPessoa();
 	}
 
 	/**
@@ -100,14 +69,45 @@ public class EnderecoPessoaBean implements Serializable {
 	 * @param pessoa
 	 */
 	public void setPessoa(PessoaBean pessoa) {
-		this.pessoa = pessoa;
-		pk.setCdPessoa(pessoa != null ? pessoa.getCdPessoa() : 0);
+		pk.setPessoa(pessoa);
 	}
-	
-    public void setEnderecoPessoaPK(int cdEndereco, int cdPessoa) {
-    	pk.setCdEndereco(cdEndereco);    	
-    	pk.setCdPessoa(cdPessoa);    	
-    }
+
+	/**
+	 * Captura o valor contido no parametro pk
+	 * 
+	 * @return pk
+	 */
+
+	/**
+	 * Captura o valor contido no parametro endereco
+	 * 
+	 * @return endereco
+	 */
+	public EnderecoBean getEndereco() {
+		return pk.getEndereco();
+	}
+
+	/**
+	 * Setar o valor para o parametro endereco
+	 * 
+	 * @param endereco
+	 */
+	public void setEndereco(EnderecoBean endereco) {
+		pk.setEndereco(endereco);
+	}
+
+	public EnderecoPessoaPK getPk() {
+		return pk;
+	}
+
+	/**
+	 * Setar o valor para o parametro pk
+	 * 
+	 * @param pk
+	 */
+	public void setPk(EnderecoPessoaPK pk) {
+		this.pk = pk;
+	}
 
 	/**
 	 * Captura o valor contido no parametro dtAlteracao
@@ -169,7 +169,7 @@ public class EnderecoPessoaBean implements Serializable {
 	public String toString() {
 		return "\nClasse ....................: " + getClass().getSimpleName() + //
 				"\nPessoa....................: " + getPessoa() != null ? getPessoa().getDsNome() : "Sem pessoa" + //
-						"\nData alteração............: " + getDtAlteracao() + //
-						"\nÉ padrão?.................: " + (isEnderecoPadrao() ? "Sim" : "Não");//
+						"\nData alteraï¿½ï¿½o............: " + getDtAlteracao() + //
+						"\nï¿½ padrï¿½o?.................: " + (isEnderecoPadrao() ? "Sim" : "Nï¿½o");//
 	}
 }

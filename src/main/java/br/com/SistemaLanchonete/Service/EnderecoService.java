@@ -8,26 +8,30 @@ import br.com.SistemaLanchonete.Domain.EnderecoPessoaBean;
 import br.com.SistemaLanchonete.Domain.EstadoBean;
 import br.com.SistemaLanchonete.Domain.LogradouroBean;
 import br.com.SistemaLanchonete.Domain.MunicipioBean;
+import br.com.SistemaLanchonete.Domain.PessoaBean;
 import br.com.SistemaLanchonete.Repository.BDException;
 import br.com.SistemaLanchonete.Repository.EErrosBD;
 import br.com.SistemaLanchonete.Repository.GenericDAO;
 
 public class EnderecoService {
-	private String retorno = "";	
-	GenericDAO<EnderecoPessoaBean> enderecoPessoaDao = new GenericDAO<EnderecoPessoaBean>();		
+	private String retorno = "";
+	GenericDAO<EnderecoPessoaBean> enderecoPessoaDao = new GenericDAO<EnderecoPessoaBean>();
 
-	public String save(EnderecoPessoaBean enderecoPessoa, int cdPessoa) throws BDException {			
+	public String save(EnderecoPessoaBean enderecoPessoa, PessoaBean pessoa) throws BDException {
 		SalvarEndereco(enderecoPessoa.getEndereco());
-
-		enderecoPessoa.setEnderecoPessoaPK(enderecoPessoa.getEndereco().getCdEndereco(), cdPessoa);
-		enderecoPessoaDao.save(enderecoPessoa, enderecoPessoa.getEndereco().getCdEndereco());		
+//aqui tive de mudar
+	 //mas voce esta setando na classe o endereco que ja estava nela
+		//ok, mas como tem de fazer entao? taa assima ntes: setEnderecoPK(enderecopessoa, pessoa)
+		enderecoPessoa.setEndereco(enderecoPessoa.getEndereco());
+		enderecoPessoa.setPessoa(pessoa);
+		enderecoPessoaDao.save(enderecoPessoa, /*enderecoPessoa.getEndereco().getCdEndereco()*/0);
 
 		return retorno;
 	}
 
 	private String SalvarEndereco(EnderecoBean endereco) throws BDException {
 		SalvarLogradouro(endereco.getLogradouro());
-		
+
 		GenericDAO<EnderecoBean> enderecoDao = new GenericDAO<EnderecoBean>();
 
 		EnderecoBean enderecoCon = new EnderecoBean(0, null, 0, endereco.getDsComplemento(), "");
@@ -52,7 +56,8 @@ public class EnderecoService {
 
 				if (!lista.isEmpty()) {
 					for (int i = 0; i < lista.size(); i++) {
-						if (endereco.getLogradouro().getCdLogradouro() == lista.get(i).getLogradouro().getCdLogradouro()) {
+						if (endereco.getLogradouro().getCdLogradouro() == lista.get(i).getLogradouro()
+								.getCdLogradouro()) {
 							endereco.setCdEndereco(lista.get(i).getCdEndereco());
 							break;
 						}
@@ -66,20 +71,20 @@ public class EnderecoService {
 			try {
 				enderecoDao.save(endereco, endereco.getCdEndereco());
 			} catch (BDException e) {
-				throw new BDException("Erro na atualização de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
+				throw new BDException("Erro na atualizaï¿½ï¿½o de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 			}
 			retorno = "Dados atualizados com sucesso na tabela";
 		}
 		return retorno;
 	}
 
-	/*private String SalvarEnderecoPessoa(EnderecoPessoaBean enderecoPessoa) throws BDException {
-		return retorno = "Salvo com Sucesso";
-	}*/
+	/*
+	 * private String SalvarEnderecoPessoa(EnderecoPessoaBean enderecoPessoa) throws
+	 * BDException { return retorno = "Salvo com Sucesso"; }
+	 */
 
 	private String SalvarBairro(BairroBean bairro) throws BDException {
 		SalvarMunicipio(bairro.getMunicipio());
-			
 
 		BairroBean bairroCon = new BairroBean(0, null, bairro.getDsBairro());
 		GenericDAO<BairroBean> bairroDao = new GenericDAO<BairroBean>();
@@ -92,7 +97,7 @@ public class EnderecoService {
 					bairro.setCdBairro(lista.get(i).getCdBairro());
 					break;
 				}
-			}			
+			}
 		}
 
 		if (bairro.getCdBairro() == 0) {
@@ -107,7 +112,7 @@ public class EnderecoService {
 							bairro.setCdBairro(lista.get(i).getCdBairro());
 							break;
 						}
-					}			
+					}
 				}
 			} catch (BDException e) {
 				throw new BDException("Erro ao Salvar dados no banco" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
@@ -117,7 +122,7 @@ public class EnderecoService {
 			try {
 				bairroDao.save(bairro, bairro.getCdBairro());
 			} catch (BDException e) {
-				throw new BDException("Erro na atualização de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
+				throw new BDException("Erro na atualizaï¿½ï¿½o de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 			}
 			retorno = "Dados atualizados com sucesso na tabela";
 		}
@@ -151,7 +156,7 @@ public class EnderecoService {
 			try {
 				estadoDao.save(estado, estado.getCdEstado());
 			} catch (BDException e) {
-				throw new BDException("Erro na atualização de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
+				throw new BDException("Erro na atualizaï¿½ï¿½o de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 			}
 			retorno = "Dados atualizados com sucesso na tabela";
 		}
@@ -166,26 +171,28 @@ public class EnderecoService {
 		GenericDAO<LogradouroBean> logDao = new GenericDAO<LogradouroBean>();
 
 		ArrayList<LogradouroBean> lista = logDao.findLike(LogradouroBean.class, logCon);
-		
+
 		if (!lista.isEmpty()) {
 			for (int i = 0; i < lista.size(); i++) {
-				if (lista.get(i).getBairro().getCdBairro() == logradouro.getBairro().getCdBairro());
-					logradouro.setCdLogradouro(lista.get(i).getCdLogradouro());	
-				break;
+				if (lista.get(i).getBairro().getCdBairro() == logradouro.getBairro().getCdBairro()) {
+					logradouro.setCdLogradouro(lista.get(i).getCdLogradouro());
+					break;
+				}
 			}
 		}
 
 		if (logradouro.getCdLogradouro() == 0) {
 			try {
 				logradouroDao.save(logradouro, 0);
-				
-				lista = logDao.findLike(LogradouroBean.class, logCon);				
+
+				lista = logDao.findLike(LogradouroBean.class, logCon);
 
 				if (!lista.isEmpty()) {
 					for (int i = 0; i < lista.size(); i++) {
-						if (lista.get(i).getBairro().getCdBairro() == logradouro.getBairro().getCdBairro());
-							logradouro.setCdLogradouro(lista.get(i).getCdLogradouro());	
-						break;
+						if (lista.get(i).getBairro().getCdBairro() == logradouro.getBairro().getCdBairro()) {
+							logradouro.setCdLogradouro(lista.get(i).getCdLogradouro());
+							break;
+						}
 					}
 				}
 			} catch (BDException e) {
@@ -196,7 +203,7 @@ public class EnderecoService {
 			try {
 				logradouroDao.save(logradouro, logradouro.getCdLogradouro());
 			} catch (BDException e) {
-				throw new BDException("Erro na atualização de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
+				throw new BDException("Erro na atualizaï¿½ï¿½o de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 			}
 			retorno = "Dados atualizados com sucesso na tabela";
 		}
@@ -215,10 +222,10 @@ public class EnderecoService {
 		if (!lista.isEmpty()) {
 			for (int i = 0; i < lista.size(); i++) {
 				if (lista.get(i).getEstado().getCdEstado() == municipio.getEstado().getCdEstado()) {
-				  municipio.setCdMunicipio(lista.get(i).getCdMunicipio());
-				  break;
+					municipio.setCdMunicipio(lista.get(i).getCdMunicipio());
+					break;
 				}
-			}			
+			}
 		}
 
 		if (municipio.getCdMunicipio() == 0) {
@@ -230,10 +237,10 @@ public class EnderecoService {
 				if (!lista.isEmpty()) {
 					for (int i = 0; i < lista.size(); i++) {
 						if (lista.get(i).getEstado().getCdEstado() == municipio.getEstado().getCdEstado()) {
-						  municipio.setCdMunicipio(lista.get(i).getCdMunicipio());
-						  break;
+							municipio.setCdMunicipio(lista.get(i).getCdMunicipio());
+							break;
 						}
-					}			
+					}
 				}
 			} catch (BDException e) {
 				throw new BDException("Erro ao Salvar dados no banco" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
@@ -243,7 +250,7 @@ public class EnderecoService {
 			try {
 				municipioDao.save(municipio, municipio.getCdMunicipio());
 			} catch (BDException e) {
-				throw new BDException("Erro na atualização de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
+				throw new BDException("Erro na atualizaï¿½ï¿½o de dados:" + e.getMessage(), EErrosBD.ATUALIZA_DADO);
 			}
 			retorno = "Dados atualizados com sucesso na tabela";
 		}

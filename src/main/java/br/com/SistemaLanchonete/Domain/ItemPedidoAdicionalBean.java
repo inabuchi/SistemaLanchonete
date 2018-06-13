@@ -4,9 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -24,17 +21,9 @@ public class ItemPedidoAdicionalBean implements Serializable {
 	@JsonIgnore
 	@EmbeddedId
 	private ItemPedidoAdicionalPK pk;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="cd_item_pedido", insertable = false, updatable = false)
-	private ItemPedidoBean itemPedido;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="cd_adicional", insertable = false, updatable = false)
-	private ProdutoAdicionalBean produtoAdicional;
 
 	/**
-	 * Contrutor padrão da classe
+	 * Contrutor padrï¿½o da classe
 	 */
 	public ItemPedidoAdicionalBean() {
 		pk = new ItemPedidoAdicionalPK();
@@ -48,11 +37,8 @@ public class ItemPedidoAdicionalBean implements Serializable {
 	 * @param produtoAdicional
 	 */
 	public ItemPedidoAdicionalBean(ItemPedidoBean itemPedido, ProdutoAdicionalBean produtoAdicional) {
-		this();
-		this.itemPedido = itemPedido;
-		this.produtoAdicional = produtoAdicional;
-		pk.setCdItemCompra(itemPedido != null ? itemPedido.getCdItemPedido() : 0);
-		pk.setCdAdicional(produtoAdicional != null ? produtoAdicional.getCdProdutoAdicional() : 0);
+		pk.setItemPedido(itemPedido);
+		pk.setAdicional(produtoAdicional);
 	}
 
 	/**
@@ -61,7 +47,7 @@ public class ItemPedidoAdicionalBean implements Serializable {
 	 * @return itemPedido
 	 */
 	public ItemPedidoBean getItemPedido() {
-		return itemPedido;
+		return pk.getItemPedido();
 	}
 
 	/**
@@ -70,8 +56,7 @@ public class ItemPedidoAdicionalBean implements Serializable {
 	 * @param itemPedido
 	 */
 	public void setItemPedido(ItemPedidoBean itemPedido) {
-		this.itemPedido = itemPedido;
-		pk.setCdItemCompra(itemPedido != null ? itemPedido.getCdItemPedido() : 0);
+		pk.setItemPedido(itemPedido);
 	}
 
 	/**
@@ -80,7 +65,7 @@ public class ItemPedidoAdicionalBean implements Serializable {
 	 * @return produtoAdicional
 	 */
 	public ProdutoAdicionalBean getPedidoAdicional() {
-		return produtoAdicional;
+		return pk.getAdicional();
 	}
 
 	/**
@@ -89,8 +74,7 @@ public class ItemPedidoAdicionalBean implements Serializable {
 	 * @param produtoAdicional
 	 */
 	public void setPedidoAdicional(ProdutoAdicionalBean produtoAdicional) {
-		this.produtoAdicional = produtoAdicional;
-		pk.setCdAdicional(produtoAdicional != null ? produtoAdicional.getCdProdutoAdicional() : 0);
+		pk.setAdicional(produtoAdicional);
 	}
 
 	@Override
@@ -120,8 +104,8 @@ public class ItemPedidoAdicionalBean implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ItemPedidoAdicionalBean [itemPedido=" + itemPedido + ", produtoAdicional=" + produtoAdicional + "]";
+		return "ItemPedidoAdicionalBean [itemPedido=" + pk.getItemPedido() + ", produtoAdicional=" + pk.getItemPedido()
+				+ "]";
 	}
-	
-	
+
 }
