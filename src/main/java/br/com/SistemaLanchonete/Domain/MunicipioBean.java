@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
- * Classe de Municípios cadastrados no sistema
+ * Classe de Municï¿½pios cadastrados no sistema
  * 
  * @author Patrick
  */
@@ -39,12 +39,13 @@ public class MunicipioBean implements Serializable {
 
 	@Column(name = "ds_municipio")
 	private String dsMunicipio;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "municipio", targetEntity = BairroBean.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<BairroBean> bairros = new ArrayList<BairroBean>();
 
 	/**
-	 * Construtor padrão da classe
+	 * Construtor padrÃ£o da classe
 	 */
 	public MunicipioBean() {
 
@@ -58,6 +59,7 @@ public class MunicipioBean implements Serializable {
 	 * @param dsMunicipio
 	 */
 	public MunicipioBean(int cdMunicipio, EstadoBean estado, String dsMunicipio) {
+		super();
 		this.cdMunicipio = cdMunicipio;
 		this.estado = estado;
 		this.dsMunicipio = dsMunicipio;

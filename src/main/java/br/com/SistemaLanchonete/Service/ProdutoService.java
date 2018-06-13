@@ -36,7 +36,7 @@ public class ProdutoService {
 						+ " atualizado com sucesso!";
 			}
 		}
-		return retorno = "Descrição de Produto & Categoria não preenchidos!";
+		return retorno = "Descriï¿½ï¿½o de Produto & Categoria nï¿½o preenchidos!";
 	}
 
 	public String remove(ProdutoBean produto) throws BDException {
@@ -50,23 +50,12 @@ public class ProdutoService {
 		return retorno;
 	}
 
-	public ProdutoBean findById(ProdutoBean produto) throws BDException {
-		try {
-			return produtoDAO.findById(produtoBean, produto.getCdProduto());
-		} catch (Exception e) {
-			throw new BDException("Erro ao buscar produto " + produto.getCdProduto() + " - " + produto.getDsProduto()
-					+ e.getMessage(), EErrosBD.CONSULTA_DADO);
-		}
+	public ProdutoBean findById(ProdutoBean produto) {
+		return produtoDAO.findById(produtoBean, produto.getCdProduto());
 	}
 
-	public ArrayList<ProdutoBean> findLike(ProdutoBean produto) throws BDException {
-		try {
-			ArrayList<ProdutoBean> listaProdutos = new ArrayList<ProdutoBean>();
-			return listaProdutos;
-		} catch (Exception e) {
-			throw new BDException("Erro ao buscar produto " + produto.getCdProduto() + " - " + produto.getDsProduto()
-					+ e.getMessage(), EErrosBD.CONSULTA_DADO);
-		}
+	public ArrayList<ProdutoBean> findLike(ProdutoBean produto) {
+		return produtoDAO.findLike(produtoBean, produto);
 	}
 
 	/**

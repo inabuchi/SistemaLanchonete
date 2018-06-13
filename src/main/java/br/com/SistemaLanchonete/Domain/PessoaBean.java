@@ -31,27 +31,30 @@ public abstract class PessoaBean implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cd_pessoa")
 	private int cdPessoa;
+	
 	@Column(name = "ds_nome")
 	private String dsNome;
+	
 	@Column(name = "ds_telefone1")
 	private String dsTelefone1;
+	
 	@Column(name = "ds_telefone2")
 	private String dsTelefone2;
+	
 	@Column(name = "dt_cadastro")
 	private Date dtCadastro = new Date();
+	
 	@Column(name = "is_ativo")
 	private boolean isAtivo;
-	@OneToMany(mappedBy = "pessoa", //
+	
+	@OneToMany(mappedBy = "pk.pessoa", //
 			targetEntity = EnderecoPessoaBean.class, //
-			fetch = FetchType.EAGER, //
-			cascade = { CascadeType.MERGE, //
-					CascadeType.REMOVE, //
-					CascadeType.REFRESH, //
-					CascadeType.DETACH })
+			fetch = FetchType.EAGER/*, //
+			cascade = CascadeType.ALL*/)
 	private List<EnderecoPessoaBean> enderecoPessoas = new ArrayList<EnderecoPessoaBean>();
 
 	/**
-	 * Construtor padrão da classe
+	 * Construtor padrï¿½o da classe
 	 */
 	public PessoaBean() {
 	}
@@ -74,7 +77,6 @@ public abstract class PessoaBean implements Serializable {
 		this.dsTelefone2 = dsTelefone2;
 		this.dtCadastro = dtCadastro;
 		this.isAtivo = isAtivo;
-		this.enderecoPessoas = new ArrayList<EnderecoPessoaBean>();
 	}
 
 	/**
@@ -234,7 +236,7 @@ public abstract class PessoaBean implements Serializable {
 				"\nApelido................: " + getDsTelefone1() + //
 				"\nTelefone...............: " + getDsTelefone2() + //
 				"\nData Cadastro..........: " + getDtCadastro() + //
-				"\nAtivo..................: " + (isAtivo() ? "Sim" : "Não");//
+				"\nAtivo..................: " + (isAtivo() ? "Sim" : "Nï¿½o");//
 	}
 
 }

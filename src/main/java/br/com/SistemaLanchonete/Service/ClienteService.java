@@ -206,7 +206,7 @@ public class ClienteService {
 		
 		for (int i = 0; i < cliente.getEnderecoPessoas().size(); i++) {
 			try {
-				endSer.save(cliente.getEnderecoPessoas().get(i), cliente.getCdPessoa());				
+				endSer.save(cliente.getEnderecoPessoas().get(i), cliente);				
 				
 			} catch(Exception e) {
 				return false;

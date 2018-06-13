@@ -2,8 +2,11 @@
 
 import java.io.Serializable;
 
-import javax.persistence.Embeddable;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 
 /**
  * Chave composta da classe ItemPedidoAdicionalBean
@@ -14,34 +17,41 @@ import javax.persistence.Column;
 @Embeddable
 public class ItemPedidoAdicionalPK implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@Column(name = "cd_item_pedido")	
-	private int cdItemCompra;
+	
+	@ManyToOne(optional = false)
+	  @JoinColumns(value = {
+	          @JoinColumn(name = "cd_item_pedido", referencedColumnName = "cd_item_pedido"),
+	          @JoinColumn(name = "cd_pedido", referencedColumnName = "cd_pedido"),
+	          @JoinColumn(name = "cd_produto", referencedColumnName = "cd_produto") })
+	
+	//@Column(name = "cd_item_pedido")	
+	private ItemPedidoBean itemPedido;
+	
+	//@Column(name = "cd_pedido")	
+	//private PedidoBean pedido;
+	
+	//@Column(name = "cd_produto")	
+	//private ProdutoBean produto;
 	
 	@Column(name = "cd_adicional")	
-	private int cdAdicional;
+	private ProdutoAdicionalBean adicional;
 
-	public int getCdItemCompra() {
-		return cdItemCompra;
+	public ItemPedidoBean getItemPedido() {
+		return itemPedido;
 	}
 
-	public void setCdItemCompra(int cdItemCompra) {
-		this.cdItemCompra = cdItemCompra;
-	}
-
-	public int getCdAdicional() {
-		return cdAdicional;
-	}
-
-	public void setCdAdicional(int cdAdicional) {
-		this.cdAdicional = cdAdicional;
+	public void setItemPedido(ItemPedidoBean itemPedido) {
+		this.itemPedido = itemPedido;
+		//this.produto = itemPedido.getProduto();
+		//this.pedido = itemPedido.getPedido();
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + cdAdicional;
-		result = prime * result + cdItemCompra;
+		result = prime * result + ((adicional == null) ? 0 : adicional.hashCode());
+		result = prime * result + ((itemPedido == null) ? 0 : itemPedido.hashCode());
 		return result;
 	}
 
@@ -54,11 +64,25 @@ public class ItemPedidoAdicionalPK implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ItemPedidoAdicionalPK other = (ItemPedidoAdicionalPK) obj;
-		if (cdAdicional != other.cdAdicional)
+		if (adicional == null) {
+			if (other.adicional != null)
+				return false;
+		} else if (!adicional.equals(other.adicional))
 			return false;
-		if (cdItemCompra != other.cdItemCompra)
+		if (itemPedido == null) {
+			if (other.itemPedido != null)
+				return false;
+		} else if (!itemPedido.equals(other.itemPedido))
 			return false;
 		return true;
+	}
+
+	public ProdutoAdicionalBean getAdicional() {
+		return adicional;
+	}
+
+	public void setAdicional(ProdutoAdicionalBean adicional) {
+		this.adicional = adicional;
 	}
 
 	

@@ -1,15 +1,24 @@
 package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * Classe modelo para ProdutoCategoria
- * @author Jonatan José Soares
+ * 
+ * @author Jonatan Josï¿½ Soares
  *
  */
 @Entity
@@ -17,14 +26,18 @@ import javax.persistence.Table;
 public class ProdutoCategoriaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@Column (name = "cd_categoria")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "cd_categoria")
 	private int cdProdutoCategoria;
 
-	@Column (name = "ds_categoria")
+	@Column(name = "ds_categoria")
 	private String dsCategoria;
-	
+@JsonIgnore
+	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+	private List<ProdutoBean> produtos = new ArrayList<ProdutoBean>();
+
 	/**
-	 * Contrutor padrão da classe
+	 * Contrutor padrï¿½o da classe
 	 */
 	public ProdutoCategoriaBean() {
 	}
@@ -45,7 +58,7 @@ public class ProdutoCategoriaBean implements Serializable {
 	 * 
 	 * @return dsCategoria
 	 */
-	
+
 	public String getDsCategoria() {
 		return dsCategoria;
 	}
@@ -61,12 +74,12 @@ public class ProdutoCategoriaBean implements Serializable {
 
 	/**
 	 * 
-	 * @return código da categoria do Produto
+	 * @return cï¿½digo da categoria do Produto
 	 */
 	public int getCdProdutoCategoria() {
 		return cdProdutoCategoria;
 	}
-	
+
 	/**
 	 * 
 	 * @param cdProdutoCategoria
@@ -99,10 +112,7 @@ public class ProdutoCategoriaBean implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ProdutoCategoriaBean [cdProdutoCategoria=" + cdProdutoCategoria + ", dsCategoria=" + dsCategoria
-				+ "]";
+		return "ProdutoCategoriaBean [cdProdutoCategoria=" + cdProdutoCategoria + ", dsCategoria=" + dsCategoria + "]";
 	}
-	
-	
 
 }

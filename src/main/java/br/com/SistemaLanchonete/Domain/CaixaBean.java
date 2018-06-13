@@ -20,9 +20,9 @@ import javax.persistence.Table;
 @Table(name = "caixa")
 public class CaixaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	@Column(name = "cd_caixa")
 	private int cdCaixa;
 
@@ -40,7 +40,7 @@ public class CaixaBean implements Serializable {
 	private float vlTrocoInicial;
 
 	/**
-	 * Construtor padrão da classe
+	 * Construtor padrï¿½o da classe
 	 */
 	public CaixaBean() {
 	}
@@ -179,7 +179,7 @@ public class CaixaBean implements Serializable {
 	public String toString() {
 		return "\nClasse .................: " + getClass().getSimpleName() + //
 				"\nIdentificador do caixa.: " + getCdCaixa() + //
-				"\nNome funcionário.......: " + // getFuncionario() != null ? getFuncionario().getDsNome() : "Sem
+				"\nNome funcionï¿½rio.......: " + // getFuncionario() != null ? getFuncionario().getDsNome() : "Sem
 												// funcionario" +//
 				"\nData abertura..........: " + getDtAbertura() + //
 				"\nData fechamento........: " + getDtFechamento() + //

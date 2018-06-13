@@ -1,13 +1,18 @@
 package br.com.SistemaLanchonete.Domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * Classe Modelo para as formas de pagamento
@@ -24,11 +29,15 @@ public class FormaPagamentoBean implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cd_forma_pagamento")
 	private int cdFormaPagamento;
+
 	@Column(name = "ds_forma_pagamento")
 	private String dsFormaPagamento;
-	
+	@JsonIgnore
+	@OneToMany(mappedBy = "formaPagto")
+	private List<PedidoBean> pedidos = new ArrayList<PedidoBean>();
+
 	/**
-	 * Contrutor padrão da classe
+	 * Contrutor padrï¿½o da classe
 	 */
 	public FormaPagamentoBean() {
 	}
@@ -80,6 +89,25 @@ public class FormaPagamentoBean implements Serializable {
 		this.dsFormaPagamento = dsFormaPagamento;
 	}
 
+	/**
+	 * Captura o valor contido no parametro pedidos
+	 * 
+	 * @return pedidos
+	 */
+
+	public List<PedidoBean> getPedidos() {
+		return pedidos;
+	}
+
+	/**
+	 * Setar o valor para o parametro pedidos
+	 * 
+	 * @param pedidos
+	 */
+	public void setPedidos(List<PedidoBean> pedidos) {
+		this.pedidos = pedidos;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -111,7 +139,7 @@ public class FormaPagamentoBean implements Serializable {
 	public String toString() {
 		return super.toString() + //
 				"\nClasse ..............: " + getClass().getSimpleName() + //
-				"\nCód. Forma Pagamento.: " + getCdFormaPagamento() + //
+				"\nCï¿½d. Forma Pagamento.: " + getCdFormaPagamento() + //
 				"\nForma Pagamento......: " + getDsFormaPagamento(); //
 	}
 }

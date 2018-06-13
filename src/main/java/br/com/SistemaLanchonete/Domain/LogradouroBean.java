@@ -47,7 +47,7 @@ public class LogradouroBean implements Serializable {
 	private List<EnderecoBean> enderecos = new ArrayList<EnderecoBean>();
 
 	/**
-	 * Construtor padrão da classe
+	 * Construtor padrÃ£o da classe
 	 */
 	public LogradouroBean() {
 	}
@@ -61,6 +61,7 @@ public class LogradouroBean implements Serializable {
 	 * @param dsLogradouro
 	 */
 	public LogradouroBean(int cdLogradouro, BairroBean bairro, int cdCep, String dsLogradouro) {
+		super();
 		this.cdLogradouro = cdLogradouro;
 		this.bairro = bairro;
 		this.cdCep = cdCep;
@@ -141,7 +142,7 @@ public class LogradouroBean implements Serializable {
 	}
 
 	/**
-	 * Retorna a lista de endereços desse logradouro
+	 * Retorna a lista de endereï¿½os desse logradouro
 	 * 
 	 * @return enderecos
 	 */

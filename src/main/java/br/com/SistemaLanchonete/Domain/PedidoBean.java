@@ -34,43 +34,59 @@ public class PedidoBean implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cd_pedido")
 	private int cdPedido;
+	
 	@ManyToOne
 	@JoinColumn(name = "cd_cliente", referencedColumnName = "cd_cliente")
 	private ClienteBean cliente;
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "cd_funcionario", referencedColumnName = "cd_funcionario")
 	private FuncionarioBean funcionario;
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "cd_funcionarioEntrega", referencedColumnName = "cd_funcionario")
 	private FuncionarioBean funcionarioEntrega;
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "cd_forma_pagamento", referencedColumnName = "cd_forma_pagamento")
 	private FormaPagamentoBean formaPagto;
+	
 	@Column(name = "cd_num_pedido")
 	private int cdNumPedido;
+	
 	@Column(name = "dt_emissao")
 	private Date dtEmissao;
+	
 	@Column(name = "vl_entrega")
 	private float vlEntrega;
+	
 	@Column(name = "vl_total_compra")
 	private float vlTotalCompra;
+	
 	@Column(name = "vl_desconto")
 	private float vlDesconto;
+	
 	@Column(name = "vl_pago")
 	private float vlPago;
+	
 	@Column(name = "dt_entrega")
 	private Date dtEntrega;
+	
 	@Column(name = "vl_troco")
 	private float vlTroco;
+	
 	@Column(name = "ds_observacao")
 	private String dsObservacao;
-	@JsonIgnore
-	@OneToMany(mappedBy = "pedido", targetEntity = ItemPedidoBean.class, fetch = FetchType.LAZY, cascade = {
+	
+	@OneToMany(mappedBy = "pk.pedido", targetEntity = ItemPedidoBean.class, fetch = FetchType.LAZY, cascade = {
 			CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH })
 	private List<ItemPedidoBean> itensPedido = new ArrayList<ItemPedidoBean>();
 
 	/**
-	 * Contrutor padrão da classe
+	 * Contrutor padrï¿½o da classe
 	 */
 	public PedidoBean() {
 
@@ -423,8 +439,8 @@ public class PedidoBean implements Serializable {
 				"\nFuncionario.........: " + getCdFuncionario() + //
 				"\nFuncionario Entrega.: " + getCdFuncionarioEntrega() + //
 				"\nForma de Pagamento..: " + getCdFormaPagamento() + //
-				"\nNúmero Pedido.......: " + getCdNumPedido() + //
-				"\nData Emissão........: " + getDtEmissao() + //
+				"\nNï¿½mero Pedido.......: " + getCdNumPedido() + //
+				"\nData Emissï¿½o........: " + getDtEmissao() + //
 				"\nValor Entrega.......: " + getVlEntrega() + //
 				"\nValor Total Compra..: " + getVlTotalCompra() + //
 				"\nValor Pago..........: " + getVlPago() + //
