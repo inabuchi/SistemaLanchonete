@@ -178,8 +178,8 @@ function getId() {
 		return 0;
 }
 
-var cdFuncionario
+var codEndereco;
 
-function editarFuncionario(id) {
-	cdFuncionario = id;
+function setCdEndereco(cd) {
+	codEndereco = cd;
 }
