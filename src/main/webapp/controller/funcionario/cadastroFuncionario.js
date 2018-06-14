@@ -17,19 +17,21 @@ function registrarOnSaveFuncionario() {
 	                alert(res.message);
 	                return false;
 	            }
-	            
+
 	            if (!getVal('cdNivel')) {
 	            	mandatoryFields += 'Nível de Permissão, ';
 	            }
-	            
-	            if (!getVal('dsLogin')) {
-	            	mandatoryFields += 'Login, ';
+
+	            if (!cdFunc) {
+	            	if (!getVal('dsLogin')) {
+	 	            	mandatoryFields += 'Login, ';
+	 	            }
+
+	 	            if (!getVal('dsSenha')) {
+	 	            	mandatoryFields += 'Senha, ';
+	 	            }
 	            }
-	            
-	            if (!getVal('dsSenha')) {
-	            	mandatoryFields += 'Senha, ';
-	            }
-	            
+
 	            if (!codigo) {
 	            	res = validaEndereco(getVal('route'), getVal('street_number'), getVal('postal_code'), getVal('baiEnd'), getVal('locality'));
 	            }
@@ -65,7 +67,7 @@ function registrarOnSaveFuncionario() {
 	        		urlSave = 'http://localhost:8080/SistemaLanchonete/services/funcionario/' + codigo;
 	        		params.cdFuncionario = getVal('cdFuncionario');
 	        	} else {
-	        		
+
 	        		params.enderecoPessoas = [
 	        			{
 		        			endereco: {
@@ -87,7 +89,6 @@ function registrarOnSaveFuncionario() {
 	        					dsComplemento: getVal('compEnd'),
 	        					dsObservacao: getVal('obsEndFunc')
 	        				},
-	        				//dtAlteracao: 9999999999999,
 	        				enderecoPadrao: true
 	        			}
 	        		];
@@ -110,7 +111,7 @@ function registrarOnSaveFuncionario() {
 	                			alert("Funcionário alterado com sucesso!");
 	                		}
 	                        $(location).attr('href','ConsultaFuncionario.html');
-	                	}, 
+	                	},
 	                	404: ()=>{
 	                		alert('Página não encontrada!');
 	                	},
@@ -149,19 +150,20 @@ function ativarDadosFuncionario() {
 	       	    if (enderecos && enderecos.length > 0) {
 	       	        let content = '';
 	       	        enderecos.forEach(end => {
+						listaEnderecos.push(end);
 		       	        let logradouro = end.endereco.logradouro;
 		       	        let url = '"CadastroEndereco.html#'+ end.endereco.cdEndereco + '"';
-		       	        let botoes = '<a data-toggle="modal" data-target="#ModalEndereco" onClick="setCdEndereco('+ end.endereco.cdEndereco +')" class="end-edit">Editar</a>' + 
+		       	        let botoes = '<a data-toggle="modal" data-target="#ModalEndereco" onClick="populaDadosEndereco('+ end.endereco.cdEndereco +')" class="end-edit">Editar</a>' +
 		       	        			 '<a href="#" class="end-del">Excluir</a>';
 		       	        let texto = 'Rua: ' + logradouro.dsLogradouro + '<br>' +
-		       	        'Número: ' + end.endereco.cdNumero + 
+		       	        'Número: ' + end.endereco.cdNumero +
 		       	        ' CEP: ' + logradouro.cdCep + '<br>' +
 		       	        'Bairro: ' + logradouro.bairro.dsBairro + '<br>' +
 		       	        'Cidade: ' + logradouro.bairro.municipio.dsMunicipio + '<br><br><br>';
 		        	    let p = '<p>' + texto + botoes + '</p>';
-		        	    content += p; 
+		        	    content += p;
 	       	        });
-	       	        	$('#cardEnds').html(content + '<a data-toggle="modal" data-target="#ModalEndereco" class="add-end"><i class="fa fa-plus"></i>Adicionar endereço</a>');
+	       	        	$('#cardEnds').html(content + '<a data-toggle="modal" data-target="#ModalEndereco" onClick="populaDadosEndereco()" class="add-end"><i class="fa fa-plus"></i>Adicionar endereço</a>');
 	       	        }
        		}
        	},
@@ -177,7 +179,7 @@ function ativarDadosFuncionario() {
        }
    });
 }
- 
+
 function getVal(idfield) {
 	return $('#'+idfield).val();
 }
@@ -187,7 +189,7 @@ function esconderCardsEndereco() {
 		 $('#fsEnd').css('visibility', 'hidden');
 		 $('#fsEnd').css('height', '0');
 	 } else {
-		 $('#fsEnds').css('visibility', 'hidden'); 
+		 $('#fsEnds').css('visibility', 'hidden');
 		 $('#fsEnds').css('height', '0');
 	 }
 }

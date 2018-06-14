@@ -20,6 +20,7 @@ $(document).ready(() => {
     				'</td>';
     				data.push(val.cdFuncionario);
     				data.push(val.dsNome);
+    				data.push(val.dsCargo);
     				data.push(val.dsTelefone1);
     				data.push(opcoes);
     				dataSet.push(data);
