@@ -1,4 +1,4 @@
-<!-- 
+﻿<!-- 
     Document   	: ProdutoCategoriaCadastro
 	Created on 	: 21/04/2018, 16:39:28
     Author     	: Morgana e Sidnei
@@ -11,20 +11,20 @@
 </div>
 
 <div class="formtitle">Adicionar categoria</div>
-<form>
+<form id="form-produto-categoria"> 
 	<div class="page-cad">
 
 
 		<div class="form-row">
 			<div class="form-group col-md-2">
 				<label for="cdProdutoCategoria">Código</label> <input class="form-control"
-					id="cdProdutoCategoria" type="number" min="1">
+					id="cdProdutoCategoria" name="cdProdutoCategoria" type="number" min="1">
 			</div>
 		</div>
 		<div class="form-row">
 			<div class="form-group col-md-10">
 				<label for="dsCategoria" class="control-label required">Descrição</label>
-				<input class="form-control" id="dsCategoria" type="text" maxlength="70"
+				<input class="form-control" id="dsCategoria" name="dsCategoria" type="text" maxlength="70"
 					required>
 			</div>
 		</div>
@@ -36,12 +36,14 @@
 			</div>
 		</div>
 
-		<center>
-			<a class="link-abrir" href="#"><button type="button"
+		<div style="text-align: center;">
+			<a class="link-abrir" href="ProdutoCategoriaConsulta.html"><button type="button"
 					class="btn btn-secondary">Cancelar</button></a> <a href="#"><button
 					type="button" class="btn btn-success" id="btnSaveCate">
 					<i class="fa fa-save"></i>Cadastrar categoria
 				</button></a>
-		</center>
+		</div>
 	</div>
 </form>
+
+<script type="text/javascript" src="controller/produto/ProdutoCategoriaCadastro.js"></script>
