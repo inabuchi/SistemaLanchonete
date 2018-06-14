@@ -1,10 +1,19 @@
 {
-    "cdProduto": 999,
-    "categoria": {
-        "cdProdutoCategoria": 9999,
-        "dsCategoria": "XXXXXXXXXXX"
-    },
-    "dsRefProduto": "XXXX",
-    "dsProduto": "XXXXXXXXXXXXXXXXXXX",
-    "isAtivo": false
+	"cdProduto": 0,
+	"categoria": {
+		"cdProdutoCategoria": 0,
+		"dsCategoria": "XXXXXXX"
+	},
+	"dsRefProduto": "XXXX",
+	"dsProduto": "XXXXX",
+	"precoProduto": [
+		{
+			"cdPrecoProduto": 0,
+			"vlPrecoAtual": 999.99,
+			"dtInicial": 1514685600000,
+			"dtFinal": 1546221600000,
+			"ativo": true
+		}
+	],
+	"ativo": true
 }

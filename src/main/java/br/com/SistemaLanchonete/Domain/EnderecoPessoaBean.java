@@ -25,7 +25,7 @@ public class EnderecoPessoaBean implements Serializable {
 	private EnderecoPessoaPK pk = new EnderecoPessoaPK();
 
 	@Column(name = "dt_alteracao")
-	private Date dtAlteracao;
+	private Date dtAlteracao= new Date();
 
 	@Column(name = "is_endereco_padrao")
 	private boolean isEnderecoPadrao;

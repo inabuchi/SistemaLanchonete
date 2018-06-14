@@ -13,8 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 /**
  * Classe modelo para ProdutoCategoria
  * 
@@ -32,7 +30,7 @@ public class ProdutoCategoriaBean implements Serializable {
 
 	@Column(name = "ds_categoria")
 	private String dsCategoria;
-@JsonIgnore
+
 	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
 	private List<ProdutoBean> produtos = new ArrayList<ProdutoBean>();
 
