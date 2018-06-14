@@ -22,12 +22,14 @@ function registrarOnSaveFuncionario() {
 	            	mandatoryFields += 'Nível de Permissão, ';
 	            }
 
-	            if (!getVal('dsLogin')) {
-	            	mandatoryFields += 'Login, ';
-	            }
+	            if (!cdFunc) {
+	            	if (!getVal('dsLogin')) {
+	 	            	mandatoryFields += 'Login, ';
+	 	            }
 
-	            if (!getVal('dsSenha')) {
-	            	mandatoryFields += 'Senha, ';
+	 	            if (!getVal('dsSenha')) {
+	 	            	mandatoryFields += 'Senha, ';
+	 	            }
 	            }
 
 	            if (!codigo) {
@@ -148,6 +150,7 @@ function ativarDadosFuncionario() {
 	       	    if (enderecos && enderecos.length > 0) {
 	       	        let content = '';
 	       	        enderecos.forEach(end => {
+						listaEnderecos.push(end);
 		       	        let logradouro = end.endereco.logradouro;
 		       	        let url = '"CadastroEndereco.html#'+ end.endereco.cdEndereco + '"';
 		       	        let botoes = '<a data-toggle="modal" data-target="#ModalEndereco" onClick="populaDadosEndereco('+ end.endereco.cdEndereco +')" class="end-edit">Editar</a>' +

@@ -208,7 +208,7 @@ var objFuncionario;
 function popularObjetoFuncionario() {
   objFuncionario = {
     cdFuncionario: $('#cdFuncionario').val(),
-    dsNome : $('#dsNome').val();
+    dsNome : $('#dsNome').val(),
     dsTelefone1 : $('#dsTelefone1').val(),
     dsTelefone2 : $('#dsTelefone2').val(),
     cdNivel : $('#cdNivel').val(),

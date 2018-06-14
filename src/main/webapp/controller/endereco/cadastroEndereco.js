@@ -44,6 +44,7 @@ $(document).ready(() => {
 					pessoa = objFuncionario;
 					objFuncionario = undefined;
 					if (codEndereco) {
+						debugger;
 						url = 'http://localhost:8080/SistemaLanchonete/services/funcionario/'+ pessoa.cdFuncionario;
 						type = 'PUT';
 					} else {
