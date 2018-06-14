@@ -15,11 +15,13 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+
 import br.com.SistemaLanchonete.Domain.ClienteBean;
 import br.com.SistemaLanchonete.Service.ClienteService;
 
 /**
- * Classe REST para manipulação de objetos do tipo cliente<br>
+ * Classe REST para manipulaï¿½ï¿½o de objetos do tipo cliente<br>
  * <p>
  * URI para acesso: http://localhost:8080/SistemaLanchonete/services/cliente
  * 
@@ -30,7 +32,7 @@ import br.com.SistemaLanchonete.Service.ClienteService;
 public class ClienteResource {
 
 	/**
-	 * Recurso REST para inserção de um novo cliente
+	 * Recurso REST para inserï¿½ï¿½o de um novo cliente
 	 * <p>
 	 * URI para acesso:
 	 * http://localhost:8080/SistemaLanchonete/services/cliente/cliente
@@ -59,7 +61,7 @@ public class ClienteResource {
 	}
 
 	/**
-	 * Recurso REST para atualização de um cliente no BD *
+	 * Recurso REST para atualizaï¿½ï¿½o de um cliente no BD *
 	 * <p>
 	 * URI para acesso:
 	 * http://localhost:8080/SistemaLanchonete/services/cliente/cdPessoa
@@ -87,7 +89,7 @@ public class ClienteResource {
 	}
 
 	/**
-	 * Recurso REST para remoção de um cliente no BD
+	 * Recurso REST para remoï¿½ï¿½o de um cliente no BD
 	 * <p>
 	 * URI para acesso:
 	 * http://localhost:8080/SistemaLanchonete/services/cliente/cdPessoa
@@ -108,14 +110,14 @@ public class ClienteResource {
 			ClienteBean cliente = new ClienteBean();
 			cliente.setCdPessoa(cdPessoa);
 			new ClienteService().remove(cliente);
-			return Response.status(200).entity("Cliente excluído com sucesso").build();
+			return Response.status(200).entity("Cliente excluï¿½do com sucesso").build();
 		} catch (Exception e) {
 			throw new WebApplicationException(500);
 		}
 	}
 
 	/**
-	 * Recurso REST para busca de um único cliente no BD
+	 * Recurso REST para busca de um ï¿½nico cliente no BD
 	 * <p>
 	 * URI para acesso:
 	 * http://localhost:8080/SistemaLanchonete/services/cliente/cdPessoa
@@ -142,7 +144,7 @@ public class ClienteResource {
 	}
 
 	/**
-	 * Recurso REST para fazer uma busca de vários clientes no BD de acordo com o
+	 * Recurso REST para fazer uma busca de vï¿½rios clientes no BD de acordo com o
 	 * valor passado por parametro na URL
 	 * <p>
 	 * URI para acesso:
