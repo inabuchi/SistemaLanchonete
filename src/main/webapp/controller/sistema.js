@@ -1,13 +1,13 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
 /**
- * 
+ *
  * Carrega uma página em um elemento html por ajax
- * 
+ *
  * @author Igor Vieira Rodrigues
  * @param {String}
  *            txtUrlEnvio url de destino
@@ -47,9 +47,9 @@ function abrirPagina(txtUrlEnvio, txtElementoDOM) {
 }
 
 /**
- * 
+ *
  * Envia objeto json para o restful via ajax
- * 
+ *
  * @author Igor Vieira Rodrigues
  * @param {String}
  *            prUrl
@@ -98,9 +98,9 @@ function enviarAjax(prUrl, prMethod, prDados, prDoneCallBack, prFailCallBack) {
 }
 
 /**
- * 
+ *
  * Retorna os dados preenchidos no formulário em formato JSON
- * 
+ *
  * @author Igor Vieira Rodrigues
  * @param {HTMLForm}
  *            prForm
@@ -127,9 +127,9 @@ function getFormCampos(prForm) {
 }
 
 /**
- * 
+ *
  * Preenche um formulário com o objeto JSON, e retorna o próprio formulário
- * 
+ *
  * @author Igor Vieira Rodrigues
  * @param {HTMLForm}
  *            prForm
@@ -154,7 +154,7 @@ function setFormCampos(prForm, prJSON) {
 
 /**
  * Função para retornar a url atual
- * 
+ *
  * @returns
  */
 function getUrl(){
@@ -166,7 +166,7 @@ function getUrl(){
 	}else{
 		return '';
 	}
-	
+
 }
 
 function getId() {
@@ -182,4 +182,39 @@ var codEndereco;
 
 function setCdEndereco(cd) {
 	codEndereco = cd;
+}
+
+var objetoPessoa;
+function popularObjetoCliente() {
+	objetoPessoa = {
+		cdPessoa : $('#cdPessoa').val(),
+		dsNome : $('#dsNome').val(),
+		dsTelefone1 : $('#dsTelefone1').val(),
+		dsTelefone2 : $('#dsTelefone2').val(),
+		dsObservacao : $('#dsObservacao').val()
+	};
+}
+
+function populaDadosEndereco(cd, tipo) {
+  setCdEndereco(cd);
+  if (tipo === 'C') {
+    popularObjetoCliente();
+  } else {
+    popularObjetoFuncionario();
+  }
+}
+
+var objFuncionario;
+function popularObjetoFuncionario() {
+  objFuncionario = {
+    cdFuncionario: $('#cdFuncionario').val(),
+    dsNome : $('#dsNome').val();
+    dsTelefone1 : $('#dsTelefone1').val(),
+    dsTelefone2 : $('#dsTelefone2').val(),
+    cdNivel : $('#cdNivel').val(),
+    ativo : $('#ativo').val(),
+    dsCargo : $('#dsCargo').val(),
+    dsLogin : $('#dsLogin').val() || null,
+    dsSenha : $('#dsSenha').val() || null
+  };
 }

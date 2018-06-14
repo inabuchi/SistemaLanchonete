@@ -24,34 +24,66 @@ $(document).ready(() => {
 		    }
 			return  true;
 		};
-		
+
 		const salvarEndereco = () => {
-			debugger
 			if (validarFormEndereco()) {
-				let url = 'http://localhost:8080/SistemaLanchonete/services/endereco/endereco';
-				let type = 'POST';
-				const params = {
-						dsRua: rua.val(),
-						cdNumero: num.val(),
-			            dsBairro: bairro.val(),
-			            cep: cep.val(),
-			            dsObservacaoEnd: obs.val(),
-			            dsLogradouro: log.val(),
-			            dsCidade: cidade.val(),
-			            dsEstado: uf.val()
-			    	   };
-				if (codEndereco) {
-					params.cdEndereco = cod.val();
-					url = 'http://localhost:8080/SistemaLanchonete/services/endereco/'+ cod.val();
-					type = 'PUT';
+				let url;
+				let type;
+				let pessoa;
+				if (objetoPessoa) {
+					pessoa = objetoPessoa;
+					if (codEndereco) {
+						url = 'http://localhost:8080/SistemaLanchonete/services/cliente/'+ pessoa.cdPessoa;
+						type = 'PUT';
+					} else {
+						url = 'http://localhost:8080/SistemaLanchonete/services/cliente/cliente';
+						type = 'POST';
+					}
+				} else if (objFuncionario) {
+					pessoa = objFuncionario;
+					if (codEndereco) {
+						url = 'http://localhost:8080/SistemaLanchonete/services/funcionario/'+ pessoa.cdFuncionario;
+						type = 'PUT';
+					} else {
+						url = 'http://localhost:8080/SistemaLanchonete/services/funcionario/funcionario';
+						type = 'POST';
+					}
 				}
+
+
+				pessoa.enderecoPessoas = [
+					{
+						endereco: {
+							logradouro: {
+								bairro: {
+									municipio: {
+										estado: {
+											dsEstado: "",
+											dsSigla: uf.val()
+										},
+										dsMunicipio: cidade.val()
+									},
+									dsBairro: bairro.val()
+								},
+								cdCep: cep.val(),
+								dsLogradouro: rua.val()
+							},
+							cdNumero: nr.val(),
+							dsComplemento: complemento.val(),
+							dsObservacao: obsEnd.val()
+						},
+						enderecoPadrao: true,
+						cdEndereco = cod.val() || null
+					}
+				];
+
 				$.ajax({
 			    	headers: {
 			            'Accept': 'application/json',
 			            'Content-Type': 'application/json'
 			        },
 			        type: type
-			        , data: JSON.stringify(params)
+			        , data: JSON.stringify(pessoa)
 			        , dataType: 'json' //
 			        , url: url
 			        , statusCode: {
@@ -62,7 +94,7 @@ $(document).ready(() => {
 			        			alert("Novo endereço cadastrado!");
 			        		}
 			        		setCdEndereco(undefined);
-			        	}, 
+			        	},
 			        	404: ()=>{
 			        		debugger;
 			        		alert('Página não encontrada!');
@@ -76,13 +108,13 @@ $(document).ready(() => {
 			        		alert('Ocorreu um erro interno. Contate o administrador.');
 			        	}
 			        }
-			    });	
+			    });
 			}
 		};
-		
+
 		salvarEndereco();
 	});
-	
+
 	$('#ModalEndereco').on('shown.bs.modal', () =>{
 	    const carregarEndereco = ()=> {
 	    	debugger;
@@ -102,7 +134,7 @@ $(document).ready(() => {
 	    				obs.val(end.dsObservacao);
 	    			}
 	    		});
-	    		$('#btnSaveEndereco').text('Editar endereço'); 
+	    		$('#btnSaveEndereco').text('Editar endereço');
 	    		$('#lcdEndereco').show();
 	   		 	$('#cdEndereco').show();
 	   		 	$('#cdEndereco').prop("readonly", true);
@@ -112,10 +144,10 @@ $(document).ready(() => {
 	    		$('#cdEndereco').hide();
 	    	}
 		};
-		
+
 		carregarEndereco();
-		
-		
+
+
 	}).on('hidden.bs.modal', () => {
 	    setCdEndereco(undefined);
 	    $('#cdEndereco').val('');
@@ -129,6 +161,5 @@ $(document).ready(() => {
 		$('#uf').val('');
 		$('#obsEnd').val('');
 	});
-	
-});
 
+});

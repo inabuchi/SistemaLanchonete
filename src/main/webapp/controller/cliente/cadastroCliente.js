@@ -4,7 +4,6 @@ function registrarOnSaveCliente() {
 	 const btnSave = $("#btnSaveCliente");
 	 btnSave.click(() => {
 		 const codigo = $('#cdCliente').val();
-		 debugger
 	        const name = $('#dsNome');
 	        const phone1 = $('#dsTelefone1');
 	        const phone2 = $('#dsTelefone2');
@@ -53,7 +52,7 @@ function registrarOnSaveCliente() {
 
 	        if (validaFomularioCliente()) {
 	        	const params = {};
-	            let type = 'POST';
+	          let type = 'POST';
 	        	params.dsNome = name.val();
 	        	params.dsTelefone1 = phone1.val();
 	        	params.dsTelefone2 = phone2.val();
@@ -108,7 +107,7 @@ function registrarOnSaveCliente() {
 	                			alert("Cliente cadastrado com sucesso!");
 	                		}
 	                        $(location).attr('href','ConsultaCliente.html');
-	                	}, 
+	                	},
 	                	404: ()=>{
 	                		alert('Página não encontrada!');
 	                	},
@@ -148,18 +147,18 @@ function ativarDadosCliente() {
 	       	        	enderecos.forEach(end => {
 	       	        		listaEnderecos.push(end);
 	       	        		let logradouro = end.endereco.logradouro;
-	       	        		
-	       	        		let botoes = '<a data-toggle="modal" data-target="#ModalEndereco" onClick="setCdEndereco('+ end.endereco.cdEndereco +')" class="end-edit">Editar</a>' + 
+											const tipo = 'C';
+	       	        		let botoes = '<a data-toggle="modal" data-target="#ModalEndereco" onClick="populaDadosEndereco('+ end.endereco.cdEndereco +',' + tipo + ')" class="end-edit">Editar</a>' +
 	       	        					 '<a href="#" class="end-del">Excluir</a>';
 	       	        		let texto = 'Rua: ' + logradouro.dsLogradouro + '<br>' +
-	       	        					'Número: ' + end.endereco.cdNumero + 
+	       	        					'Número: ' + end.endereco.cdNumero +
 	       	        					' CEP: ' + logradouro.cdCep + '<br>' +
 	       	        					'Bairro: ' + logradouro.bairro.dsBairro + '<br>' +
 	       	        					'Cidade: ' + logradouro.bairro.municipio.dsMunicipio + '<br><br><br>';
 	        	        		let p = '<p>' + texto + botoes + '</p>';
-	        	        		content += p; 
+	        	        		content += p;
 	       	        	});
-	       	        	$('#cardEnds').html(content + '<a data-toggle="modal" data-target="#ModalEndereco" class="add-end"><i class="fa fa-plus"></i>Adicionar endereço</a>');
+	       	        	$('#cardEnds').html(content + '<a data-toggle="modal" data-target="#ModalEndereco" onClick="populaDadosEndereco(undefined, '+ tipo +')" class="add-end"><i class="fa fa-plus"></i>Adicionar endereço</a>');
 	       	        }
        		}
        	},
@@ -184,7 +183,7 @@ function tratarVisibilidadeCampos() {
 		 $('#cdCliente').show();
 		 $('#cdCliente').prop("readonly", true);
 	 } else {
-		 $('#fsEnds').css('visibility', 'hidden'); 
+		 $('#fsEnds').css('visibility', 'hidden');
 		 $('#fsEnds').css('height', '0');
 		 $('#lcdCliente').hide();
 		 $('#cdCliente').hide();
@@ -207,13 +206,3 @@ $("#formCliente").ready(() => {
 		cdEdit = undefined;
 	}
 });
-
-
-
-
-
-
-
-
-
-
