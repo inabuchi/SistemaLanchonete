@@ -19,7 +19,7 @@ function carregarPagina($) {
     }
 
 
-    $('a#btnSaveAdic').on('click', e => salvar(e));
+    $('a#btnSaveCate').on('click', e => salvar(e));
 }
 
 /**
@@ -46,7 +46,7 @@ function salvar(e) {
  * 
  * @param {Object} dados 
  */
-function updateProdutoAdicional(dados) {
+function updateProdutoCategoria(dados) {
     return enviarAjax(`services/produtoCategoria/${dados.cdProdutoCategoria}`,
         'PUT',
         dados,
@@ -58,7 +58,7 @@ function updateProdutoAdicional(dados) {
  * 
  * @param {Object} dados 
  */
-function insertProdutoAdicional(dados) {
+function insertProdutoCategoria(dados) {
     return enviarAjax('services/produtoCategoria/produtoCategoria',
         'POST',
         dados,

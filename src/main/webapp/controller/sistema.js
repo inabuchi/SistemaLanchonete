@@ -78,6 +78,8 @@ function enviarAjax(prUrl, prMethod, prDados, prDoneCallBack, prFailCallBack) {
         url: prUrl,
         type: prMethod.toUpperCase(),
         headers: {
+//            'Accept': 'application/json',
+//            'Content-Type': 'application/json',
             'Cache-Control': 'no-cache',
             'X-Requested-With': 'XMLHttpRequest',
             'Access-Control-Allow-Origin': '*',

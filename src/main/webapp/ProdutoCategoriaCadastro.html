@@ -5,43 +5,45 @@
 	Função		: Cadastrar/modificar uma Categoria de produto (alguns exemplos de categoria são lanche, petisco, bebida)
 -->
 <div class="content-title">
-	<i class="fa fa-barcode"></i>Produtos<a class="link-abrir"
-		href="ProdutoCategoriaConsulta.html"><i class="fa fa-angle-right"></i>Categorias
-		de produtos</a> <i class="fa fa-angle-right"></i>Adicionar categoria
+	<i class="fa fa-barcode"></i>Produtos
+	<a class="link-abrir" href="ProdutoCategoriaConsulta.html">
+		<i class="fa fa-angle-right"></i>Categorias de produtos</a>
+	<i class="fa fa-angle-right"></i>Adicionar categoria
 </div>
 
 <div class="formtitle">Adicionar categoria</div>
-<form id="form-produto-categoria"> 
+<form id="form-produto-categoria">
 	<div class="page-cad">
 
 
 		<div class="form-row">
 			<div class="form-group col-md-2">
-				<label for="cdProdutoCategoria">Código</label> <input class="form-control"
-					id="cdProdutoCategoria" name="cdProdutoCategoria" type="number" min="1">
+				<label for="cdProdutoCategoria">Código</label>
+				<input class="form-control" id="cdProdutoCategoria" name="cdProdutoCategoria" type="number" min="1">
 			</div>
 		</div>
 		<div class="form-row">
 			<div class="form-group col-md-10">
 				<label for="dsCategoria" class="control-label required">Descrição</label>
-				<input class="form-control" id="dsCategoria" name="dsCategoria" type="text" maxlength="70"
-					required>
+				<input class="form-control" id="dsCategoria" name="dsCategoria" type="text" maxlength="70" required>
 			</div>
 		</div>
 		<div class="form-row">
 			<div class="form-check">
-				<input class="form-check-input" type="checkbox" checked="checked"
-					id="ativo"> <label class="form-check-label"
-					for="ativo">Ativo</label>
+				<input class="form-check-input" type="checkbox" checked="checked" id="ativo">
+				<label class="form-check-label" for="ativo">Ativo</label>
 			</div>
 		</div>
 
 		<div style="text-align: center;">
-			<a class="link-abrir" href="ProdutoCategoriaConsulta.html"><button type="button"
-					class="btn btn-secondary">Cancelar</button></a> <a href="#"><button
-					type="button" class="btn btn-success" id="btnSaveCate">
+			<a class="link-abrir" href="ProdutoCategoriaConsulta.html">
+				<button type="button" class="btn btn-secondary">Cancelar</button>
+			</a>
+			<a id="btnSaveCate" href="#">
+				<button type="button" class="btn btn-success">
 					<i class="fa fa-save"></i>Cadastrar categoria
-				</button></a>
+				</button>
+			</a>
 		</div>
 	</div>
 </form>
