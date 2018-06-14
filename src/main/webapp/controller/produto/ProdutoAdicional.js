@@ -1,4 +1,4 @@
-$(document).ready(() =>{
+($ => $(document).ready(() =>{
     const codAdicional = $('#codAdi').val();
     const codReferencia = $('#refAdi').val();
     const descProduto = $('#descProd').val();
@@ -51,4 +51,4 @@ $(document).ready(() =>{
     $('#btnSave').click(() => {
         salvarProduto();
     });
-});
+}))(jQuery);

@@ -20,13 +20,13 @@
 
     $(document.body).on('click', '#includeMenu ul.collapse li > a',
         /**
-		 * 
-		 * Evento que visa abrir páginas dentro de um div específico
-		 * 
-		 * @param {Event}
-		 *            e
-		 * @returns {Boolean}
-		 */
+         * 
+         * Evento que visa abrir páginas dentro de um div específico
+         * 
+         * @param {Event}
+         *            e
+         * @returns {Boolean}
+         */
         e => {
             e.preventDefault();
             e.stopImmediatePropagation();
@@ -42,42 +42,48 @@
 
             return false;
         }).on('click', 'a.link-abrir', e => {
-            e.preventDefault();
-            e.stopImmediatePropagation();
+        e.preventDefault();
+        e.stopImmediatePropagation();
 
-            abrirPagina(e.currentTarget.href, '#conteudo');
+        abrirPagina(e.currentTarget.href, '#conteudo');
 
-            return false;
-        }).on('click', 'a.link-editar', e => {
-            e.preventDefault();
-            e.stopImmediatePropagation();
+        return false;
+    }).on('click', 'a.link-editar', e => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
 
-            console.log(e.currentTarget.attributes);
-            
-            var nrId = parseInt(e.currentTarget.getAttribute('data-id') ||'0');
-            var txtServico = e.currentTarget.getAttribute('data-servico');
-            var txtKey = e.currentTarget.getAttribute('data-key');
+        console.log(e.currentTarget.attributes);
 
-            abrirPagina(e.currentTarget.href, '#conteudo');
+        var nrId = parseInt(e.currentTarget.getAttribute('data-id') || '0');
+        var txtServico = e.currentTarget.getAttribute('data-servico');
+        var txtKey = e.currentTarget.getAttribute('data-key');
 
-            setTimeout(() =>            $('#conteudo form').each((index, formulario) => {
+        abrirPagina(e.currentTarget.href, '#conteudo');
 
-                enviarAjax(`/SistemaLanchonete/services/${txtServico}/${nrId}`,
-                    'GET',
-                    { txtKey: nrId },
-                    res => setFormCampos(formulario, res),
-                    res => console.error(res));
-            }), 500);
+        setTimeout(() => $('#conteudo form').each((index, formulario) => {
 
-            return false;
-        });
+            enviarAjax(`/SistemaLanchonete/services/${txtServico}/${nrId}`,
+                'GET', {
+                    txtKey: nrId
+                },
+                res => setFormCampos(formulario, res),
+                res => console.error(res));
+        }), 500);
+
+        return false;
+    });
 
 }))(jQuery);
-function carregarPaginaInicial() {
-    var txtUrl = getUrl();
-    if (txtUrl.length > 0)
-        abrirPagina(txtUrl, '#conteudo');
-    else
-    	abrirPagina('TelaDefault.html', '#conteudo');
-}
 
+function carregarPaginaInicial() {
+    var bloqueio = window.bloqueio || false;
+
+    if (!bloqueio) {
+        var txtUrl = getUrl();
+        if (txtUrl.length > 0)
+            abrirPagina(txtUrl, '#conteudo');
+        else
+            abrirPagina('TelaDefault.html', '#conteudo');
+    }
+    window.bloqueio = false;
+}

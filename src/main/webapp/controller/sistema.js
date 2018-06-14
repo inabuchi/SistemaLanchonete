@@ -36,10 +36,10 @@ function abrirPagina(txtUrlEnvio, txtElementoDOM) {
 
         // var txtUrlCrypt = btoa(JSON.stringify(txtUrlEnvio));
         var txtUrlCrypt = btoa(txtUrlEnvio);
+        window.bloqueio = true;
         window.location.href = `${txtUrl}#${txtUrlCrypt}`;
 
         $(txtElementoDOM).html("");
-
         $(txtElementoDOM).load(txtUrlEnvio, fnRetornoAjax);
     } catch (ex) {
         console.debug(ex);
