@@ -5,55 +5,51 @@
 	Função		: Cadastrar/modificar um adicional de produto (um exemplo de adicional é o bacon adicional do seu X-galinha)
 -->
 
-<script type="text/javascript"
-	src="controller/produto/cadastroProduto.js"></script>
-<script type="text/javascript"
-	src="controller/generics/validacoesGenericas.js"></script>
+<script type="text/javascript" src="controller/produto/cadastroProduto.js"></script>
+<script type="text/javascript" src="controller/generics/validacoesGenericas.js"></script>
 
 <div class="content-title">
-	<i class="fa fa-barcode"></i>Produtos<i class="fa fa-angle-right"></i><a
-		class="link-abrir" href="ProdutoAdicionalConsulta.html">Consulta
-		de adicionais</a><i class="fa fa-angle-right"></i>Cadastrar produto
-	adicional
+	<i class="fa fa-barcode"></i>Produtos
+	<i class="fa fa-angle-right"></i>
+	<a class="link-abrir" href="ProdutoAdicionalConsulta.html">Consulta de adicionais</a>
+	<i class="fa fa-angle-right"></i>Cadastrar produto adicional
 </div>
 
 <div class="formtitle">Cadastrar produto adicional</div>
-<form>
+<form id="form-produto-adicional">
 	<div class="page-cad">
 
 		<div class="form-row">
 			<div class="form-group col-md-2">
-				<label for="cdProdutoAdicional">Código</label> <input class="form-control"
-					id="cdProdutoAdicional" type="number" min="1">
+				<label for="cdProdutoAdicional">Código</label>
+				<input class="form-control" id="cdProdutoAdicional" name="cdProdutoAdicional" type="number" min="1">
 			</div>
 			<div class="form-group col-md-2">
 				<label for="dsReferencia" class="control-label required">Referência</label>
-				<input class="form-control" id="dsReferencia" type="text" maxlength="12"
-					required>
+				<input class="form-control" id="dsReferencia" name="dsReferencia" type="text" maxlength="12" required>
 			</div>
 		</div>
 		<div class="form-row">
 			<div class="form-group col-md-10">
 				<label for="dsAdicional" class="control-label required">Descrição</label>
-				<input class="form-control" id="dsAdicional" type="text" maxlength="70"
-					required>
+				<input class="form-control" id="dsAdicional" name="dsAdicional" type="text" maxlength="70" required>
 			</div>
 			<div class="form-group col-md-2">
 				<label for="vlAdicional" class="control-label required">Valor</label>
-				<input class="form-control" id="vlAdicional" type="number" required>
+				<input class="form-control" id="vlAdicional" name="vlAdicional" type="number" required>
 			</div>
 		</div>
 		<div class="form-row">
 			<div class="form-check">
-				<input class="form-check-input" type="checkbox" checked="checked"
-					id="ativo"> <label class="form-check-label"
-					for="ativo">Ativo</label>
+				<input class="form-check-input" type="checkbox" checked="checked" id="ativo">
+				<label class="form-check-label" for="ativo" name="ativo">Ativo</label>
 			</div>
 		</div>
 		<center>
 			<a class="link-abrir" href="#">
 				<button type="button" class="btn btn-secondary">Cancelar</button>
-			</a> <a href="#">
+			</a>
+			<a href="#">
 				<button type="button" class="btn btn-success" id="btnSaveAdic">
 					<i class="fa fa-save"></i>Cadastrar Adicional
 				</button>
@@ -61,3 +57,5 @@
 		</center>
 	</div>
 </form>
+
+<script type="text/javascript" src="controller/produto/ProdutoAdicionalCadastro.js"></script>

@@ -27,7 +27,6 @@
  */
 function popularTabela(tabela, res) {
 
-	debugger;
 	const dataSet = [];
 	const colunas = [{
 			'data': 'cdProdutoAdicional',
@@ -51,17 +50,16 @@ function popularTabela(tabela, res) {
 			'title': 'Opções',
 			'className': 'table-buttons',
 			'render': (data, type, row) => {
-				return `\
-					<a class="link-abrir" href="ProdutoAdicionalCadastro.html#${data}">\
-						<button type="button" class="table-edit" title="Editar">\
-							<i class="fa fa-pencil"></i>\
-						</button>\
-					</a>\
-					<!-- <a href="#${data}">\
-						<button type="button" class="table-del" title="Excluir">\
-							<i class="fa fa-close"></i>\
-						</button>\
-					</a> -->`;
+				return `<a class="link-abrir" href="ProdutoAdicionalCadastro.html#${data}">` +
+					'<button type="button" class="table-edit" title="Editar">' +
+					'<i class="fa fa-pencil"></i>' +
+					'</button>' +
+					'</a>' +
+					`<a href="#" onclick="excluirProdutoAdcional(event, ${data}, '${row.dsAdicional}')">` +
+					'<button type="button" class="table-del" title="Excluir">' +
+					'<i class="fa fa-close"></i>' +
+					'</button>' +
+					'</a>';
 			}
 
 		},
@@ -113,5 +111,27 @@ function popularTabela(tabela, res) {
 		},
 	});
 
+	$(tabela).find('th.table-buttons').removeClass('table-buttons');
+
 	return true;
+}
+
+/**
+ * Deleta o produto adcional
+ * 
+ * @param {Event} e evento
+ * @param {number} id Id do produto adicional
+ * @returns {boolean}
+ */
+function excluirProdutoAdcional(e, id, dsAdicional) {
+	e.preventDefault();
+	e.stopImmediatePropagation();
+
+	if (confirm(`Deseja excluir o produto adicional "${dsAdicional}"?`))
+		enviarAjax(`services/produtoAdicional/${id}`,
+			'DELETE', {}, 
+			res => alert(`"${dsAdicional} foi excluído com sucesso.`),
+			() => alert('Houve uma falha ao tentar excluir o produto.'));
+
+	return false;
 }
