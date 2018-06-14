@@ -32,6 +32,7 @@ $(document).ready(() => {
 				let pessoa;
 				if (objetoPessoa) {
 					pessoa = objetoPessoa;
+					objetoPessoa = undefined;
 					if (codEndereco) {
 						url = 'http://localhost:8080/SistemaLanchonete/services/cliente/'+ pessoa.cdPessoa;
 						type = 'PUT';
@@ -41,6 +42,7 @@ $(document).ready(() => {
 					}
 				} else if (objFuncionario) {
 					pessoa = objFuncionario;
+					objFuncionario = undefined;
 					if (codEndereco) {
 						url = 'http://localhost:8080/SistemaLanchonete/services/funcionario/'+ pessoa.cdFuncionario;
 						type = 'PUT';
@@ -160,6 +162,8 @@ $(document).ready(() => {
 		$('#cidade').val('');
 		$('#uf').val('');
 		$('#obsEnd').val('');
+		objFuncionario = undefined;
+		objetoPessoa = undefined;
 	});
 
 });
