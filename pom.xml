@@ -10,6 +10,11 @@
 	<description>Sistema para controle de pedidos em Lanchonete</description>
 	<url>http://maven.apache.org</url>
 	
+	<properties>
+		<jersey2.version>2.19</jersey2.version>
+		<jaxrs.version>2.0.1</jaxrs.version>
+	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -19,19 +24,37 @@
 		</dependency>
 		<!-- INICIO DAS DEPENDECIAS DO JERSEY -->
 		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-core</artifactId>
-			<version>1.19</version>
-		</dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>${jaxrs.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>${jersey2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>${jersey2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${jersey2.version}</version>
+        </dependency>
+		
 		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-json</artifactId>
-			<version>1.19</version>
+		    <groupId>org.glassfish.jersey.media</groupId>
+		    <artifactId>jersey-media-json-jackson</artifactId>
+		    <version>${jersey2.version}</version>
 		</dependency>
+
 		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-servlet</artifactId>
-			<version>1.19</version>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
 		</dependency>
 		<!-- FIM DAS DEPENDECIAS DO JERSEY -->
 		<!-- HIBERNATE -->
@@ -52,6 +75,28 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.46</version>
 		</dependency>
+		
+		<!-- Shiro authentication -->
+		<!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-core -->
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-core</artifactId>
+		    <version>1.4.0</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-web -->
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-web</artifactId>
+		    <version>1.4.0</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>org.secnod.shiro</groupId>
+		  <artifactId>shiro-jersey</artifactId>
+		  <version>0.2.0</version>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<finalName>SistemaLanchonete</finalName>
