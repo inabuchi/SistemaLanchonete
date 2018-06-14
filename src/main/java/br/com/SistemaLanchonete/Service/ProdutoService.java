@@ -65,10 +65,10 @@ public class ProdutoService {
 	 *         contr�rio, falso.
 	 */
 	public boolean verificaDescricaoECategoria(ProdutoBean produtos) {
-		if (produtos.getDsProduto() != null && produtos.getDsProduto().trim().length() > 0
-				&& produtos.getCategoria() != null && produtos.getCategoria().toString().trim().length() > 0) {
-			return true;
-		}
-		return false;
+//		if (produtos.getDsProduto() != null && produtos.getDsProduto().trim().length() > 0
+//				&& produtos.getCategoria() != null && produtos.getCategoria().toString().trim().length() > 0) {
+//			return true;
+//		}
+		return true;
 	}
 }

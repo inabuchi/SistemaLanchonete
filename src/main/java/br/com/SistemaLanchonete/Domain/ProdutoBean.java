@@ -18,9 +18,9 @@ import javax.persistence.Table;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
- * Classe modelo ProdutoBean para população dos produtos
+ * Classe modelo ProdutoBean para populaï¿½ï¿½o dos produtos
  * 
- * @author Jonatan José Soares
+ * @author Jonatan Josï¿½ Soares
  *
  */
 
@@ -42,30 +42,33 @@ public class ProdutoBean {
 
 	@Column(name = "ds_produto")
 	private String dsProduto;
+	
+	@OneToMany(mappedBy = "produto", targetEntity = PrecoProdutoBean.class, fetch = FetchType.LAZY, cascade = {
+			CascadeType.ALL })
+	private List<PrecoProdutoBean> precoProduto = new ArrayList<PrecoProdutoBean>();
 
 	@Column(name = "is_ativo")
 	private boolean isAtivo;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "pk.produto", targetEntity = ItemPedidoBean.class, fetch = FetchType.LAZY, cascade = {
 			CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH })
 	private List<ItemPedidoBean> itensPedido = new ArrayList<ItemPedidoBean>();
+
 	/**
-	 * Constructor padrão da Classe ProdutoBean;
+	 * Constructor padrï¿½o da Classe ProdutoBean;
 	 */
 
 	public ProdutoBean() {
 	}
 
 	/**
-	 * Construtor da classe
-	 *
 	 * @param cdProduto
 	 * @param categoria
 	 * @param dsRefProduto
 	 * @param dsProduto
 	 * @param isAtivo
 	 */
-
 	public ProdutoBean(int cdProduto, ProdutoCategoriaBean categoria, String dsRefProduto, String dsProduto,
 			boolean isAtivo) {
 		super();
@@ -77,88 +80,149 @@ public class ProdutoBean {
 	}
 
 	/**
+	 * Captura o valor contido no parametro cdProduto
 	 * 
-	 * @return Retorna a categproa do Produto
+	 * @return cdProduto
 	 */
-	public ProdutoCategoriaBean getCategoria() {
-		return categoria;
-	}
 
-	/**
-	 * 
-	 * @param Setar
-	 *            valor para categoria
-	 */
-	public void setCategoria(ProdutoCategoriaBean categoria) {
-		this.categoria = categoria;
-	}
-
-	/**
-	 * 
-	 * @return Retorna a descrição da referência do Produto
-	 */
 	public int getCdProduto() {
 		return cdProduto;
 	}
 
 	/**
+	 * Setar o valor para o parametro cdProduto
 	 * 
-	 * @param Setar
-	 *            valor para cdProduto
+	 * @param cdProduto
 	 */
 	public void setCdProduto(int cdProduto) {
 		this.cdProduto = cdProduto;
 	}
 
 	/**
+	 * Captura o valor contido no parametro categoria
 	 * 
-	 * @return Retorna a descrição da referência do Produto
+	 * @return categoria
 	 */
+
+	public ProdutoCategoriaBean getCategoria() {
+		return categoria;
+	}
+
+	/**
+	 * Setar o valor para o parametro categoria
+	 * 
+	 * @param categoria
+	 */
+	public void setCategoria(ProdutoCategoriaBean categoria) {
+		this.categoria = categoria;
+	}
+
+	/**
+	 * Captura o valor contido no parametro dsRefProduto
+	 * 
+	 * @return dsRefProduto
+	 */
+
 	public String getDsRefProduto() {
 		return dsRefProduto;
 	}
 
 	/**
+	 * Setar o valor para o parametro dsRefProduto
 	 * 
-	 * @param Setar
-	 *            valor para dsRefProduto
+	 * @param dsRefProduto
 	 */
 	public void setDsRefProduto(String dsRefProduto) {
 		this.dsRefProduto = dsRefProduto;
 	}
 
 	/**
+	 * Captura o valor contido no parametro dsProduto
 	 * 
-	 * @return Retorna a descrição do Produto
+	 * @return dsProduto
 	 */
+
 	public String getDsProduto() {
 		return dsProduto;
 	}
 
 	/**
+	 * Setar o valor para o parametro dsProduto
 	 * 
-	 * @param Setar
-	 *            valor para dsProduto
+	 * @param dsProduto
 	 */
 	public void setDsProduto(String dsProduto) {
 		this.dsProduto = dsProduto;
 	}
 
 	/**
+	 * Captura o valor contido no parametro precoProduto
 	 * 
-	 * @return Retorna se produto está ativo ou não
+	 * @return precoProduto
 	 */
-	public boolean getIsAtivo() {
+
+	public List<PrecoProdutoBean> getPrecoProduto() {
+		return precoProduto;
+	}
+
+	/**
+	 * Setar o valor para o parametro precoProduto
+	 * 
+	 * @param precoProduto
+	 */
+	public void setPrecoProduto(List<PrecoProdutoBean> precoProduto) {
+		this.precoProduto = precoProduto;
+	}
+
+	/**
+	 * Captura o valor contido no parametro isAtivo
+	 * 
+	 * @return isAtivo
+	 */
+
+	public boolean isAtivo() {
 		return isAtivo;
 	}
 
 	/**
+	 * Setar o valor para o parametro isAtivo
 	 * 
-	 * @param Setar
-	 *            valor para isAtivo (True or False)
+	 * @param isAtivo
 	 */
-	public void setIsAtivo(boolean isAtivo) {
+	public void setAtivo(boolean isAtivo) {
 		this.isAtivo = isAtivo;
+	}
+
+	/**
+	 * Captura o valor contido no parametro itensPedido
+	 * 
+	 * @return itensPedido
+	 */
+
+	public List<ItemPedidoBean> getItensPedido() {
+		return itensPedido;
+	}
+
+	/**
+	 * Setar o valor para o parametro itensPedido
+	 * 
+	 * @param itensPedido
+	 */
+	public void setItensPedido(List<ItemPedidoBean> itensPedido) {
+		this.itensPedido = itensPedido;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + cdProduto;
+		return result;
 	}
 
 	/*
@@ -168,24 +232,28 @@ public class ProdutoBean {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (!super.equals(obj))
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (!(obj instanceof ProdutoBean)) {
 			return false;
+		}
 		ProdutoBean other = (ProdutoBean) obj;
-		if (cdProduto != other.cdProduto)
+		if (cdProduto != other.cdProduto) {
 			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "\nClasse ................: " + getClass().getSimpleName() + //
-				"\nCódigo do Produto......: " + getCdProduto() + //
+				"\nCï¿½digo do Produto......: " + getCdProduto() + //
 				"\nRef. Interna...........: " + getDsRefProduto() + //
-				"\nDescrição do Produto...: " + getDsProduto() + //
-				"\nAtivo..................: " + (getIsAtivo() ? "Sim" : "Não");//
+				"\nDescriï¿½ï¿½o do Produto...: " + getDsProduto() + //
+				"\nAtivo..................: " + (isAtivo() ? "Sim" : "Nï¿½o");//
 	}
 }

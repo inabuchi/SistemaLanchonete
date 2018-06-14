@@ -1,5 +1,6 @@
 package br.com.SistemaLanchonete.Teste;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import br.com.SistemaLanchonete.Domain.FuncionarioBean;
 import br.com.SistemaLanchonete.Domain.LogradouroBean;
 import br.com.SistemaLanchonete.Domain.MunicipioBean;
 import br.com.SistemaLanchonete.Domain.PedidoBean;
+import br.com.SistemaLanchonete.Domain.PrecoProdutoBean;
 import br.com.SistemaLanchonete.Domain.ProdutoAdicionalBean;
 import br.com.SistemaLanchonete.Domain.ProdutoBean;
 import br.com.SistemaLanchonete.Domain.ProdutoCategoriaBean;
@@ -113,6 +115,13 @@ public class Principal {
 	private static ProdutoBean pro6 = new ProdutoBean(0, cat6, "99", "produto sem espaco", true);
 	private static ProdutoBean pro7 = new ProdutoBean(0, cat6, "xxxx", "123456789", true);
 	private static ProdutoBean[] produtos = { pro0, pro1, pro2, pro3, pro4, pro5, pro6, pro7 };
+
+	/*
+	 * Preços para teste
+	 */
+	private static PrecoProdutoBean pre0 = new PrecoProdutoBean(0, pro7, 10, null, null, true);
+	private static List<PrecoProdutoBean> precoProduto = new ArrayList<PrecoProdutoBean>();
+
 	private static PedidoBean ped1 = new PedidoBean(0, cli5, func4, func3, fpa7, 0, new Date(), 0, 0, 0, 0, new Date(),
 			0, "");
 	private static PedidoBean ped2;
@@ -193,26 +202,27 @@ public class Principal {
 	 * 
 	 */
 	private static void cliente(String operacao) throws BDException {
-		//vamos inserir um cliente completo para ver
-		
+		// vamos inserir um cliente completo para ver
+
 		EstadoBean est = new EstadoBean(0, "Exterior", "EX");
 		MunicipioBean mun = new MunicipioBean(0, est, "Rowekseoes");
 		BairroBean bairro = new BairroBean(0, mun, "Adsrewqw");
 		LogradouroBean log = new LogradouroBean(0, bairro, 89010600, "Rua woeasudwi");
 		EnderecoBean end = new EnderecoBean(0, log, 799, "SCI Sistemas cont�beis", "");
-		EnderecoPessoaBean endPessoa = new EnderecoPessoaBean(null, end,new Date(), true);
+		EnderecoPessoaBean endPessoa = new EnderecoPessoaBean(null, end, new Date(), true);
 		/* EnderecoService endSer = new EnderecoService(); */
 		cli5.addEnderecoPessoa(endPessoa);
 		ClienteService cliSer = new ClienteService();
 		cliSer.save(cli5);
-//		for (ClienteBean clienteBean : clientes) {
-//			try {
-//				System.out.println(clienteBean + " <--> " + new ClienteService().save(clienteBean));
-//			} catch (BDException e) {
-//
-//				e.printStackTrace();
-//			}
-//		}
+		// for (ClienteBean clienteBean : clientes) {
+		// try {
+		// System.out.println(clienteBean + " <--> " + new
+		// ClienteService().save(clienteBean));
+		// } catch (BDException e) {
+		//
+		// e.printStackTrace();
+		// }
+		// }
 		/* endSer.save(endPessoa); */
 	}
 
@@ -347,10 +357,15 @@ public class Principal {
 		// "dsProduto": "XXXXXXXXXXXXXXXXXXX",//
 		// "isAtivo": false //
 		// } //
+		precoProduto.add(pre0);
+		pro7.setPrecoProduto(precoProduto);
+		List<ProdutoBean> listaProduto = new ProdutoResource().findLike(null, null);
+		ProdutoResource produtoResource = new ProdutoResource();
+
 		switch (operacao) {
 		case Constantes.INSERE:
 			for (ProdutoBean produtoBean : produtos) {
-				System.out.println(produtoBean + " <--> " + new ProdutoResource().insert(produtoBean));
+				System.out.println(produtoBean + " <--> " + produtoResource.insert(produtoBean));
 			}
 			break;
 		case Constantes.ALTERA:
@@ -358,8 +373,16 @@ public class Principal {
 		case Constantes.DELETA:
 			break;
 		case Constantes.PESQUISA:
+			for (int i = 0; i <= listaProduto.size(); i++) {
+				System.out.println("Pesquisa Unica " + i + " <--> " + produtoResource.select(i));
+			}
 			break;
 		default:
+			System.out.println("Pesquisa Completa: ");
+			for (ProdutoBean produtoBean : listaProduto) {
+				System.out.println(produtoBean);
+				System.out.println(produtoBean.getPrecoProduto());
+			}
 			break;
 		}
 	}

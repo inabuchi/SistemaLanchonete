@@ -12,8 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
- * Classe modelo PrecoProdutoBean para população das tabelas de preço
+ * Classe modelo PrecoProdutoBean para populaï¿½ï¿½o das tabelas de preï¿½o
  * 
  * @author Yago Setter
  *
@@ -23,37 +25,36 @@ import javax.persistence.Table;
 @Table(name = "preco_produto")
 public class PrecoProdutoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column (name= "cd_preco_produto")
+	@Column(name = "cd_preco_produto")
 	private int cdPrecoProduto;
-	
+	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="cd_produto", referencedColumnName="cd_produto")
+	@JoinColumn(name = "cd_produto", referencedColumnName = "cd_produto")
 	private ProdutoBean produto;
-	
-	@Column (name = "vl_preco_atual")
+
+	@Column(name = "vl_preco_atual")
 	private float vlPrecoAtual;
-	
+
 	@Column(name = "dt_inicial")
-	private Date dtInicial;
-	
+	private Date dtInicial = new Date();
+
 	@Column(name = "dt_final")
-	private Date dtFinal;
-	
+	private Date dtFinal = new Date();
+
 	@Column(name = "is_ativo")
 	private boolean isAtivo;
 
 	/**
-	 * Contrutor padrão da classe
+	 * 
 	 */
 	public PrecoProdutoBean() {
+
 	}
 
 	/**
-	 * Construtor da classe
-	 *
 	 * @param cdPrecoProduto
 	 * @param produto
 	 * @param vlPrecoAtual
@@ -63,6 +64,7 @@ public class PrecoProdutoBean implements Serializable {
 	 */
 	public PrecoProdutoBean(int cdPrecoProduto, ProdutoBean produto, float vlPrecoAtual, Date dtInicial, Date dtFinal,
 			boolean isAtivo) {
+		super();
 		this.cdPrecoProduto = cdPrecoProduto;
 		this.produto = produto;
 		this.vlPrecoAtual = vlPrecoAtual;
@@ -76,6 +78,7 @@ public class PrecoProdutoBean implements Serializable {
 	 * 
 	 * @return cdPrecoProduto
 	 */
+
 	public int getCdPrecoProduto() {
 		return cdPrecoProduto;
 	}
@@ -94,6 +97,7 @@ public class PrecoProdutoBean implements Serializable {
 	 * 
 	 * @return produto
 	 */
+
 	public ProdutoBean getProduto() {
 		return produto;
 	}
@@ -112,6 +116,7 @@ public class PrecoProdutoBean implements Serializable {
 	 * 
 	 * @return vlPrecoAtual
 	 */
+
 	public float getVlPrecoAtual() {
 		return vlPrecoAtual;
 	}
@@ -130,6 +135,7 @@ public class PrecoProdutoBean implements Serializable {
 	 * 
 	 * @return dtInicial
 	 */
+
 	public Date getDtInicial() {
 		return dtInicial;
 	}
@@ -148,6 +154,7 @@ public class PrecoProdutoBean implements Serializable {
 	 * 
 	 * @return dtFinal
 	 */
+
 	public Date getDtFinal() {
 		return dtFinal;
 	}
@@ -166,6 +173,7 @@ public class PrecoProdutoBean implements Serializable {
 	 * 
 	 * @return isAtivo
 	 */
+
 	public boolean isAtivo() {
 		return isAtivo;
 	}
@@ -179,6 +187,11 @@ public class PrecoProdutoBean implements Serializable {
 		this.isAtivo = isAtivo;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -187,20 +200,29 @@ public class PrecoProdutoBean implements Serializable {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (!(obj instanceof PrecoProdutoBean)) {
 			return false;
+		}
 		PrecoProdutoBean other = (PrecoProdutoBean) obj;
-		if (cdPrecoProduto != other.cdPrecoProduto)
+		if (cdPrecoProduto != other.cdPrecoProduto) {
 			return false;
+		}
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "PrecoProdutoBean [cdPrecoProduto=" + cdPrecoProduto + ", produto=" + produto + ", vlPrecoAtual="
