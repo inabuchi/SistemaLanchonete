@@ -23,10 +23,10 @@ function abrirPagina(txtUrlEnvio, txtElementoDOM) {
             txtUrl = txtUrl.substr(0, nrFim);
 
         var fnRetornoAjax = (res, status, xhr) => {
-        	if ('error' == status){
-        		$(txtElementoDOM).html(res);
-        		console.error(xhr);
-        	}
+            if ('error' == status) {
+                $(txtElementoDOM).html(res);
+                console.error(xhr);
+            }
         };
 
         // var obj = {
@@ -36,10 +36,10 @@ function abrirPagina(txtUrlEnvio, txtElementoDOM) {
 
         // var txtUrlCrypt = btoa(JSON.stringify(txtUrlEnvio));
         var txtUrlCrypt = btoa(txtUrlEnvio);
+        window.bloqueio = true;
         window.location.href = `${txtUrl}#${txtUrlCrypt}`;
 
         $(txtElementoDOM).html("");
-
         $(txtElementoDOM).load(txtUrlEnvio, fnRetornoAjax);
     } catch (ex) {
         console.debug(ex);
@@ -78,6 +78,8 @@ function enviarAjax(prUrl, prMethod, prDados, prDoneCallBack, prFailCallBack) {
         url: prUrl,
         type: prMethod.toUpperCase(),
         headers: {
+//            'Accept': 'application/json',
+//            'Content-Type': 'application/json',
             'Cache-Control': 'no-cache',
             'X-Requested-With': 'XMLHttpRequest',
             'Access-Control-Allow-Origin': '*',
@@ -102,8 +104,7 @@ function enviarAjax(prUrl, prMethod, prDados, prDoneCallBack, prFailCallBack) {
  * Retorna os dados preenchidos no formulário em formato JSON
  * 
  * @author Igor Vieira Rodrigues
- * @param {HTMLForm}
- *            prForm
+ * @param {HTMLForm} prForm
  * @returns {JSON}
  */
 function getFormCampos(prForm) {
@@ -141,9 +142,9 @@ function setFormCampos(prForm, prJSON) {
     var n = 0;
     var objRetorno = {};
     while (prForm[n]) {
-        var txtNome = prForm[n].name;
+        var txtNome = prForm[n].name ;
 
-        prForm[n].value = prJSON[txtNome];
+        prForm[n].value = prJSON[txtNome] || '';
 
 
         n++;
@@ -157,29 +158,29 @@ function setFormCampos(prForm, prJSON) {
  * 
  * @returns
  */
-function getUrl(){
-	var nrFim = window.location.href.indexOf('#') || 0;
-	var txtUrl = '';
-	if (nrFim !== -1){
-		txtUrl = window.location.href.substr(nrFim + 1);
-		return atob(txtUrl);
-	}else{
-		return '';
-	}
-	
+function getUrl() {
+    var nrFim = window.location.href.indexOf('#') || 0;
+    var txtUrl = '';
+    if (nrFim !== -1) {
+        txtUrl = window.location.href.substr(nrFim + 1);
+        return atob(txtUrl);
+    } else {
+        return '';
+    }
+
 }
 
 function getId() {
-	const url = getUrl();
-	const p = url.indexOf('#')+1;
-	if (p >= 0)
-		return parseInt(url.substr(p));
-	else
-		return 0;
+    const url = getUrl();
+    const p = url.indexOf('#') + 1;
+    if (p >= 0)
+        return parseInt(url.substr(p));
+    else
+        return 0;
 }
 
 var codEndereco;
 
 function setCdEndereco(cd) {
-	codEndereco = cd;
+    codEndereco = cd;
 }

@@ -1,4 +1,4 @@
-<!-- 
+﻿<!-- 
     Document   	: ProdutoAdicionalConsulta
 	Created on 	: 21/04/2018, 16:39:28
     Author     	: Morgana e Sidnei
@@ -6,18 +6,18 @@
 -->
 
 <div class="content-title">
-	<i class="fa fa-barcode"></i>Produtos<i class="fa fa-angle-right"></i>Consulta
-	de adicionais
+	<i class="fa fa-barcode"></i>Produtos
+	<i class="fa fa-angle-right"></i>Consulta de adicionais
 </div>
 
 <div class="formtitle">Adicionais</div>
 <div class="page-consulta">
-	<a class="link-abrir" href="ProdutoAdicionalCadastro.html"><button
-			type="button" class="btn btn-success"
-			style="margin: 15px 15px 25px 15px;">
+	<a class="link-abrir" href="ProdutoAdicionalCadastro.html">
+		<button type="button" class="btn btn-success" style="margin: 15px 15px 25px 15px;">
 			<i class="fa fa-plus-circle"></i>Adicionar produto
-		</button></a>
-	<table class="table table-bordered table-hover" id="data-table">
+		</button>
+	</a>
+	<table class="table table-bordered table-hover" id="table-produto-adicional">
 		<thead>
 			<tr>
 				<th scope="col">Código</th>
@@ -34,17 +34,21 @@
 				<td>1</td>
 				<td>Bacon</td>
 				<td>R$ 3,50</td>
-				<td class="table-buttons"><a class="link-editar" data-id="1"
-								data-key="cdProdutoAdicional" data-servico="produtoadicional"
-					href="ProdutoAdicionalCadastro.html"><button type="button"
-							class="table-edit" title="Editar">
+				<td class="table-buttons">
+					<a class="link-editar" data-id="1" data-key="cdProdutoAdicional" data-servico="produtoadicional" href="ProdutoAdicionalCadastro.html">
+						<button type="button" class="table-edit" title="Editar">
 							<i class="fa fa-pencil"></i>
-						</button></a> <a href="#"><button type="button" class="table-del"
-							title="Excluir">
+						</button>
+					</a>
+					<a href="#">
+						<button type="button" class="table-del" title="Excluir">
 							<i class="fa fa-close"></i>
-						</button></a></td>
+						</button>
+					</a>
+				</td>
 			</tr>
 		</tbody>
 	</table>
 </div>
 
+<script type="text/javascript" src="controller/produto/ProdutoAdicionalConsulta.js"></script>
