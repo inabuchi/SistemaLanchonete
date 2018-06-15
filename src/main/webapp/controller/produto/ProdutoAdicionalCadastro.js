@@ -30,6 +30,8 @@ function carregarPagina($) {
 function salvar(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
+    
+    debugger;
 
     var dados = getFormCampos(document.getElementById('form-produto-adicional'));
 
@@ -59,6 +61,9 @@ function updateProdutoAdicional(dados) {
  * @param {Object} dados 
  */
 function insertProdutoAdicional(dados) {
+    
+	delete dados.cdProdutoAdicional;
+
     return enviarAjax('services/produtoAdicional/produtoAdicional',
         'POST',
         dados,

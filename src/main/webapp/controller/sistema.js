@@ -67,6 +67,10 @@ function enviarAjax(prUrl, prMethod, prDados, prDoneCallBack, prFailCallBack) {
     prUrl = prUrl || '';
     prMethod = prMethod || 'GET';
     prDados = prDados || {};
+    
+    if (['POST', 'PUT'].includes(prMethod.toUpperCase())) {
+        prDados = JSON.stringify(prDados);
+    }
 
     prDoneCallBack = prDoneCallBack || (res => console.log(res));
 
@@ -78,24 +82,25 @@ function enviarAjax(prUrl, prMethod, prDados, prDoneCallBack, prFailCallBack) {
         url: prUrl,
         type: prMethod.toUpperCase(),
         headers: {
-//            'Accept': 'application/json',
-//            'Content-Type': 'application/json',
-            'Cache-Control': 'no-cache',
-            'X-Requested-With': 'XMLHttpRequest',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type, Accept',
-            'Access-Control-Max-Age': '1'
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            //            'Cache-Control': 'no-cache',
+            //            'X-Requested-With': 'XMLHttpRequest',
+            //            'Access-Control-Allow-Origin': '*',
+            //            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+            //            'Access-Control-Allow-Headers': 'Content-Type, Accept',
+            //            'Access-Control-Max-Age': '1'
         },
         dataType: 'json',
         crossDomain: false,
         data: prDados,
         statusCode: {
-            404: function () {
-                console.error("404 - página não encontrada");
-            }
+        	200: res => prDoneCallBack(res),
+        	201: res => prDoneCallBack(res),
+            404: res =>console.error("404 - página não encontrada"),
+            500: res => prFailCallBack(res)
         }
-    }).done(prDoneCallBack).fail(prFailCallBack);
+    }); //.done(prDoneCallBack).fail(prFailCallBack);
 
 }
 
@@ -119,7 +124,10 @@ function getFormCampos(prForm) {
         } else if (campo.value !== "") {
             valor = campo.value;
         }
-        objRetorno[campo.name] = campo.value === "" ? null : campo.value;
+
+        if (campo.name !== '' && campo.name !== undefined) {
+            objRetorno[campo.name] = campo.value === "" ? null : campo.value;
+        }
 
         n++;
     }
@@ -142,7 +150,7 @@ function setFormCampos(prForm, prJSON) {
     var n = 0;
     var objRetorno = {};
     while (prForm[n]) {
-        var txtNome = prForm[n].name ;
+        var txtNome = prForm[n].name;
 
         prForm[n].value = prJSON[txtNome] || '';
 
@@ -158,15 +166,15 @@ function setFormCampos(prForm, prJSON) {
  *
  * @returns
  */
-function getUrl(){
-	var nrFim = window.location.href.indexOf('#') || 0;
-	var txtUrl = '';
-	if (nrFim !== -1){
-		txtUrl = window.location.href.substr(nrFim + 1);
-		return atob(txtUrl);
-	}else{
-		return '';
-	}
+function getUrl() {
+    var nrFim = window.location.href.indexOf('#') || 0;
+    var txtUrl = '';
+    if (nrFim !== -1) {
+        txtUrl = window.location.href.substr(nrFim + 1);
+        return atob(txtUrl);
+    } else {
+        return '';
+    }
 
 }
 
@@ -182,41 +190,42 @@ function getId() {
 var codEndereco;
 
 function setCdEndereco(cd) {
-	codEndereco = cd;
+    codEndereco = cd;
 }
 
 var objetoPessoa;
+
 function popularObjetoCliente() {
-	objetoPessoa = {
-		cdPessoa : $('#cdPessoa').val(),
-		dsNome : $('#dsNome').val(),
-		dsTelefone1 : $('#dsTelefone1').val(),
-		dsTelefone2 : $('#dsTelefone2').val(),
-		dsObservacao : $('#dsObservacao').val()
-	};
+    objetoPessoa = {
+        cdPessoa: $('#cdPessoa').val(),
+        dsNome: $('#dsNome').val(),
+        dsTelefone1: $('#dsTelefone1').val(),
+        dsTelefone2: $('#dsTelefone2').val(),
+        dsObservacao: $('#dsObservacao').val()
+    };
 }
 
 function populaDadosEndereco(cd, tipo) {
-  setCdEndereco(cd);
-  if (tipo === 'C') {
-    popularObjetoCliente();
-  } else {
-    popularObjetoFuncionario();
-  }
+    setCdEndereco(cd);
+    if (tipo === 'C') {
+        popularObjetoCliente();
+    } else {
+        popularObjetoFuncionario();
+    }
 }
 
 var objFuncionario;
-function popularObjetoFuncionario() {
-  objFuncionario = {
-    cdFuncionario: $('#cdFuncionario').val(),
-    dsNome : $('#dsNome').val(),
-    dsTelefone1 : $('#dsTelefone1').val(),
-    dsTelefone2 : $('#dsTelefone2').val(),
-    cdNivel : $('#cdNivel').val(),
-    ativo : $('#ativo').val(),
-    dsCargo : $('#dsCargo').val(),
-    dsLogin : $('#dsLogin').val() || null,
-    dsSenha : $('#dsSenha').val() || null
-  };
-}
 
+function popularObjetoFuncionario() {
+    objFuncionario = {
+        cdFuncionario: $('#cdFuncionario').val(),
+        dsNome: $('#dsNome').val(),
+        dsTelefone1: $('#dsTelefone1').val(),
+        dsTelefone2: $('#dsTelefone2').val(),
+        cdNivel: $('#cdNivel').val(),
+        ativo: $('#ativo').val(),
+        dsCargo: $('#dsCargo').val(),
+        dsLogin: $('#dsLogin').val() || null,
+        dsSenha: $('#dsSenha').val() || null
+    };
+}
