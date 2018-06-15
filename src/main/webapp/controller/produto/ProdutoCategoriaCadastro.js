@@ -12,7 +12,7 @@ function carregarPagina($) {
 
     if (id > 0) {
         var form = document.getElementById('form-produto-categoria');
-
+        
         enviarAjax(`services/produtoCategoria/${id}`,
             'GET', {},
             res => setFormCampos(form, res));
@@ -30,7 +30,7 @@ function carregarPagina($) {
 function salvar(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
-
+    
     var dados = getFormCampos(document.getElementById('form-produto-categoria'));
 
     if (isAlterarProdutoCategoria)
